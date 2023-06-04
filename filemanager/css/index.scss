@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Noto+Sans:wght@500&family=Open+Sans:wght@700&display=swap');
+/*
+* {
+    outline: dotted 1px red;
+}
+*/
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+    font-family: 'Noto Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+}
+body {
+    overflow-x: hidden;
+}
+.main {
+    width: 100vw;
+    height: 100vh;
+    & header {
+        width: 100vw;
+        height: 50px;
+        & p {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 15px;
+            width: 20000px;
+            font-size: 30px;
+            & span {
+                font-size: 15px;
+            }
+        }
+        & .mainelement{
+            height: 50px;
+            top: 0px;
+            position: absolute;
+            right: 0px;
+            background-size: cover;
+            width: 50px;
+        }
+        & .secondelement{
+            height: 50px;
+            top: 0px;
+            position: absolute;
+            right: 50px;
+            background-size: cover;
+            width: 50px;
+        }
+        & .thirdelement{
+            height: 50px;
+            top: 0px;
+            position: absolute;
+            right: 100px;
+            background-size: cover;
+            width: 50px;
+        }
+    }
+    &.light {
+        background-color: white;
+        & .element,.elmnt {
+            background-color: rgb(165, 165, 165);
+            &:hover {
+                background-color: rgb(116, 116, 116);
+            }
+            & * {
+                color: black;
+            }
+        }
+        & header {
+            background-color: white;
+            color: black;
+            & .mainelement {
+                background-image: url("./../images/img.png");
+            }
+            & .secondelement {
+                background-image: url("./../images/folder.png");
+            }
+            & .thirdelement {
+                background-image: url("./../images/file.png");
+            }
+        }
+    }
+    &.dark {
+        background-color: #3b3838;
+        & .element,.elmnt {
+            background-color: #252525;
+            &:hover {
+                background-color: #141414;
+            }
+            & * {
+                color: white;
+            }
+        }
+        & header {
+            background-color: rgb(17, 17, 17);
+            color: white;
+            & .mainelement {
+                background-image: url("./../images/img-dark.png");
+            }
+            & .secondelement {
+                background-image: url("./../images/folder-dark.png");
+            }
+            & .thirdelement {
+                background-image: url("./../images/file-dark.png");
+            }
+        }
+    }
+    & .element,.elmnt {
+        & * {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 30px;
+        }
+        & span {
+            float: right;
+            right: 15px
+        }
+        & p {
+            float: left;
+            left: 15px
+        }
+        height: 50px;
+        width: 100vw;
+        transition: background-color 0.2s ease;
+    }
+}
+.hidden {
+    display: none!important;
+    & * {
+        display: none!important;
+    }
+}
+.rightclick, .rightclicktwo {
+    position: absolute;
+    width: 150px;
+    height: auto;
+    background-color: white;
+    border-radius: 5px;
+    top: 0;
+    left:0;
+    & .choice {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: background-color 0.2s ease;
+        background-color: white;
+        &:hover {
+            background-color: rgb(150, 150, 150);
+        }
+        &.first {
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        &.last {
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+    }
+}

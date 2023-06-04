@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motiv</title>
+    <style>
+        :root {
+            --pocet: 4;
+            --spanvalue: 0.6;
+        }
+    </style>
+    <link rel="stylesheet" href="./../style.css">
+    <script src="./../mouse.js" defer></script>
+    <script src="/reset.js"></script>
+    <script src="/isiframe.js"></script>
+    <script>
+        function ano() {
+            localStorage.setItem("filePreview","true");
+        }
+        function ne() {
+            localStorage.removeItem("filePreview");
+        }
+    </script>
+</head>
+<body onmouseup="mouseUp()" onmousedown="mouseDown()" >
+    <div id="firstcursor"></div>
+    <div id="secondcursor" class="secondcursor"></div>
+    <div class="button" onclick="window.location.replace('..')"><- Zpět</div>
+    <div class="button nohover"><span>Tato funkce je zatím ve vývoji. Pokud chcete aby když najedete myší na ikonku minimalizovaného okna, ukázal se náhled?</span></div>
+    <div class="button" onclick="ano()">Ano</div>
+    <div class="button" onclick="ne()">Ne</div>
+    <script src="./../main.js" defer></script>
+</body>
+</html>

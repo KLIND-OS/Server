@@ -1,0 +1,167 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&family=Noto+Sans:wght@500&family=Open+Sans:wght@700&display=swap");
+/*
+* {
+    outline: dotted 1px red;
+}
+*/
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Lato", sans-serif;
+  font-family: "Noto Sans", sans-serif;
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.main {
+  width: 100vw;
+  height: 100vh;
+}
+.main header {
+  width: 100vw;
+  height: 50px;
+}
+.main header p {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 15px;
+  width: 20000px;
+  font-size: 30px;
+}
+.main header p span {
+  font-size: 15px;
+}
+.main header .mainelement {
+  height: 50px;
+  top: 0px;
+  position: absolute;
+  right: 0px;
+  background-size: cover;
+  width: 50px;
+}
+.main header .secondelement {
+  height: 50px;
+  top: 0px;
+  position: absolute;
+  right: 50px;
+  background-size: cover;
+  width: 50px;
+}
+.main header .thirdelement {
+  height: 50px;
+  top: 0px;
+  position: absolute;
+  right: 100px;
+  background-size: cover;
+  width: 50px;
+}
+.main.light {
+  background-color: white;
+}
+.main.light .element, .main.light .elmnt {
+  background-color: rgb(165, 165, 165);
+}
+.main.light .element:hover, .main.light .elmnt:hover {
+  background-color: rgb(116, 116, 116);
+}
+.main.light .element *, .main.light .elmnt * {
+  color: black;
+}
+.main.light header {
+  background-color: white;
+  color: black;
+}
+.main.light header .mainelement {
+  background-image: url("./../images/img.png");
+}
+.main.light header .secondelement {
+  background-image: url("./../images/folder.png");
+}
+.main.light header .thirdelement {
+  background-image: url("./../images/file.png");
+}
+.main.dark {
+  background-color: #3b3838;
+}
+.main.dark .element, .main.dark .elmnt {
+  background-color: #252525;
+}
+.main.dark .element:hover, .main.dark .elmnt:hover {
+  background-color: #141414;
+}
+.main.dark .element *, .main.dark .elmnt * {
+  color: white;
+}
+.main.dark header {
+  background-color: rgb(17, 17, 17);
+  color: white;
+}
+.main.dark header .mainelement {
+  background-image: url("./../images/img-dark.png");
+}
+.main.dark header .secondelement {
+  background-image: url("./../images/folder-dark.png");
+}
+.main.dark header .thirdelement {
+  background-image: url("./../images/file-dark.png");
+}
+.main .element, .main .elmnt {
+  height: 50px;
+  width: 100vw;
+  transition: background-color 0.2s ease;
+}
+.main .element *, .main .elmnt * {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 30px;
+}
+.main .element span, .main .elmnt span {
+  float: right;
+  right: 15px;
+}
+.main .element p, .main .elmnt p {
+  float: left;
+  left: 15px;
+}
+
+.hidden {
+  display: none !important;
+}
+.hidden * {
+  display: none !important;
+}
+
+.rightclick, .rightclicktwo {
+  position: absolute;
+  width: 150px;
+  height: auto;
+  background-color: white;
+  border-radius: 5px;
+  top: 0;
+  left: 0;
+}
+.rightclick .choice, .rightclicktwo .choice {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s ease;
+  background-color: white;
+}
+.rightclick .choice:hover, .rightclicktwo .choice:hover {
+  background-color: rgb(150, 150, 150);
+}
+.rightclick .choice.first, .rightclicktwo .choice.first {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.rightclick .choice.last, .rightclicktwo .choice.last {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}/*# sourceMappingURL=index.css.map */

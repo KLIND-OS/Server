@@ -1,0 +1,73 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+body {
+    background-color: darkblue;
+}
+.installdiv {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 1px solid black;
+    width: 700px;
+    height: 500px;
+    background-color: white;
+    border-radius: 15px;
+}
+.buttonnext {
+    position: absolute;
+    height: 70px;
+    width: 200px;
+    bottom: 15px;
+    background-color: rgb(75, 75, 75);
+    left: calc(60% - 170px);
+    display: flex;
+    justify-content: center;
+    font-size: 1.5em;
+    color: white;
+    cursor: pointer;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: ease 0.2s scale;
+    scale: 1;
+}
+.buttonnext:hover {
+    scale: 0.95;
+}
+.icon {
+    position: relative;
+    left: 50%;
+    margin-top: 10px;
+    transform: translateX(-50%);
+    border-radius: 15px;
+}
+.title {
+    text-align: center;
+    margin: 10px;
+}
+#druhy .left, #druhy .right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 50px;
+    width: calc(100% / 2 - 2px);
+    border: 1px solid black;
+    cursor: pointer;
+    bottom: 0;
+}
+#druhy .right {
+    right: 0;
+}
+#cistainstall #username, #cistainstall #password {
+    width: calc(100% - 2px);
+    height: 50px;
+    text-align: center;
+    border: none;
+    outline: none;
+    border: 1px solid black;
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="/isiframe.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileManager</title>
+    <script src="/mouse.js" defer></script>
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="./js/main.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+    <style>
+        * {
+            cursor: none;
+        }
+        #firstcursor {
+            width: 2em;
+            height: 2em;
+            border-radius: 50%;
+            border: 2px solid black;
+            position: absolute;
+            z-index: 99999999999999999999999999999999999999999999999999999999999999999999;
+            position: fixed;
+            pointer-events: none;
+            transition: all .1s ease,top .18s ease-out,left .18s ease-out;
+        }
+        #secondcursor {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: black;
+            position: absolute;
+            z-index: 99999999999999999999999999999999999999999999999999999999999999999999;
+            position: fixed;
+            pointer-events: none;
+            transition: ease 0.2s background;
+        }
+    </style>
+</head>
+<body onmouseup="mouseUp()" onmousedown="mouseDown()" onload="FileManager.readFiles()">
+    <div id="firstcursor"></div>
+    <div id="secondcursor" class="secondcursor"></div>
+    <div class="main">
+        <!-- Main content -->
+    </div>
+    <div class="hidden">
+        <input type="file" onchange="FileManager.inputelement.change(this)" id="fileupload">
+    </div>
+    <div class="rightclick" style="display: none;">
+        <div class="choice first" onclick='FileManager.copy(this.parentElement.getAttribute("idel"));document.querySelector(".rightclick").style.display = "none"'><p>Kopírovat</p></div>
+        <div class="choice" onclick='FileManager.convertTo(this.parentElement.getAttribute("idel"));document.querySelector(".rightclick").style.display = "none"'><p>Convertovat</p></div>
+        <div class="choice" onclick='FileManager.downloadFile(this.parentElement.getAttribute("idel"));document.querySelector(".rightclick").style.display = "none"'><p>Stáhnout</p></div>
+        <div class="choice" onclick='FileManager.copyPath(this.parentElement.getAttribute("idel"));document.querySelector(".rightclick").style.display = "none"'><p>Zkopírovat cestu</p></div>
+        <div class="choice" onclick='FileManager.rename(this.parentElement.getAttribute("idel"));document.querySelector(".rightclick").style.display = "none"'><p>Přejmenovat</p></div>
+        <div class="choice" onclick='FileManager.remove(this.parentElement.getAttribute("idel"));document.querySelector(".rightclick").style.display = "none"'><p>Smazat</p></div>
+        <div class="choice last" onclick='FileManager.properties(this.parentElement.getAttribute("idel"));document.querySelector(".rightclick").style.display = "none"'><p>Vlastnosti</p></div>
+    </div>
+    <div class="rightclicktwo" style="display: none;">
+        <div class="choice first last" onclick='FileManager.removeFolder(this.parentElement.getAttribute("idel"));document.querySelector(".rightclicktwo").style.display = "none"'><p>Smazat</p></div>
+    </div>
+</body>
+</html>

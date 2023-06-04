@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/isiframe.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="sandbox.css" rel="stylesheet" />
+    <script src="/filemanager.js"></script>
+</head>
+<body>
+    <div id="sandbox">sandbox loading...</div>
+    <!-- The sandbox template -->
+    <script type="text/template" id="tplSandbox">
+        <pre class="output"></pre>
+        <div class="input">
+            <textarea rows="1" placeholder="<%= placeholder %>"></textarea>
+        </div>
+    </script>
+
+    <!-- The command/result template (NB whitespace/line breaks matter inside <pre> tag): -->
+    <script type="text/template" id="tplCommand"><% if (! _hidden) { %><span class="command"><%= command %></span>
+    <span class="prefix"><%= this.resultPrefix %></span><span class="<%= _class %>"><%= result %></span>
+    <% } %></script>
+    <script src="js/libs/underscore.min.js"></script>
+    <script src="js/libs/backbone.min.js"></script>
+    <script src="js/libs/backbone-localstorage.min.js"></script><!-- opt -->
+    <script src="js/libs/jquery.min.js"></script>
+
+    <script src="js/sandbox-console.js"></script>
+    <script type="text/javascript" defer>
+        jQuery(document).ready(function($) {
+            // Create the sandbox:
+
+            window.sandbox = new Sandbox.View({
+                // these two are required:
+                model : new Sandbox.Model(), // see below for more
+                el : $('#sandbox'), // or etc.
+                
+                // these are optional (defaults are given here):
+                resultPrefix : "  => ",
+                helpText : "Pomoc:\nNapište JavaScriptový příkaz do terminálu. \nšipka nahoru a dolů pro procházení historie,\n':clear' pro vyčištění historie.\n':load url' pro načtení jakékoliv knihovny do termminálu.\n':reload' načte terminál znovu.\n':run cestaKSouboru' spustí příkaz v souboru .ks. Více info ve složce examples.",
+                tabCharacter : "\t",
+                placeholder : "// Napište příkaz (:help pro informace)"
+            });
+        });
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Music Player</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      width: 100vw;
+      height: 70px;
+      background-color: #292929;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 40;
+    }
+    #name {
+      text-align: center;
+      font-size: 50px;
+      color: white;
+    }
+    .playPauseContainer {
+      width: 100vw;
+      height: calc(100vh - 160px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .playPauseContainer div {
+      width: 150px;
+      height: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      background-color: rgb(37, 200, 255);
+      cursor: pointer;
+    }
+    .progressbar {
+      height: 30px;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+    }
+    .progressbar input{
+      width: 90%;
+    }
+    .buttons {
+      height: 60px;
+      width: 100vw;
+    }
+    .buttons button {
+      box-sizing: border-box;
+      width: 50%;
+      height:100%;
+      float: left;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="name">Unknown</h1>
+  </header>
+  <div class="playPauseContainer">
+    <div id="playpause" onclick="playPause();">Pause</div>
+  </div>
+  <div class="progressbar">
+    <input type="range" id="slider" min="0" max="100" value="0">
+  </div>
+  <div class="buttons">
+    <button onclick="playlistPlayer.previous()">Předchozí</button>
+    <button onclick="playlistPlayer.next()">Další</button>
+  </div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.min.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>

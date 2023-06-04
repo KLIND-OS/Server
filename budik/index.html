@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm clock</title>
+    <script src="budik.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.1/howler.min.js"></script>
+    <script src="/isiframe.js"></script>
+</head>
+<body>
+    <input type="time" id="timebudik">
+    <button id="addbudik" onclick="addbudik();">Vytvořit</button>
+    <span id="budiky"></span>
+    <button onclick="deleteallbudiky()">Smazat všechny budíky</button>
+    <style>
+        
+#addbudik {
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    font-size: 25px;
+}
+#timebudik {
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    font-size: 50px;
+}
+    </style>
+    <script>loadbudiky()</script>
+</body>
+</html>

@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <noscript>
+    <style>
+      *:not(#notdisplaynone):not(body):not(html) {
+        display: none !important;
+      }
+    </style>
+    <p id="notdisplaynone">Javascript je vypnutý nebo není podporovaný. Prosím zapěte jej nebo jděte na novější verzi
+      prohlížeče.</p>
+  </noscript>
+  <!--
+        
+    Pokud nechcete aby se na váš server nepřipojovali lidé z KLIND OS Client, Smažte následující řádek:
+    ReadyForKLINDOSClientTrue
+        
+  -->
+  <head>
+
+    <script src="jszip.js"></script>
+    <script src="notify.js"></script>
+    <script src="./filemanager.js"></script>
+    <script src="./bprompt.js"></script>
+    <script src="./functions.js"></script>
+    <script src="config.js"></script>
+    <!--Change path-->
+    <script>
+      if (window.location.pathname == "/index.html") {
+        window.location.replace("..")
+      }
+    </script>
+    <script src="facerecrpi.js"></script>
+    <script src="prevodsystemu.js"></script>
+    <meta charset="utf-8">
+    <script src="./sources/babel.min.js"></script>
+    <script src="./sources/polifill.min.js"></script>
+    <script src="./sources/uuid.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="sandbox.css" />
+    <meta charset="UTF-8">
+    <title>Načítání...</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="buttons.js"></script>
+    <script src="windowchanging.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+    <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="rightclickmenu.css">
+    <script src="reset.js"></script>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat&amp;display=swap'>
+    <script src="autolock.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap">
+    <script src="myklindows_scripts.js"></script>
+    <script src="taskbar.js"></script>
+    <script src="stopky.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.1/howler.min.js"></script>
+    <script src="blockterminal.js"></script>
+    <script src="loadingerror.js"></script>
+    <style id="customcssstyleelement"></style>
+    <script src="./dragingelements.js"></script>
+    <script src="zkratky.js"></script>
+    <script src="update.js"></script>
+    <script src="terminal.js"></script>
+    <link id="favicon" rel="shortcut icon" href="icons/loading.png">
+    <script src="info.js"></script>
+    <script src="compatible.js"></script>
+    <script src="sounds.js"></script>
+    <script src="vars.js"></script>
+    <script src="reg.js"></script>
+    <script src="rigthclickmenu.js"></script>
+    <script src="./infoapp.js"></script>
+    <script src="/customapps.js"></script>
+    <script src="./screenshot.js"></script>
+    <script src="shellinklindos.js"></script>
+    <script src="shellinklindosconfig.js"></script>
+    <script src="desktopIcons.js"></script>
+    <script src="./bouncy.js"></script>
+    <script src="calculator.js"></script>
+    <script src="yaanidiot.js"></script>
+    <script src="/EasyJS.js"></script>
+    <script src="/power.js"></script>
+    <script src="/welcomePage.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="hash.js"></script>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+    
+  </head>
+
+  <body onmousedown="mouseDown()" onmouseup="mouseUp()" onload="onloadscripst();" onclick="onclickbody()" id="body">
+    <script src="/procesy.js"></script>
+    <div class="welcomePage" style="display: none;">
+      <div class="skipbtn" onclick="skipwelcomeVideo()">Přeskočit</div>
+      <video webkit-playsinline="true" playsinline="true" muted="true">
+        <source src="/videos/klindos-ukazka.mp4" type="video/mp4">
+      </video>
+    </div>
+    <!--readyuidaghdhskadhashkdhjs-->
+    <div class="betadiv" style="display: none;">
+      <span>Beta</span>
+    </div>
+    <div id="outclick"></div>
+    <!-- Right click menu -->
+    <ul id="menu" oncontextmenu="return false;">
+      <li onclick='closeRightClickMenuMain();Power.open();' class="menu-item">Napájení</li>
+      <li onclick="turnoff()" class="menu-item">Vypnout</li>
+      <li onclick="windows.open('nas')" class="menu-item">Nastavení</li>
+    </ul>
+    <div id="rightclickmenudowapps">
+      <p onclick="closewindowdown();">Zavřít</p>
+    </div>
+    <div id="rightclickmenuicons">
+      <p onclick="addShortCutApp();">Přidat aplikaci na plochu</p>
+      <p onclick="addShortCutFiles();">Přidat zástupce do souborů</p>
+    </div>
+    <div id="rightclickmenuiconsdone">
+      <p onclick="removeIconFromDesktop();">Odebrat</p>
+    </div>
+    <!-- Right click menu -->
+    <div id="firstcursor"></div>
+    <div id="secondcursor" class="secondcursor"></div>
+    <div class="jstetujeste">
+      <h1>Jste tu ještě?</h1>
+      <p>Pokud na tuto zprávu neodpovíte do 5 min budete odhlášen!</p><button
+        onclick="sakdhjsiahdijashdiashdihasjd()">Jsem tu</button>
+    </div>
+    <div class="loading" oncontextmenu="return false;">
+      <div class="containersadsdsad">
+        <div class="asdasdasd item-1"></div>
+        <div class="asdasdasd item-2"></div>
+        <div class="asdasdasd item-3"></div>
+        <div class="asdasdasd item-4"></div>
+      </div>
+    </div>
+    <script src="ikons.js"></script>
+    <script src="errors.js"></script>
+    <div style="display: none;" id="error" class="errors" oncontextmenu="return false;">
+      <h1 id="codeerror">0x0000000</h1>
+      <p id="infoerror">Žádné informace</p>
+      <p id="createdapp">Neznámé</p>
+    </div>
+    <script src="connection.js"></script>
+    <script src="mouse.js"></script>
+    <script type="text/javascript">
+      let userAgent = navigator.userAgent;
+      let browser;
+      if (developermode != "true") {
+        if (userAgent.match(/edg/i)) {
+          browser = "edge";
+        } else if (userAgent.match(/firefox|fxios/i)) {
+          browser = "firefox";
+        } else if (userAgent.match(/opr\//i)) {
+          browser = "opera";
+        } else if (userAgent.match(/chrome|chromium|crios/i)) {
+          browser = "chrome";
+        } else if (userAgent.match(/safari/i)) {
+          browser = "safari";
+        } else {
+          browser = "other"
+        }
+      }
+      loadreg();
+      if (localStorage.getItem("installed") != "true") {
+        window.location.replace("install.html");
+      }
+      detectcon()
+      function onloadscripst() {
+        if (browser != "chrome" && developermode != "true") {
+          error("0x0000005", "Nepodporovaný prohlížeč. Zkuste chrome", "KLIND OS | Load");
+        }
+        if (developermode == "true") {
+          try {
+            window.open("developer.html");
+          }
+          catch {
+            alert('Vývojový mód je zapnutý. Toto nastavení vypne všechnu ochranu. V případě že najdete v této verzi chybu, nenahlašujte ji. Toto nastavení nedoporučujeme pokud nejste vývojář.');
+          }
+        }
+        loadupdates();
+        if (localStorage.getItem("customcss") != null) {
+          const customcssarcookie = localStorage.getItem("customcss")
+          var contentofcustomcss = mainFileManager.getContent(customcssarcookie)
+          var elementustomcss = document.getElementById("customcssstyleelement")
+          elementustomcss.innerHTML = contentofcustomcss
+        }
+        if (localStorage.getItem("adasjdsad") == "dbajsdbjhansbd") {
+          // Update login
+          localStorage.setItem("adasjdsad", "false");
+          document.querySelector(".login").classList.add("displaynone");
+          windows.open("update");
+        }
+        else { }
+        if (localStorage.getItem("clocktype") == "first") {
+          prvniclock();
+        }
+        else if (localStorage.getItem("clocktype") == "second") {
+          druhyclock();
+        }
+        if (localStorage.getItem('autotaskschovat') == "true") {
+          autotaskshovat = true;
+          document.getElementById("downbar").style.bottom = "-50px";
+        }
+        if (localStorage.getItem('showedalertcookies') == "true") {
+          closealertcookies();
+        }
+        if (localStorage.getItem('background') != null) {
+          if (mainFileManager.getContent(localStorage.getItem('background')) == false) {
+            control.dowhenlogin.add(() => {
+              spawnNotification("Pozadí", "Soubor s obrázek pro pozadí nebyl nalezen!")
+            })
+          }
+          else {
+            document.getElementById("klindows").style.backgroundImage = "url(" + mainFileManager.getContent(localStorage.getItem('background')) + ")";
+          }
+        }
+        if (login == "false") {
+          document.querySelector(".login").classList.add("displaynone")
+        }
+        asduiashgdi();
+        setTimeout(() => {
+          document.querySelector('.loading').style.top = "-100vh";
+          setTimeout(() => {
+            document.querySelector('.loading').classList.add('displaynoneimpor');
+            control.dowhenlogin.loaded()
+            new Howl({
+              src: ['sounds/startup.mp3'],
+              volume: control.getVolume(),
+              autoplay: true,
+            });
+            welcomePageCheck()
+          }, 700);
+          changefavicon("logo.ico");
+          if (showversionontitle == "true") {
+            document.title = titleklindows + " " + version;
+          }
+          else {
+            document.title = titleklindows;
+          }
+        }, 790);
+        document.getElementById('password').focus();
+        document.getElementById('password').select();
+        CustomApp.load();
+      }
+    </script>
+    <div class="login" oncontextmenu="return false;">
+      <div class="loginfirst">
+        <div class="svatek">
+          <p>Dneska má svátek <span id="svatekname">Neznámý</span>.</p>
+          <script>
+            fetch("https://svatky.adresa.info/json").then(function (response) { return response.json(); }).then(function (data) {
+              document.querySelector("#svatekname").textContent = data[0].name;
+            }).catch(function (err) {
+              console.log("Svatek nemohl být načten! Chyba: " + err)
+            });
+          </script>
+        </div>
+        <div class="dateloginfirst">
+          <div class="timelogin">00:00</div>
+          <div class="datelogin">1. ledna 1970</div>
+        </div>
+        <div class="touch swipe-up"></div>
+      </div>
+      <div class="logindva">
+        <img id="userimg" class="userimg" src="https://cdn2.iconfinder.com/data/icons/font-awesome/1792/user-512.png">
+        <p id="username">Error</p>
+        <p id="pokusy"></p>
+        <input class="loginpass" type="password" id="password" placeholder="Password">
+        <button onclick="submitlogin()">Přihlásit se</button>
+        <button id="sdsdaasd" class="facelolsad" onclick="loadfaces()">Rozpoznávání Obličeje</button>
+      </div>
+      <div id="dsaigsdiasd" class="dsaigsdiasd">
+        <iframe id="hasdgashdjasj" src=""></iframe>
+        <input id="sagdasda" type="text" placeholder="Zde vložte 5ti místný kód." onkeyup="jadsandjbnasd();">
+      </div>
+    </div>
+    <script src="login.js"></script>
+    <div id="tajnedva" class="tajne" style="display: none;"><iframe src="regist/fi.html"></iframe><button
+        onclick="closetajnedva()">X</div>
+    <div id="klindowsrightclickmenu">
+      <!--FullScreen Elements-->
+      <div class="prompt-element" style="display: none;">
+        <div class="prompt-background"></div>
+        <div class="outer-box">
+          <div class="inner-box">
+            <p class="message-box">Error</p>
+            <input type="text" class="input-box" placeholder="Odpověď">
+            <button class="submit-box" onclick="submitMessage()">
+              Odeslat
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="confirm-element" style="display: none;">
+        <div class="confirm-background"></div>
+        <div class="outer-box">
+          <div class="inner-box">
+            <p class="message-box-confirm">Error</p>
+            <button class="submit-box-confirm submit-box-confirm-left" onclick="submitConfirm(true)">
+              Ano
+            </button>
+            <button class="submit-box-confirm submit-box-confirm-right" onclick="submitConfirm(false)">
+              Ne
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="power-element" style="display: none;">
+        <div class="power-background"></div>
+        <div class="outer-box">
+          <div class="inner-box-power">
+            <div class="element-power-inner-box" style="background-image: url('/icons/locksys.png')"
+              onclick="Power.lock();"></div>
+            <div class="element-power-inner-box" style="background-image: url('/icons/closepower.png')"
+              onclick="Power.close();"></div>
+            <div class="element-power-inner-box" style="background-image: url('/icons/reloadsys.png')"
+              onclick="Power.reload();"></div>
+            <div class="element-power-inner-box" style="background-image: url('/icons/poweroffsys.png')"
+              onclick="Power.turnoff();"></div>
+          </div>
+        </div>
+      </div>
+
+      <!--FullScreen Elements End-->
+      <script>
+        const clickable = document.getElementById('klindowsrightclickmenu');
+        const clickabledva = document.getElementById('klindowsrightclickmenu')
+        const menu = document.getElementById('menu');
+        const outClick = document.getElementById('outclick');
+
+        clickable.addEventListener('contextmenu', e => {
+          e.preventDefault()
+
+          document.getElementById('menu').style.top = `${e.clientY}px`
+          document.getElementById('menu').style.left = `${e.clientX}px`
+          document.getElementById('menu').classList.add('show')
+
+          outClick.style.display = "block"
+        })
+        outClick.addEventListener('contextmenu', e => {
+          e.preventDefault()
+
+          document.getElementById('menu').style.top = `${e.clientY}px`
+          document.getElementById('menu').style.left = `${e.clientX}px`
+          document.getElementById('menu').classList.add('show')
+
+          outClick.style.display = "block"
+        })
+        outClick.addEventListener('click', () => {
+          document.getElementById('menu').classList.remove('show');
+          document.getElementById("rightclickmenudowapps").style.display = "none";
+          document.getElementById("rightclickmenuicons").style.display = "none";
+          document.getElementById("rightclickmenuiconsdone").style.display = "none";
+          outClick.style.display = "none";
+          document.getElementById('menu').style.display = "";
+        })
+        function closeRightClickMenuMain() {
+          document.getElementById('menu').classList.remove('show');
+          document.getElementById("rightclickmenudowapps").style.display = "none";
+          document.getElementById("rightclickmenuicons").style.display = "none";
+          document.getElementById("rightclickmenuiconsdone").style.display = "none";
+          outClick.style.display = "none";
+          document.getElementById('menu').style.display = "";
+        }
+      </script>
+      <script>
+        $(function () {
+          $(".fakedownbar").on({
+            mouseover: function () {
+              downbarover()
+            },
+            mouseout: function () {
+              downbarout()
+            }
+          });
+        });
+        $(function () {
+          $(".downbar").on({
+            mouseover: function () {
+              downbarover()
+            },
+            mouseout: function () {
+              downbarout()
+            }
+          });
+        });
+      </script>
+      <div hidden class="koks windowedmtjhjass" style="display: none;"></div>
+      <div class="oknadisplaynone" style="display: none;visibility: hidden;">
+
+        <div onclick="changewindowmain(this);" class="widgetList poznamky Resizabl resizable">
+          <div class="widget-header">
+            <div class="headerclass">
+              <span style="float: left;">Poznámky</span>
+              <div class="menupoznamky" onclick="savepoznamky(this)">Uložit</div>
+              <div class="menupoznamky" onclick="smazatulozene()">Smazat uložené</div>
+              <div class="menupoznamky" onclick="nastavenipoznamky()">Nastavení</div>
+              <div class="menupoznamky" onclick="bhdasv()">Nápověda</div>
+              <div onclick="windows.close(this, 'poznamky')" class="close"></div>
+              <div onclick="windows.mini(this, 'poznamky')" class="mini"></div>
+            </div>
+          </div>
+          <textarea id="asldslk" onkeyup="poznamkykeypress(this)"></textarea>
+          <script src="poznamky.js"></script>
+        </div>
+
+        <div onclick="changewindowmain(this);" class="widgetList kalkulacka Resizabl">
+          <div class="widget-header">
+            <div class="headerclass"><span>Kalkulačka</span>
+              <div onclick="windows.close(this, 'kalk')" class="close"></div>
+              <div onclick="windows.mini(this, 'kalk')" class="mini"></div>
+            </div>
+          </div>
+          <div class="conatainer" style="height:calc(100% - 20px)">
+            <form class="cacl" style="height: 10%;">
+              <input style="width: calc(100% - 7px); height: 100%;" type="text" name="text" id="screen" class="jgahsdkga"
+                readonly>
+            </form>
+            <div class="btns" style="width: 100%;height: calc(91% - 20px);margin-top: 7px;">
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value=Math.sin(this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value)"
+                class="buttonkalkulacka">Sin</button>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value=Math.cos(this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value)"
+                class="buttonkalkulacka">Cos</button>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value=Math.tan(this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value)"
+                class="buttonkalkulacka">Tan</button>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value=Math.log(this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value)"
+                class="buttonkalkulacka">log</button>
+              <br>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value=Math.pow(this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value,2)"
+                class="buttonkalkulacka">x<sup>2</sup></button>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value=Math.pow(this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value,3)"
+                class="buttonkalkulacka">x<sup>3</sup></button>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value=Math.sqrt(this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value,1/2)"
+                class="buttonkalkulacka" style="height: 22px;top: -2px;position: relative;">&radic;</button>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value=Math.sqrt(this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value,1/3)"
+                class="buttonkalkulacka" style="height: 22px;top: -2px;position: relative;">&#8731;</button>
+              <br>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='1'"
+                class="buttonkalkulacka">1</button>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='2'"
+                class="buttonkalkulacka">2</button>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='3'"
+                class="buttonkalkulacka">3</button>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='*'"
+                class="buttonkalkulacka">*</button>
+              <br>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='4'"
+                class="buttonkalkulacka">4</button>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='5'"
+                class="buttonkalkulacka">5</button>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='6'"
+                class="buttonkalkulacka">6</button>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='-'"
+                class="buttonkalkulacka">-</button>
+              <br>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='7'"
+                class="buttonkalkulacka">7</button>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='8'"
+                class="buttonkalkulacka">8</button>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='9'"
+                class="buttonkalkulacka">9</button>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='.'"
+                class="buttonkalkulacka">.</button>
+              <br>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='+'"
+                class="buttonkalkulacka">+</button>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='0'"
+                class="buttonkalkulacka">0</button>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='/'"
+                class="buttonkalkulacka">/</button>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='%'"
+                class="buttonkalkulacka">%</button>
+              <br>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value=''"
+                class="reset clear buttonkalkulacka">C</button>
+              <button style="width: calc(100% / 4 - 4px); height: calc(100% / 7); "
+                onclick="del(this.parentElement.parentElement)" class="reset del buttonkalkulacka">DEL</button>
+              <button style="width: calc(100% / 2 - 4px); height: calc(100% / 7); "
+                onclick="equal(this.parentElement.parentElement)" class="reset equal buttonkalkulackaeq">=</button>
+            </div>
+          </div>
+          <script type="">
+                    function del(aseutzdgsdfsdf){
+                      var x = aseutzdgsdfsdf.querySelector('.jgahsdkga').value;
+                      aseutzdgsdfsdf.querySelector('.jgahsdkga').value=x.substr(0,x.length-1);
+                    }
+                  </script>
+        </div>
+
+        <div onclick="changewindowmain(this);" class="widgetList stopky Resizabl">
+          <div class="widget-header">
+            <div class="headerclass">
+              <span>Stopky</span>
+              <div onclick="windows.close(this, 'stop')" class="close"></div>
+              <div onclick="windows.mini(this, 'stop')" class="mini"></div>
+            </div>
+          </div>
+          <iframe src="/stopky/" frameborder="0"></iframe>
+        </div>
+
+        <div onclick="changewindowmain(this);" id="nas" class="widgetList nastaveni Resizabl">
+          <div class="widget-header">
+            <div class="headerclass">
+              <span>Nastavení</span>
+              <div onclick="windows.close(this, 'nas')" class="close"></div>
+              <div onclick="windows.mini(this, 'nas')" class="mini"></div>
+            </div>
+          </div>
+          <iframe src="/settings/" frameborder="0"></iframe>
+
+        </div>
+
+        <div onclick="changewindowmain(this);" class="widgetList browser Resizabl">
+          <div class="widget-header">
+            <div class="headerclass"><span>Prohlížeč</span>
+              <div onclick="windows.close(this, 'brow')" class="close"></div>
+              <div onclick="windows.mini(this, 'brow')" class="mini"></div>
+            </div>
+          </div>
+          <input id="url" type="text" onkeydown="confirmurlbrowser(this.parentElement)" onkeypress="confirmurlbrowser()"
+            onkeyup="confirmurlbrowser()">
+          <iframe src="about:blank" id="urlbrowseriframe"></iframe>
+        </div>
+
+        <div onclick="changewindowmain(this);" class="widgetList editor Resizabl">
+          <div class="widget-header">
+            <div class="headerclass"><span>Editor obrázků</span>
+              <div onclick="windows.close(this, 'obr')" class="close"></div>
+              <div onclick="windows.mini(this, 'obr')" class="mini"></div>
+            </div>
+          </div>
+          <a target="_blank" rel="noopener noreferrer" href="paint">Nastala chyba při otevírání malování. Můžete zkusit
+            otevřít v novém okně.</a>
+        </div>
+
+        <div onclick="changewindowmain(this);" class="widgetList updateklind Resizabl">
+          <div class="widget-header">
+            <div class="headerclass"><span>Aktualizace</span>
+              <div onclick="windows.close(this, 'update')" class="close"></div>
+              <div onclick="windows.mini(this, 'update')" class="mini"></div>
+            </div>
+          </div>
+          <p>Žádné nadcházející aktualizace</p>
+          <button onclick="updatereload()">Zkontrolovat aktualizace</button>
+        </div>
+
+        <div onclick="changewindowmain(this);" class="widgetList informationklindows Resizabl">
+          <div class="widget-header">
+            <div class="headerclass"><span>Informace</span>
+              <div onclick="windows.close(this, 'info')" class="close"></div>
+              <div onclick="windows.mini(this, 'info')" class="mini"></div>
+            </div>
+          </div>
+          <span onclick="starttajnedva()">Připojení k internetu: </span><span id="internetsss"></span><br>
+          <span>Verze: </span><span id="versionwrite" onclick="tajnever()">unknown</span>
+        </div>
+
+        <div onclick="changewindowmain(this);" class="widgetList terminal Resizabl">
+          <div class="widget-header">
+            <div class="headerclass"><span>Terminál</span>
+              <div onclick="windows.close(this, 'ter')" class="close"></div>
+              <div onclick="windows.mini(this, 'ter')" class="mini"></div>
+            </div>
+          </div>
+          <iframe src="ter"></iframe>
+        </div>
+
+        <div onclick="changewindowmain(this);" class="widgetList shellinklindos Resizabl">
+          <div class="widget-header">
+            <div class="headerclass"><span>ShellInKLINDOS Client</span>
+              <div onclick="windows.close(this, 'ShellInKLINDOS Client')" class="close"></div>
+            </div>
+          </div>
+          <iframe src="about:blank"></iframe>
+        </div>
+
+        <div onclick="changewindowmain(this);" class="widgetList napoveda Resizabl" style="position: absolute;">
+          <div class="widget-header">
+            <div class="headerclass"><span style="float: left;">KLIND OS | Nápověda</span>
+              <div onclick="windows.close(this, 'nap')" class="close"></div>
+              <div onclick="windows.mini(this, 'nap')" class="mini"></div>
+            </div>
+          </div>
+          <h1>Zkratky:</h1>
+          <ul style="position: relative; left: 20px;">
+            <li>CTRL + L Zamkne systém</li>
+            <li>ALT Gr + R Zobrazí start</li>
+            <li>ALT Gr + H Zobrazí nápovědu</li>
+            <li>ALT + ; Otevře okno s právě otevřenýmy programy</li>
+          </ul>
+        </div>
+
+        <div onclick="changewindowmain(this)" class="widgetList reg Resizabl">
+          <div class="widget-header">
+            <div class="headerclass"><span>Editor registrů</span>
+              <div onclick="windows.close(this, 'reg')" class="close"></div>
+              <div onclick="windows.mini(this, 'reg')" class="mini"></div>
+            </div>
+          </div>
+          <div class="content">
+            <select id="changesss">
+              <option value="login">Login</option>
+              <option value="consolelog">ConsoleLog</option>
+              <option value="autolocklogin">AutoLock</option>
+            </select>
+            <input placeholder="Value" id="valuesss" type="text">
+            <button onclick="submitreg(this.parentElement)">Odeslat</button>
+          </div>
+        </div>
+
+        <div onclick="changewindowmain(this)" class="widgetList kalendar Resizabl">
+          <div class="widget-header">
+            <div class="headerclass">
+              <span>Kalendář</span>
+              <div onclick="windows.close(this, 'kalen')" class="close"></div>
+              <div onclick="windows.mini(this, 'kalen')" class="mini"></div>
+            </div>
+          </div>
+          <iframe class="innerIframe" src="calendar" frameborder="0"></iframe>
+        </div>
+
+        <div onclick="changewindowmain(this)" class="widgetList budik Resizabl">
+          <div class="widget-header">
+            <div class="headerclass"><span>Budík</span>
+              <div onclick="windows.close(this, 'budik')" class="close"></div>
+              <div onclick="windows.mini(this, 'budik')" class="mini"></div>
+            </div>
+          </div>
+          <iframe class="innerIframe" src="budik" frameborder="0"></iframe>
+        </div>
+
+        <div onclick="changewindowmain(this)" class="widgetList maps Resizabl">
+          <div class="widget-header">
+            <div class="headerclass"><span>Mapy</span>
+              <div onclick="windows.close(this, 'maps')" class="close"></div>
+              <div onclick="windows.mini(this, 'maps')" class="mini"></div>
+            </div>
+          </div>
+          <iframe src="maps"></iframe>
+        </div>
+
+        <div onclick="changewindowmain(this)" class="widgetList prevodsys Resizabl">
+          <div class="widget-header">
+            <div class="headerclass"><span>Převod systému</span>
+              <div onclick="windows.close(this, 'prevod')" class="close"></div>
+              <div onclick="windows.mini(this, 'prevod')" class="mini"></div>
+            </div>
+          </div>
+          <div id="abjasbdjkbasknfljkdhfasasd">
+            <p>Nikdy soubor neupravuj! Může dojít k poškození systému.</p>
+            <div onclick="prevedsystem();">Získat .klindos soubor</div>
+            <div onclick="submitnjahsbdjksabd();">Nahrát .klindos soubor</div>
+          </div>
+        </div>
+
+        <div onclick="changewindowmain(this)" class="widgetList record Resizabl">
+          <div class="widget-header">
+            <div class="headerclass"><span>Nahrávání</span>
+              <div onclick="windows.close(this, 'record')" class="close"></div>
+              <div onclick="windows.mini(this, 'record')" class="mini"></div>
+            </div>
+          </div>
+          <iframe src="/record/"></iframe>
+        </div>
+
+        <div onclick="changewindowmain(this)" class="widgetList faceset Resizabl">
+          <div class="widget-header">
+            <div class="headerclass"><span>Nastavení rozpoznávání obličeje</span>
+              <div onclick="windows.close(this, 'faceset')" class="close"></div>
+              <div onclick="windows.mini(this, 'faceset')" class="mini"></div>
+            </div>
+          </div>
+          <iframe class="facesetiframe" src="faceinstall.html"></iframe>
+        </div>
+
+        <div onclick="changewindowmain(this)" class="widgetList filemanager Resizabl">
+          <div class="widget-header">
+            <div class="headerclass"><span>Správce Souborů</span>
+              <div onclick="windows.close(this, 'filemanager')" class="close"></div>
+              <div onclick="windows.mini(this, 'filemanager')" class="mini"></div>
+            </div>
+          </div>
+          <iframe class="filemanager" id="filemanageriframe" src="about:blank"></iframe>
+        </div>
+
+        <div onclick="changewindowmain(this)" class="widgetList fileproperties Resizabl">
+          <div class="widget-header">
+            <div class="headerclass"><span>Vlastnosti souboru</span>
+              <div onclick="windows.close(this, 'fileproperties')" class="close"></div>
+            </div>
+          </div>
+          <p>Název souboru: <span id="filename">error</span></p>
+          <p>Velikost souboru: <span id="filesize">error</span></p>
+          <p>Datum poslední změny: <span id="filechange">error</span></p>
+          <p>Typ souboru: <span id="filetype">neznámý</span></p>
+          <p>Umístění: <span id="filelocation">error</span></p>
+        </div>
+
+        <div onclick="changewindowmain(this)" class="widgetList fileeditor Resizabl">
+          <div class="widget-header">
+            <div class="headerclass">
+              <span style="float: left;">Soubor</span>
+              <div
+                onclick="mainFileManager.save(this.parentElement.parentElement.parentElement.getAttribute('filelocation'), this.parentElement.parentElement.parentElement.querySelector('#textareafileeditorimage').value)"
+                class="menupoznamky filesavefileconfig">Uložit</div>
+              <div
+                onclick="mainFileManager.setWallpaper(this.parentElement.parentElement.parentElement.getAttribute('filelocation'))"
+                class="menupoznamky imgwallpaperfileconfig">Nastavit jako pozadí</div>
+              <div onclick="windows.close(this, 'fileeditor')" class="close"></div>
+              <div onclick="windows.mini(this, 'fileeditor')" class="mini"></div>
+            </div>
+          </div>
+          <div class="fileeditorimage" style="display: none;">
+            <img id="fileeditorimageimg" style="object-fit: contain;">
+          </div>
+          <div class="fileeditoraudio" style="display: none">
+            <iframe src="" id="audiosourcefileeditor"></iframe>
+          </div>
+          <div class="fileeditorvideo" style="display: none">
+            <video id="player" playsinline controls crossorigin >
+              <source src=""/>
+            </video>
+          </div>
+          <div class="fileeditortext" style="display: none">
+            <textarea id="textareafileeditorimage"></textarea>
+          </div>
+        </div>
+
+        <div onclick="changewindowmain(this)" class="widgetList zdroje Resizabl">
+          <div class="widget-header">
+            <div class="headerclass">
+              <span>Zdroje</span>
+              <div onclick="windows.close(this, 'zdroje')" class="close"></div>
+              <div onclick="windows.mini(this, 'zdroje')" class="mini"></div>
+            </div>
+          </div>
+          <h1>Zdroje</h1>
+          <p>Ikony: <a href="http://icons8.com">Icons8</a></p>
+          <p>Zvukové efekty <a
+              href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=14572">Pixabay</a>
+          </p>
+          <p>API pro svátky: <a href="https://svatky.adresa.info/">svatky.adresa.info/</a></p>
+          <p>6.1 trialer song by <a href="https://www.chosic.com/free-music/all/">www.chosic.com/free-music/all/</a></p>
+          <p>Další ikony: <a href="https://www.flaticon.com/free-icons/downloading">Flaticon</a></p>
+        </div>
+        <div onclick="changewindowmain(this)" class="widgetList about Resizabl">
+          <div class="widget-header">
+            <div class="headerclass">
+              <span>O KLIND OS</span>
+              <div onclick="windows.close(this, 'about')" class="close"></div>
+              <div onclick="windows.mini(this, 'about')" class="mini"></div>
+            </div>
+          </div>
+          <h1>O KLIND OS</h1>
+          <p>KLIND OS je "operační systém" který je naprogramovaný v programovacím jazyce JavaScript.<br>
+            KLIND OS je Client Side operační systém. To znamená že server poskytne kód, a Váš počítač dělá všechny
+            operace.
+          </p>
+        </div>
+        <div onclick="changewindowmain(this)" class="widgetList installapp Resizabl">
+          <div class="widget-header">
+            <div class="headerclass">
+              <span>Instalátor aplikací</span>
+              <div onclick="windows.close(this, 'installapp')" class="close"></div>
+              <div onclick="windows.mini(this, 'installapp')" class="mini"></div>
+            </div>
+          </div>
+          <input style="display: none;" type="file" id="customappadd" onchange="CustomApp.add(this)">
+          <header style="
+                  height: 50px;
+                  display: flex;
+                  align-items: center;
+                  font-size: 25px;
+                    ">Vlastní aplikace<button style="
+                    height: 50px;
+                    right: 0;
+                    position: absolute;
+                    width: 50px;
+                " onclick="document.querySelector('#customappadd').click();">Nahrát</button></header>
+          <div class="allapps">
+
+          </div>
+        </div>
+        <div class="widgetList audioLevelEditor" onclick="changewindowmain(this)">
+          <div>
+            <div>
+              <div></div>
+            </div>
+          </div>
+          <h1 style="text-align: center;">Zvuky</h1>
+          <div class="slidecontainer">
+            <input type="range" min="0" max="100" value="50" class="slider" id="myRange"
+              oninput="AudioEditor.input(this)">
+            <div class="value" style="
+                      float: right;
+                      top: 4px;
+                      position: relative;
+                      right: 3px;
+                  ">38%</div>
+          </div>
+        </div>
+        <div onclick="changewindowmain(this)" class="widgetList procesy Resizabl">
+          <div class="widget-header">
+            <div class="headerclass">
+              <span>Správce úloh</span>
+              <div onclick="windows.close(this, 'procesy')" class="close"></div>
+              <div onclick="windows.mini(this, 'procesy')" class="mini"></div>
+            </div>
+          </div>
+          <button onclick="Procesy.analyze(this.parentElement)">Spustit analýzu procesů</button>
+          <div class="procesyContent"></div>
+        </div>
+        <div onclick="changewindowmain(this)" class="widgetList viewtext Resizabl">
+          <div class="widget-header">
+            <div class="headerclass">
+              <span>TextView</span>
+              <div onclick="windows.close(this, 'viewtext')" class="close"></div>
+            </div>
+          </div>
+          <textarea></textarea>
+        </div>
+        <div onclick="changewindowmain(this)" class="widgetList musicplayer Resizabl">
+          <div class="widget-header">
+            <div class="headerclass">
+              <span>Přehrávač hudby</span>
+              <div onclick="windows.close(this, 'viewtext')" class="close"></div>
+              <div onclick="windows.mini(this, 'musicplayer')" class="mini"></div>
+            </div>
+          </div>
+          <iframe></iframe>
+        </div>
+      </div>
+      <div id="klindows" class="klindows">
+        <div id="openedapps">
+          <span></span>
+        </div>
+        <div id="tajne" class="tajne" style="display: none;"><button
+            style="position: absolute; right: 0; font-size: 1.5em; "
+            onclick="document.getElementById('tajne').style.display = 'none';">X</button><button id="startgame"
+            onclick="startgame()">Start</button><iframe src="game" style="display: none;" id="hratajna"></iframe></div>
+
+        <div class="alertcookies" id="alertcookies">
+          <h1>Tato stránka bude ukládat soubory cookies do vašeho počítače pro ukládání informací a nastavení.</h1>
+          <button onclick="closealertcookies()">Rozumím</button>
+        </div>
+        <div class="openopenedapps" style="display: none;z-index:500;">
+        </div>
+        <div class="oknepatrizde">
+          <div onclick="changewindowmain(this);" class="poznamkymenu drageble displaynone drageblepoznamky">
+            <div class="headerclass"><span style="float: left;">Poznámky | Nápověda</span>
+              <div onclick="closepoznamkymenu()" class="close"></div>
+            </div>
+            <h1>Zkratky</h1>
+            <li>!date Vloží datum.</li>
+            <li>!ahoj Pozdraví.</li>
+            <li>(r) Vloží ®.</li>
+            <li>(e) Vloží €.</li>
+            <li>(c) Vloží ©.</li>
+            <li>\()/ Vloží ¯\_(ツ)_/¯.</li>
+            <li>:-) Vloží 😊.</li>
+            <li>:D Vloží 😁.</li>
+            <p>Pro to aby se zkratka projevila za zkratkou stiskněte mezeru.</p>
+            <br>
+            <h1>Příkaz var:</h1>
+            <p>Tento příkaz funguje jako takové úložiště slova věty nebo čísla.</p>
+            <br>
+            <p style="color:rgb(43, 43, 43);float: right;">Zde vložte větu slovo nebo číslo</p>
+            <br>
+            <p style="color:rgb(43, 43, 43);left:384px;position: relative;">↓</p>
+            <p style="font-weight: bold;">Pro vložení slova věty nebo čísla napíšete !setvar= !</p>
+            <p style="color:rgb(43, 43, 43);left:388px;position: relative;">↑</p>
+            <p style="color:rgb(43, 43, 43);float: right;">Tento vykřičník znamená konec věty slova nebo čísla</p>
+            <br>
+            <br>
+            <p>Pro vložení uloženého čísla slova nebo věty napište !writevar a stiskněte mezeru.</p>
+            <p>Uložené slovo nebo věta bude zachována aji po vypnutí či restartovaní systému.</p>
+          </div>
+
+          <div onclick="changewindowmain(this);" class="poznamkynas drageble displaynone drageblepoznamky">
+            <div class="headerclass"><span style="float: left;">Poznámky | Nastavení</span>
+              <div onclick="closepoznamkynas()" class="close"></div>
+            </div>
+            <h1 style="text-align: center;">Nastavení</h1>
+            <span>Velikost písma: </span><input onkeyup="sadhos()" id="velikostpismapoznamky"><span>px</span><br>
+            <span>Barva písma: </span><input onkeyup="sadhsaos()" id="barvapismapoznamky"><span>Vložte hex, rgb nebo
+              anglické jméno.</span>
+          </div>
+        </div>
+        <div class="iconsKLINDOS"></div>
+        <script>
+          dragingikonaklindows()
+        </script>
+        <div class="notifidiv dnlol">
+          <button onclick="closenotifi();">X</button>
+          <h1 id="hinotifi">Error</h1>
+          <p id="pnotifi">Error</p>
+          <script>
+            loadbetaicon();
+            DesktopIcons.load();
+          </script>
+          <script src="getos.js" defer></script>
+        </div>
+        <div id="fakedownbar" class="fakedownbar"></div>
+        <div id="downbar" class="downbar">
+          <div id="backsix" style="display: none;" class="startmenu">
+            <div class="leftdiv">
+              <img onclick="openstartmenu();Power.open()" class="userimgdownturnoff" cursor="pointer"
+                src="https://www.pngrepo.com/png/149346/512/power-button-sign.png">
+            </div>
+            <input type="text" id="searchstartmenu" onkeyup="searchstartmenu()" placeholder="Hledat">
+            <ul id="liststartmenu">
+              <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('poznamky');"
+                  icon="poznamky.png">Poznámky</a></li>
+              <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('kalk');tajnettri();"
+                  icon="icons/kalkulacka.png">Kalkulačka</a></li>
+              <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('nas');starttajne();"
+                  icon="nas.png">Nastavení</a></li>
+              <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('filemanager');"
+                  icon="icons/filemanager.png">Správce Souborů</a></li>
+              <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('brow');"
+                  icon="https://img.icons8.com/cotton/64/000000/search-in-browser.png">Prohlížeč</a></li>
+              <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('nap');" icon="icons/nap.png">Nápověda</a>
+              </li>
+              <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('info');" icon="icons/info.png">Info</a>
+              </li>
+              <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('stop');" icon="icons/stopky.">Stopky</a>
+              </li>
+              <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('update');" icon="icons/update.png">KLIND
+                  OS Aktualizace</a></li>
+              <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('reg');"
+                  icon="https://img.icons8.com/color-glass/96/000000/registry-editor.png">Editor registů</a></li>
+              <li><a oncontextmenu="rightclickApp(this)" onclick="window.open('https://klindos.jzitnik.is-a.dev/report');"
+                  icon="icons/report.png">Nahlásit chybu</a></li>
+              <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('ter');"
+                  icon="https://img.icons8.com/carbon-copy/100/000000/console.png">Terminál</a></li>
+              <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('kalen');"
+                  icon="icons/calendar.png">Kalendář</a></li>
+              <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('budik');" icon="icons/budik.png">Budík</a>
+              </li>
+              <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('maps');" icon="icons/maps.png">Mapy</a>
+              </li>
+              <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('prevod');" icon="icons/prevod.png">Převod
+                  systému</a></li>
+              <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('record');"
+                  icon="icons/record.png">Nahrávání</a></li>
+              <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('faceset');"
+                  icon="icons/faceset.png">Nastavení rozpoznávání obličeje</a></li>
+              <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('zdroje');"
+                  icon="icons/zdroje.png">Zdroje</a></li>
+              <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('about');" icon="icons/about.png">O KLIND
+                  OS</a></li>
+              <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('installapp');"
+                  icon="icons/installapp.png">Instalátor aplikací</a></li>
+              <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('procesy');"
+                  icon="icons/process.png">Správce úloh</a></li>
+            </ul>
+          </div>
+          <div id="logo" class="logo" onclick="openstartmenu()">
+            <div id="items-1" class="items-1"></div>
+            <div id="items-2" class="items-3"></div>
+            <div id="items-3" class="items-2"></div>
+            <div id="items-4" class="items-4"></div>
+          </div>
+          <div class="downiconsAppNone" style="display: none">
+            <img src="poznamky.png" alt="Poznámky" 
+              onclick="windows.miniOpen('poznamky',this)" class="ikonadown poznamkyikonadown">
+            <img src="icons/kalkulacka.png" alt="Kalkulačka"
+              onclick="windows.miniOpen('kalk',this)" class="ikonadown kalkikonadown">
+            <img src="nas.png" alt="Nastavení"
+              onclick="windows.miniOpen('nas',this);" class="ikonadown nasikonadown">
+            <img src="https://img.icons8.com/cotton/64/000000/search-in-browser.png"
+              alt="Prohlížeč" onclick="windows.miniOpen('brow',this)"
+              class="ikonadown browikonadown">
+            <img src="https://img.icons8.com/carbon-copy/100/000000/console.png"
+              alt="Terminal" onclick="windows.miniOpen('ter',this)"
+              class="ikonadown terikonadown">
+            <img src="https://img.icons8.com/color-glass/96/000000/registry-editor.png"
+              alt="Editor registrů" onclick="windows.miniOpen('reg',this)"
+              class="ikonadown regikonadown">
+            <img onclick="windows.miniOpen('timer',this)" alt="Časovač"
+              class="ikonadown timerikonadown" src="https://img.icons8.com/dotty/100/000000/timer.png">
+            <img onclick="windows.miniOpen('stop',this)" alt="Stopky"
+              class="ikonadown stopikonadown" src="icons/stopky.png">
+            <img onclick="windows.miniOpen('info',this)" alt="Informace"
+              class="ikonadown infoikonadown" src="icons/info.png">
+            <img onclick="windows.miniOpen('kalen',this)" alt="Kalendář"
+              class="ikonadown kalenikonadown" src="icons/calendar.png">
+            <img onclick="windows.miniOpen('budik',this)" alt="Budík"
+              class="ikonadown budikikonadown" src="icons/budik.png">
+            <img onclick="windows.miniOpen('maps',this)" alt="Mapy"
+              class="ikonadown mapsikonadown" src="icons/maps.png">
+            <img onclick="windows.miniOpen('prevod',this)" alt="Převod"
+              class="ikonadown prevodikonadown" src="icons/prevod.png">
+            <img onclick="windows.miniOpen('update',this)" 
+              alt="Aktualizace" class="ikonadown updateikonadown" src="icons/update.png">
+            <img onclick="windows.miniOpen('nap',this)" alt="Nápověda"
+              class="ikonadown napikonadown" src="icons/nap.png">
+            <img onclick="windows.miniOpen('faceset',this)"
+              alt="Rozpoznávání" class="ikonadown facesetikonadown" src="icons/faceset.png">
+            <img onclick="windows.miniOpen('record',this)"
+              alt="Nahrávání" class="ikonadown recordikonadown" src="icons/record.png">
+            <img onclick="windows.miniOpen('filemanager',this)"
+              alt="Správce souborů" class="ikonadown filemanagerikonadown" src="icons/filemanager.png">
+            <img onclick="windows.miniOpen('fileeditor',this)" alt="Editor souboru" class="ikonadown fileeditorikonadown"
+              src="icons/fileeditor.png">
+            <img onclick="windows.miniOpen('zdroje',this)" alt="Zdroje"
+              class="ikonadown zdrojeikonadown" src="icons/zdroje.png">
+            <img onclick="windows.miniOpen('about',this)" alt="O KLIND OS"
+              class="ikonadown aboutikonadown" src="icons/about.png">
+            <img onclick="windows.miniOpen('installapp',this)" 
+              alt="Instalátor aplikací" class="ikonadown installappikonadown" src="icons/installapp.png">
+            <img onclick="windows.miniOpen('procesy',this)" 
+              alt="Správce úloh" class="ikonadown procesyikonadown" src="icons/taskmanager.png">
+            <img onclick="windows.miniOpen('musicplayer',this)" 
+              alt="Přehrávač hudby" class="ikonadown musicplayerikonadown" src="icons/musicplayer.png">
+          </div>
+          <div class="appdiv">
+            <h1 style="height: 43px;">SomeApp</h1>
+            <div class="canvasSection">
+
+            </div>
+          </div>
+          <div class="downiconsApps" style="height: 100%;left: 50px;position: absolute;">
+
+          </div>
+
+          <div class="clockdate">
+            <div class="time">
+              <span id="timess">Error</span>
+            </div>
+            <div class="date">
+              <span id="dateclock">Error</span>
+            </div>
+            <script src="dateclock.js"></script>
+          </div>
+          <div class="clock jednaclock" onclick="opendate()">
+            <span id="time">Error</span>
+          </div>
+          <div class="clock dvaclock closedclock" onclick="opendate()">
+            <span id="timedva">Error</span>
+          </div>
+          <script src="clock.js"></script>
+          <img id="internetno" src="https://img.icons8.com/plumpy/24/000000/without-internet.png" style="float: right;"
+            class="ikonadown" onclick="windows.open('info')">
+          <img id="intrnetyes" src="https://img.icons8.com/windows/32/000000/internet.png" style="float: right;"
+            class="ikonadown" onclick="windows.open('info')">
+          <img src="/icons/audioeditor.png" style="float: right; display: block;" class="ikonadown audioLevelEditorIcon"
+            onclick="AudioEditor.toggle(this)">
+          <script src="./mainfacerec.js"></script>
+          <script src="changingz-index.js"></script>
+          <script src="/audioEditor.js"></script>
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>

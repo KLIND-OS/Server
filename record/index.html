@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="/isiframe.js"></script>
+    <title>Recorder</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div id="container">
+      <video id="gum" playsinline autoplay muted></video>
+      <video id="recorded" playsinline loop></video>
+ 
+      <div>
+        <button id="start">Spustit</button>
+        <button id="record" disabled>Nahrát</button>
+        <button id="play" disabled>Start</button>
+        <button id="download" disabled>Stáhnout</button>
+      </div>
+ 
+      <div>
+        <h4>Možnosti pro omezení toku média</h4>
+        <p>
+          Potlačení šumu: <input type="checkbox" id="echoCancellation" />
+        </p>
+      </div>
+ 
+      <div>
+        <span id="errorMsg"></span>
+      </div>
+    </div>
+  </body>
+  <script src="script.js"></script>
+</html>
