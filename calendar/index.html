@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <script src="/isiframe.js"></script>
+</head>
+<body>
+    <div id="calendar"></div>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <!-- Add jQuery library (required) -->
+    <script src="https://cdn.jsdelivr.net/npm/evo-calendar@1.1.2/evo-calendar/js/evo-calendar.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="calendar.min.css"/>
+    <!-- Add the evo-calendar.js for.. obviously, functionality! -->
+    <script>
+        // Initialize evo-calendar in your script file or an inline <script> tag
+       
+        $(document).ready(function() {
+            $('#calendar').evoCalendar({
+                theme: "Default",
+                firstDayOfWeek: 1,
+                eventListToggler: true,
+                eventDisplayDefault: true,
+                eventHeaderFormat: "d. MM yy",
+                calendarEvents: [
+                    {
+                        id: 'event1', // Event's ID (required)
+                        name: "New year", // Event name (required)
+                        date: "January/1/0", // Event date (required)
+                        type: "holiday", // Event type (required)
+                        everyYear: true // Same event every year (optional)
+                    },
+                    
+                ],
+            });
+            
+            //fetch("https://cloudklind.000webhostapp.com/klindos-scripts/calendar-api.txt").then(function(response) {
+            //    return response.json();
+            //}).then(function(data) {
+            //    for (var i = 0; i < data.length; i++) {
+            //        var element = data[i];
+            //        $('#calendar').evoCalendar('addCalendarEvent', element);
+            //    }
+            //}).catch(function(err) {
+            //    parent.spawnNotification("Calendar","We were unable to display events from the KLIND OS website.")
+            //});
+        })
+    </script>
+</body>
+</html>

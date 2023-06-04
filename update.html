@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>KLIND OS | Aktualizace</title>
+        <meta charset="UTF-8">
+        <script src="info.js"></script>
+        <script src="hash.js"></script>
+    </head>
+    <body style="text-align:center;margin:0;padding:0;">
+        <h1>KLIND OS | Aktualizace</h1>
+        <p>Toto je upozornění že tento server byl aktualizován na novou verzi KLIND OS.!</p>
+        <p>Pokud chcete pokračovat do KLIND OS, musíte si KLIND OS aktualizovat i na svém zařízení.</p>
+        <p>Pokud aktualizujete, nebudete moct se vrátit na starší verzi.</p>
+        <div class="actions">
+            <h2>Akce které se budou muset provést při aktualizaci:</h2>
+            <div class="act">
+                <p>Změna dat o vaší verzi</p>
+            </div>
+        </div>
+        <button onclick="this.innerHTML = 'Probíhá aktualizace';
+            setTimeout(() => {
+                this.innerHTML = 'Skoro hotovo...';
+                setTimeout(() => {
+                    this.style.display='none';
+                    document.getElementById('hotovo').style.display='';
+                }, 3488);
+            }, 5712);
+            ">Aktualizovat</button>
+        <button id="hotovo" onclick="finish()" style="display: none;">Hotovo (klikněte pro potvrzení)</button>
+        <script>
+            function finish() {
+                for (var i = 0; i < todo.length; i++) {
+                    todo[i]();
+                }
+                localStorage.setItem("updatesklindows", version);
+                localStorage.setItem("welcomePage", "true");
+                window.location.replace("index.html");
+            }
+        </script>
+    </body>
+</html>
+<script>
+    var messages = [
+        [6.1, "<p>Změna localStorage hodnoty pro pozadí na zamykací obrazovce.</p>", () => {
+            if(localStorage.getItem("background"))localStorage.setItem("background-lockScreen",localStorage.getItem("background"));
+        }],
+        [6.2, "<p>Odstranení všech vlastních aplikací z důvodu změny formátu.</p><p>Změna uložení hesla na nový formát.</p>", () => {
+            localStorage.removeItem("customapps");
+            localStorage.setItem("password", hashCode(localStorage.getItem("password")));
+        }]
+    ]
+</script>
+<script>
+    var startindex = undefined;
+    var endindex = undefined;
+    var todo = [];
+    for (var i = 0; i < messages.length; i++) {
+        if (messages[i][0] == localStorage.updatesklindows) {
+            startindex = i+1
+        }
+    }
+    for (var i = 0; i < messages.length; i++) {
+        if (messages[i][0] == version) {
+            endindex = i
+        }
+    }
+    if (endindex == undefined) {endindex = messages.length}
+    else {endindex++;}
+    for (var i = startindex?startindex:0; i < endindex; i++) {
+        var info = messages[i]
+        if (info[2] !== undefined) {
+            todo.push(info[2])
+        }
+        document.querySelector(".act").innerHTML+=info[1]?info[1]:""
+    }
+</script>

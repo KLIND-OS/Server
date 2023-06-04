@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musíme převést váš systém</title>
+</head>
+<body>
+    <style>
+        * {
+            text-align: center;
+        }
+        h1 {
+            font-size: 3em;
+        }
+        p {
+            font-size: 2em;
+        }
+        .questions *{
+            display: none;
+        }
+        .visible, .visible *{
+            display: block;
+        }
+        button {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: relative;
+        }
+    </style>
+    <h1>Je to tu!</h1>
+    <p>
+        Verze KLIND OS 6 nebo novější právě začala běžet na tomto serveru!<br>
+        Ale pozor! Budeme muset migrovat Váš operační systém. Proč?<br>
+        KLIND OS 6 začala používát novou technologii pro ukládání dat do prohlížeče.<br>
+        Zeptáme se Vás pár otázek aby jsme věděli jakým spůsobem budeme migrovat Váš systém.<br>
+    </p>
+    <div class="questions">
+        <div class="first visible">
+            <h2>Chcete ponechat zatím uložené věci v KLIND OS? Nebo chcete resetovat KLIND OS do továrního nastavení, a začít od znovu.</h2>
+            <button onclick="odpoved(1, 1)">
+                Ponechat
+            </button>
+            <button onclick="odpoved(1, 2)">
+                Resetovat do továrního nastavení
+            </button>
+        </div>
+        <div class="second">
+            <h2>Chcete zístat zálohu Vašeho systému pro jistotu, kdyby se něco pokazilo?</h2>
+            <button onclick="odpoved(2, 1)">
+                Ano (doporučujeme)
+            </button>
+            <button onclick="odpoved(2, 2)">
+                Ne
+            </button>
+        </div>
+        <div class="third">
+            <h2 class="message">Error! </h2>
+        </div>
+    </div>
+    <script>
+        var ponechat = false;
+        var zaloha = false;
+        function odpoved(otazka, odpoved) {
+            if (otazka === 1) {
+                document.querySelector(".first").classList.remove("visible")
+                document.querySelector(".second").classList.add("visible")
+                if (odpoved === 1) {
+                    ponechat = true
+                }
+                else if (odpoved === 2) {
+                    ponechat = false
+                }
+                else {
+                    alert("Error!")
+                }
+            }
+            else if (otazka === 2) {
+                document.querySelector(".second").classList.remove("visible")
+                document.querySelector(".third").classList.add("visible")
+                if (odpoved === 1) {
+                    zaloha = true;
+                    start();
+                }
+                else if (odpoved === 2) {
+                    zaloha = false;
+                    start();
+                }
+                else {
+                    alert("Error!")
+                }
+            }
+            else {
+                alert("Error!")
+            }
+        }
+        function downloadAsFile(filename, text) {
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('download', filename);
+          
+            element.style.display = 'none';
+            document.body.appendChild(element);
+          
+            element.click();
+          
+            document.body.removeChild(element);
+          }
+        function allCookies() {
+
+            var archive = []
+            var cookies = document.cookie.split("; ")
+            for (var i = 0; i < cookies.length; i++)  {
+                archive.push([
+                    cookies[i].split("=")[0],
+                    cookies[i].split("=")[1]
+                ])
+            }
+        
+            return archive;
+        }
+        function getBackup() {
+            var as = new Date
+            downloadAsFile(
+                "KLINDOS-BackUp.klindos",
+                JSON.stringify(allCookies())
+            )
+        }
+        function start() {
+            var msg = document.querySelector(".message")
+            if (zaloha) {
+                getBackup()
+            }
+            if (ponechat) {
+                msg.textContent = "Začínám převod systému."
+                var cookies = allCookies()
+                for (var i = 0; i < cookies.length; i++) {
+                    localStorage.setItem(
+                        cookies[i][0],
+                        cookies[i][1],
+                    )
+                }
+                setTimeout(() => {
+                    document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+                    msg.textContent = "Dokončeno. Za 10 sekund budete přesunuti na KLIND OS."
+                    setTimeout(() => {
+                        window.location.replace("/")
+                    }, 10000)
+                },1000)
+            }
+            else {
+                msg.textContent = "Nechtěli jste systém ponechat. Proto ho převádíme do továrního nastavení. Za 10 sekund budete přesunuti na KLIND OS."
+                document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+                localStorage.clear()
+                setTimeout(() => {
+                    window.location.replace("/")
+                },10000)
+            }
+        }
+    </script>
+</body>
+</html>

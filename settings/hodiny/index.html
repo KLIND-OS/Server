@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motiv</title>
+    <style>
+        :root {
+            --pocet: 3;
+        }
+    </style>
+    <link rel="stylesheet" href="./../style.css">
+    <script src="./../mouse.js" defer></script>
+    <script src="/isiframe.js"></script>
+    <script>
+        function dvahod() {
+            parent.prvniclock();
+        }
+        function ctyry() {
+            parent.druhyclock();
+        }
+    </script>
+</head>
+<body onmouseup="mouseUp()" onmousedown="mouseDown()" >
+    <div id="firstcursor"></div>
+    <div id="secondcursor" class="secondcursor"></div>
+    <div class="button" onclick="window.location.replace('..')"><- Zpět</div>
+    <div class="button" onclick="dvahod()">12 hodinové hodiny</div>
+    <div class="button" onclick="ctyry()">24 hodinové hodiny</div>
+    <script src="./../main.js" defer></script>
+</body>
+</html>

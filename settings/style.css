@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+    cursor: none;
+}
+body {
+    color: black;
+    background-color: white;
+}
+body.dark {
+    color: white;
+    background-color: rgb(59, 56, 56);
+}
+.button {
+    width: 100vw;
+    height: calc(100vh / var(--pocet));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(100vh / var(--pocet) /2.4);
+    background-color: transparent;
+    transition: ease 0.2s background-color;
+}
+.button:hover:not(.nohover) {
+    background-color: gray;
+}
+.button.input {
+    border: none;
+    outline: none;
+}
+.button span {
+    font-size: calc(2vh + 2vw / var(--spanvalue));
+}
+
+
+* {
+    cursor: none;
+}
+#firstcursor {
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    border: 2px solid black;
+    position: absolute;
+    z-index: 99999999999999999999999999999999999999999999999999999999999999999999;
+    position: fixed;
+    pointer-events: none;
+    transition: all .1s ease,top .18s ease-out,left .18s ease-out;
+}
+#secondcursor {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: black;
+    position: absolute;
+    z-index: 99999999999999999999999999999999999999999999999999999999999999999999;
+    position: fixed;
+    pointer-events: none;
+    transition: ease 0.2s background;
+}

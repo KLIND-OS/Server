@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KLINDOS | Settings</title>
+    <style>
+        :root {
+            --pocet: 7;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="/isiframe.js"></script>
+</head>
+<body onmouseup="mouseUp()" onmousedown="mouseDown()" >
+    <div id="firstcursor"></div>
+    <div id="secondcursor" class="secondcursor"></div>
+    <div class="button" onclick="window.location.replace('./motiv')">Motiv</div>
+    <div class="button" onclick="window.location.replace('./user')">Uživatel</div>
+    <div class="button" onclick="window.location.replace('./hodiny')">Hodiny</div>
+    <div class="button" onclick="window.location.replace('./taskbar')">Taskbar</div>
+    <div class="button" onclick="window.location.replace('./lockscreen')">Zamykací obrazovka</div>
+    <div class="button" onclick="window.location.replace('./mouseover')">Náhled okna</div>
+    <div class="button" onclick="window.location.replace('./reset')">Reset</div>
+    <script src="./main.js" defer></script>
+    <script src="./mouse.js" defer></script>
+</body>
+</html>
