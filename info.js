@@ -1,3 +1,3 @@
-version = "6.2";
+version = "6.3";
 var titleklindows = "KLIND-OS"
 var beta = false;

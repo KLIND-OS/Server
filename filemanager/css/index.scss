@@ -43,7 +43,7 @@ body {
             height: 50px;
             top: 0px;
             position: absolute;
-            right: 50px;
+            right: 0px;
             background-size: cover;
             width: 50px;
         }
@@ -51,7 +51,7 @@ body {
             height: 50px;
             top: 0px;
             position: absolute;
-            right: 100px;
+            right: 50px;
             background-size: cover;
             width: 50px;
         }
@@ -132,7 +132,7 @@ body {
         display: none!important;
     }
 }
-.rightclick, .rightclicktwo {
+.rightclick, .rightclicktwo, .rightclickthree {
     position: absolute;
     width: 150px;
     height: auto;

@@ -1,54 +1,52 @@
 setInterval(() => {
     var d = new Date()
     if (d.getHours() < 10) {
-        var hour = "0"+d.getHours()
+        var hour = "0" + d.getHours()
     }
     else {
         var hour = d.getHours()
     }
     if (d.getMinutes() < 10) {
-        var minutes = "0"+d.getMinutes()
+        var minutes = "0" + d.getMinutes()
     }
     else {
         var minutes = d.getMinutes()
     }
-    document.querySelector(".timelogin").innerHTML =hour+":"+minutes
-    document.querySelector(".datelogin").innerHTML = d.getDate()+". "+["ledna","února","března","dubna","května","června","července","srpna","zaří","října","listopadu","prosince"][d.getMonth()]+" "+d.getFullYear()
+    document.querySelector(".timelogin").innerHTML = hour + ":" + minutes
+    document.querySelector(".datelogin").innerHTML = d.getDate() + ". " + ["ledna", "února", "března", "dubna", "května", "června", "července", "srpna", "zaří", "října", "listopadu", "prosince"][d.getMonth()] + " " + d.getFullYear()
 }, 1000);
 function loadBackgroundLockScreen() {
     var path = localStorage.getItem("background-lockScreen")
     var content = mainFileManager.getContent(path);
-    if (path == "" || path == null) {
-
-    }
+    if (path == "" || path == null) {}
     else if (content == false) {
-        control.dowhenlogin.add(()=> {
-            spawnNotification("UI","Obrázek pro zamykací obrazovku nebyl nalezen!")
+        control.dowhenlogin.add(() => {
+            spawnNotification("UI", "Obrázek pro zamykací obrazovku nebyl nalezen!")
         })
     }
     else {
-        document.querySelector(".loginfirst").style.backgroundImage = "url("+content+")";
+        document.querySelector(".loginfirst").style.backgroundImage = "url(" + content + ")";
     }
 }
 loadBackgroundLockScreen()
-$( function() {
-    $( ".loginfirst" ).draggable({
+$(function () {
+    $(".loginfirst").draggable({
         axis: "y",
         scroll: false,
         start: (e) => {
             e.target.style.transition = ""
         },
         stop: (e) => {
-            var top = e.target.style.top.replace("px","")
+            var top = e.target.style.top.replace("px", "")
             var windowHeight = window.innerHeight
-            if (e.target.style.top.replace("px","")>0) {
+            if (e.target.style.top.replace("px", "") > 0) {
                 e.target.style.transition = "ease 0.7s top"
                 e.target.style.top = "0px";
                 setTimeout(() => {
                     e.target.style.transition = ""
                 }, 700);
             }
-            else if (Math.abs(top)>windowHeight/2) {
+            else if (Math.abs(top) > windowHeight / 2) {
                 e.target.style.transition = "ease 0.7s top"
                 e.target.style.top = "-100vh";
                 setTimeout(() => {
@@ -64,25 +62,25 @@ $( function() {
             }
         }
     });
-  } );
+});
 const passwordcookie = localStorage.getItem('password');
 if (localStorage.getItem('customicon') != null) {
     const customicon = localStorage.getItem("customicon")
     if (customicon == "") {
-        document.getElementById("userimg").src = "https://cdn2.iconfinder.com/data/icons/font-awesome/1792/user-512.png"
+        document.getElementById("userimg").src = "icons/user.png"
     }
     else {
         const content = mainFileManager.getContent(customicon)
         if (content == false) {
             control.dowhenlogin.add(() => {
-                spawnNotification("Uživatelské rozhraní","Profilovka nebyla nalazena v souborech!")
+                spawnNotification("Uživatelské rozhraní", "Profilovka nebyla nalazena v souborech!")
             })
         }
         else {
             document.getElementById("userimg").src = content;
         }
     }
-    
+
 }
 function logout() {
     document.querySelector(".loginfirst").style.top = "0px"
@@ -97,8 +95,8 @@ var pokusy = 5;
 function submitlogin() {
     var password = document.getElementById("password").value;
     var hashed = hashCode(password)
-    if (pokusy==0) {}
-    else if (password == "") {}
+    if (pokusy == 0) { }
+    else if (password == "") { }
     else if (hashed == passwordcookie) {
         pokusy = 5;
         document.querySelector(".login").classList.add("displaynone");
@@ -114,8 +112,8 @@ function submitlogin() {
             document.getElementById("pokusy").innerHTML = "Na 60s se ti<br>zablokuje přihlášení.";
             var asdhjklasjd = setInterval(() => {
                 casyasjk--;
-                document.getElementById("pokusy").innerHTML = "Na "+casyasjk+"s se ti<br>zablokuje přihlášení.";
-                
+                document.getElementById("pokusy").innerHTML = "Na " + casyasjk + "s se ti<br>zablokuje přihlášení.";
+
             }, 1000);
             setTimeout(() => {
                 document.getElementById("pokusy").innerHTML = "";
@@ -127,7 +125,7 @@ function submitlogin() {
         else {
             document.getElementById("password").value = "";
             pokusy--;
-            document.getElementById("pokusy").innerHTML = "Zbývající pokusy: "+pokusy;
+            document.getElementById("pokusy").innerHTML = "Zbývající pokusy: " + pokusy;
         }
     }
 }
@@ -140,8 +138,8 @@ var url = window.location.href;
 function jadsandjbnasd() {
     var sajjidhasjod = document.getElementById('hasdgashdjasj').contentDocument.location.href;
     let sajjidhasjods = sajjidhasjod
-    .replace(url+"face/#][%C4%91%C4%905655%C4%91%C4%90%C4%91%C4%90%C4%91", "")
-    .replace("%C4%90%C4%91%C4%90%C4%911%C4%905%C4%9155]5%C4%90", "")
+        .replace(url + "face/#][%C4%91%C4%905655%C4%91%C4%90%C4%91%C4%90%C4%91", "")
+        .replace("%C4%90%C4%91%C4%90%C4%911%C4%905%C4%9155]5%C4%90", "")
     if (document.getElementById("sagdasda").value == sajjidhasjods) {
         pokusy = 5;
         timelogin = 59;

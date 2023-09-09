@@ -5,7 +5,7 @@ function allStorage() {
         i = 0, key;
 
     for (; key = keys[i]; i++) {
-        archive.push( [key, localStorage.getItem(key)]);
+        archive.push([key, localStorage.getItem(key)]);
     }
 
     return archive;
@@ -14,18 +14,18 @@ function downloadAsFile(filename, text) {
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
     element.setAttribute('download', filename);
-  
+
     element.style.display = 'none';
     document.body.appendChild(element);
-  
+
     element.click();
-  
+
     document.body.removeChild(element);
-  }
+}
 
 function prevedsystem() {
     var as = new Date
-    downloadAsFile(as.getDate().toString() +"."+(as.getMonth()+1)+"."+as.toString().split(" ")[3]+".klindos", JSON.stringify(allStorage()))
+    downloadAsFile(as.getDate().toString() + "." + (as.getMonth() + 1) + "." + as.toString().split(" ")[3] + ".klindos", JSON.stringify(allStorage()))
 }
 function submitnjahsbdjksabd() {
     input = document.createElement("input")

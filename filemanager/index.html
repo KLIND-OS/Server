@@ -51,14 +51,18 @@
     <div class="rightclick" style="display: none;">
         <div class="choice first" onclick='FileManager.copy(this.parentElement.getAttribute("idel"));document.querySelector(".rightclick").style.display = "none"'><p>Kopírovat</p></div>
         <div class="choice" onclick='FileManager.convertTo(this.parentElement.getAttribute("idel"));document.querySelector(".rightclick").style.display = "none"'><p>Convertovat</p></div>
-        <div class="choice" onclick='FileManager.downloadFile(this.parentElement.getAttribute("idel"));document.querySelector(".rightclick").style.display = "none"'><p>Stáhnout</p></div>
+        <!--<div class="choice" onclick='FileManager.downloadFile(this.parentElement.getAttribute("idel"));document.querySelector(".rightclick").style.display = "none"'><p>Stáhnout</p></div>-->
         <div class="choice" onclick='FileManager.copyPath(this.parentElement.getAttribute("idel"));document.querySelector(".rightclick").style.display = "none"'><p>Zkopírovat cestu</p></div>
+        <div class="choice" onclick='FileManager.addShortcut(this.parentElement.getAttribute("idel"));document.querySelector(".rightclick").style.display = "none"'><p>Přidat zástupce na plochu</p></div>
         <div class="choice" onclick='FileManager.rename(this.parentElement.getAttribute("idel"));document.querySelector(".rightclick").style.display = "none"'><p>Přejmenovat</p></div>
         <div class="choice" onclick='FileManager.remove(this.parentElement.getAttribute("idel"));document.querySelector(".rightclick").style.display = "none"'><p>Smazat</p></div>
         <div class="choice last" onclick='FileManager.properties(this.parentElement.getAttribute("idel"));document.querySelector(".rightclick").style.display = "none"'><p>Vlastnosti</p></div>
     </div>
     <div class="rightclicktwo" style="display: none;">
         <div class="choice first last" onclick='FileManager.removeFolder(this.parentElement.getAttribute("idel"));document.querySelector(".rightclicktwo").style.display = "none"'><p>Smazat</p></div>
+    </div>
+    <div class="rightclickthree" style="display: none;">
+        <div class="choice first last" onclick='FileManager.createShortcut();document.querySelector(".rightclicktwo").style.display = "none"'><p>Vytvořit zástupce</p></div>
     </div>
 </body>
 </html>

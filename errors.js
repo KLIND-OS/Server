@@ -1,5 +1,5 @@
-function error(code, info, app){
-    if (developermode=="false") {
+function error(code, info, app) {
+    if (developermode == "false") {
         new Howl({
             src: ['sounds/error.mp3'],
             volume: 1,
@@ -9,7 +9,7 @@ function error(code, info, app){
         document.querySelector("#infoerror").innerHTML = info;
         document.querySelector("#createdapp").innerHTML = app;
         document.querySelector("#error").style.display = "block";
-        console.error("Error code: "+code+" Informations: "+info+" Created error by: "+app+" Chyba byla vytvořena chybou v kódu KLIND OS nebo externí aplikace!");
+        console.error("Error code: " + code + " Informations: " + info + " Created error by: " + app + " Chyba byla vytvořena chybou v kódu KLIND OS nebo externí aplikace!");
     }
 }
 

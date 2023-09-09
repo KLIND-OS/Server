@@ -47,7 +47,7 @@ body {
   height: 50px;
   top: 0px;
   position: absolute;
-  right: 50px;
+  right: 0px;
   background-size: cover;
   width: 50px;
 }
@@ -55,7 +55,7 @@ body {
   height: 50px;
   top: 0px;
   position: absolute;
-  right: 100px;
+  right: 50px;
   background-size: cover;
   width: 50px;
 }
@@ -136,7 +136,7 @@ body {
   display: none !important;
 }
 
-.rightclick, .rightclicktwo {
+.rightclick, .rightclicktwo, .rightclickthree {
   position: absolute;
   width: 150px;
   height: auto;
@@ -145,7 +145,7 @@ body {
   top: 0;
   left: 0;
 }
-.rightclick .choice, .rightclicktwo .choice {
+.rightclick .choice, .rightclicktwo .choice, .rightclickthree .choice {
   width: 100%;
   height: 50px;
   display: flex;
@@ -154,14 +154,14 @@ body {
   transition: background-color 0.2s ease;
   background-color: white;
 }
-.rightclick .choice:hover, .rightclicktwo .choice:hover {
+.rightclick .choice:hover, .rightclicktwo .choice:hover, .rightclickthree .choice:hover {
   background-color: rgb(150, 150, 150);
 }
-.rightclick .choice.first, .rightclicktwo .choice.first {
+.rightclick .choice.first, .rightclicktwo .choice.first, .rightclickthree .choice.first {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
-.rightclick .choice.last, .rightclicktwo .choice.last {
+.rightclick .choice.last, .rightclicktwo .choice.last, .rightclickthree .choice.last {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }/*# sourceMappingURL=index.css.map */

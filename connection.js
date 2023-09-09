@@ -1,32 +1,32 @@
 var connectedsss = true
-function detectcon() {
+function monitorConnection() {
     try {
         var predchozisad = "true";
-        function ajax(){
+        function ajax() {
             let xhr = new XMLHttpRequest();
             xhr.open("GET", "https://jsonplaceholder.typicode.com/posts", true);
-            xhr.onload = ()=>{
-                if(xhr.status == 200 && xhr.status < 300){
+            xhr.onload = () => {
+                if (xhr.status == 200 && xhr.status < 300) {
                     try {
                         document.getElementById("internetsss").textContent = "Připojeno";
                         document.getElementById("internetno").style.display = "none";
                         document.getElementById("intrnetyes").style.display = "block";
-                    }catch{}
+                    } catch { }
                     connectedsss = "true";
                     if (predchozisad == "false") {
                         internet_up();
                     }
                     predchozisad = "true";
-                }else{
+                } else {
                     offline();
                 }
             }
-            xhr.onerror = ()=>{
+            xhr.onerror = () => {
                 offline();
             }
             xhr.send();
         }
-        function offline(){
+        function offline() {
             document.getElementById("internetsss").textContent = "Odpojeno";
             connectedsss = "false";
             document.getElementById("internetno").style.display = "block";
@@ -36,9 +36,9 @@ function detectcon() {
             }
             predchozisad = "false";
         }
-        setInterval(()=>{
+        setInterval(() => {
             ajax();
         }, 1000);
     }
-    catch {}
+    catch { }
 }

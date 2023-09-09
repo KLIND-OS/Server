@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pozor!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background-color: red;
+            padding: 50px;
+        }
+        h1 {
+            font-size: 60px;
+        }
+        p {
+            font-size: 30px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function reset() {
+            localStorage.clear()
+            window.location.replace("http://localhost:10000")
+        }
+    </script>
+</head>
+<body>
+    <h1>Pozor!</h1>
+    <p>Byly jste přesměrování na stránku která není od KLIND OS. Toto není normální chování! Váš systém byl pravděpodobně napaden! Kvůli vaší bezpečnosti budeme muset váš systém resetovat do továrního nastavení.</p>
+    <button onclick="reset()">Resetovat do továrního nastavení</button>
+</body>
+</html>

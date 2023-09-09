@@ -1,13 +1,13 @@
 var autotaskshovat = false;
 function adjasjdk(cbtaskbar) {
-    if (cbtaskbar){
+    if (cbtaskbar) {
         autotaskshovat = true;
-        localStorage.setItem("autotaskschovat","true")
+        localStorage.setItem("autotaskschovat", "true")
         document.getElementById("downbar").style.bottom = "-50px";
     }
     else {
         autotaskshovat = false;
-        localStorage.setItem("autotaskschovat","false")
+        localStorage.setItem("autotaskschovat", "false")
         document.getElementById("downbar").style.bottom = "0";
     }
 }
