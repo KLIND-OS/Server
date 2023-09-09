@@ -15,7 +15,7 @@ var control = {
             }
             todos = []
         },
-        loaded: () =>{
+        loaded: () => {
             if (login != "true") {
                 setTimeout(() => {
                     for (var i = 0; i < todos.length; i++) {
@@ -29,17 +29,17 @@ var control = {
     error: (type) => {
         if (type == "fatal") {
             return (info, appName) => {
-                error("0x0000241", info, "Chyba vyvolána aplikací: "+appName)
+                error("0x0000241", info, "Chyba vyvolána aplikací: " + appName)
             }
         }
         else if (type == "warn") {
             return (info, appName) => {
-                spawnNotification(appName+" - Varování", info)
+                spawnNotification(appName + " - Varování", info)
             }
         }
         else {
             return () => {
-                throw new Error("Uknown type of error: "+type)
+                throw new Error("Uknown type of error: " + type)
             }
         }
     },
@@ -54,7 +54,7 @@ var control = {
         },
         reboot: (app) => {
             var appName = app.info.name
-            BPrompt.confirm("Chcete aplikaci "+appName+" povolit restartovat Váš počítač?", (x) => {
+            BPrompt.confirm("Chcete aplikaci " + appName + " povolit restartovat Váš počítač?", (x) => {
                 if (x) {
                     spawnNotification(appName, "Systém bude restartován za 5 sekund!")
                     setTimeout(() => {
@@ -67,10 +67,10 @@ var control = {
     playSound: (location) => {
         var x = new Howl({
             src: [location],
-            volume: Math.round((AudioEditor.value/100) * 10) / 10,
+            volume: Math.round((AudioEditor.value / 100) * 10) / 10,
             autoplay: true
         });
-        x.on('end', function() {
+        x.on('end', function () {
             playingSounds = removebyindex(playingSounds, playingSounds.indexOf(x))
         })
         playingSounds.push(x);
@@ -79,34 +79,36 @@ var control = {
     playSong: (location, otherSettings, autoplay) => {
         var x = new Howl({
             src: [location],
-            volume: Math.round((AudioEditor.value/100) * 10) / 10,
+            volume: Math.round((AudioEditor.value / 100) * 10) / 10,
             autoplay: autoplay || true,
             ...otherSettings
         });
-        x.on('end', function() {
+        x.on('end', function () {
             playingSongs = removebyindex(playingSongs, playingSongs.indexOf(x))
         })
         playingSongs.push(x);
         return x;
     },
-    getVolume: () => Math.round((AudioEditor.value/100) * 10) / 10,
+    getVolume: () => Math.round((AudioEditor.value / 100) * 10) / 10,
     notify: spawnNotification,
     fileManager: Object.assign({}, {
         fileSelect: (callBack) => {
-            windows.open("filemanager", {mode:"select",callBack:callBack})
+            windows.open("filemanager", { mode: "select", callBack: callBack })
         },
         FileConstructor: File
-    },mainFileManager),
+    }, mainFileManager),
     message: BPrompt,
     printScreen: (callback) => {
-        html2canvas(document.querySelector("#klindows"),{useCORS: true,
-            allowTaint: true,}).then(function(canvas) {
+        html2canvas(document.querySelector("#klindows"), {
+            useCORS: true,
+            allowTaint: true,
+        }).then(function (canvas) {
             callback(canvas.toDataURL())
         });
     }
 }
 class App {
-    constructor({name, onStart, hidden}) {
+    constructor({ name, onStart, hidden }) {
         if (windows.list.names.includes(name)) {
             throw new Error("App with this name already exists. Name must be a unique.")
         }
@@ -115,7 +117,7 @@ class App {
                 var element = document.createElement("li")
                 var a = document.createElement("a")
                 a.textContent = name
-                a.onclick = () => {windows.open(name);}
+                a.onclick = () => { windows.open(name); }
                 element.appendChild(a)
                 document.querySelector("#liststartmenu").appendChild(element)
             }
@@ -131,14 +133,15 @@ class App {
                 onStart: onStart,
                 inStartMenu: hidden,
             }
+            LocalStorage.customApps.push(name)
         }
     }
-    createWindow({buttons, content}) {
+    createWindow({ buttons, content }) {
         var name = this.info.name
-        
+
         var okno = document.createElement('div')
         okno.classList.add('widgetList')
-        okno.classList.add(name.replaceAll(" ",""))
+        okno.classList.add(name.replaceAll(" ", ""))
         okno.classList.add('Resizabl')
         okno.setAttribute("onclick", "changewindowmain(this);")
 
@@ -154,7 +157,7 @@ class App {
         if (buttons.close != undefined) {
             var closeBtn = document.createElement('div')
             closeBtn.classList.add("close")
-            closeBtn.setAttribute("onclick", "windows.close(this,'"+name+"')")
+            closeBtn.setAttribute("onclick", "windows.close(this,'" + name + "')")
             headerClass.appendChild(closeBtn)
             var closeaction = buttons.close
         }
@@ -164,7 +167,7 @@ class App {
         if (buttons.mini != undefined) {
             var miniBtn = document.createElement('div')
             miniBtn.classList.add("mini")
-            miniBtn.setAttribute("onclick", "windows.mini(this,'"+name+"')")
+            miniBtn.setAttribute("onclick", "windows.mini(this,'" + name + "')")
             headerClass.appendChild(miniBtn)
             var miniaction = buttons.mini
         }
@@ -174,7 +177,7 @@ class App {
 
         windows.list.special[name][1] = closeaction
         windows.list.special[name][2] = miniaction
-        
+
         widgetHeader.appendChild(headerClass)
 
         okno.appendChild(widgetHeader)
@@ -184,29 +187,29 @@ class App {
         final.innerHTML += content
 
         var location = windows.list.names.indexOf(name)
-        windows.list.classes[location] = "."+name.replaceAll(" ","")
+        windows.list.classes[location] = "." + name.replaceAll(" ", "")
 
         this.window = final;
     }
     createMiniIcon() {
         var appname = this.info.name
-        
+
         var element = document.createElement("img")
         element.src = CustomApp.getIcon(appname)
         element.alt = appname
-        element.setAttribute("onclick", "windows.miniOpen('"+appname+"',this)")
+        element.setAttribute("onclick", "windows.miniOpen('" + appname + "',this)")
         element.classList.add("ikonadown")
-        element.classList.add(appname.replaceAll(" ","")+"ikonadown")
+        element.classList.add(appname.replaceAll(" ", "") + "ikonadown")
 
         var final = document.querySelector(".downiconsAppNone").appendChild(element)
 
         var location = windows.list.names.indexOf(appname)
-        windows.list.ikonadown[location] = "."+appname.replaceAll(" ","")+"ikonadown"
+        windows.list.ikonadown[location] = "." + appname.replaceAll(" ", "") + "ikonadown"
 
         this.miniIcon = final;
     }
     storage = {
-        set: (key,value) => {
+        set: (key, value) => {
             var storage = JSON.parse(localStorage.getItem(this.info.name)) || {}
             storage[key] = value;
             localStorage.setItem(this.info.name, JSON.stringify(storage));

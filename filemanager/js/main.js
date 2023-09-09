@@ -8,71 +8,77 @@ function downloadAsFile(filename, text) {
     element.style.display = 'none';
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
     element.setAttribute('download', filename);
-  
+
     element.style.display = 'none';
     document.body.appendChild(element);
-  
-    element.click();
-  
-    document.body.removeChild(element);
-  }
 
-document.addEventListener('contextmenu', function(e) {
+    element.click();
+
+    document.body.removeChild(element);
+}
+
+document.addEventListener('contextmenu', function (e) {
     if (!selectmode) {
         if (e.target.classList == "element") {
             rightclickad = document.querySelector(".rightclick")
             rightclickad.setAttribute("idel", e.target.getAttribute("idel"))
-            rightclickad.style.left = e.clientX+"px"
-            rightclickad.style.top = e.clientY+"px"
+            rightclickad.style.left = e.clientX + "px"
+            rightclickad.style.top = e.clientY + "px"
             rightclickad.style.display = "block"
         }
-        else if (e.target.parentElement.classList== "element"){
+        else if (e.target.parentElement.classList == "element") {
             rightclickad = document.querySelector(".rightclick")
             rightclickad.setAttribute("idel", e.target.parentElement.getAttribute("idel"))
-            rightclickad.style.left = e.clientX+"px"
-            rightclickad.style.top = e.clientY+"px"
+            rightclickad.style.left = e.clientX + "px"
+            rightclickad.style.top = e.clientY + "px"
             rightclickad.style.display = "block"
         }
         else if (e.target.classList == "elmnt") {
             rightclickad = document.querySelector(".rightclicktwo")
             rightclickad.setAttribute("idel", e.target.querySelector("p").innerHTML)
-            rightclickad.style.left = e.clientX+"px"
-            rightclickad.style.top = e.clientY+"px"
+            rightclickad.style.left = e.clientX + "px"
+            rightclickad.style.top = e.clientY + "px"
             rightclickad.style.display = "block"
         }
         else if (e.target.parentElement.classList == "elmnt") {
             rightclickad = document.querySelector(".rightclicktwo")
             rightclickad.setAttribute("idel", e.target.parentElement.querySelector("p").innerHTML)
-            rightclickad.style.left = e.clientX+"px"
-            rightclickad.style.top = e.clientY+"px"
+            rightclickad.style.left = e.clientX + "px"
+            rightclickad.style.top = e.clientY + "px"
+            rightclickad.style.display = "block"
+        }
+        else if (e.target.classList.contains("main")) {
+            rightclickad = document.querySelector(".rightclickthree")
+            rightclickad.style.left = e.clientX + "px"
+            rightclickad.style.top = e.clientY + "px"
             rightclickad.style.display = "block"
         }
     }
     e.preventDefault();
 }, false);
 
-var parseExcel = function(file) {
+var parseExcel = function (file) {
     var reader = new FileReader();
 
-    reader.onload = function(e) {
+    reader.onload = function (e) {
         var asdajksdhjasd = [];
         var data = e.target.result;
         var workbook = XLSX.read(data, {
             type: 'binary'
         });
 
-        workbook.SheetNames.forEach(function(sheetName) {
+        workbook.SheetNames.forEach(function (sheetName) {
             // Here is your object
             var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
-            
+
             asdajksdhjasd.push(XL_row_object)
 
         })
-        FileManager.uploadToLocalStorage(file,JSON.stringify(asdajksdhjasd))
+        FileManager.uploadToLocalStorage(file, JSON.stringify(asdajksdhjasd))
         document.querySelector("#fileupload").value = "";
         FileManager.readFiles();
     };
-    reader.onerror = function(ex) {
+    reader.onerror = function (ex) {
         console.log(ex);
     };
 
@@ -87,35 +93,39 @@ function removebyindex(array, index) {
     }
     return doacgajs
 }
-function humanFileSize(bytes, si=false, dp=1) {
+function humanFileSize(bytes, si = false, dp = 1) {
     const thresh = si ? 1000 : 1024;
-  
+
     if (Math.abs(bytes) < thresh) {
-      return bytes + ' B';
+        return bytes + ' B';
     }
-  
-    const units = si 
-      ? ['KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'] 
-      : ['KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
+
+    const units = si
+        ? ['KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+        : ['KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
     let u = -1;
-    const r = 10**dp;
-  
+    const r = 10 ** dp;
+
     do {
-      bytes /= thresh;
-      ++u;
+        bytes /= thresh;
+        ++u;
     } while (Math.round(Math.abs(bytes) * r) / r >= thresh && u < units.length - 1);
-  
-  
+
+
     return bytes.toFixed(dp) + ' ' + units[u];
 }
-window.addEventListener('click', function(e){   
-    if (document.querySelector(".rightclick").contains(e.target)){
-    } else{
+window.addEventListener('click', function (e) {
+    if (document.querySelector(".rightclick").contains(e.target)) {
+    } else {
         document.querySelector(".rightclick").style.display = "none"
     }
-    if (document.querySelector(".rightclicktwo").contains(e.target)){
-    } else{
+    if (document.querySelector(".rightclicktwo").contains(e.target)) {
+    } else {
         document.querySelector(".rightclicktwo").style.display = "none"
+    }
+    if (document.querySelector(".rightclickthree").contains(e.target)) {
+    } else {
+        document.querySelector(".rightclickthree").style.display = "none"
     }
 });
 var FileManager = {
@@ -131,7 +141,7 @@ var FileManager = {
             else {
                 const reader = new FileReader();
                 reader.addEventListener("load", () => {
-                    FileManager.uploadToLocalStorage(element.files[0],reader.result)
+                    FileManager.uploadToLocalStorage(element.files[0], reader.result)
                     element.value = "";
                     FileManager.readFiles();
                 })
@@ -139,13 +149,13 @@ var FileManager = {
                     parent.spawnNotification("Správce Souborů", "Tento soubor neumím správně spracovat. Po nahrání může být poškozen!")
                     reader.readAsBinaryString(element.files[0])
                 }
-                else if (element.files[0].type.split("/")[0]== "text"){
+                else if (element.files[0].type.split("/")[0] == "text") {
                     reader.readAsText(element.files[0])
                 }
-                else if (element.files[0].type.split("/")[0]== "image" || element.files[0].type.split("/")[0]== "audio" || element.files[0].type.split("/")[0]== "video") {
+                else if (element.files[0].type.split("/")[0] == "image" || element.files[0].type.split("/")[0] == "audio" || element.files[0].type.split("/")[0] == "video") {
                     reader.readAsDataURL(element.files[0])
                 }
-                else if (element.files[0].type.split("/")[1]== "vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+                else if (element.files[0].type.split("/")[1] == "vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
                     parent.spawnNotification("Správce Souborů", "Excelová tabulka bude převedena na text ve formátu JSON.")
                     parseExcel(element.files[0])
                 }
@@ -159,9 +169,9 @@ var FileManager = {
     uploadToLocalStorage: (info, data) => {
         if (localStorage.getItem("files-uploaded")) {
             var stored = JSON.parse(localStorage.getItem("files-uploaded"));
-            stored.push([info["name"],lengthInUtf8Bytes(data),info["type"],info["lastModifiedDate"].toString(),data,infolder])
+            stored.push([info["name"], lengthInUtf8Bytes(data), info["type"], info["lastModifiedDate"].toString(), data, infolder])
             try {
-                localStorage.setItem("files-uploaded",JSON.stringify(stored))
+                localStorage.setItem("files-uploaded", JSON.stringify(stored))
             }
             catch (e) {
                 parent.spawnNotification("Správce souborů", "Není dostatek místa na úložišti. Více info <a href='https://www.gwtproject.org/doc/latest/DevGuideHtml5Storage.html'>zde</a>.")
@@ -169,10 +179,10 @@ var FileManager = {
             }
         }
         else {
-            prozatim = [[info["name"],lengthInUtf8Bytes(data),info["type"],info["lastModifiedDate"].toString(),data,infolder]]
+            prozatim = [[info["name"], lengthInUtf8Bytes(data), info["type"], info["lastModifiedDate"].toString(), data, infolder]]
             try {
-                localStorage.setItem("files-uploaded",JSON.stringify(prozatim))
-            }catch (e) {
+                localStorage.setItem("files-uploaded", JSON.stringify(prozatim))
+            } catch (e) {
                 parent.spawnNotification("Správce souborů", "Není dostatek místa na úložišti. Více info <a href='https://www.gwtproject.org/doc/latest/DevGuideHtml5Storage.html'>zde</a>.")
                 console.log("File is too big to be uploaded. Error message: " + e.toString())
             }
@@ -180,18 +190,19 @@ var FileManager = {
     },
     readFiles: () => {
         if (selectmode) {
-            document.querySelector(".main").innerHTML = '<header><p>Správce Souborů <span>'+infolder+'</span></p></header>'
+            document.querySelector(".main").innerHTML = '<header><p>Správce Souborů <span>' + infolder + '</span></p></header>'
         }
         else {
-            document.querySelector(".main").innerHTML = '<header><p>Správce Souborů <span>'+infolder+'</span></p><div class="mainelement" onclick="FileManager.upload();"></div><div class="secondelement" onclick="FileManager.createFolder();"></div><div class="thirdelement" onclick="FileManager.createFile();"></div></header>'
+            document.querySelector(".main").innerHTML = '<header><p>Správce Souborů <span>' + infolder + '</span></p><!--<div class="mainelement" onclick="FileManager.upload();"></div>--!><div class="secondelement" onclick="FileManager.createFolder();"></div><div class="thirdelement" onclick="FileManager.createFile();"></div></header>'
         }
         if (infolder != "/") {
             var element = document.createElement("div");
             element.classList.add("elmnt")
             element.setAttribute("onclick", "FileManager.goto('..')")
             element.setAttribute("idel", i)
-            element.innerHTML = "<p>..</p>";
-            
+            element.setAttribute("cursor", "pointer")
+            element.innerHTML = "<p cursor='pointer'>..</p>";
+
             document.querySelector(".main").appendChild(element)
         }
         var folders = JSON.parse(localStorage.getItem("folders-uploaded"));
@@ -200,10 +211,11 @@ var FileManager = {
                 if (folders[i][1] == infolder) {
                     var element = document.createElement("div");
                     element.classList.add("elmnt")
-                    element.setAttribute("onclick", "FileManager.goto('"+folders[i][0]+"/')")
+                    element.setAttribute("onclick", "FileManager.goto('" + folders[i][0] + "/')")
                     element.setAttribute("idel", i)
-                    element.innerHTML = "<p>"+folders[i][0]+"</p>";
-                    
+                    element.setAttribute("cursor", "pointer")
+                    element.innerHTML = "<p cursor='pointer'>" + folders[i][0] + "</p>";
+
                     document.querySelector(".main").appendChild(element)
                 }
             }
@@ -214,10 +226,11 @@ var FileManager = {
                 if (stored[i][5] == infolder) {
                     var element = document.createElement("div");
                     element.classList.add("element")
-                    element.setAttribute("onclick", "FileManager.openFile("+i+")")
+                    element.setAttribute("onclick", "FileManager.openFile(" + i + ")")
                     element.setAttribute("idel", i)
-                    element.innerHTML = "<p>"+stored[i][0]+"</p><span>"+humanFileSize(stored[i][1],true)+"</span>";
-                    
+                    element.setAttribute("cursor", "pointer")
+                    element.innerHTML = "<p cursor='pointer'>" + stored[i][0] + "</p><span>" + humanFileSize(stored[i][1], true) + "</span>";
+
                     document.querySelector(".main").appendChild(element)
                 }
             }
@@ -226,15 +239,36 @@ var FileManager = {
     openFile: (isdd) => {
         if (!selectmode) {
             var stored = JSON.parse(localStorage.getItem("files-uploaded"));
-            parent.mainFileManager.open(stored[isdd]);
-            
+            var file = stored[isdd]
+            if (file[2] == "klindos/shortcut") {
+                var content = file[4]
+                if (content.includes(":") && content.split(":")[0].trim() == "open" && content.split(":")[1] !== "") {
+                    var path = content.split(":")[1]
+                    if (parent.mainFileManager.fileExists(path)) {
+                        parent.mainFileManager.open(parent.mainFileManager.getFile(path))
+                    }
+                    else if (parent.mainFileManager.folderExist(path)) {
+                        FileManager.goto(path.replace("/", "") + "/")
+                    }
+                    else {
+                        parent.spawnNotification("Správce souborů", "Soubor nebo složka neexistuje!")
+                    }
+                }
+            }
+            else if (file[2] == "klindos/script") {
+                const path = file[5]+file[0]
+                parent.windows.open("ter", {file:path})
+            }
+            else {
+                parent.mainFileManager.open(stored[isdd]);
+            }
         }
         else {
             var stored = JSON.parse(localStorage.getItem("files-uploaded"))
             var index = window.location.href.split("index=")[1];
             parent.openGetFile[index][1]["success"](stored[isdd])
-            var element =parent.openGetFile[index][0].querySelector(".close")
-            parent.openGetFile = removebyindex(parent.openGetFile,index)
+            var element = parent.openGetFile[index][0].querySelector(".close")
+            parent.openGetFile = removebyindex(parent.openGetFile, index)
             parent.windows.close(element, "filemanager")
         }
     },
@@ -242,7 +276,7 @@ var FileManager = {
         var value = JSON.parse(localStorage.getItem("files-uploaded"))
         var newarray = removebyindex(value, idel)
         if (newarray.length > 0) {
-            localStorage.setItem("files-uploaded",JSON.stringify(newarray))
+            localStorage.setItem("files-uploaded", JSON.stringify(newarray))
         }
         else {
             localStorage.removeItem("files-uploaded")
@@ -258,7 +292,7 @@ var FileManager = {
             }
         }
         for (var i = 0; i < value.length; i++) {
-            if (value[i][1].indexOf(infolder+idel+"/")==0) {
+            if (value[i][1].indexOf(infolder + idel + "/") == 0) {
                 value = removebyindex(value, i)
                 continue
             }
@@ -266,20 +300,20 @@ var FileManager = {
         var valuedva = JSON.parse(localStorage.getItem("files-uploaded"))
         if (valuedva != null) {
             for (var i = 0; i < valuedva.length; i++) {
-                if (valuedva[i][5].indexOf(infolder+idel+"/")==0) {
+                if (valuedva[i][5].indexOf(infolder + idel + "/") == 0) {
                     valuedva = removebyindex(valuedva, i)
                     continue
                 }
             }
             if (valuedva.length > 0) {
-                localStorage.setItem("files-uploaded",JSON.stringify(valuedva))
+                localStorage.setItem("files-uploaded", JSON.stringify(valuedva))
             }
             else {
                 localStorage.removeItem("files-uploaded")
             }
         }
         if (value.length > 0) {
-            localStorage.setItem("folders-uploaded",JSON.stringify(value))
+            localStorage.setItem("folders-uploaded", JSON.stringify(value))
         }
         else {
             localStorage.removeItem("folders-uploaded")
@@ -290,24 +324,24 @@ var FileManager = {
         if (folder == "..") {
             nocasdjhuasd = infolder.split("/")
             for (var i = 0; i < nocasdjhuasd.length; i++) {
-                nocasdjhuasd[i]+="/"
+                nocasdjhuasd[i] += "/"
             }
             infolder = nocasdjhuasd.slice(0, -2).join("")
             FileManager.readFiles()
         }
         else {
-            infolder+=folder
+            infolder += folder
             FileManager.readFiles();
         }
-        document.querySelector("header p").innerHTML = "Správce Souborů <span>"+infolder+"</span>"
+        document.querySelector("header p").innerHTML = "Správce Souborů <span>" + infolder + "</span>"
     },
     createFolder: () => {
         parent.BPrompt.prompt("Zadejte název složky:", (name) => {
-            if (name==null || name.length == 0) {
-            
+            if (name == null || name.length == 0) {
+
             }
             else {
-                if (name.indexOf("/")>-1 || name.indexOf(".")>-1) {
+                if (name.indexOf("/") > -1 || name.indexOf(".") > -1) {
                     parent.spawnNotification("Správce Souborů", "'/' a '.' jsou zakázané znaky!")
                 }
                 else {
@@ -315,16 +349,16 @@ var FileManager = {
                         parent.spawnNotification("Správce Souborů", "Složka se stejným názvem již v této složce existuje.")
                     }
                     else {
-                        
-                            var array = JSON.parse(localStorage.getItem("folders-uploaded"))
-                            if (array) {
-                                array.push([name, infolder])
-                            }
-                            else {
-                                array = [[name, infolder]]
-                            }
-                            localStorage.setItem("folders-uploaded",JSON.stringify(array))
-                        
+
+                        var array = JSON.parse(localStorage.getItem("folders-uploaded"))
+                        if (array) {
+                            array.push([name, infolder])
+                        }
+                        else {
+                            array = [[name, infolder]]
+                        }
+                        localStorage.setItem("folders-uploaded", JSON.stringify(array))
+
                         FileManager.readFiles()
                     }
                 }
@@ -367,7 +401,7 @@ var FileManager = {
     },
     rename: (idel) => {
         var value = JSON.parse(localStorage.getItem("files-uploaded"))
-        
+
         parent.BPrompt.prompt("Zadejte nové jméno souboru.", (newname) => {
             if (newname == null || newname.length == 0) {
 
@@ -375,7 +409,7 @@ var FileManager = {
             else if (newname.length > 30) {
                 parent.spawnNotification("Správce Souborů", "Název souborů nesmí být delší jak 30 znaků.")
             }
-            else if (newname.indexOf("/")>-1 || newname.indexOf("\\") > -1) {
+            else if (newname.indexOf("/") > -1 || newname.indexOf("\\") > -1) {
                 parent.spawnNotification("Správce Souborů", "'/' a '\\' jsou zakázané znaky.")
             }
             else if (FileManager.fileExist(newname)) {
@@ -383,7 +417,7 @@ var FileManager = {
             }
             else {
                 value[idel][0] = newname
-                localStorage.setItem("files-uploaded",JSON.stringify(value))
+                localStorage.setItem("files-uploaded", JSON.stringify(value))
             }
             FileManager.readFiles();
         })
@@ -412,13 +446,13 @@ var FileManager = {
                 newclipboard[5] = infolder
                 value.push(newclipboard)
                 try {
-                    localStorage.setItem("files-uploaded",JSON.stringify(value))
+                    localStorage.setItem("files-uploaded", JSON.stringify(value))
                 }
                 catch (e) {
                     parent.spawnNotification("Správce Souborů", "Není dostatek místa na úložišti. Více info <a href='https://www.gwtproject.org/doc/latest/DevGuideHtml5Storage.html'>zde</a>.")
                     console.log("File is too big to be uploaded. Error message: " + e.toString())
                 }
-                
+
             }
             FileManager.readFiles();
         }
@@ -441,7 +475,7 @@ var FileManager = {
                         parent.spawnNotification("Správce Souborů", "Název souborů nesmí být delší jak 30 znaků.")
                     }
                     else {
-                        if (name.indexOf("/")>-1||name.indexOf("\\")>-1) {
+                        if (name.indexOf("/") > -1 || name.indexOf("\\") > -1) {
                             parent.spawnNotification("Správce Souborů", "'/' a '\\' jsou zakázané znaky.")
                         }
                         else {
@@ -453,36 +487,36 @@ var FileManager = {
                             else {
                                 value.push([name, 0, "text/plain", time, "", infolder])
                             }
-                            localStorage.setItem("files-uploaded",JSON.stringify(value))
+                            localStorage.setItem("files-uploaded", JSON.stringify(value))
                         }
                     }
                 }
             }
             FileManager.readFiles();
         })
-        
+
     },
     convertTo: (idel) => {
         var value = JSON.parse(localStorage.getItem("files-uploaded"))
-        parent.BPrompt.prompt("Převod: 1 - Text, 2 - Obrázek, 3 - Zvuk, 4 - Video, c - Vlastní", (to) => {
+        parent.BPrompt.prompt("Převod:<br><br>1 - Text<br>2 - Obrázek<br>3 - Zvuk<br>4 - Video<br>5 - KLIND OS Script<br>c - Vlastní", (to) => {
             if (to == null || to.length == 0) {
 
             }
             else {
                 if (to == "1") {
                     value[idel][2] = "text/plain"
-                    localStorage.setItem("files-uploaded",JSON.stringify(value))
+                    localStorage.setItem("files-uploaded", JSON.stringify(value))
                 }
                 else if (to == "2") {
                     setTimeout(() => {
                         parent.BPrompt.prompt("Vyberte formát: 1 - JPEG 2 - PNG", (format) => {
                             if (format == "1") {
                                 value[idel][2] = "image/jpeg"
-                                localStorage.setItem("files-uploaded",JSON.stringify(value))
+                                localStorage.setItem("files-uploaded", JSON.stringify(value))
                             }
                             else if (format == "2") {
                                 value[idel][2] = "image/png"
-                                localStorage.setItem("files-uploaded",JSON.stringify(value))
+                                localStorage.setItem("files-uploaded", JSON.stringify(value))
                             }
                             else {
                                 parent.spawnNotification("Správce Souborů", "Neplatný výběr.")
@@ -492,17 +526,21 @@ var FileManager = {
                 }
                 else if (to == "3") {
                     value[idel][2] = "audio/mpeg"
-                    localStorage.setItem("files-uploaded",JSON.stringify(value))
+                    localStorage.setItem("files-uploaded", JSON.stringify(value))
                 }
                 else if (to == "4") {
                     value[idel][2] = "video/mp4"
-                    localStorage.setItem("files-uploaded",JSON.stringify(value))
+                    localStorage.setItem("files-uploaded", JSON.stringify(value))
+                }
+                else if (to == "5") {
+                    value[idel][2] = "klindos/script"
+                    localStorage.setItem("files-uploaded", JSON.stringify(value))
                 }
                 else if (to == "c") {
                     setTimeout(() => {
-                        parent.BPrompt.prompt("Vložte vlastní typ ve tvaru např. (text/plain)", (type) =>{
+                        parent.BPrompt.prompt("Vložte vlastní typ ve tvaru např. (text/plain)", (type) => {
                             value[idel][2] = type
-                            localStorage.setItem("files-uploaded",JSON.stringify(value))
+                            localStorage.setItem("files-uploaded", JSON.stringify(value))
                         })
                     }, 200);
                 }
@@ -515,11 +553,11 @@ var FileManager = {
     },
     downloadFile: (idel) => {
         var value = JSON.parse(localStorage.getItem("files-uploaded"))[idel]
-        if (value[2].split("/")[0]=="text") {
+        if (value[2].split("/")[0] == "text") {
             downloadAsFile(value[0], value[4])
         }
-        else if (value[2].split("/")[0]=="image" || value[2].split("/")[0]=="audio" ) {
-            if (value[4].indexOf("data:")>-1) {
+        else if (value[2].split("/")[0] == "image" || value[2].split("/")[0] == "audio") {
+            if (value[4].indexOf("data:") > -1) {
                 var element = document.createElement("a")
                 element.href = value[4]
                 element.setAttribute("download", value[0])
@@ -534,32 +572,80 @@ var FileManager = {
         }
     },
     copyPath: (idel) => {
-        var path = infolder+JSON.parse(localStorage.getItem("files-uploaded"))[idel][0]
-        parent.spawnNotification("Správce Souborů","Cesta: "+path)
+        var path = infolder + JSON.parse(localStorage.getItem("files-uploaded"))[idel][0]
+        parent.spawnNotification("Správce Souborů", "Cesta: " + path)
     },
     selectMode: () => {
         selectmode = true;
     },
+    addShortcut: (idel) => {
+        var file = JSON.parse(localStorage.getItem("files-uploaded"))[idel]
+        var path = file[5] + file[0]
+
+        var fun = `try{mainFileManager.open(mainFileManager.getFile("${path.replaceAll("'", "\\'")}"))}catch {spawnNotification("Správce souborů","Tento soubor nebyl nalezen!")}`
+        parent.DesktopIcons.add({ run: fun, icon: "filemanager/images/file.png" })
+    },
+    createShortcut: () => {
+        parent.BPrompt.prompt("Vložte název zástupce.", (name) => {
+            if (name == null || name.length == 0) {
+
+            }
+            else {
+                if (FileManager.fileExist(name)) {
+                    parent.spawnNotification("Správce Souborů", "Soubor se stejným názvem už existuje.")
+                }
+                else {
+                    if (name.length > 30) {
+                        parent.spawnNotification("Správce Souborů", "Název souborů nesmí být delší jak 30 znaků.")
+                    }
+                    else {
+                        if (name.indexOf("/") > -1 || name.indexOf("\\") > -1) {
+                            parent.spawnNotification("Správce Souborů", "'/' a '\\' jsou zakázané znaky.")
+                        }
+                        else {
+                            setTimeout(() => {
+                                parent.BPrompt.prompt("Vložte cestu k souboru ke kterému chcete přidat zástupce.", (path) => {
+                                    var time = new Date().toString();
+                                    var value = JSON.parse(localStorage.getItem("files-uploaded"))
+                                    var content = "open:" + path
+                                    var file = [name, lengthInUtf8Bytes(content), "klindos/shortcut", time, content, infolder]
+
+                                    if (value == null) {
+                                        value = [file]
+                                    }
+                                    else {
+                                        value.push(file)
+                                    }
+                                    localStorage.setItem("files-uploaded", JSON.stringify(value))
+                                    FileManager.readFiles();
+                                })
+                            }, 50);
+                        }
+                    }
+                }
+            }
+        })
+    }
 }
 var selectmode = false;
 var keysdown = []
-document.addEventListener("keydown", function(e) {
+document.addEventListener("keydown", function (e) {
     keysdown.push(e.key)
-    if (keysdown.indexOf("Control")>-1 && keysdown.indexOf("v")>-1) {
+    if (keysdown.indexOf("Control") > -1 && keysdown.indexOf("v") > -1) {
         keysdown.length = 0
         FileManager.paste()
     }
 })
-document.addEventListener("keyup", function() {
+document.addEventListener("keyup", function () {
     keysdown.length = 0
 })
 var clipboard;
-if (window.location.href.indexOf("dark")>-1) {
+if (window.location.href.indexOf("dark") > -1) {
     document.querySelector(".main").classList.add("dark")
 }
 else {
     document.querySelector(".main").classList.add("light")
 }
-if (window.location.href.indexOf("select")>-1) {
+if (window.location.href.indexOf("select") > -1) {
     FileManager.selectMode();
 }

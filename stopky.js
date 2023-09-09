@@ -15,16 +15,16 @@ let interval = null;
 let status = "stopped";
 
 //Stopwatch function (logic to determine when to increment next value, etc.)
-function stopWatch(){
+function stopWatch() {
 
     seconds++;
 
     //Logic to determine when to increment next value
-    if(seconds / 60 === 1){
+    if (seconds / 60 === 1) {
         seconds = 0;
         minutes++;
 
-        if(minutes / 60 === 1){
+        if (minutes / 60 === 1) {
             minutes = 0;
             hours++;
         }
@@ -32,24 +32,24 @@ function stopWatch(){
     }
 
     //If seconds/minutes/hours are only one digit, add a leading 0 to the value
-    if(seconds < 10){
+    if (seconds < 10) {
         displaySeconds = "0" + seconds.toString();
     }
-    else{
+    else {
         displaySeconds = seconds;
     }
 
-    if(minutes < 10){
+    if (minutes < 10) {
         displayMinutes = "0" + minutes.toString();
     }
-    else{
+    else {
         displayMinutes = minutes;
     }
 
-    if(hours < 10){
+    if (hours < 10) {
         displayHours = "0" + hours.toString();
     }
-    else{
+    else {
         displayHours = hours;
     }
 
@@ -60,9 +60,9 @@ function stopWatch(){
 
 
 
-function startStopstopky(){
+function startStopstopky() {
 
-    if(status === "stopped"){
+    if (status === "stopped") {
 
         //Start the stopwatch (by calling the setInterval() function)
         interval = window.setInterval(stopWatch, 1000);
@@ -70,7 +70,7 @@ function startStopstopky(){
         status = "started";
 
     }
-    else{
+    else {
 
         window.clearInterval(interval);
         document.getElementById("startStop").innerHTML = "Start";
@@ -81,7 +81,7 @@ function startStopstopky(){
 }
 
 //Function to reset the stopwatch
-function resetstopky(){
+function resetstopky() {
 
     window.clearInterval(interval);
     seconds = 0;

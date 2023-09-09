@@ -1,6 +1,6 @@
 var screenshot = {
     take: () => {
-        let div =document.body;
+        let div = document.body;
         html2canvas(div).then(
             function (canvas) {
                 document.body.appendChild(canvas);

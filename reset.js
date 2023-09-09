@@ -5,6 +5,6 @@ function resetklindows() {
         document.cookie = nameofcookie + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
     localStorage.clear();
-    
+
     parent.window.location.reload();
 }

@@ -2,9 +2,11 @@
     padding: 0;
     margin: 0;
 }
+
 body {
     background-color: darkblue;
 }
+
 .installdiv {
     position: absolute;
     top: 50%;
@@ -16,6 +18,7 @@ body {
     background-color: white;
     border-radius: 15px;
 }
+
 .buttonnext {
     position: absolute;
     height: 70px;
@@ -35,9 +38,11 @@ body {
     transition: ease 0.2s scale;
     scale: 1;
 }
+
 .buttonnext:hover {
     scale: 0.95;
 }
+
 .icon {
     position: relative;
     left: 50%;
@@ -45,11 +50,14 @@ body {
     transform: translateX(-50%);
     border-radius: 15px;
 }
+
 .title {
     text-align: center;
     margin: 10px;
 }
-#druhy .left, #druhy .right {
+
+#druhy .left,
+#druhy .right {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -60,10 +68,13 @@ body {
     cursor: pointer;
     bottom: 0;
 }
+
 #druhy .right {
     right: 0;
 }
-#cistainstall #username, #cistainstall #password {
+
+#cistainstall #username,
+#cistainstall #password {
     width: calc(100% - 2px);
     height: 50px;
     text-align: center;

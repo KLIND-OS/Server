@@ -1,16 +1,28 @@
 * {
     margin: 0;
     padding: 0;
-    cursor: none!important;
+    cursor: none !important;
 }
+
+.plyr__menu__container * {
+    color: black!important;
+}
+
 .dragdrageble {
     opacity: 0.85;
 }
+
 body {
     overflow: hidden;
     background-color: black;
 }
-.betadiv , .betadiv span{
+
+iframe {
+    border: 0;
+}
+
+.betadiv,
+.betadiv span {
     font-family: 'Dancing Script', cursive;
     position: absolute;
     right: 10px;
@@ -20,6 +32,7 @@ body {
     z-index: 24654654;
     pointer-events: none;
 }
+
 .klindows {
     height: 100vh;
     width: 100vw;
@@ -29,15 +42,7 @@ body {
     background-image: url();
     cursor: pointer;
 }
-.resizeerror {
-    background-color: #292929;
-    height: 100vh;
-    width: 100vw;
-    text-align: center;
-    color: white;
 
-    z-index: 999999999999999999;
-}
 .downbar {
     bottom: 0;
     position: absolute;
@@ -47,22 +52,26 @@ body {
     z-index: 9999999;
     transition: ease 0.5s bottom;
 }
+
 #fakedownbar {
     bottom: 0;
     position: absolute;
     width: 100vw;
     height: 50px;
 }
+
 .logo {
     width: auto;
     height: 100%;
-    
+
     transition: ease 0.2s;
     float: left;
 }
+
 .logo:hover {
     background-color: aqua;
 }
+
 .startmenu {
     position: absolute;
     bottom: 50px;
@@ -74,16 +83,19 @@ body {
     overflow: auto;
     border-radius: 15px;
 }
+
 .startmenu.opened {
     opacity: 1;
 }
+
 .startmenu.display {
-    display: block!important;
+    display: block !important;
 }
+
 #searchstartmenu {
     position: fixed;
     left: 45px;
-    background-image: url('https://www.w3schools.com/css/searchicon.png');
+    background-image: url('icons/searchicon.png');
     background-position: 10px 12px;
     background-repeat: no-repeat;
     width: 355px;
@@ -95,6 +107,7 @@ body {
     z-index: 1;
     border-start-end-radius: 15px;
 }
+
 #liststartmenu {
     list-style-type: none;
     padding: 0;
@@ -105,6 +118,7 @@ body {
     margin-left: 45px;
     overflow: auto;
 }
+
 .downscroll {
     width: calc(100% - 45px);
     left: 45px;
@@ -115,15 +129,19 @@ body {
     text-align: center;
     color: white;
 }
+
 .startmenu .leftdiv {
     width: 45px;
     background-color: #424141;
     position: fixed;
     height: 700px;
     border-start-start-radius: 15px;
-}#liststartmenu li {
+}
+
+#liststartmenu li {
     margin: 0;
 }
+
 #liststartmenu li a {
     padding: 12px;
     text-decoration: none;
@@ -136,89 +154,106 @@ body {
     left: 0;
     position: relative;
 }
+
 #liststartmenu li a:hover {
     background-color: #d3d3d3
 }
+
 .poznamky {
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 600px;
     min-height: 600px;
-    overflow:hidden;
+    height: 600px;
+    overflow: hidden;
     min-width: 550px;
     z-index: 23;
 }
+
 .hagapp {
     background-color: white;
     width: 300px;
     height: 300px;
-    position: absolute!important;
+    position: absolute !important;
 }
+
 .paint {
     background-color: rgb(168, 168, 168);
     width: 300px;
     height: 300px;
-    position: absolute!important;
+    position: absolute !important;
 }
+
 .poznamkymenu {
     background-color: rgb(168, 168, 168);
     width: 500px;
     height: 600px;
-    position: absolute!important;
+    position: absolute !important;
     z-index: 25;
     border-radius: 10px;
 }
+
 .poznamkynas {
     background-color: rgb(168, 168, 168);
     width: 500px;
     height: 600px;
-    position: absolute!important;
+    position: absolute !important;
     z-index: 25;
     border-radius: 10px;
 }
+
 .nastaveni {
     background-color: white;
     min-width: 300px;
     min-height: 435px;
+    height: 435px;
     width: 300px;
-    position: absolute!important;
+    position: absolute !important;
     overflow: hidden;
 }
+
 .nastaveni iframe {
     width: 100%;
     height: calc(100% - 20px);
 }
+
 .metronome {
     background-color: white;
     width: 500px;
     height: 300px;
-    position: absolute!important;
+    position: absolute !important;
 }
+
 .kalkulacka {
     background-color: white;
     min-width: 250px;
     min-height: 250px;
     height: 250px;
-    position: absolute!important;
+    position: absolute !important;
     overflow: hidden;
-}.stopky {
+}
+
+.stopky {
     background-color: white;
     min-width: 324px;
     min-height: 140px;
     height: 140px;
-    position: absolute!important;
+    position: absolute !important;
     overflow: hidden;
 }
+
 .stopky iframe {
     width: 100%;
     height: calc(100% - 20px)
 }
+
 .malovani {
     background-color: white;
     width: auto;
     height: auto;
-    position: absolute!important;
+    position: absolute !important;
 }
+
 .headerclass {
     width: 100%;
     height: 20px;
@@ -228,9 +263,7 @@ body {
     border-start-start-radius: 10px;
     transition: ease 0.2s background;
 }
-.headerclass p, .headerclass span {
-    color: black!important;
-}
+
 .close {
     float: right;
     height: 100%;
@@ -242,15 +275,20 @@ body {
     background-color: transparent;
     transition: ease 0.2s background-color;
 }
-.close:hover, .mini:hover, .nasfull:hover {
+
+.close:hover,
+.mini:hover,
+.nasfull:hover {
     background-color: red;
 }
+
 .close::before {
     content: 'x';
     color: #fff;
     font-weight: 300;
     font-family: Arial, sans-serif;
 }
+
 .mini {
     float: right;
     height: 100%;
@@ -261,14 +299,16 @@ body {
     padding-left: 10px;
     transition: ease 0.2s background-color;
 }
+
 .mini::before {
     content: '-';
     color: #fff;
     font-weight: 300;
     font-family: Arial, sans-serif;
 }
+
 .nasfull {
-    
+
     float: right;
     height: 100%;
     width: auto;
@@ -276,11 +316,13 @@ body {
     width: 18px;
     padding-left: 10px;
 }
+
 .nasfull img {
     right: 5px;
     position: relative;
     height: 100%;
 }
+
 .window {
     display: none;
     z-index: 25;
@@ -289,9 +331,10 @@ body {
     border-radius: 10px;
     transition: ease 0.2s box-shadow, ease 0.2s opacity;
 }
+
 .audioLevelEditor {
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 300px;
     height: 75px;
     bottom: 65px;
@@ -300,39 +343,48 @@ body {
     z-index: 23;
     top: auto;
 }
+
 .drageblepoznamky {
     transition: ease 0.2s box-shadow, ease 0.2s opacity;
 }
+
 .ikonaklindows {
     transition: ease 0.2s opacity
 }
-.window.openedwin, .betadiv.openedwin {
-    display: block!important;
+
+.window.openedwin,
+.betadiv.openedwin {
+    display: block !important;
 }
+
 .ikonadown {
     width: auto;
     height: 100%;
     float: left;
     transition: ease 0.2s transform;
-    bottom:0;
+    bottom: 0;
     transform: scale(0.8);
 }
+
 .ikonadown.opened {
     left: 50px;
     position: relative;
 }
+
 .ikonadown:hover {
     transform: scale(1);
 }
+
 .ikonadown:active {
-    transform: scale(0.7)!important;
+    transform: scale(0.7) !important;
 }
+
 .poznamky textarea {
     width: 100%;
     height: 97%;
     resize: none;
     background-color: transparent;
-    border: none!important;
+    border: none !important;
 }
 
 .headerclass span {
@@ -341,6 +393,7 @@ body {
     top: 2px;
     position: relative;
 }
+
 input[type=checkbox] {
     font-size: 17px;
     visibility: hidden;
@@ -361,7 +414,7 @@ input[type=checkbox]:after {
     padding: 0 3px;
     margin: 2px 0;
     border-radius: 8px;
-    box-shadow: 0 0 15px 0 rgba(0,0,0,0.08), 0 0 2px 0 rgba(0,0,0,0.16);
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.08), 0 0 2px 0 rgba(0, 0, 0, 0.16);
 }
 
 input[type=checkbox]:checked:after {
@@ -369,11 +422,13 @@ input[type=checkbox]:checked:after {
     display: unset;
     font-weight: bold;
 }
+
 /*Metronome*/
 body {
-  background: #f9f8ec;
-  font-family: "Open Sans", sans-serif;
+    background: #f9f8ec;
+    font-family: "Open Sans", sans-serif;
 }
+
 #play-button {
     width: 150px;
     height: 150px;
@@ -411,6 +466,7 @@ body {
 .tempo-container {
     margin: 0 15px;
 }
+
 .created-by {
     margin-top: 40px;
 }
@@ -439,88 +495,118 @@ a:hover {
     border-left: 15px solid #e9e9e9;
     border-right: 15px solid #e9e9e9;
 }
-.metronome #play-button{
+
+.metronome #play-button {
     justify-content: center;
 }
+
 .fullscreen {
     width: 100%;
     height: 99%;
-    left: 0!important;
-    top: 0!important;
+    left: 0 !important;
+    top: 0 !important;
 }
 
-.nastaveni .changebackgound { width: 100%; height: 80px;  } 
-#inputpozadi { top: 15px; position: relative; } 
-.changebackgound #custombackcheck { margin-left: 15px; position: relative; } 
-.changebackgound #sd { top: 10px; position: relative; }
+.nastaveni .changebackgound {
+    width: 100%;
+    height: 80px;
+}
+
+#inputpozadi {
+    top: 15px;
+    position: relative;
+}
+
+.changebackgound #custombackcheck {
+    margin-left: 15px;
+    position: relative;
+}
+
+.changebackgound #sd {
+    top: 10px;
+    position: relative;
+}
 
 
 body {
-    background:#555;
-  }
-  .app {
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    width:650px;
-    height:650px;
-    font-family:"Raleway", sans-serif;
-  }
-  .app .controls {
-    height:50px;
-    display:flex;
-    align-items:center;
-    background:#ddd;
-    padding:0px 10px;
-  }
-  .app .controls .title {
-    font-weight:600;
-    color:#222;
-    width:80px;
-  }
-  .app .controls .type,
-  .app .controls .size,
-  .app .controls .color {
+    background: #555;
+}
+
+.app {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 650px;
+    height: 650px;
+    font-family: "Raleway", sans-serif;
+}
+
+.app .controls {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    background: #ddd;
+    padding: 0px 10px;
+}
+
+.app .controls .title {
+    font-weight: 600;
+    color: #222;
+    width: 80px;
+}
+
+.app .controls .type,
+.app .controls .size,
+.app .controls .color {
     margin: 0px 10px;
-  }
-  .app .controls .type input {
-    display:none;
-  }
-  .app .controls .type label {
-    width:30px;
-    height:30px;
-    display:inline-block;
-    text-align:center;
-    line-height:30px;
-    margin:0px 2px;
-  }
-  .app .controls .type input:checked + label {
-    background:#111;
-    color:#eee;
-    border-radius:50%;
-  }
-  .app .controls .size input {
-    height:10px;
-  }
-  .app .controls .actions {
-    flex:1;
-    text-align:right;
-  }
-  .app .controls .actions button {
-    padding:5px 10px;
-  }
+}
+
+.app .controls .type input {
+    display: none;
+}
+
+.app .controls .type label {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+    margin: 0px 2px;
+}
+
+.app .controls .type input:checked+label {
+    background: #111;
+    color: #eee;
+    border-radius: 50%;
+}
+
+.app .controls .size input {
+    height: 10px;
+}
+
+.app .controls .actions {
+    flex: 1;
+    text-align: right;
+}
+
+.app .controls .actions button {
+    padding: 5px 10px;
+}
 
 .test {
     background-color: #3b3838;
 }
+
 .window.dark {
     background-color: #3b3838;
 }
+
 .window.white {
     background-color: white;
 }
-.downbar .clock{
+
+.downbar .clock {
     float: right;
     height: 70%;
     background-color: #161616;
@@ -529,6 +615,7 @@ body {
     text-align: center;
     padding-top: 15px;
 }
+
 .dialog {
     height: 300px;
     width: 500px;
@@ -537,257 +624,285 @@ body {
     transform: translate(-50%, -50%);
     position: absolute;
 }
+
 .dialog button {
     position: absolute;
     bottom: 0;
 }
+
 .buttonrightdialog {
     position: absolute;
     z-index: 20;
     right: 0;
     color: white;
 }
+
 .napoveda {
     min-height: 500px;
     min-width: 500px;
     overflow: hidden;
 }
+
 .closedclock {
     display: none;
 }
+
 .openedclock {
     display: block;
 }
+
 .clock span {
     color: white;
 }
-.minecraft {
-    background-color: white;
-    position: absolute!important;
-    min-width: 300px;
-    min-height: 300px;
-    overflow:hidden;
-}
+
 .browser {
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     min-width: 300px;
     min-height: 300px;
-    overflow:hidden;
+    height: 300px;
+    overflow: hidden;
 }
+
 .timer {
-    
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 300px;
     min-height: 300px;
-    overflow:hidden;
+    height: 300px;
+    overflow: hidden;
     min-width: 300px;
     z-index: 23;
 }
+
 #calendar {
     height: 100%;
 }
+
 .kalendar {
-    
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     min-height: 580px;
-    overflow:hidden;
+    min-height: 580px;
+    overflow: hidden;
     min-width: 1100px;
     z-index: 23;
 }
+
 .budik {
-    
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     min-height: 300px;
     height: 300px;
-    overflow:hidden;
+    overflow: hidden;
     min-width: 300px;
     z-index: 23;
 }
+
 .maps {
-    
+    height: 580px;
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     min-height: 580px;
-    overflow:hidden;
+    overflow: hidden;
     min-width: 1100px;
     z-index: 23;
 }
+
 .htmleditor {
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     height: 580px;
-    overflow:hidden;
+    overflow: hidden;
     width: 1100px;
     z-index: 23;
 }
+
 .htmleditor iframe {
     width: 1100px;
     height: 560px;
 }
+
 .faceset {
-    
+    height: 360px;
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     min-height: 360px;
-    overflow:hidden;
+    overflow: hidden;
     min-width: 326px;
     z-index: 23;
 }
+
 .faceset iframe {
     width: 100%;
     height: calc(100% - 20px);
 }
+
 .record {
-    
+    height: 591px;
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     min-height: 591px;
-    overflow:hidden;
+    overflow: hidden;
     min-width: 467px;
     z-index: 23;
 }
+
 .record iframe {
     width: 100%;
     height: calc(100% - 20px);
 }
+
 .editor iframe {
     width: 100%;
-    height: 99%; 
+    height: 99%;
     position: absolute;
+}
 
+.black p,
+.black span,
+.black ul,
+.black li,
+.black h1,
+.black h2,
+.black h3,
+.black h4,
+.black h5,
+.black h6,
+.black,
+.black textarea {
+    color: white;
 }
-.black p, .black span, .black ul, .black li, .black h1, .black h2, .black h3, .black h4, .black h5, .black h6, .black, .black textarea{
-    color:white;
-}
+
 #searchstartmenu:focus {
     outline: none;
 }
+
 .customapp {
-    
+    height: 300px;
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 300px;
     min-height: 300px;
-    overflow:hidden;
+    overflow: hidden;
     min-width: 300px;
     z-index: 23;
-    
 }
+
 .customapp iframe {
     width: 100%;
     height: 90%;
     position: absolute;
 }
+
 .editor {
-    
+    height: 300px;
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 300px;
     min-height: 300px;
-    overflow:hidden;
+    overflow: hidden;
     min-width: 300px;
     z-index: 23;
 }
+
 .reg {
-    
+    height: 300px;
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 300px;
     min-height: 300px;
-    overflow:hidden;
+    overflow: hidden;
     min-width: 300px;
     z-index: 23;
 }
+
 .weather {
-    
+    height: 369px;
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 677px;
     min-height: 639px;
-    overflow:hidden;
+    overflow: hidden;
     min-width: 677px;
     z-index: 23;
 }
-.novinky {
-    
-    background-color: white;
-    position: absolute!important;
-    width: 677px;
-    min-height: 639px;
-    overflow:hidden;
-    min-width: 677px;
-    z-index: 23;
-}
-.weather iframe{
+
+.weather iframe {
     width: 100%;
-    height: calc(100% - 20px); 
+    height: calc(100% - 20px);
     position: absolute;
 }
+
 .shop {
-    
+    height: 639px;
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 677px;
     min-height: 639px;
-    overflow:hidden;
+    overflow: hidden;
     min-width: 677px;
     z-index: 23;
 }
-.shop iframe{
+
+.shop iframe {
     width: 100%;
-    height: calc(100% - 20px); 
+    height: calc(100% - 20px);
     position: absolute;
 }
+
 .myklindows {
-    
+    height: 300px;
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 300px;
     min-height: 300px;
-    overflow:hidden;
+    overflow: hidden;
     min-width: 300px;
     z-index: 23;
 }
-.myklindows h1, h2 {
+
+.myklindows h1,
+h2 {
     color: black;
     text-align: center;
     font-family: 'Staatliches', cursive;
 }
+
 .myklindows button {
     width: 100%;
     height: 50px;
     border: none;
-    
+
 }
+
 .customapps {
-    
+    height: 300px;
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 300px;
     min-height: 300px;
-    overflow:hidden;
+    overflow: hidden;
     min-width: 300px;
     z-index: 23;
 }
+
 .customapps button {
     position: absolute;
     bottom: 15px;
-    cursor:pointer;
+    cursor: pointer;
 }
+
 .updateklind {
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 300px;
     height: 300px;
-    overflow:hidden;
+    overflow: hidden;
     z-index: 23;
-    
     overflow: hidden;
 }
+
 .updateklind p {
     text-align: center;
     color: green;
@@ -795,6 +910,7 @@ body {
     top: 15px;
     font-size: 1.5em;
 }
+
 .updateklind button {
     position: absolute;
     bottom: 0;
@@ -803,33 +919,38 @@ body {
     border: none;
     font-size: 2em;
 }
+
 .terminal {
-    position: absolute!important;
+    position: absolute !important;
     width: 681px;
     height: 372px;
-    overflow:hidden;
+    overflow: hidden;
     z-index: 23;
-    background-color: black!important;
+    background-color: black !important;
     color: white;
 }
+
 .terminal iframe {
     height: 352;
     width: 681px;
     border: none;
     min-height: 740px;
 }
+
 .innerIframe {
     height: calc(100% - 20px);
     width: 100%;
     border: none;
     min-height: 740px;
 }
+
 #lsaiosfdhjji {
     width: 100%;
     height: 100%;
     min-width: 560px;
     min-height: 740px;
 }
+
 #inputcommand {
     background-color: transparent;
     color: white;
@@ -837,127 +958,183 @@ body {
     outline: none;
     width: calc(100% - 17px);
 }
+
 .informationklindows {
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 300px;
     min-height: 300px;
-    overflow:hidden;
+    height: 300px;
+    overflow: hidden;
     min-width: 300px;
     z-index: 23;
 }
+
+.emergencymenu {
+    background-color: white;
+    position: absolute !important;
+    width: 300px;
+    min-height: 300px;
+    height: 300px;
+    overflow: hidden;
+    min-width: 300px;
+    z-index: 23;
+}
+
+.cleaner {
+    background-color: white;
+    position: absolute !important;
+    width: 300px;
+    min-height: 300px;
+    height: 300px;
+    overflow: hidden;
+    min-width: 300px;
+    z-index: 23;
+}
+
+.cleaner .keys {
+    overflow: auto;
+    height: calc(100% - 80px);
+    width: calc(100% - 16px);
+}
+
 .musicplayer {
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 300px;
     min-height: 300px;
-    overflow:hidden;
+    height: 300px;
+    overflow: hidden;
     min-width: 300px;
     z-index: 23;
 }
+
 .procesy {
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 300px;
     min-height: 300px;
-    overflow:hidden;
+    height: 300px;
+    overflow: hidden;
     min-width: 300px;
     z-index: 23;
 }
+.procesy .procesyContent {
+    overflow: auto;
+    height: calc(100% - 40px);
+}
+
 .viewtext {
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 300px;
     min-height: 300px;
-    overflow:hidden;
+    height: 300px;
+    overflow: hidden;
     min-width: 300px;
     z-index: 23;
 }
+
 .musicplayer iframe {
     width: 100%;
     height: calc(100% - 20px);
     background: transparent;
 }
+
 .viewtext textarea {
     width: 100%;
     height: calc(100% - 20px);
     background: transparent;
 }
+
 .installapp {
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 300px;
     min-height: 300px;
-    overflow:hidden;
+    height: 300px;
+    overflow: hidden;
     min-width: 300px;
     z-index: 23;
 }
+
 .zdroje {
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 300px;
     min-height: 300px;
-    overflow:hidden;
+    height: 300px;
+    overflow: hidden;
     min-width: 300px;
     z-index: 23;
 }
+
 .about {
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 300px;
     min-height: 300px;
-    overflow:hidden;
+    height: 300px;
+    overflow: hidden;
     min-width: 300px;
     z-index: 23;
 }
+
 .shellinklindos {
-    
+
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 300px;
     min-height: 300px;
-    overflow:hidden;
+    height: 300px;
+    overflow: hidden;
     min-width: 300px;
     z-index: 23;
 }
+
 .shellinklindos iframe {
     width: 100%;
     height: calc(100% - 20px);
     min-height: 300px;
-    background-color:white;
-}
-.customAppResizable {
-    
     background-color: white;
-    position: absolute!important;
+}
+
+.customAppResizable {
+
+    background-color: white;
+    position: absolute !important;
     width: 300px;
     min-height: 300px;
-    overflow:hidden;
+    height: 300px;
+    overflow: hidden;
     min-width: 300px;
     z-index: 23;
 }
+
 .customAppNormal {
-    position: absolute!important;
-    overflow:hidden;
+    position: absolute !important;
+    overflow: hidden;
     z-index: 23;
     background-color: white;
 }
 
 .prevodsys {
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 300px;
     min-height: 300px;
     height: 300px;
-    overflow:hidden;
+    overflow: hidden;
     min-width: 300px;
     z-index: 23;
-    
+
 }
+
 .timer iframe {
-   width: 96%;
-   height: 94%; 
+    width: 96%;
+    height: 94%;
 }
+
 #shdbuhagdj {
     height: 100%;
     width: 100%;
@@ -966,13 +1143,16 @@ body {
     min-height: 300px;
     min-width: 300px;
 }
+
 .dragging {
     opacity: 0.5;
 }
+
 .widget-header {
     z-index: 20;
     position: relative;
 }
+
 .alertcookies {
     position: absolute;
     bottom: 0;
@@ -981,32 +1161,39 @@ body {
     background-color: white;
     z-index: 9999999999999999999999999999999999999;
 }
+
 .alertcookies h1 {
     top: 30%;
     position: relative;
 }
+
 .alertcookies button {
     position: absolute;
-    border:white 0px solid;
+    border: white 0px solid;
     background-color: sandybrown;
     transition: ease 0.2s background;
     right: 20px;
     width: 130px;
     height: 35px;
-    
+
 }
+
 .alertcookies button:hover {
     background-color: saddlebrown;
 }
-.browser iframe {
-    width: 100%;
-    height: calc(100% - 20px - 60px);
-    min-height: 300px;
-    background-color:white;
+.browser .controls {
+    display: flex;
 }
-.browser #url {
+.browser .controls #url {
     height: 40px;
+    width: calc(100% - 240px);
+}
+.browser .controls button {
+    width: 60px;
+}
+.browser webview {
     width: 100%;
+    height: calc(100% - 64px);
 }
 .icon {
     width: 80px;
@@ -1017,24 +1204,30 @@ body {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    opacity: 1!important;
+    opacity: 1 !important;
     margin: 5px;
 }
+
 .icon:hover {
-    background-color:rgb(168, 168, 168, .7);
+    background-color: rgb(168, 168, 168, .7);
 }
+
 .dragging {
     cursor: none;
 }
+
 .displaynone {
     display: none;
 }
+
 .displaynoneimpor {
-    display: none!important;
+    display: none !important;
 }
+
 .displayblockimport {
-    display: block!important;
+    display: block !important;
 }
+
 .menupoznamky {
     width: auto;
     float: left;
@@ -1042,9 +1235,11 @@ body {
     position: relative;
     height: 100%;
 }
+
 .menupoznamky:hover {
     background-color: rgb(94, 94, 94);
 }
+
 .clockdate {
     position: absolute;
     right: 0;
@@ -1055,24 +1250,29 @@ body {
     height: 600px;
     display: none;
 }
+
 .clockdate .time {
     width: 100%;
     height: 70px;
     text-align: center;
     font-size: 2em;
 }
+
 .clockdate .date {
     width: 100%;
     text-align: center;
     font-size: 2em;
     height: 70px;
 }
+
 .displayblock {
-    display: block!important;
+    display: block !important;
 }
+
 table tr td input {
     width: 100%;
 }
+
 .login {
     width: 100vw;
     height: 100vh;
@@ -1086,30 +1286,68 @@ table tr td input {
     -o-animation: xcyccnvoi 53s ease infinite;
     animation: xcyccnvoi 53s ease infinite;
 }
+
 @-webkit-keyframes xcyccnvoi {
-    0%{background-position:0% 90%}
-    50%{background-position:100% 11%}
-    100%{background-position:0% 90%}
+    0% {
+        background-position: 0% 90%
+    }
+
+    50% {
+        background-position: 100% 11%
+    }
+
+    100% {
+        background-position: 0% 90%
+    }
 }
+
 @-moz-keyframes xcyccnvoi {
-    0%{background-position:0% 90%}
-    50%{background-position:100% 11%}
-    100%{background-position:0% 90%}
+    0% {
+        background-position: 0% 90%
+    }
+
+    50% {
+        background-position: 100% 11%
+    }
+
+    100% {
+        background-position: 0% 90%
+    }
 }
+
 @-o-keyframes xcyccnvoi {
-    0%{background-position:0% 90%}
-    50%{background-position:100% 11%}
-    100%{background-position:0% 90%}
+    0% {
+        background-position: 0% 90%
+    }
+
+    50% {
+        background-position: 100% 11%
+    }
+
+    100% {
+        background-position: 0% 90%
+    }
 }
+
 @keyframes xcyccnvoi {
-    0%{background-position:0% 90%}
-    50%{background-position:100% 11%}
-    100%{background-position:0% 90%}
+    0% {
+        background-position: 0% 90%
+    }
+
+    50% {
+        background-position: 100% 11%
+    }
+
+    100% {
+        background-position: 0% 90%
+    }
 }
+
 .userimg {
     width: 20em;
     height: 20em;
 }
+
 .logindva {
     top: 50%;
     left: 50%;
@@ -1118,9 +1356,11 @@ table tr td input {
     display: flex;
     flex-direction: column;
 }
+
 .logindva button {
     height: 50px;
 }
+
 .logindva input {
     width: 100%;
     height: 50px;
@@ -1129,43 +1369,52 @@ table tr td input {
     font-family: 'Open Sans', sans-serif;
     box-sizing: border-box;
 }
-.logindva p{
+
+.logindva p {
     text-align: center;
     font-family: 'Open Sans', sans-serif;
     font-size: 1.8em;
     margin-bottom: 10px;
 }
-.startmenu .userimgdownturnoff{
+
+.startmenu .userimgdownturnoff {
     position: absolute;
     bottom: 0;
     width: 100%;
     transition: ease 0.2s scale;
     scale: 1;
 }
-.startmenu .userimgdownturnoff:hover{
+
+.startmenu .userimgdownturnoff:hover {
     scale: 0.8;
 }
-.startmenu .userimgdown:hover{
+
+.startmenu .userimgdown:hover {
     background-color: aqua;
 }
-.startmenu .userimgdown{
+
+.startmenu .userimgdown {
     position: absolute;
     bottom: 45px;
     width: 100%;
     transition: ease 0.2s background;
 }
-.window.windowedmtjhjass .headerclass,  .drageblepoznamky.windowedmtjhjass .headerclass{
+
+.window.windowedmtjhjass .headerclass,
+.drageblepoznamky.windowedmtjhjass .headerclass {
     background-color: #6f6f6f;
-    
+
 }
+
 .window.windowedmtjhjass {
-    box-shadow: 0 1px 2px rgba(0,0,0,0.07), 
-                0 2px 4px rgba(0,0,0,0.07), 
-                0 4px 8px rgba(0,0,0,0.07), 
-                0 8px 16px rgba(0,0,0,0.07),
-                0 16px 32px rgba(0,0,0,0.07), 
-                0 32px 64px rgba(0,0,0,0.07);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07),
+        0 2px 4px rgba(0, 0, 0, 0.07),
+        0 4px 8px rgba(0, 0, 0, 0.07),
+        0 8px 16px rgba(0, 0, 0, 0.07),
+        0 16px 32px rgba(0, 0, 0, 0.07),
+        0 32px 64px rgba(0, 0, 0, 0.07);
 }
+
 .tajne {
     width: 100vw;
     height: 100vh;
@@ -1173,11 +1422,13 @@ table tr td input {
     background-color: white;
     z-index: 20000000;
 }
-.tajne iframe{
+
+.tajne iframe {
     width: 100%;
     height: 100%;
     border: none;
 }
+
 #startgame {
     position: absolute;
     top: 50%;
@@ -1187,58 +1438,77 @@ table tr td input {
     height: 200px;
     font-size: 3em;
 }
+
 .errors {
     z-index: 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999;
     width: 100vw;
     height: 100vh;
     position: absolute;
     background-color: red;
+    cursor: default!important;
 }
+
+.errors * {
+    cursor: default!important;
+}
+
 .errors h1 {
     font-size: 3em;
     text-align: center;
     margin-top: 25%;
 }
+
 .errors p {
     font-size: 2em;
     text-align: center;
 }
 
 .shakelogin {
-    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
     transform: translate3d(0, 0, 0);
 }
+
 @keyframes shake {
-    10%, 90% {
-      transform: translate3d(-1px, 0, 0);
+
+    10%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
     }
-    
-    20%, 80% {
-      transform: translate3d(2px, 0, 0);
+
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
     }
-  
-    30%, 50%, 70% {
-      transform: translate3d(-4px, 0, 0);
+
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-4px, 0, 0);
     }
-  
-    40%, 60% {
-      transform: translate3d(4px, 0, 0);
+
+    40%,
+    60% {
+        transform: translate3d(4px, 0, 0);
     }
 }
-.customsize input{
+
+.customsize input {
     top: 300px;
     left: 10px;
 }
+
 .customsize span {
     top: 20px;
     left: 45px;
     position: relative;
 }
+
 .taskskryt span {
     top: 10px;
     left: 25px;
     position: relative;
 }
+
 .ikonaklindows {
     width: 4em;
     height: 4em;
@@ -1248,6 +1518,7 @@ table tr td input {
     background-repeat: no-repeat;
     float: left;
 }
+
 .loading {
     width: 100vw;
     height: 100vh;
@@ -1257,6 +1528,7 @@ table tr td input {
     position: absolute;
     transition: ease 0.5s top;
 }
+
 .containersadsdsad {
     position: absolute;
     width: 200px;
@@ -1266,71 +1538,124 @@ table tr td input {
     left: 0;
     right: 0;
     margin: auto;
-  }
-  
-  .asdasdasd {
+}
+
+.asdasdasd {
     width: 100px;
     height: 100px;
     position: absolute;
-  }
-  
-  .item-1 {
+}
+
+.item-1 {
     background-color: #FA5667;
     top: 0;
     left: 0;
     z-index: 1;
-    animation: item-1_move 1.8s cubic-bezier(.6,.01,.4,1) infinite;
-  }
-  
-  .item-2 {
+    animation: item-1_move 1.8s cubic-bezier(.6, .01, .4, 1) infinite;
+}
+
+.item-2 {
     background-color: #7A45E5;
     top: 0;
     right: 0;
-    animation: item-2_move 1.8s cubic-bezier(.6,.01,.4,1) infinite;
-  }
-  
-  .item-3 {
+    animation: item-2_move 1.8s cubic-bezier(.6, .01, .4, 1) infinite;
+}
+
+.item-3 {
     background-color: #1B91F7;
     bottom: 0;
     right: 0;
     z-index: 1;
-    animation: item-3_move 1.8s cubic-bezier(.6,.01,.4,1) infinite;
-  }
-  
-  .item-4 {
+    animation: item-3_move 1.8s cubic-bezier(.6, .01, .4, 1) infinite;
+}
+
+.item-4 {
     background-color: #FAC24C;
     bottom: 0;
     left: 0;
-    animation: item-4_move 1.8s cubic-bezier(.6,.01,.4,1) infinite;
-  }
-  
-  @keyframes item-1_move {
-    0%, 100% {transform: translate(0, 0)} 
-    25% {transform: translate(0, 100px)} 
-    50% {transform: translate(100px, 100px)} 
-    75% {transform: translate(100px, 0)} 
-  }
-  
-  @keyframes item-2_move {
-    0%, 100% {transform: translate(0, 0)} 
-    25% {transform: translate(-100px, 0)} 
-    50% {transform: translate(-100px, 100px)} 
-    75% {transform: translate(0, 100px)} 
-  }
-  
-  @keyframes item-3_move {
-    0%, 100% {transform: translate(0, 0)} 
-    25% {transform: translate(0, -100px)} 
-    50% {transform: translate(-100px, -100px)} 
-    75% {transform: translate(-100px, 0)} 
-  }
-  
-  @keyframes item-4_move {
-    0%, 100% {transform: translate(0, 0)} 
-    25% {transform: translate(100px, 0)} 
-    50% {transform: translate(100px, -100px)} 
-    75% {transform: translate(0, -100px)} 
-  }
+    animation: item-4_move 1.8s cubic-bezier(.6, .01, .4, 1) infinite;
+}
+
+@keyframes item-1_move {
+
+    0%,
+    100% {
+        transform: translate(0, 0)
+    }
+
+    25% {
+        transform: translate(0, 100px)
+    }
+
+    50% {
+        transform: translate(100px, 100px)
+    }
+
+    75% {
+        transform: translate(100px, 0)
+    }
+}
+
+@keyframes item-2_move {
+
+    0%,
+    100% {
+        transform: translate(0, 0)
+    }
+
+    25% {
+        transform: translate(-100px, 0)
+    }
+
+    50% {
+        transform: translate(-100px, 100px)
+    }
+
+    75% {
+        transform: translate(0, 100px)
+    }
+}
+
+@keyframes item-3_move {
+
+    0%,
+    100% {
+        transform: translate(0, 0)
+    }
+
+    25% {
+        transform: translate(0, -100px)
+    }
+
+    50% {
+        transform: translate(-100px, -100px)
+    }
+
+    75% {
+        transform: translate(-100px, 0)
+    }
+}
+
+@keyframes item-4_move {
+
+    0%,
+    100% {
+        transform: translate(0, 0)
+    }
+
+    25% {
+        transform: translate(100px, 0)
+    }
+
+    50% {
+        transform: translate(100px, -100px)
+    }
+
+    75% {
+        transform: translate(0, -100px)
+    }
+}
+
 .jstetujeste {
     position: absolute;
     width: 300px;
@@ -1343,6 +1668,7 @@ table tr td input {
     text-align: center;
     display: none;
 }
+
 .jstetujeste button {
     width: 100%;
     position: absolute;
@@ -1350,22 +1676,26 @@ table tr td input {
     bottom: 0;
     left: 0%;
 }
+
 .player {
-    
+    height: 300px;
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 300px;
     min-height: 300px;
-    overflow:hidden;
+    overflow: hidden;
     min-width: 300px;
     z-index: 23;
 }
+
 .windowedmtjhjass {
-    z-index: 50!important;
+    z-index: 50 !important;
 }
+
 #gtx-trans {
-    display: none!important;
+    display: none !important;
 }
+
 .items-1 {
     background-color: #FA5667;
     top: 0;
@@ -1376,33 +1706,40 @@ table tr td input {
     transition: all 0.25s linear;
     position: absolute;
 }
+
 #tajnedva {
     opacity: 0;
     transition: linear 500ms opacity;
 }
-#tajnedva iframe{
+
+#tajnedva iframe {
     width: 100%;
     height: 100%;
     border: none;
     border-radius: none;
 }
+
 #tajnedva button {
-    top:0;
+    top: 0;
     position: absolute;
     right: 0;
 }
+
 #klindowsrightclickmenu {
     transition: linear 2s opacity;
 }
+
 .items-2 {
     background-color: #7A45E5;
     position: absolute;
-    top:0;
+    top: 0;
     left: 25px;
-    z-index: 1;height: 25px;
+    z-index: 1;
+    height: 25px;
     width: 25px;
     transition: all 0.25s linear;
 }
+
 .items-3 {
     background-color: #1B91F7;
     top: 25px;
@@ -1412,6 +1749,7 @@ table tr td input {
     transition: all 0.25s linear;
     position: absolute;
 }
+
 .items-4 {
     background-color: #FAC24C;
     bottom: 0;
@@ -1421,6 +1759,7 @@ table tr td input {
     transition: all 0.25s linear;
     position: absolute;
 }
+
 #firstcursor {
     width: 2em;
     height: 2em;
@@ -1430,8 +1769,9 @@ table tr td input {
     z-index: 99999999999999999999999999999999999999999999999999999999999999999999;
     position: fixed;
     pointer-events: none;
-    transition: all .1s ease,top .18s ease-out,left .18s ease-out;
+    transition: all .1s ease, top .18s ease-out, left .18s ease-out;
 }
+
 #secondcursor {
     width: 5px;
     height: 5px;
@@ -1442,8 +1782,9 @@ table tr td input {
     position: fixed;
     pointer-events: none;
     transition: ease 0.2s background;
-    
+
 }
+
 #alertdev-tools {
     position: absolute;
     bottom: 55px;
@@ -1456,16 +1797,19 @@ table tr td input {
     transition: linear 0.2s right;
     padding: 2px;
 }
-#alertdev-tools div{
+
+#alertdev-tools div {
     position: absolute;
     right: 5px;
 }
-#alertdev-tools span{
-    top:25px;
+
+#alertdev-tools span {
+    top: 25px;
     position: absolute;
     color: black;
 }
-#customasdappsadasdasdsad img{
+
+#customasdappsadasdasdsad img {
     height: 70px;
     width: 70px;
 }
@@ -1475,6 +1819,7 @@ table tr td input {
     min-height: calc(100% - 20px);
     height: 570px;
 }
+
 #iframe-novinky {
     width: 100%;
     min-height: calc(100% - 20px);
@@ -1482,6 +1827,7 @@ table tr td input {
     border: none;
     display: none;
 }
+
 .infoapdjasbjd {
     background-color: #1a1a1a;
     margin: 10px;
@@ -1490,9 +1836,10 @@ table tr td input {
     height: 40px;
     padding-left: 15px;
     text-align: center;
-    color:white;
+    color: white;
     font-size: 2em
 }
+
 .dsaigsdiasd {
     width: 100vw;
     height: 100vh;
@@ -1501,11 +1848,13 @@ table tr td input {
     display: none;
     top: 0;
 }
+
 .dsaigsdiasd iframe {
     border: none;
     width: 100vw;
     height: 100vh;
 }
+
 #sagdasda {
     width: 100vw;
     height: 70px;
@@ -1515,9 +1864,11 @@ table tr td input {
     z-index: 162465545646541;
     display: block;
 }
+
 .buttonkalkulacka {
     width: 50px;
 }
+
 .buttonkalkulackaeq {
     width: 104px;
 }
@@ -1530,31 +1881,36 @@ table tr td input {
     height: 125px;
     background-color: #292929;
     border-radius: 15px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.07), 
-                0 2px 4px rgba(0,0,0,0.07), 
-                0 4px 8px rgba(0,0,0,0.07), 
-                0 8px 16px rgba(0,0,0,0.07),
-                0 16px 32px rgba(0,0,0,0.07), 
-                0 32px 64px rgba(0,0,0,0.07);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07),
+        0 2px 4px rgba(0, 0, 0, 0.07),
+        0 4px 8px rgba(0, 0, 0, 0.07),
+        0 8px 16px rgba(0, 0, 0, 0.07),
+        0 16px 32px rgba(0, 0, 0, 0.07),
+        0 32px 64px rgba(0, 0, 0, 0.07);
     transition: ease 0.5s all;
     z-index: 200;
 }
+
 .notifidiv.openedlol {
     right: 15px;
 }
+
 .notifidiv.dnlol {
-    display: none!important;
+    display: none !important;
 }
+
 .notifidiv h1 {
     color: white;
     margin-top: 5px;
     margin-left: 5px;
 }
+
 .notifidiv p {
     margin-top: 10px;
     text-align: center;
     color: white;
 }
+
 .notifidiv button {
     position: absolute;
     right: 0;
@@ -1566,10 +1922,12 @@ table tr td input {
     color: white;
     font-size: 20px;
 }
+
 .maps iframe {
     width: 100%;
     height: calc(100% - 20px);
 }
+
 .openopenedapps {
     top: 50%;
     left: 50%;
@@ -1580,79 +1938,95 @@ table tr td input {
     padding: 30px;
     background-color: #292929;
     border-radius: 15px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.07), 
-                0 2px 4px rgba(0,0,0,0.07), 
-                0 4px 8px rgba(0,0,0,0.07), 
-                0 8px 16px rgba(0,0,0,0.07),
-                0 16px 32px rgba(0,0,0,0.07), 
-                0 32px 64px rgba(0,0,0,0.07);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07),
+        0 2px 4px rgba(0, 0, 0, 0.07),
+        0 4px 8px rgba(0, 0, 0, 0.07),
+        0 8px 16px rgba(0, 0, 0, 0.07),
+        0 16px 32px rgba(0, 0, 0, 0.07),
+        0 32px 64px rgba(0, 0, 0, 0.07);
     color: white;
 }
+
 .openopenedapps .buttonopenedapps {
     background-color: #353535;
     padding: 20px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.07), 
-                0 2px 4px rgba(0,0,0,0.07), 
-                0 4px 8px rgba(0,0,0,0.07), 
-                0 8px 16px rgba(0,0,0,0.07),
-                0 16px 32px rgba(0,0,0,0.07), 
-                0 32px 64px rgba(0,0,0,0.07);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07),
+        0 2px 4px rgba(0, 0, 0, 0.07),
+        0 4px 8px rgba(0, 0, 0, 0.07),
+        0 8px 16px rgba(0, 0, 0, 0.07),
+        0 16px 32px rgba(0, 0, 0, 0.07),
+        0 32px 64px rgba(0, 0, 0, 0.07);
     color: white;
-    float:left;
+    float: left;
     margin: 3px
 }
+
 .openopenedapps .buttonopenedapps.selected {
     outline: 1px red solid
 }
+
 .filemanager {
-    
+
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 500px;
     min-height: 400px;
-    overflow:hidden;
+    overflow: hidden;
     min-width: 500px;
 }
-.filemanager iframe{
+
+.filemanager iframe {
     resize: none;
     width: 100%;
-    height: calc(100% - 20px)
-}.fileproperties {
-    
+    height: calc(100% - 20px);
+    min-height: 0;
+}
+
+.fileproperties {
+
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 300px;
     min-height: 300px;
-    overflow:hidden;
+    overflow: hidden;
     min-width: 300px;
     z-index: 23;
 }
+
 .fileeditor {
-    
+
     background-color: white;
-    position: absolute!important;
+    position: absolute !important;
     width: 300px;
     min-height: 300px;
-    overflow:hidden;
+    overflow: hidden;
     min-width: 300px;
     z-index: 23;
 }
-.fileeditor .fileeditorimage,  .fileeditor .fileeditortext, .fileeditor .fileeditorvideo{
+
+.fileeditor .fileeditorimage,
+.fileeditor .fileeditortext,
+.fileeditor .fileeditorvideo {
     resize: none;
     width: 100%;
     height: calc(100% - 20px)
 }
-.fileeditortext textarea, .fileeditorimage img {
+
+.fileeditortext textarea,
+.fileeditorimage img {
     resize: none;
     width: 100%;
     height: 100%
 }
+
 .fileeditortext textarea {
     background-color: transparent;
 }
+
 #abjasbdjkbasknfljkdhfasasd {
     height: calc(100% - 20px)
 }
+
 #abjasbdjkbasknfljkdhfasasd * {
     width: 100%;
     height: calc(100% / 3);
@@ -1661,36 +2035,43 @@ table tr td input {
     justify-content: center;
     align-items: center;
 }
+
 #abjasbdjkbasknfljkdhfasasd div {
     font-size: 40px;
 }
 
-.ui-resizable-s{
-    height: 15px!important;
+.ui-resizable-s {
+    height: 15px !important;
     bottom: -5px;
 }
-.ui-resizable-e{
-    right: -5px!important;
-    width: 15px!important;
-    height: calc(100% - 20px)!important;
-    top: 20px!important;
+
+.ui-resizable-e {
+    right: -5px !important;
+    width: 15px !important;
+    height: calc(100% - 20px) !important;
+    top: 20px !important;
 }
+
 .ui-resizable-w {
-    left: -5px!important;
-    width: 15px!important;
+    left: -5px !important;
+    width: 15px !important;
 }
+
 .ui-resizable-n {
-    height: 10px!important;
-    top: -5px!important;
+    height: 10px !important;
+    top: -5px !important;
 }
+
 .reg .content {
     height: calc(100% - 20px);
 }
+
 #changesss {
     height: calc(100% / 3);
     width: 100%;
     text-align: center;
 }
+
 #valuesss {
     height: calc(100% / 3);
     width: calc(100% - 1px);
@@ -1698,30 +2079,40 @@ table tr td input {
     outline: none;
     text-align: center;
 }
+
 .content button {
     height: calc(100% / 3);
     width: 100%;
-}.fileeditoraudio iframe{
+}
+
+.fileeditoraudio iframe {
     border: none;
     width: 100%;
     height: 100%;
 }
+
 .fileeditoraudio {
     height: calc(100% - 20px)
 }
-.prompt-element, .confirm-element, .power-element {
+
+.prompt-element,
+.confirm-element,
+.power-element {
     position: absolute;
     width: 100vw;
     height: 100vh;
     z-index: 5000000000000000;
 }
-.prompt-background, .confirm-background{
+
+.prompt-background,
+.confirm-background {
     position: absolute;
     background-color: black;
     opacity: 0.5;
     width: 100%;
     height: 100%;
 }
+
 .outer-box {
     width: 100%;
     height: 100%;
@@ -1730,50 +2121,58 @@ table tr td input {
     justify-content: center;
     align-items: center;
 }
+
 .inner-box {
     width: 500px;
-    height: 150px;
+    min-height: 140px;
     background-color: blue;
     border-radius: 15px;
 }
-.message-box, .message-box-confirm {
+
+.message-box,
+.message-box-confirm {
     text-align: center;
     margin-top: 8px;
     margin-bottom: 8px;
     font-size: 1.5em;
     color: white;
 }
+
 .input-box {
     height: 50px;
     width: 500px;
     border: none;
 }
+
 .submit-box {
     height: 50px;
     width: 500px;
     border-end-end-radius: 15px;
     border-end-start-radius: 15px;
     position: relative;
-    top: 7px;
+    margin-top: 7px;
 }
+
 .submit-box-confirm {
     height: 50px;
     width: 250px;
     position: relative;
-    top: 51px;
+    margin-top: 51px;
     float: left;
 }
+
 .submit-box-confirm.submit-box-confirm-left {
     border-end-start-radius: 15px;
 }
+
 .submit-box-confirm.submit-box-confirm-right {
     border-end-end-radius: 15px;
 }
+
 .loginfirst {
     width: 100vw;
-    height: 100vh!important;
+    height: 100vh !important;
     background-color: #555;
-    /*background-image: url("https://www.cestovinky.cz/sites/default/files/styles/medium/public/images/1/bigstock-hill-of-crosses-lithuania-116305928.jpg?h=15698844&itok=Eoue4Fm0");*/
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -1782,6 +2181,7 @@ table tr td input {
     top: 0px;
     /*transition: ease 0.7s top;*/
 }
+
 .loginfirst .svatek {
     backdrop-filter: blur(5px);
     width: 100vw;
@@ -1791,10 +2191,12 @@ table tr td input {
     align-items: center;
     display: flex;
 }
+
 .loginfirst .svatek p {
     color: white;
     text-align: center;
 }
+
 .dateloginfirst {
     position: absolute;
     bottom: 30px;
@@ -1807,15 +2209,19 @@ table tr td input {
     transform: scale(1);
     transition: ease 0.2s transform;
 }
+
 .dateloginfirst:hover {
     transform: scale(1.1);
 }
+
 .timelogin {
     font-size: 7em;
 }
+
 .datelogin {
     font-size: 2em;
 }
+
 .touch {
     position: absolute;
     top: 50%;
@@ -1833,37 +2239,98 @@ table tr td input {
 }
 
 @keyframes swipe-up {
-    0% {transform: translate(-50%, 0%) scale(0);} 
-    10% {transform: translate(-50%, 0%) scale(0);}
-    20% {transform: translate(-50%, 0%) scale(1);}
-    80% {transform: translate(-50%, -300%) scale(1);}
-    90% {transform: translate(-50%, -300%) scale(0);}
-    100% {transform: translate(-50%, -300%) scale(0);}
+    0% {
+        transform: translate(-50%, 0%) scale(0);
+    }
+
+    10% {
+        transform: translate(-50%, 0%) scale(0);
+    }
+
+    20% {
+        transform: translate(-50%, 0%) scale(1);
+    }
+
+    80% {
+        transform: translate(-50%, -300%) scale(1);
+    }
+
+    90% {
+        transform: translate(-50%, -300%) scale(0);
+    }
+
+    100% {
+        transform: translate(-50%, -300%) scale(0);
+    }
 }
 
 
 @keyframes gelatine {
-    from, to { transform: scale(1, 1); }
-    25% { transform: scale(0.9, 1.1); }
-    50% { transform: scale(1.1, 0.9); }
-    75% { transform: scale(0.95, 1.05); }
-  }
-  @keyframes hithere {
-    30% { transform: scale(1.2); }
-    40%, 60% { transform: rotate(-20deg) scale(1.2); }
-    50% { transform: rotate(20deg) scale(1.2); }
-    70% { transform: rotate(0deg) scale(1.2); }
-    100% { transform: scale(1); }
-  }
 
-  @keyframes bounsdce { 
-    0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
-    40% {transform: translateY(-100px);} 
-    60% {transform: translateY(-50px);} 
+    from,
+    to {
+        transform: scale(1, 1);
+    }
+
+    25% {
+        transform: scale(0.9, 1.1);
+    }
+
+    50% {
+        transform: scale(1.1, 0.9);
+    }
+
+    75% {
+        transform: scale(0.95, 1.05);
+    }
 }
+
+@keyframes hithere {
+    30% {
+        transform: scale(1.2);
+    }
+
+    40%,
+    60% {
+        transform: rotate(-20deg) scale(1.2);
+    }
+
+    50% {
+        transform: rotate(20deg) scale(1.2);
+    }
+
+    70% {
+        transform: rotate(0deg) scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes bounsdce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-100px);
+    }
+
+    60% {
+        transform: translateY(-50px);
+    }
+}
+
 ::-webkit-scrollbar {
     width: auto;
 }
+
 ::-webkit-scrollbar-track {
     background-color: rgba(217, 217, 217, 1);
 }
@@ -1871,10 +2338,10 @@ table tr td input {
 ::-webkit-scrollbar-thumb {
     background: rgba(184, 184, 184, 1);
     box-shadow:
-    inset .05em .05em 0 rgba(0, 0, 0, .1),
-    inset 0 -.05em 0 rgba(0, 0, 0, .07)
-    ;
+        inset .05em .05em 0 rgba(0, 0, 0, .1),
+        inset 0 -.05em 0 rgba(0, 0, 0, .07);
 }
+
 .inner-box-power {
     width: 500px;
     height: 500px;
@@ -1883,9 +2350,11 @@ table tr td input {
     scale: 0;
     transition: ease 0.35s scale;
 }
+
 .inner-box-power.openBackground {
     scale: 1;
 }
+
 .power-background {
     position: absolute;
     background-color: black;
@@ -1894,9 +2363,11 @@ table tr td input {
     height: 100%;
     transition: ease 0.2s opacity;
 }
+
 .power-background.openBackground {
     opacity: 0.5;
 }
+
 .element-power-inner-box {
     width: calc(100% / 2);
     height: calc(100% / 2);
@@ -1908,6 +2379,7 @@ table tr td input {
     background-size: 151px;
     background-position: center;
 }
+
 .element-power-inner-box:hover {
     background-color: rgb(0 0 0 / 50%);
 }
@@ -1915,6 +2387,7 @@ table tr td input {
 .slidercontainer {
     width: 100%;
 }
+
 .slider {
     appearance: none;
     height: 15px;
@@ -1935,7 +2408,7 @@ table tr td input {
     appearance: none;
     width: 25px;
     height: 25px;
-    border-radius: 50%; 
+    border-radius: 50%;
     background: #04AA6D;
 }
 
@@ -1945,6 +2418,7 @@ table tr td input {
     border-radius: 50%;
     background: #04AA6D;
 }
+
 .welcomePage {
     width: 100vw;
     height: 100vh;
@@ -1952,19 +2426,22 @@ table tr td input {
     background-color: white;
     z-index: 100000;
 }
+
 .welcomePage video {
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
+
 .welcomePage .skipbtn {
     position: absolute;
     right: 0;
-    top:0;
+    top: 0;
     background: black;
     color: white;
     z-index: 1;
 }
+
 .customappdiv {
     width: calc(100% - 2px);
     height: 50px;
@@ -1972,12 +2449,14 @@ table tr td input {
     display: flex;
     align-items: center;
 }
+
 .customappdiv button {
     position: absolute;
     height: 50px;
     right: 0;
     width: 90px;
 }
+
 .downbar .appdiv {
     width: 300px;
     height: 217px;
@@ -1988,6 +2467,7 @@ table tr td input {
     display: none;
     color: white;
 }
+
 .canvasSection {
     width: 100%;
     height: calc(100% - 43px);
@@ -2005,17 +2485,17 @@ table tr td input {
     width: 2em;
     overflow: visible;
     position: relative;
-  }
-  
-  /* Transparent Overlay */
-  .canvasSection .loading:before {
+}
+
+/* Transparent Overlay */
+.canvasSection .loading:before {
     content: '';
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.3);
-  }
-  
-  
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+
 /* :not(:required) hides these rules from IE9 and below */
 .canvasSection .loading:not(:required) {
     /* hide "loading..." text */
@@ -2024,9 +2504,9 @@ table tr td input {
     text-shadow: none;
     background-color: transparent;
     border: 0;
-  }
-  
-  .canvasSection  .loading:not(:required):after {
+}
+
+.canvasSection .loading:not(:required):after {
     content: '';
     display: block;
     font-size: 10px;
@@ -2041,71 +2521,132 @@ table tr td input {
     border-radius: 0.5em;
     -webkit-box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0, rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
     box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) -1.5em 0 0 0, rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
-  }
-  
-  /* Animation */
-  
-  @-webkit-keyframes spinner {
+}
+
+/* Animation */
+
+@-webkit-keyframes spinner {
     0% {
-      -webkit-transform: rotate(0deg);
-      -moz-transform: rotate(0deg);
-      -ms-transform: rotate(0deg);
-      -o-transform: rotate(0deg);
-      transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
     }
+
     100% {
-      -webkit-transform: rotate(360deg);
-      -moz-transform: rotate(360deg);
-      -ms-transform: rotate(360deg);
-      -o-transform: rotate(360deg);
-      transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
-  @-moz-keyframes spinner {
+}
+
+@-moz-keyframes spinner {
     0% {
-      -webkit-transform: rotate(0deg);
-      -moz-transform: rotate(0deg);
-      -ms-transform: rotate(0deg);
-      -o-transform: rotate(0deg);
-      transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
     }
+
     100% {
-      -webkit-transform: rotate(360deg);
-      -moz-transform: rotate(360deg);
-      -ms-transform: rotate(360deg);
-      -o-transform: rotate(360deg);
-      transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
-  @-o-keyframes spinner {
+}
+
+@-o-keyframes spinner {
     0% {
-      -webkit-transform: rotate(0deg);
-      -moz-transform: rotate(0deg);
-      -ms-transform: rotate(0deg);
-      -o-transform: rotate(0deg);
-      transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
     }
+
     100% {
-      -webkit-transform: rotate(360deg);
-      -moz-transform: rotate(360deg);
-      -ms-transform: rotate(360deg);
-      -o-transform: rotate(360deg);
-      transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
-  @keyframes spinner {
+}
+
+@keyframes spinner {
     0% {
-      -webkit-transform: rotate(0deg);
-      -moz-transform: rotate(0deg);
-      -ms-transform: rotate(0deg);
-      -o-transform: rotate(0deg);
-      transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
     }
+
     100% {
-      -webkit-transform: rotate(360deg);
-      -moz-transform: rotate(360deg);
-      -ms-transform: rotate(360deg);
-      -o-transform: rotate(360deg);
-      transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
+}
+
+.selectApp {
+    position: absolute;
+    z-index: 33333333;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.insideSelectApp {
+    background-color: white;
+    width: 425px;
+    height: 631px;
+    border-radius: 15px;
+}
+
+.insideSelectApp h1 {
+    text-align: center;
+}
+
+.insideSelectApp .apps {
+    height: auto;
+    width: 100%;
+    position: relative;
+}
+.insideSelectApp .apps div {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    background-color: white;
+    transition: ease 0.2s background-color;
+    font-size: 20px;
+    box-sizing: border-box;
+}
+.insideSelectApp .apps div:hover {
+    background-color: rgb(202, 202, 202);
+}
+
+.window.black .headerclass * {
+    color: white;
+}
+
+.plyr.plyr--full-ui {
+    width: 100%;
+}
+
+.plyr__tooltip {
+    color: black!important;
+}

@@ -1,7 +1,7 @@
-window.addEventListener('click', function(e){
-    if (document.querySelector(".openopenedapps").contains(e.target)){
+window.addEventListener('click', function (e) {
+    if (document.querySelector(".openopenedapps").contains(e.target)) {
         // Clicked in box
-    } else{
+    } else {
         if (appsopened.oppened) {
             appsopened.close();
         }
@@ -23,11 +23,11 @@ var appsopened = {
         if (appsopened.count != 0) {
             var innerHTMLvalue = ""
             for (var i = 0; i < appsopened.count; i++) {
-                if (appsopened.list[i][2]==openedwindowindex) {
-                    innerHTMLvalue+='<div class="selected buttonopenedapps '+appsopened.list[i][0]+'vybranydiv" onclick="appsopened.openwin('+i+')">'+appsopened.list[i][1]+'</div>';
+                if (appsopened.list[i][2] == openedwindowindex) {
+                    innerHTMLvalue += '<div class="selected buttonopenedapps ' + appsopened.list[i][0] + 'vybranydiv" onclick="appsopened.openwin(' + i + ')">' + appsopened.list[i][1] + '</div>';
                 }
                 else {
-                    innerHTMLvalue+='<div class="buttonopenedapps '+appsopened.list[i][0]+'vybranydiv" onclick="appsopened.openwin('+i+')">'+appsopened.list[i][1]+'</div>';
+                    innerHTMLvalue += '<div class="buttonopenedapps ' + appsopened.list[i][0] + 'vybranydiv" onclick="appsopened.openwin(' + i + ')">' + appsopened.list[i][1] + '</div>';
                 }
             }
             element.innerHTML = innerHTMLvalue;
@@ -36,7 +36,7 @@ var appsopened = {
             element.innerHTML = "Nejsou otevřené žádné okna"
         }
         appsopened.oppened = true;
-        element.style.display="block";
+        element.style.display = "block";
     },
     close: () => {
         appsopened.oppened = false
@@ -48,9 +48,9 @@ setInterval(() => {
     appsopened.list = []
     var elements = document.querySelectorAll(".window.openedwin")
     for (var i = 0; i < elements.length; i++) {
-        try{
-            appsopened.list.push([elements[i].classList[1],elements[i].querySelector(".headerclass span").innerHTML,elements[i]])
-        }catch{}
+        try {
+            appsopened.list.push([elements[i].classList[1], elements[i].querySelector(".headerclass span").innerHTML, elements[i]])
+        } catch { }
     }
     appsopened.count = appsopened.list.length
 }, 500);

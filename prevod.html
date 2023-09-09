@@ -1,28 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Musíme převést váš systém</title>
 </head>
+
 <body>
     <style>
         * {
             text-align: center;
         }
+
         h1 {
             font-size: 3em;
         }
+
         p {
             font-size: 2em;
         }
-        .questions *{
+
+        .questions * {
             display: none;
         }
-        .visible, .visible *{
+
+        .visible,
+        .visible * {
             display: block;
         }
+
         button {
             top: 50%;
             left: 50%;
@@ -39,7 +47,8 @@
     </p>
     <div class="questions">
         <div class="first visible">
-            <h2>Chcete ponechat zatím uložené věci v KLIND OS? Nebo chcete resetovat KLIND OS do továrního nastavení, a začít od znovu.</h2>
+            <h2>Chcete ponechat zatím uložené věci v KLIND OS? Nebo chcete resetovat KLIND OS do továrního nastavení, a
+                začít od znovu.</h2>
             <button onclick="odpoved(1, 1)">
                 Ponechat
             </button>
@@ -100,25 +109,25 @@
             var element = document.createElement('a');
             element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
             element.setAttribute('download', filename);
-          
+
             element.style.display = 'none';
             document.body.appendChild(element);
-          
+
             element.click();
-          
+
             document.body.removeChild(element);
-          }
+        }
         function allCookies() {
 
             var archive = []
             var cookies = document.cookie.split("; ")
-            for (var i = 0; i < cookies.length; i++)  {
+            for (var i = 0; i < cookies.length; i++) {
                 archive.push([
                     cookies[i].split("=")[0],
                     cookies[i].split("=")[1]
                 ])
             }
-        
+
             return archive;
         }
         function getBackup() {
@@ -143,22 +152,23 @@
                     )
                 }
                 setTimeout(() => {
-                    document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+                    document.cookie.split(";").forEach(function (c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
                     msg.textContent = "Dokončeno. Za 10 sekund budete přesunuti na KLIND OS."
                     setTimeout(() => {
                         window.location.replace("/")
                     }, 10000)
-                },1000)
+                }, 1000)
             }
             else {
                 msg.textContent = "Nechtěli jste systém ponechat. Proto ho převádíme do továrního nastavení. Za 10 sekund budete přesunuti na KLIND OS."
-                document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+                document.cookie.split(";").forEach(function (c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
                 localStorage.clear()
                 setTimeout(() => {
                     window.location.replace("/")
-                },10000)
+                }, 10000)
             }
         }
     </script>
 </body>
+
 </html>
