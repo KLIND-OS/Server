@@ -1,5 +1,8 @@
 class Browser {
   static changeUrl(window, url) {
+    if (!/^https?:\/\//i.test(url)) {
+        url = 'http://' + url;
+    }
     const browser = window.querySelector("#brow");
     browser.src = url;
     browser.setAttribute("sr", url);
