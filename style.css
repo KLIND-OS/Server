@@ -1346,6 +1346,9 @@ table tr td input {
 .userimg {
     width: 20em;
     height: 20em;
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
 }
 
 .logindva {
