@@ -228,3 +228,6 @@ class App {
         }
     }
 }
+
+
+window.control = control
