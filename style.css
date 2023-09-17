@@ -1194,6 +1194,7 @@ h2 {
 .browser webview {
     width: 100%;
     height: calc(100% - 64px);
+    background-color: white;
 }
 .icon {
     width: 80px;
