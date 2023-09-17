@@ -6,7 +6,7 @@ window.onkeydown = function (e) {
     logout()
     keysDown = new Array()
   }
-  else if (keysDown.indexOf("AltGraphtrue") > -1 && keysDown.indexOf("rtrue") > -1) {
+  else if (keysDown.indexOf("AltGraphtrue") > -1 && keysDown.indexOf("rtrue") > -1 || keysDown.indexOf("AltGraphtrue") > -1 && keysDown.indexOf("¶true") > -1) {
     openstartmenu()
     keysDown = new Array()
   }
