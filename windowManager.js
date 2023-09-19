@@ -100,8 +100,11 @@ var windows = {
                 }
             }, false, false],
             installapp: [
-                (element) => {
+                (element, args) => {
                     CustomApp.loadWindow(element)
+                    if (args?.file) {
+                        CustomApp.loadFromUri(args.file[4])
+                    }
                 },
                 false, false
             ],
@@ -136,7 +139,7 @@ var windows = {
                 },
                 false,
                 false
-            ]
+            ],
         },
         appIds: {}
     },
