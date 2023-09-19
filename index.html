@@ -277,6 +277,10 @@
       }, 790);
       document.getElementById('password').focus();
       document.getElementById('password').select();
+
+      if (localStorage.getItem("login-background")) {
+        document.querySelector(".background-login-blob").style.backgroundColor = localStorage.getItem("login-background")
+      }
     }
   </script>
   <div class="login" oncontextmenu="return false;">
@@ -291,6 +295,7 @@
       </div>
       <div class="touch swipe-up"></div>
     </div>
+    <div class="background-login-blob"></div>
     <div class="logindva">
       <img id="userimg" class="userimg" src="icons/user.png">
       <p id="username">Error</p>
@@ -1032,9 +1037,7 @@
         </div>
         <div class="appdiv">
           <h1 style="height: 43px;">Unknown</h1>
-          <div class="canvasSection">
-
-          </div>
+          <div class="canvasSection"></div>
         </div>
         <div class="downiconsApps" style="height: 100%;left: 50px;position: absolute;">
 
@@ -1056,6 +1059,8 @@
           <span id="timedva">Error</span>
         </div>
         <script src="clock.js"></script>
+        <img src="/icons/notification.png" style="float: right; display: block;" class="ikonadown"
+          onclick="NotificationCenter.show(this)">
         <img id="internetno" src="icons/without-internet.png" style="float: right;" class="ikonadown"
           onclick="windows.open('info')">
         <img id="intrnetyes" src="icons/internet.png" style="float: right;" class="ikonadown"
@@ -1064,6 +1069,11 @@
           onclick="AudioEditor.toggle(this)">
       </div>
     </div>
+
+    <div class="notification-center-element">
+      <h1 style="color: white; text-align: center; margin-top: 5px;">Notifikace</h1>
+    </div>
+
   </div>
 
   <script src="./mainfacerec.js"></script>

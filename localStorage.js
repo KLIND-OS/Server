@@ -29,7 +29,9 @@ class LocalStorage {
         "barvapismapoznamky",
         "welcomepage",
         "filePreview",
-        "budiky"
+        "budiky",
+        "login-background",
+        "bootType"
     ]
     static customApps = []
     static getAllLocalStorages() {
