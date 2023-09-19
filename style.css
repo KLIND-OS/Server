@@ -2616,6 +2616,7 @@ table tr td input {
     border-radius: 10px;
     backdrop-filter: blur(10px);
     overflow-y: auto;
+    z-index: 1000;
 }
 
 .notification-center-element .notification {
