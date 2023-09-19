@@ -1279,69 +1279,7 @@ table tr td input {
     height: 100vh;
     position: absolute;
     z-index: 99999;
-    background: linear-gradient(77deg, #ff0d00, #00ff2b, #00c5ff, #ff00bd, #003eff, #00f2ff);
-    background-size: 1200% 1200%;
-
-    -webkit-animation: xcyccnvoi 53s ease infinite;
-    -moz-animation: xcyccnvoi 53s ease infinite;
-    -o-animation: xcyccnvoi 53s ease infinite;
-    animation: xcyccnvoi 53s ease infinite;
-}
-
-@-webkit-keyframes xcyccnvoi {
-    0% {
-        background-position: 0% 90%
-    }
-
-    50% {
-        background-position: 100% 11%
-    }
-
-    100% {
-        background-position: 0% 90%
-    }
-}
-
-@-moz-keyframes xcyccnvoi {
-    0% {
-        background-position: 0% 90%
-    }
-
-    50% {
-        background-position: 100% 11%
-    }
-
-    100% {
-        background-position: 0% 90%
-    }
-}
-
-@-o-keyframes xcyccnvoi {
-    0% {
-        background-position: 0% 90%
-    }
-
-    50% {
-        background-position: 100% 11%
-    }
-
-    100% {
-        background-position: 0% 90%
-    }
-}
-
-@keyframes xcyccnvoi {
-    0% {
-        background-position: 0% 90%
-    }
-
-    50% {
-        background-position: 100% 11%
-    }
-
-    100% {
-        background-position: 0% 90%
-    }
+    background-color: black;
 }
 
 .userimg {
@@ -1350,6 +1288,18 @@ table tr td input {
     left: 50%;
     position: relative;
     transform: translateX(-50%);
+}
+
+.background-login-blob {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    width: 550px;
+    height: 550px;
+    background-color: #00c0ff;
+    border-radius: 50%;
+    filter: blur(178px);
 }
 
 .logindva {
@@ -2653,4 +2603,29 @@ table tr td input {
 
 .plyr__tooltip {
     color: black!important;
+}
+
+.notification-center-element {
+    position: absolute;
+    height: calc(100vh - 50px - 20px - 20px);
+    top: 20px;
+    right: -350px;
+    transition: ease 0.5s right;
+    background-color: rgba(0, 0, 0, .65);
+    width: 350px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    overflow-y: auto;
+}
+
+.notification-center-element .notification {
+    color: white;
+    padding: 20px;
+    position: relative;
+}
+
+.notification-center-element .notification .closebtn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
