@@ -12,7 +12,7 @@ if (developermode == "false") {
         
     }
     else if (OSName === "Linux") {
-        spawnNotification("Info", "Na linuxu nemusí některé funkce fungovat správně.")
+        
     }
     else {
         error("0x0000297", "Nepodporovaný operační systém klienta. Zkuste Windows nebo Linux", "KLIND OS | Load");
