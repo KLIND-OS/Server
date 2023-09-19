@@ -498,7 +498,7 @@ var FileManager = {
     },
     convertTo: (idel) => {
         var value = JSON.parse(localStorage.getItem("files-uploaded"))
-        parent.BPrompt.prompt("Převod:<br><br>1 - Text<br>2 - Obrázek<br>3 - Zvuk<br>4 - Video<br>5 - KLIND OS Script<br>c - Vlastní", (to) => {
+        parent.BPrompt.prompt("Převod:<br><br>1 - Text<br>2 - Obrázek<br>3 - Zvuk<br>4 - Video<br>5 - KLIND OS Script<br>6 - KLIND OS Instalační balíček<br>c - Vlastní", (to) => {
             if (to == null || to.length == 0) {
 
             }
@@ -534,6 +534,10 @@ var FileManager = {
                 }
                 else if (to == "5") {
                     value[idel][2] = "klindos/script"
+                    localStorage.setItem("files-uploaded", JSON.stringify(value))
+                }
+                else if (to == "6") {
+                    value[idel][2] = "klindos/installer"
                     localStorage.setItem("files-uploaded", JSON.stringify(value))
                 }
                 else if (to == "c") {

@@ -68,9 +68,17 @@ var CustomApp = {
         }
         window.location.reload();
     },
-    add: (e) => {
+    add: (e, x=false) => {
+        var d;
+        if (x) {
+            d = e;
+        }
+        else {
+            d = e.files[0]
+        }
+
         var new_zip = new JSZip();
-        new_zip.loadAsync(e.files[0])
+        new_zip.loadAsync(d)
             .then(function (zip) {
                 zip.file("script.js").async("text")
                     .then(function success(asdtarsd) {
@@ -113,7 +121,7 @@ var CustomApp = {
                                                                 else {
                                                                     eval(installScript);
                                                                     localStorage.setItem("customapps", JSON.stringify([[name, script, image]]))
-                                                                    e.value = ""
+                                                                    if (!x) e.value = ""
                                                                     window.location.reload();
                                                                 }
                                                             }
@@ -136,5 +144,16 @@ var CustomApp = {
                     });
 
             });
+    },
+    loadFromUri(uri) {
+        var byteString = window.atob(uri.split(',')[1]);
+        var mimeString = "klindos/installer"
+        var arrayBuffer = new ArrayBuffer(byteString.length);
+        var uint8Array = new Uint8Array(arrayBuffer);
+        for (var i = 0; i < byteString.length; i++) {
+            uint8Array[i] = byteString.charCodeAt(i);
+        }
+        var blob = new Blob([uint8Array], { type: mimeString });
+        CustomApp.add(blob, true)
     }
 }

@@ -56,6 +56,10 @@ var mainFileManager = {
       parent.windows.open(file[4].split(":")[1]);
       return;
     }
+    else if (file[2] == "klindos/installer") {
+      parent.windows.open("installapp", {"file": file})
+      return;
+    }
 
     var possible = [];
     if (Object.keys(mainFileManager.openWith).includes(file[2])) {
