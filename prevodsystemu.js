@@ -27,15 +27,10 @@ function prevedsystem() {
     var as = new Date
     downloadAsFile(as.getDate().toString() + "." + (as.getMonth() + 1) + "." + as.toString().split(" ")[3] + ".klindos", JSON.stringify(allStorage()))
 }
-function submitnjahsbdjksabd() {
-    input = document.createElement("input")
-    input.type = "file"
-    input.style.display = "none";
-    input.addEventListener("change", (e) => {
-        e = e.target.files[0]
-        const reader = new FileReader();
-        reader.addEventListener("load", () => {
-            var result = JSON.parse(reader.result)
+function submitnjahsbdjksabd(e) {
+    control.fileManager.fileSelect({
+        success: (file_array) => {
+            var result = JSON.parse(file_array[4])
             var make = false;
             for (var i = 0; i < result.length; i++) {
                 if (result[i][0] == "updatesklindows" && result[i][1] == version) {
@@ -53,10 +48,6 @@ function submitnjahsbdjksabd() {
             else {
                 spawnNotification("Převod systému", "Tento soubor je na jinou verzi KLIND OS. Aktualizujte soubor.")
             }
-            input.remove()
-        })
-        reader.readAsText(e)
+        },closed: () => {}
     })
-    var element = document.body.appendChild(input)
-    element.click()
 }
