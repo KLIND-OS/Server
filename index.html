@@ -9,13 +9,6 @@
   <p id="notdisplaynone" style="color: white; font-size: 50px;">Javascript je vypnutý nebo není podporovaný. Prosím
     zapěte jej nebo jděte na novější verzi prohlížeče.</p>
 </noscript>
-<!--
-        
-    Pokud nechcete aby se na váš server nepřipojovali lidé z KLIND OS Client, Smažte následující řádek:
-    ReadyForKLINDOSClientTrue
-        
--->
-
 <head>
   <meta charset="UTF-8">
   <!--Change path-->
@@ -94,6 +87,11 @@
   <script src="browser.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+  <script src="tinymce/tinymce.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.0/mammoth.browser.min.js"></script>
+  <script src="wordeditor.js"></script>
+  <script src="sheetseditor.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.2.1/exceljs.min.js"></script>
   <script>
     if (localStorage.getItem("installed") != "true") {
       window.location.replace("install.html");
@@ -310,7 +308,7 @@
     </div>
   </div>
   <div id="tajnedva" class="tajne" style="display: none;"><iframe src="regist/fi.html"></iframe><button
-      onclick="closetajnedva()">X</div>
+      onclick="closetajnedva()">X</button></div>
   <div id="klindowsrightclickmenu">
     <!--FullScreen Elements-->
     <div class="prompt-element" style="display: none;">
@@ -857,6 +855,38 @@
           onclick="localStorage.setItem(prompt('Klíč který chcete upravit'),prompt('Zadejte novou hodnotu'))">Upravit
           klíč</button>
       </div>
+      <div onclick="changewindowmain(this)" class="widgetList wordeditor Resizabl">
+        <div class="widget-header">
+          <div class="headerclass">
+            <span style="float: left;">Word editor</span>
+            <div
+              onclick="WordEditor.save(this.parentElement.parentElement.parentElement)"
+              class="menupoznamky filesavefileconfig">Uložit</div>
+            <div onclick="windows.close(this, 'wordeditor')" class="close"></div>
+            <div onclick="windows.mini(this, 'wordeditor')" class="mini"></div>
+          </div>
+        </div>
+        <div class="wordeditor-element"></div>
+      </div>
+      <div onclick="changewindowmain(this)" class="widgetList sheetseditor Resizabl">
+        <div class="widget-header">
+          <div class="headerclass">
+            <span style="float: left;">Sheets editor</span>
+            <div
+              onclick="WordEditor.save(this.parentElement.parentElement.parentElement)"
+              class="menupoznamky filesavefileconfig">Uložit</div>
+            <div onclick="windows.close(this, 'sheetseditor')" class="close"></div>
+            <div onclick="windows.mini(this, 'sheetseditor')" class="mini"></div>
+          </div>
+        </div>
+        <p>Tato aplikace je velice nedodělaná! Pravděpodobně se zde nacházejí chyby.</p>
+        <div id="grid-container"></div>
+        <button id="save-button">Save</button>
+        <button id="add-row-button">Přidat řádek</button>
+        <button id="remove-row-button">Odstranit řádek</button>
+        <button id="add-column-button">Přidat sloupec</button>
+        <button id="remove-column-button">Odstranit sloupec</button>
+      </div>
     </div>
     <div id="klindows" class="klindows">
       <div id="openedapps">
@@ -1031,6 +1061,8 @@
             class="ikonadown musicplayerikonadown" src="icons/musicplayer.png">
           <img onclick="windows.miniOpen('cleaner',this)" alt="Čistič systému" class="ikonadown cleanerikonadown"
             src="icons/cleaner.png">
+          <img onclick="windows.miniOpen('wordeditor',this)" alt="Word editor" class="ikonadown wordeditorikonadown"
+            src="icons/document.png">
         </div>
         <div class="appdiv">
           <h1 style="height: 43px;">Unknown</h1>

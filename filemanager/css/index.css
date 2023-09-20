@@ -59,6 +59,14 @@ body {
   background-size: cover;
   width: 50px;
 }
+.main header .fourthelement {
+  height: 50px;
+  top: 0px;
+  position: absolute;
+  right: 100px;
+  background-size: cover;
+  width: 50px;
+}
 .main.light {
   background-color: white;
 }
@@ -84,6 +92,9 @@ body {
 .main.light header .thirdelement {
   background-image: url("./../images/file.png");
 }
+.main.light header .fourthelement {
+  background-image: url("./../images/reload.png");
+}
 .main.dark {
   background-color: #3b3838;
 }
@@ -108,6 +119,9 @@ body {
 }
 .main.dark header .thirdelement {
   background-image: url("./../images/file-dark.png");
+}
+.main.dark header .fourthelement {
+  background-image: url("./../images/reload-dark.png");
 }
 .main .element, .main .elmnt {
   height: 50px;

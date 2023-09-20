@@ -193,7 +193,7 @@ var FileManager = {
             document.querySelector(".main").innerHTML = '<header><p>Správce Souborů <span>' + infolder + '</span></p></header>'
         }
         else {
-            document.querySelector(".main").innerHTML = '<header><p>Správce Souborů <span>' + infolder + '</span></p><!--<div class="mainelement" onclick="FileManager.upload();"></div>--!><div class="secondelement" onclick="FileManager.createFolder();"></div><div class="thirdelement" onclick="FileManager.createFile();"></div></header>'
+            document.querySelector(".main").innerHTML = '<header><p>Správce Souborů <span>' + infolder + '</span></p><!--<div class="mainelement" onclick="FileManager.upload();"></div>--!><div class="secondelement" onclick="FileManager.createFolder();"></div><div class="thirdelement" onclick="FileManager.createFile();"></div><div class="fourthelement" onclick="FileManager.readFiles();"></div></header>'
         }
         if (infolder != "/") {
             var element = document.createElement("div");
@@ -498,7 +498,7 @@ var FileManager = {
     },
     convertTo: (idel) => {
         var value = JSON.parse(localStorage.getItem("files-uploaded"))
-        parent.BPrompt.prompt("Převod:<br><br>1 - Text<br>2 - Obrázek<br>3 - Zvuk<br>4 - Video<br>5 - KLIND OS Script<br>6 - KLIND OS Instalační balíček<br>c - Vlastní", (to) => {
+        parent.BPrompt.prompt("Převod:<br><br>1 - Text<br>2 - Obrázek<br>3 - Zvuk<br>4 - Video<br>5 - KLIND OS Script<br>6 - KLIND OS Instalační balíček<br>7 - Word dokument<br>8 - Excel dokument<br>9 - HTML dokument<br>c - Vlastní", (to) => {
             if (to == null || to.length == 0) {
 
             }
@@ -538,6 +538,18 @@ var FileManager = {
                 }
                 else if (to == "6") {
                     value[idel][2] = "klindos/installer"
+                    localStorage.setItem("files-uploaded", JSON.stringify(value))
+                }
+                else if (to == "7") {
+                    value[idel][2] = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    localStorage.setItem("files-uploaded", JSON.stringify(value))
+                }
+                else if (to == "8") {
+                    value[idel][2] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                    localStorage.setItem("files-uploaded", JSON.stringify(value))
+                }
+                else if (to == "9") {
+                    value[idel][2] = "text/html"
                     localStorage.setItem("files-uploaded", JSON.stringify(value))
                 }
                 else if (to == "c") {

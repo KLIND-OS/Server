@@ -55,6 +55,14 @@ body {
             background-size: cover;
             width: 50px;
         }
+        & .fourthelement {
+            height: 50px;
+            top: 0px;
+            position: absolute;
+            right: 100px;
+            background-size: cover;
+            width: 50px;
+        }
     }
     &.light {
         background-color: white;
@@ -78,6 +86,9 @@ body {
             }
             & .thirdelement {
                 background-image: url("./../images/file.png");
+            }
+            & .fourthelement {
+                background-image: url("./../images/reload.png");
             }
         }
     }
@@ -103,6 +114,9 @@ body {
             }
             & .thirdelement {
                 background-image: url("./../images/file-dark.png");
+            }
+            & .fourthelement {
+                background-image: url("./../images/reload-dark.png");
             }
         }
     }
