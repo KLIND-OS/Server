@@ -36,8 +36,17 @@ function humanFileSize(bytes, si = false, dp = 1) {
 }
 var mainFileManager = {
   openWith: {
-    text: [
+    "text/plain": [
       ["Textový editor", (file) => windows.open("fileeditor", { file: file })],
+    ],
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document": [
+      ["Word editor", (file) => windows.open("wordeditor", { file: file })],
+    ],
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [
+      ["Sheets editor", (file) => windows.open("sheetseditor", { file: file })],
+    ],
+    "text/html": [
+      ["Word editor", (file) => windows.open("wordeditor", { file: file })],
     ],
     image: [["Obrázky", (file) => windows.open("fileeditor", { file: file })]],
     video: [
@@ -354,91 +363,6 @@ var mainFileManager = {
         var data = uri.split(",")[1];
         uri = decodeURIComponent(data);
         x();
-      } else if (type =="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
-        var data = uri.split(",")[1];
-        var byteString = atob(uri.split(",")[1]);
-        var mimeString = uri.split(",")[0].split(":")[1].split(";")[0];
-        var ab = new ArrayBuffer(byteString.length);
-        var ia = new Uint8Array(ab);
-        for (var i = 0; i < byteString.length; i++) {
-          ia[i] = byteString.charCodeAt(i);
-        }
-        var blob = new Blob([ab], { type: mimeString });
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-          var asdajksdhjasd = [];
-          var data = e.target.result;
-          var workbook = XLSX.read(data, {
-            type: "binary",
-          });
-
-          workbook.SheetNames.forEach(function (sheetName) {
-            // Here is your object
-            var XL_row_object = XLSX.utils.sheet_to_row_object_array(
-              workbook.Sheets[sheetName]
-            );
-
-            asdajksdhjasd.push(XL_row_object);
-          });
-
-          function uploadToLocalStorage(name, data) {
-            if (localStorage.getItem("files-uploaded")) {
-              var stored = JSON.parse(localStorage.getItem("files-uploaded"));
-              stored.push([
-                name,
-                lengthInUtf8Bytes(data),
-                mimeString,
-                new Date().toString(),
-                data,
-                "/",
-              ]);
-              try {
-                localStorage.setItem("files-uploaded", JSON.stringify(stored));
-              } catch (e) {
-                spawnNotification(
-                  "Správce souborů",
-                  "Není dostatek místa na úložišti. Více info <a href='https://www.gwtproject.org/doc/latest/DevGuideHtml5Storage.html'>zde</a>."
-                );
-                console.log(
-                  "File is too big to be uploaded. Error message: " +
-                    e.toString()
-                );
-              }
-            } else {
-              prozatim = [
-                [
-                  name,
-                  lengthInUtf8Bytes(data),
-                  mimeString,
-                  new Date().toString(),
-                  data,
-                  "/",
-                ],
-              ];
-              try {
-                localStorage.setItem(
-                  "files-uploaded",
-                  JSON.stringify(prozatim)
-                );
-              } catch (e) {
-                spawnNotification(
-                  "Správce souborů",
-                  "Není dostatek místa na úložišti. Více info <a href='https://www.gwtproject.org/doc/latest/DevGuideHtml5Storage.html'>zde</a>."
-                );
-                console.log(
-                  "File is too big to be uploaded. Error message: " +
-                    e.toString()
-                );
-              }
-            }
-          }
-          uploadToLocalStorage(filename, JSON.stringify(asdajksdhjasd));
-        };
-        reader.onerror = function (ex) {
-          console.log(ex);
-        };
-        reader.readAsBinaryString(blob);
       } else {
         x();
       }

@@ -2,9 +2,9 @@ var videofileids = []
 
 var windows = {
     list: {
-        names: ["poznamky", "kalk", "stop", "nas", "brow", "ter", "player", "info", "reg", "kalen", "budik", "prevod", "update", "nap", "faceset", "record", "filemanager", "fileproperties", "fileeditor", "zdroje", "about", "audioLevelEditor", "installapp", "procesy", "viewtext", "musicplayer", "cleaner", "emergencyMenu"],
-        classes: [".poznamky", ".kalkulacka", ".stopky", ".nastaveni", ".browser", ".terminal", ".player", ".informationklindows", ".reg", ".kalendar", ".budik", ".prevodsys", ".updateklind", ".napoveda", ".faceset", ".record", ".filemanager", ".fileproperties", ".fileeditor", ".zdroje", ".about", ".audioLevelEditor", ".installapp", ".procesy", ".viewtext", ".musicplayer", ".cleaner", ".emergencymenu"],
-        ikonadown: [".poznamkyikonadown", ".kalkikonadown", ".stopikonadown", ".nasikonadown", ".browikonadown", ".terikonadown", ".playerikonadown", ".infoikonadown", ".regikonadown", ".kalenikonadown", ".budikikonadown", ".prevodikonadown", ".updateikonadown", ".napikonadown", ".facesetikonadown", ".recordikonadown", ".filemanagerikonadown", false, ".fileeditorikonadown", ".zdrojeikonadown", ".aboutikonadown", false, ".installappikonadown", ".procesyikonadown", false, ".musicplayerikonadown", ".cleanerikonadown"],
+        names: ["poznamky", "kalk", "stop", "nas", "brow", "ter", "player", "info", "reg", "kalen", "budik", "prevod", "update", "nap", "faceset", "record", "filemanager", "fileproperties", "fileeditor", "zdroje", "about", "audioLevelEditor", "installapp", "procesy", "viewtext", "musicplayer", "cleaner", "emergencyMenu", "wordeditor", "sheetseditor"],
+        classes: [".poznamky", ".kalkulacka", ".stopky", ".nastaveni", ".browser", ".terminal", ".player", ".informationklindows", ".reg", ".kalendar", ".budik", ".prevodsys", ".updateklind", ".napoveda", ".faceset", ".record", ".filemanager", ".fileproperties", ".fileeditor", ".zdroje", ".about", ".audioLevelEditor", ".installapp", ".procesy", ".viewtext", ".musicplayer", ".cleaner", ".emergencymenu", ".wordeditor", ".sheetseditor"],
+        ikonadown: [".poznamkyikonadown", ".kalkikonadown", ".stopikonadown", ".nasikonadown", ".browikonadown", ".terikonadown", ".playerikonadown", ".infoikonadown", ".regikonadown", ".kalenikonadown", ".budikikonadown", ".prevodikonadown", ".updateikonadown", ".napikonadown", ".facesetikonadown", ".recordikonadown", ".filemanagerikonadown", false, ".fileeditorikonadown", ".zdrojeikonadown", ".aboutikonadown", false, ".installappikonadown", ".procesyikonadown", false, ".musicplayerikonadown", ".cleanerikonadown", ".wordeditorikonadown", ".sheetseditor"],
         special: {
             poznamky: [(element) => { loadpoznamky(element) }, () => { closepoznamkymenu() }, false],
             info: [infoApp.loadInfo, false, false],
@@ -140,6 +140,73 @@ var windows = {
                 false,
                 false
             ],
+            wordeditor: [
+                (win, args) => {
+                    if (!(args && args.file)) {
+                        throw new Error("File must be specified");
+                    }
+                    win.setAttribute("filelocation", args.file[5] + args.file[0])
+
+                    function convertDataUriToHtml(dataUri, successCallback, errorCallback) {
+                        const base64Data = dataUri.split(",")[1];
+                    
+                        const arrayBuffer = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0)).buffer;
+                    
+                        mammoth.convertToHtml({ arrayBuffer })
+                        .then((result) => {
+                            successCallback(result.value);
+                        })
+                        .catch((error) => { errorCallback(error)})
+                    }
+
+                    if (localStorage.getItem("mode") == "dark") {
+                        var skin = "oxide-dark"
+                    }
+                    else {
+                        var skin = "oxide"
+                    }
+
+                    tinymce.init({
+                        selector: ".window.wordeditor .wordeditor-element",
+                        height: '400px',
+                        menubar: 'edit insert format',
+                        plugins: 'advlist autolink lists link image charmap anchor',
+                        toolbar: 'fontselect fontsizeselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+                        theme: "silver",
+                        skin: skin,
+                        resize: false,
+                        height: "calc(100% - 20px)",
+                        language: "cs",
+                        setup: function (editor) {
+                            editor.on('init', function () {
+                                if (args.file[2] == "text/html") {
+                                    editor.setContent(args.file[4])
+                                }
+                                else {
+                                    convertDataUriToHtml(args.file[4], (html)  => {
+                                        editor.setContent(html)
+                                    }, (error) => console.error(error))
+                                }
+                            });
+                        }
+                    })
+
+                },
+                false,
+                false
+            ],
+            sheetseditor: [
+                (win, args) => {
+                    if (args && args.file) {
+                        SheetsEditor.init(win, args.file)
+                    }
+                    else {
+                        throw new Error("File must be specified");
+                    }
+                },
+                false,
+                false
+            ]
         },
         appIds: {}
     },
