@@ -874,14 +874,13 @@
             <span style="float: left;">Sheets editor</span>
             <div
               onclick="WordEditor.save(this.parentElement.parentElement.parentElement)"
-              class="menupoznamky filesavefileconfig">Uložit</div>
+              class="menupoznamky filesavefileconfig" id="save-button">Uložit</div>
             <div onclick="windows.close(this, 'sheetseditor')" class="close"></div>
             <div onclick="windows.mini(this, 'sheetseditor')" class="mini"></div>
           </div>
         </div>
         <p>Tato aplikace je velice nedodělaná! Pravděpodobně se zde nacházejí chyby.</p>
         <div id="grid-container"></div>
-        <button id="save-button">Save</button>
         <button id="add-row-button">Přidat řádek</button>
         <button id="remove-row-button">Odstranit řádek</button>
         <button id="add-column-button">Přidat sloupec</button>
@@ -1063,6 +1062,8 @@
             src="icons/cleaner.png">
           <img onclick="windows.miniOpen('wordeditor',this)" alt="Word editor" class="ikonadown wordeditorikonadown"
             src="icons/document.png">
+          <img onclick="windows.miniOpen('sheeteditor',this)" alt="Sheet editor" class="ikonadown sheeteditorikonadown"
+            src="icons/spreadsheet.png">
         </div>
         <div class="appdiv">
           <h1 style="height: 43px;">Unknown</h1>
