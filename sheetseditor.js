@@ -159,6 +159,7 @@ class SheetsEditor {
           for (var i = 0; i < storage.length; i++) {
             if (storage[i][5] + storage[i][0] == file_array[5] + file_array[0]) {
               storage[i][4] = dataURI;
+              storage[i][1] = lengthInUtf8Bytes(dataURI)
               localStorage.setItem("files-uploaded", JSON.stringify(storage));
 
               var windowasjdh = document.querySelectorAll(".window");
