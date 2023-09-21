@@ -32,7 +32,7 @@ class WordEditor {
                         if (storage[i][5] + storage[i][0] == fileLocation) {
                             storage[i][2] = "text/html"
                             storage[i][4] = content;
-                            storage[i][1] = lengthInUtf8Bytes(dataURI)
+                            storage[i][1] = lengthInUtf8Bytes(content)
                             localStorage.setItem("files-uploaded", JSON.stringify(storage));
     
                             var windowasjdh = document.querySelectorAll(".window");
