@@ -1,5 +1,5 @@
 function changepass(element) {
-    var newpass = element.querySelector("#changepassinputvalue").value;
+    var newpass = hashCode(element.querySelector("#changepassinputvalue").value);
     if (login == "false") {
         localStorage.setItem("reg.login", newpass + "**.false")
     }

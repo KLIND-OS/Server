@@ -329,7 +329,7 @@ iframe {
     top: 30px;
     left: 30px;
     border-radius: 10px;
-    transition: ease 0.2s box-shadow, ease 0.2s opacity;
+    transition: ease 0.2s box-shadow, ease 0.2s opacity, ease 0.2s scale;
 }
 
 .audioLevelEditor {

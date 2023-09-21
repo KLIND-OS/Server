@@ -222,6 +222,8 @@ var windows = {
             let newelement = element.cloneNode(true)
             newelement.classList.add("window")
             newelement.classList.add("openedwin")
+            newelement.style.opacity = "0"
+            newelement.style.scale = "0.9"
             document.querySelector(".oknepatrizde").appendChild(newelement)
             reloaddraggable();
             if (localStorage.getItem("mode") == "dark") {
@@ -240,8 +242,10 @@ var windows = {
                     x[i].classList.remove("black");
                 }
             }
+            newelement.style.opacity = "1";
+            newelement.style.scale = "1";
+
             newelement.click()
-            
             if (special != undefined && special[0] !== false) {
                 special[0](newelement, args)
             }
@@ -249,11 +253,17 @@ var windows = {
         }
     },
     close: (element, name) => {
+        var el = element.parentElement.parentElement.parentElement
         var special = windows.list.special[name]
         if (special != undefined && special[1] !== false) {
-            special[1](element.parentElement.parentElement.parentElement)
+            special[1](el)
         }
-        element.parentElement.parentElement.parentElement.remove();
+        el.style.scale = "0.9";
+        el.style.opacity = "0"
+
+        setTimeout(() => {
+            el.remove();
+        }, 200);
     },
     mini: (element, name) => {
         var location = windows.list.names.indexOf(name)
@@ -274,7 +284,12 @@ var windows = {
                 special[2](mainElement);
             }
             var el = document.querySelector(".downiconsApps").appendChild(newElement)
-            mainElement.classList.remove("openedwin");
+            mainElement.style.opacity = "0";
+            mainElement.style.scale = "0.9";
+
+            setTimeout(() => {
+                mainElement.classList.remove("openedwin");
+            }, 200)
             setTimeout(() => {
                 el.style.transform = ""
                 el.addEventListener("click", () => {
@@ -335,12 +350,16 @@ var windows = {
             var id = thiselement.getAttribute("windowId")
             var mainElement = windows.list.appIds[id];
             mainElement.classList.add("openedwin");
-            mainElement.click()
-            thiselement.style.transform = "scale(0)"
-            windows.list.appIds[id] = undefined;
             setTimeout(() => {
-                thiselement.remove();
-            }, 200);
+                mainElement.style.opacity = "1";
+                mainElement.style.scale = "1";
+                mainElement.click()
+                thiselement.style.transform = "scale(0)"
+                windows.list.appIds[id] = undefined;
+                setTimeout(() => {
+                    thiselement.remove();
+                }, 200);
+            },10)
         }, 150);
     }
 }
