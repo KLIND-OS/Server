@@ -36,12 +36,19 @@ class NotificationCenter {
   static #opened = false;
   static show() {
       if (!NotificationCenter.#opened) {
-        document.querySelector(".notification-center-element").style.right = "10px";
-        NotificationCenter.#opened = true;
+        document.querySelector(".notification-center-element").style.display = "block";
+        setTimeout(() => {
+          document.querySelector(".notification-center-element").style.right = "10px";
+          NotificationCenter.#opened = true;
+        }, 10);
       }
       else {
         document.querySelector(".notification-center-element").style.right = "-350px";
-        NotificationCenter.#opened = false;
+        setTimeout(() => {
+          document.querySelector(".notification-center-element").style.display = "none"
+          NotificationCenter.#opened = false;
+        }, 600)
+        
       }
   }
   static add(appname, text) {
