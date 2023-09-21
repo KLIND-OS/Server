@@ -34,11 +34,17 @@ function reloaddraggable() {
                     var minHeight = parseInt($(target).css("min-height").replace("px", ""))
                     var odchylka = 3
                     if (target.getAttribute("isFullscreen") == "true") {
-                        target.setAttribute("isFullscreen", "false")
-                        target.style.width = minWidth + "px"
-                        target.style.height = minHeight + "px"
-                        $(target).css("left", parseInt(mouseX - (minWidth / 2)))
-                        $(target).css("top", mouseY - 10 + "px")
+                        target.style.transition = "ease 0.1s all"
+                        setTimeout(() => {
+                            target.setAttribute("isFullscreen", "false")
+                            target.style.width = minWidth + "px"
+                            target.style.height = minHeight + "px"
+                            $(target).css("left", parseInt(mouseX - (minWidth / 2)))
+                            $(target).css("top", mouseY - 10 + "px")
+                            setTimeout(() => {
+                                target.style.transition = ""
+                            }, 200);
+                        }, 10);
                     }
                     else {
                         target.setAttribute("isFullscreen", "false")
@@ -48,11 +54,17 @@ function reloaddraggable() {
                             centerOfElement > centerOfWindow - (centerOfWindow / odchylka)
                         ) {
                             // Fullscreen
-                            target.style.left = "0px"
-                            target.style.top = "0px"
-                            target.style.width = widthOfWindow + "px"
-                            target.style.height = heightOfWindow - 50 + "px"
-                            target.setAttribute("isFullscreen", "true")
+                            target.style.transition = "ease 0.1s all"
+                            setTimeout(() => {
+                                target.style.left = "0px"
+                                target.style.top = "0px"
+                                target.style.width = widthOfWindow + "px"
+                                target.style.height = heightOfWindow - 50 + "px"
+                                target.setAttribute("isFullscreen", "true")
+                                setTimeout(() => {
+                                    target.style.transition = ""
+                                }, 200);
+                            }, 10);
                         }
                         else if (
                             left <= odchylka * 7 &&
@@ -60,11 +72,17 @@ function reloaddraggable() {
                             centerOfElementY > centerOfWindowY - (centerOfWindowY / odchylka)
                         ) {
                             // Left
-                            target.style.top = "0px"
-                            target.style.left = "0px"
-                            target.style.height = heightOfWindow - 50 + "px"
-                            target.style.width = parseInt(widthOfWindow / 2) + "px"
-                            target.setAttribute("isFullscreen", "true")
+                            target.style.transition = "ease 0.1s all"
+                            setTimeout(() => {
+                                target.style.top = "0px"
+                                target.style.left = "0px"
+                                target.style.height = heightOfWindow - 50 + "px"
+                                target.style.width = parseInt(widthOfWindow / 2) + "px"
+                                target.setAttribute("isFullscreen", "true")
+                                setTimeout(() => {
+                                    target.style.transition = ""
+                                }, 200);
+                            }, 10);
                         }
                         else if (
                             widthOfWindow - (left + width) <= odchylka * 7 &&
@@ -72,11 +90,17 @@ function reloaddraggable() {
                             centerOfElementY > centerOfWindowY - (centerOfWindowY / odchylka)
                         ) {
                             // Right
-                            target.style.top = "0px"
-                            target.style.left = parseInt(window.innerWidth / 2) + "px"
-                            target.style.height = heightOfWindow - 50 + "px"
-                            target.style.width = parseInt(widthOfWindow / 2) + "px"
-                            target.setAttribute("isFullscreen", "true")
+                            target.style.transition = "ease 0.1s all"
+                            setTimeout(() => {
+                                target.style.top = "0px"
+                                target.style.left = parseInt(window.innerWidth / 2) + "px"
+                                target.style.height = heightOfWindow - 50 + "px"
+                                target.style.width = parseInt(widthOfWindow / 2) + "px"
+                                target.setAttribute("isFullscreen", "true")
+                                setTimeout(() => {
+                                    target.style.transition = ""
+                                }, 200);
+                            }, 10);
                         }
                     }
                 }
@@ -86,7 +110,7 @@ function reloaddraggable() {
             }
         })
     });
-    // Resizing is still in beta version
+    // Resizing is still in beta version UPDATE: now it's not
     var sddsaelements = document.querySelectorAll(".window");
     for (var i = 0; i < sddsaelements.length; i++) {
         $(sddsaelements[i]).resizable({
