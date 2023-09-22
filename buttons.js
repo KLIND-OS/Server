@@ -27,36 +27,44 @@ if (!cookieEnabled) {
     window.location.reload();
 }
 var sdjhahsdjhasdjsd = 0;
+var openingtrue = false;
 function openstartmenu() {
-    setTimeout(() => {
-        document.getElementById("searchstartmenu").focus();
-    }, 130);
-
-    if (sdjhahsdjhasdjsd == 0) {
-        sdjhahsdjhasdjsd++
-
-        document.getElementById("items-1").style.top = "25px";
-        document.getElementById("items-4").style.left = "25px";
-        document.getElementById("items-2").style.top = "0px";
-        document.getElementById("items-3").style.left = "0px";
-
-        document.querySelector(".startmenu").classList.toggle("display");
+    if (!openingtrue) {
         setTimeout(() => {
-            document.querySelector(".startmenu").classList.toggle("opened");
-        }, 20);
-    }
-    else {
-        sdjhahsdjhasdjsd = 0;
-        document.getElementById("items-1").style.top = "0px";
-        document.getElementById("items-4").style.left = "0px";
-        document.getElementById("items-2").style.top = "25px";
-        document.getElementById("items-3").style.left = "25px";
-
-        document.querySelector(".startmenu").classList.toggle("opened");
-        setTimeout(() => {
-
-            document.querySelector(".startmenu").classList.toggle("display");
+            document.getElementById("searchstartmenu").focus();
         }, 130);
+    
+        if (sdjhahsdjhasdjsd == 0) {
+            sdjhahsdjhasdjsd++
+    
+            document.getElementById("items-1").style.top = "25px";
+            document.getElementById("items-4").style.left = "25px";
+            document.getElementById("items-2").style.top = "0px";
+            document.getElementById("items-3").style.left = "0px";
+    
+            document.querySelector(".startmenu").classList.toggle("display");
+            openingtrue = true;
+            setTimeout(() => {
+                document.querySelector(".startmenu").classList.toggle("opened");
+            }, 20);
+            setTimeout(() => {
+                openingtrue = false;
+            }, 500)
+        }
+        else {
+            sdjhahsdjhasdjsd = 0;
+            document.getElementById("items-1").style.top = "0px";
+            document.getElementById("items-4").style.left = "0px";
+            document.getElementById("items-2").style.top = "25px";
+            document.getElementById("items-3").style.left = "25px";
+    
+            document.querySelector(".startmenu").classList.toggle("opened");
+            openingtrue = true;
+            setTimeout(() => {
+                document.querySelector(".startmenu").classList.toggle("display");
+                openingtrue = false;
+            }, 500);
+        }
     }
 }
 var showversionontitle;
