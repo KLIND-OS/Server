@@ -11,12 +11,19 @@ class Cleaner {
         }
     }
     static loadStorage() {
-        var correctStorages = LocalStorage.getAllLocalStorages()
+        var [correctStorages, startsWith] = LocalStorage.getAllLocalStorages()
         var allStorages = Object.keys(localStorage)
         var badLocalStorages = []
         for (const key of allStorages) {
             if (!correctStorages.includes(key)) {
-                badLocalStorages.push(key)
+                var bad = true;
+                for (const starts of startsWith) {
+                    if (key.startsWith(starts)) {
+                        bad = false;
+                        break;
+                    }
+                }
+                if (bad) badLocalStorages.push(key)
             }
         }
         return badLocalStorages

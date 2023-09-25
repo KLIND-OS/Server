@@ -33,8 +33,12 @@ class LocalStorage {
         "login-background",
         "bootType"
     ]
+    static startsWith = [
+        "tinymce-",
+        "SandboxConsole"
+    ]
     static customApps = []
     static getAllLocalStorages() {
-        return LocalStorage.systemLocalStorage.concat(LocalStorage.customApps)
+        return [LocalStorage.systemLocalStorage.concat(LocalStorage.customApps), LocalStorage.startsWith]
     }
 }
