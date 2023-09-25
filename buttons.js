@@ -1,3 +1,4 @@
+var sdjhahsdjhasdjsd = 0;
 document.addEventListener("click", evt => {
     const flyoutElement = document.getElementById("backsix");
     const flyoutElements = document.getElementById("logo");
@@ -10,30 +11,33 @@ document.addEventListener("click", evt => {
         targetElement = targetElement.parentNode;
     } while (targetElement);
 
-    sdjhahsdjhasdjsd = 0;
-    document.getElementById("items-1").style.top = "0px";
-    document.getElementById("items-4").style.left = "0px";
-    document.getElementById("items-2").style.top = "25px";
-    document.getElementById("items-3").style.left = "25px";
+    if (sdjhahsdjhasdjsd == 1) {
+        sdjhahsdjhasdjsd = 0;
+        document.getElementById("items-1").style.top = "0px";
+        document.getElementById("items-4").style.left = "0px";
+        document.getElementById("items-2").style.top = "25px";
+        document.getElementById("items-3").style.left = "25px";
 
-    document.querySelector(".startmenu").classList.remove("opened");
-    setTimeout(() => {
-        document.querySelector(".startmenu").classList.remove("display");
-    }, 130);
+        document.querySelector(".startmenu").classList.remove("opened");
+        openingtrue = true;
+        setTimeout(() => {
+            document.querySelector(".startmenu").classList.remove("display");
+            openingtrue = false;
+        }, 500);
+    }
 });
 var cookieEnabled = navigator.cookieEnabled;
 if (!cookieEnabled) {
     alert('Tato stránka vyžaduje cookies. Prosím zapněte je v nastavení prohlížeče.');
     window.location.reload();
 }
-var sdjhahsdjhasdjsd = 0;
 var openingtrue = false;
 function openstartmenu() {
     if (!openingtrue) {
         setTimeout(() => {
             document.getElementById("searchstartmenu").focus();
         }, 130);
-    
+        
         if (sdjhahsdjhasdjsd == 0) {
             sdjhahsdjhasdjsd++
     
@@ -42,10 +46,10 @@ function openstartmenu() {
             document.getElementById("items-2").style.top = "0px";
             document.getElementById("items-3").style.left = "0px";
     
-            document.querySelector(".startmenu").classList.toggle("display");
+            document.querySelector(".startmenu").classList.add("display");
             openingtrue = true;
             setTimeout(() => {
-                document.querySelector(".startmenu").classList.toggle("opened");
+                document.querySelector(".startmenu").classList.add("opened");
             }, 20);
             setTimeout(() => {
                 openingtrue = false;
@@ -58,10 +62,10 @@ function openstartmenu() {
             document.getElementById("items-2").style.top = "25px";
             document.getElementById("items-3").style.left = "25px";
     
-            document.querySelector(".startmenu").classList.toggle("opened");
+            document.querySelector(".startmenu").classList.remove("opened");
             openingtrue = true;
             setTimeout(() => {
-                document.querySelector(".startmenu").classList.toggle("display");
+                document.querySelector(".startmenu").classList.remove("display");
                 openingtrue = false;
             }, 500);
         }

@@ -74,16 +74,14 @@ iframe {
 
 .startmenu {
     position: absolute;
-    /* bottom: 50px; */
     height: 700px;
     width: 462px;
     background-color: white;
-    /* opacity: 0; */
-    /* transition: opacity 0.2s ease; */
     overflow: auto;
     border-radius: 15px;
     transition: ease 0.5s bottom;
     bottom: -750px;
+    z-index: 100;
 }
 
 .startmenu.opened {
@@ -866,7 +864,7 @@ body {
 }
 
 .myklindows h1,
-h2 {
+.myklindows h2 {
     color: black;
     text-align: center;
     font-family: 'Staatliches', cursive;
