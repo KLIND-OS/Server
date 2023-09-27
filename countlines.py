@@ -19,6 +19,7 @@ def count_lines_in_files(folder_path):
 
             
             if is_text_file(file) and not 'libs/' in file_path:
+            #if is_text_file(file):
                 try:
                     
                     with open(file_path, 'r', encoding='utf-8') as f:

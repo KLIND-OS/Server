@@ -293,12 +293,12 @@ var mainFileManager = {
       }
     }
   },
-  saveFromUri(uri, filename) {
+  saveFromUri(uri, filename, parentFolder = "/", messages = true) {
     if (filename == null) {
       BPrompt.prompt("Vyberte název souboru", (n) => {
         mainFileManager.saveFromUri(uri, n);
       });
-    } else if (mainFileManager.fileExists("/" + filename)) {
+    } else if (mainFileManager.fileExists(parentFolder + filename)) {
       BPrompt.prompt(
         "Soubor se stejným názvem v kořenové složce již existuje. Vyberte nový název souboru",
         (n) => {
@@ -321,7 +321,7 @@ var mainFileManager = {
             type,
             new Date().toString(),
             uri,
-            "/",
+            parentFolder,
           ]);
           try {
             localStorage.setItem("files-uploaded", JSON.stringify(stored));
@@ -342,7 +342,7 @@ var mainFileManager = {
               type,
               new Date().toString(),
               uri,
-              "/",
+              parentFolder,
             ],
           ];
           try {
@@ -366,7 +366,7 @@ var mainFileManager = {
       } else {
         x();
       }
-      spawnNotification("Stahování", "Soubor byl stažen do kořenové složky");
+      if (messages) spawnNotification("Stahování", "Soubor byl stažen do kořenové složky");
     }
   },
 };

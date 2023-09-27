@@ -92,6 +92,7 @@
   <script src="wordeditor.js"></script>
   <script src="sheetseditor.js"></script>
   <script src="libs/exceljs.js"></script>
+  <script src="diskmanager.js"></script>
   <script>
     if (localStorage.getItem("installed") != "true") {
       window.location.replace("install.html");
@@ -897,6 +898,20 @@
         <button id="add-column-button">Přidat sloupec</button>
         <button id="remove-column-button">Odstranit sloupec</button>
       </div>
+      <div onclick="changewindowmain(this)" class="widgetList diskmanager Resizabl">
+        <div class="widget-header">
+          <div class="headerclass">
+            <span style="float: left;">Správce disků</span>
+            <div onclick="windows.close(this, 'sheetseditor')" class="close"></div>
+            <div onclick="windows.mini(this, 'sheetseditor')" class="mini"></div>
+          </div>
+        </div>
+        <h1>Správce disků</h1>
+        <button onclick="DiskManager.init(this.parentElement)">Načíst znovu</button>
+        <div class="disks">
+
+        </div>
+      </div>
     </div>
     <div id="klindows" class="klindows">
       <div id="openedapps">
@@ -1015,6 +1030,8 @@
               icon="icons/process.png">Správce úloh</a></li>
           <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('cleaner');"
               icon="icons/cleaner.png">Čistič systému</a></li>
+          <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('diskmanager');"
+              icon="icons/diskmanager.png">Správce disků</a></li>
         </ul>
       </div>
       <div id="fakedownbar" class="fakedownbar"></div>
@@ -1075,6 +1092,8 @@
             src="icons/document.png">
           <img onclick="windows.miniOpen('sheeteditor',this)" alt="Sheet editor" class="ikonadown sheeteditorikonadown"
             src="icons/spreadsheet.png">
+          <img onclick="windows.miniOpen('sheeteditor',this)" alt="Správce disků" class="ikonadown diskmanagerikonadown"
+            src="icons/diskmanager.png">
         </div>
         <div class="appdiv">
           <h1 style="height: 43px;">Unknown</h1>
