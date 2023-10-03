@@ -171,6 +171,34 @@ iframe {
     z-index: 23;
 }
 
+.getstarted {
+    background-color: white;
+    position: absolute !important;
+    width: 600px;
+    min-height: 600px;
+    height: 600px;
+    overflow: hidden;
+    min-width: 550px;
+    z-index: 23;
+}
+
+.getstarted .content {
+    width: 100%;
+    height: calc(100% - 20px);
+}
+.getstarted .content h1, .getstarted .content p {
+    text-align: center;
+}
+
+.getstarted .content .page {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
 .hagapp {
     background-color: white;
     width: 300px;
@@ -2667,4 +2695,29 @@ table tr td input {
     position: absolute;
     right: 10px;
     top: 10px;
+}
+
+
+.connection-lost-element {
+    z-index: 8763487234762437348723487234;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    backdrop-filter: grayscale(1);
+    display: flex;
+    align-items: center;
+}
+
+.connection-lost {
+    width: 100vw;
+    height: 200px;
+    background-color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.connection-lost h1 {
+    font-size: 50px;
 }

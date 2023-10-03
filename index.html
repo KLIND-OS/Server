@@ -102,6 +102,13 @@
 
 <body onmousedown="mouseDown()" onmouseup="mouseUp()" onload="onloadscripst();" onclick="onclickbody()" id="body">
 
+  <div class="connection-lost-element" style="display: none;">
+    <div class="connection-lost">
+      <h1>Spojení bylo ztraceno</h1>
+      <p>Spojení s lokálním serverem bylo ztraceno. Může to být způsobeno chybou lokálního serveru.</p>
+      <p>Pokouším se připojit znovu<span class="testingAnimation">.</span></p>
+    </div>
+  </div>
   <div class="welcomePage" style="display: none;">
     <div class="skipbtn" onclick="skipwelcomeVideo()">Přeskočit</div>
     <video webkit-playsinline="true" playsinline="true" muted="true">
@@ -912,6 +919,60 @@
 
         </div>
       </div>
+      <div onclick="changewindowmain(this)" class="widgetList getstarted Resizabl">
+        <div class="widget-header">
+          <div class="headerclass">
+            <span style="float: left;">Začínáme s KLIND OS</span>
+            <div style="display: none;" onclick="windows.close(this, 'getstarted')" class="close"></div>
+          </div>
+        </div>
+        <div class="content">
+          <div class="page page1">
+            <img src="logo.png" alt="KLIND OS logo" style="height: 100px; width: 100px;">
+            <h1>Vítejte v KLIND OS</h1>
+            <button class="zaciname" style="margin-top: 50px; width: auto; height: auto; padding: 20px 30px 20px 30px; font-size: 30px;" onclick="GetStarted.zaciname(this.parentElement.parentElement.parentElement)">Začínáme</button>
+          </div>
+          <div class="page page2">
+            <h1>Tlačítko start menu</h1>
+            <p>Toto je tlačítko které otevře start menu. Myslel jsem si že to nebudu muset vysvětlovat ale po několika zkušenostech jsem se rozhodl to ukázat.</p>
+            <p>Když na to tlačítko stisknete levým tlačítkem na vaší myši, nešahej na tu klávesnici. Myslel jsem myš, ne to kde jsou písmenka ale to... prostě to druhé.</p>
+            <button class="zaciname" style="width: auto; height: auto; padding: 20px 30px 20px 30px; font-size: 30px;" onclick="GetStarted.nextStart(this.parentElement.parentElement.parentElement)">Chápu (ano opravdu to chápu)</button>
+          </div>
+          <div class="page page3">
+            <h1>Start menu</h1>
+            <p>V tomto menu si můžeš vybrat aplikaci kterou chceš spustit. (teď žádnou nespouštěj)</p>
+            <button class="zaciname" style="width: auto; height: auto; padding: 20px 30px 20px 30px; font-size: 30px;" onclick="GetStarted.nextMenu(this.parentElement.parentElement.parentElement)">Pokračuj</button>
+          </div>
+          <div class="page page4">
+            <h1>Aplikace</h1>
+            <p>Takhle vypadají aplikace. V horní liště máš název aplikace a popřípadě nějaká tlačítka. Vpravo nahoře máš tlačítko na zavření a popřípadě na minimalizaci.</p>
+            <button class="zaciname" style="width: auto; height: auto; padding: 20px 30px 20px 30px; font-size: 30px;" onclick="GetStarted.nextApp(this.parentElement.parentElement.parentElement)">Pokračuj</button>
+          </div>
+          <div class="page page5">
+            <h1>Posouvání okna</h1>
+            <p>S oknem můžeš posouvat kdekoliv na obrazovce potažením horní lišty.</p>
+            <p>Klidně si to vyzkoušej</p>
+            <button class="zaciname" style="width: auto; height: auto; padding: 20px 30px 20px 30px; font-size: 30px;" onclick="GetStarted.nextDrag(this.parentElement.parentElement.parentElement)">Pokračuj</button>
+          </div>
+          <div class="page page6">
+            <h1>Minimalizace okna</h1>
+            <p>Při minimalizaci okna se ti ikona okna zobrazí na spodní liště.</p>
+            <button class="zaciname" style="width: auto; height: auto; padding: 20px 30px 20px 30px; font-size: 30px;" onclick="GetStarted.nextMini(this.parentElement.parentElement.parentElement)">Pokračuj</button>
+          </div>
+          <div class="page page7">
+            <h1>Otevření minimalizovaného okna</h1>
+            <p>Pro otevření minimalizovaného okna stiskněte ikonu na spodní liště.</p>
+            <button class="zaciname" style="width: auto; height: auto; padding: 20px 30px 20px 30px; font-size: 30px;" onclick="GetStarted.nextOpen(this.parentElement.parentElement.parentElement)">Pokračuj</button>
+          </div>
+          <div class="page page8">
+            <h1>Konec</h1>
+            <p>A to je vše abyste mohli začít používat KLIND OS.</p>
+            <p>Je tu ale mnohem více věcí!</p>
+            <button class="zaciname" style="width: auto; height: auto; padding: 20px 30px 20px 30px; font-size: 30px;" onclick="GetStarted.closeApp(this.parentElement.parentElement.parentElement)">Zavřít</button>
+          </div>
+        </div>
+        <img class="arrowdownhelp" src="icons/arrowdown.png" alt="arrow down" style="height: 50px; width: 50px; display: none; position: absolute; bottom: 0; transition: ease 0.5s all;">
+      </div>
     </div>
     <div id="klindows" class="klindows">
       <div id="openedapps">
@@ -1032,6 +1093,8 @@
               icon="icons/cleaner.png">Čistič systému</a></li>
           <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('diskmanager');"
               icon="icons/diskmanager.png">Správce disků</a></li>
+          <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('getstarted');"
+                icon="icons/getstarted.png">Prohlídka</a></li>
         </ul>
       </div>
       <div id="fakedownbar" class="fakedownbar"></div>
@@ -1141,11 +1204,13 @@
   <script src="/audioEditor.js"></script>
   <script src="login.js"></script>
   <script src="mouse.js"></script>
+  <script src="connection-local.js"></script>
   <script>
     if (Boot.safeBoot) { 
       document.querySelector(".downbar").style.display = "none"; windows.open("emergencyMenu") 
     }
   </script>
+  <script src="getstartedfunctions.js"></script>
 </body>
 
 </html>

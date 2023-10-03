@@ -31,7 +31,8 @@ class LocalStorage {
         "filePreview",
         "budiky",
         "login-background",
-        "bootType"
+        "bootType",
+        "getStartedClosed"
     ]
     static startsWith = [
         "tinymce-",

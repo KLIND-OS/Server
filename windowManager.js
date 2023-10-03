@@ -2,9 +2,9 @@ var videofileids = []
 
 var windows = {
     list: {
-        names: ["poznamky", "kalk", "stop", "nas", "brow", "ter", "player", "info", "reg", "kalen", "budik", "prevod", "update", "nap", "faceset", "record", "filemanager", "fileproperties", "fileeditor", "zdroje", "about", "audioLevelEditor", "installapp", "procesy", "viewtext", "musicplayer", "cleaner", "emergencyMenu", "wordeditor", "sheetseditor", "diskmanager"],
-        classes: [".poznamky", ".kalkulacka", ".stopky", ".nastaveni", ".browser", ".terminal", ".player", ".informationklindows", ".reg", ".kalendar", ".budik", ".prevodsys", ".updateklind", ".napoveda", ".faceset", ".record", ".filemanager", ".fileproperties", ".fileeditor", ".zdroje", ".about", ".audioLevelEditor", ".installapp", ".procesy", ".viewtext", ".musicplayer", ".cleaner", ".emergencymenu", ".wordeditor", ".sheetseditor", ".diskmanager"],
-        ikonadown: [".poznamkyikonadown", ".kalkikonadown", ".stopikonadown", ".nasikonadown", ".browikonadown", ".terikonadown", ".playerikonadown", ".infoikonadown", ".regikonadown", ".kalenikonadown", ".budikikonadown", ".prevodikonadown", ".updateikonadown", ".napikonadown", ".facesetikonadown", ".recordikonadown", ".filemanagerikonadown", false, ".fileeditorikonadown", ".zdrojeikonadown", ".aboutikonadown", false, ".installappikonadown", ".procesyikonadown", false, ".musicplayerikonadown", ".cleanerikonadown", false, ".wordeditorikonadown", ".sheeteditorikonadown", ".diskmanagerikonadown"],
+        names: ["poznamky", "kalk", "stop", "nas", "brow", "ter", "player", "info", "reg", "kalen", "budik", "prevod", "update", "nap", "faceset", "record", "filemanager", "fileproperties", "fileeditor", "zdroje", "about", "audioLevelEditor", "installapp", "procesy", "viewtext", "musicplayer", "cleaner", "emergencyMenu", "wordeditor", "sheetseditor", "diskmanager", "getstarted"],
+        classes: [".poznamky", ".kalkulacka", ".stopky", ".nastaveni", ".browser", ".terminal", ".player", ".informationklindows", ".reg", ".kalendar", ".budik", ".prevodsys", ".updateklind", ".napoveda", ".faceset", ".record", ".filemanager", ".fileproperties", ".fileeditor", ".zdroje", ".about", ".audioLevelEditor", ".installapp", ".procesy", ".viewtext", ".musicplayer", ".cleaner", ".emergencymenu", ".wordeditor", ".sheetseditor", ".diskmanager", ".getstarted"],
+        ikonadown: [".poznamkyikonadown", ".kalkikonadown", ".stopikonadown", ".nasikonadown", ".browikonadown", ".terikonadown", ".playerikonadown", ".infoikonadown", ".regikonadown", ".kalenikonadown", ".budikikonadown", ".prevodikonadown", ".updateikonadown", ".napikonadown", ".facesetikonadown", ".recordikonadown", ".filemanagerikonadown", false, ".fileeditorikonadown", ".zdrojeikonadown", ".aboutikonadown", false, ".installappikonadown", ".procesyikonadown", false, ".musicplayerikonadown", ".cleanerikonadown", false, ".wordeditorikonadown", ".sheeteditorikonadown", ".diskmanagerikonadown", false],
         special: {
             poznamky: [(element) => { loadpoznamky(element) }, () => { closepoznamkymenu() }, false],
             info: [infoApp.loadInfo, false, false],
@@ -19,7 +19,7 @@ var windows = {
                     else url += "&select"
                     var index = openGetFile.length
                     openGetFile.push([element, args.callBack])
-                    element.querySelector(".close").setAttribute("onclick", "openGetFile[" + index + "][1]['closed']();windows.close(this,'poznamky')")
+                    element.querySelector(".close").setAttribute("onclick", "openGetFile[" + index + "][1]['closed']();windows.close(this,'filemanager')")
                     element.querySelector(".mini").remove()
                     element.querySelector(".headerclass span").textContent = "Vyberte soubor";
                     url += "&index=" + index
@@ -208,7 +208,12 @@ var windows = {
                 false
             ],
             diskmanager: [
-                win=>DiskManager.init(win),
+                win => DiskManager.init(win),
+                false,
+                false
+            ],
+            getstarted:  [
+                win => GetStarted.init(win),
                 false,
                 false
             ]
