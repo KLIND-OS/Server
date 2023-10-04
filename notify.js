@@ -34,19 +34,28 @@ function closenotifi() {
 
 class NotificationCenter {
   static #opened = false;
+  static moving = false;
   static show() {
+      if (NotificationCenter.moving) return
+
       if (!NotificationCenter.#opened) {
+        NotificationCenter.moving = true;
         document.querySelector(".notification-center-element").style.display = "block";
         setTimeout(() => {
           document.querySelector(".notification-center-element").style.right = "10px";
+          setTimeout(() => {
+            NotificationCenter.moving = false;
+          }, 600)
           NotificationCenter.#opened = true;
         }, 10);
       }
       else {
         document.querySelector(".notification-center-element").style.right = "-350px";
+        NotificationCenter.moving = true;
         setTimeout(() => {
           document.querySelector(".notification-center-element").style.display = "none"
           NotificationCenter.#opened = false;
+          NotificationCenter.moving = false;
         }, 600)
         
       }
