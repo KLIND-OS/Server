@@ -17,7 +17,7 @@ body.dark {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: calc(100vh / var(--pocet) /2.4);
+    font-size: calc(100vh / var(--pocet) / 2.6);
     background-color: transparent;
     transition: ease 0.2s background-color;
 }

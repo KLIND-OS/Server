@@ -57,13 +57,15 @@ class DiskManager {
 
     static mainToPartition(partition) {
         // TODO: implement this feature
-        /* BPrompt.prompt("Vyberte složku z které chcete vzít data a zkopírovat je na disk.", (value) => {
-            if (value) {
-                value = value.endsWith("/") ? value : value + "/"
-                window.writeDiskFromStorage(value, partition)
+        BPrompt.prompt("Zadejte cestu složky", (folder) => {
+            folder = value.endsWith("/") ? folder : folder + "/"
+            if (mainFileManager.folderExist(folder)) {
+                window.writeDiskFromStorage(folder, partition)
             }
-        }) */
-
+            else {
+                spawnNotification("Správce disků", "Tato složka neexistuje!")
+            }
+        })
         spawnNotification("Správce souborů", "Tato funkce není dokončena. Funkce bude dostupná v následující aktualizaci.")
     }
 }
