@@ -4,6 +4,14 @@
     cursor: none !important;
 }
 
+.filter {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 465616515123;
+    pointer-events: none;
+}
+
 .plyr__menu__container * {
     color: black!important;
 }
@@ -999,6 +1007,17 @@ body {
     z-index: 23;
 }
 
+.screenfilter {
+    background-color: white;
+    position: absolute !important;
+    width: 300px;
+    min-height: 300px;
+    height: 300px;
+    overflow: hidden;
+    min-width: 300px;
+    z-index: 23;
+}
+
 .diskmanager {
     background-color: white;
     position: absolute !important;
@@ -1533,6 +1552,15 @@ table tr td input {
     background-position: center;
     background-repeat: no-repeat;
     float: left;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    color: white;
+}
+
+.ikonaklindows span {
+    top: 17px;
+    position: relative;
 }
 
 .loading {

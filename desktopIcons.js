@@ -10,6 +10,11 @@ var DesktopIcons = {
                 element.setAttribute("ondblclick", storage[i][0])
                 element.setAttribute("id", i)
                 element.setAttribute("oncontextmenu", "rightClickIcon(this)")
+                if (storage[i][3]) {
+                    var text = document.createElement("span")
+                    text.textContent = storage[i][3]
+                    element.appendChild(text)
+                }
                 var elmnt = document.querySelector(".iconsKLINDOS").appendChild(element)
                 elmnt.style.backgroundImage = "url(" + storage[i][1] + ")";
                 try {
@@ -28,7 +33,7 @@ var DesktopIcons = {
         array[id][2][1] = top
         localStorage.setItem("desktop-icons", JSON.stringify(array))
     },
-    add: ({ run, icon }) => {
+    add: ({ run, icon, name }) => {
         var storage = localStorage.getItem("desktop-icons")
         if (storage) {
             storage = JSON.parse(storage)
@@ -36,7 +41,7 @@ var DesktopIcons = {
         else {
             storage = []
         }
-        storage.push([run, icon, ["0", "0"]])
+        storage.push([run, icon, ["0", "0"], name])
         localStorage.setItem("desktop-icons", JSON.stringify(storage))
         document.querySelector(".iconsKLINDOS").innerHTML = ""
         DesktopIcons.load()

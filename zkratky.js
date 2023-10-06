@@ -27,6 +27,9 @@ window.onkeydown = function (e) {
     }
     keysDown = new Array()
   }
+  else if (keysDown.indexOf("AltGraphtrue") > -1 && keysDown.indexOf("ftrue") > -1 || keysDown.indexOf("AltGraphtrue") > -1 && keysDown.indexOf("[true") > -1) {
+    ColorFilters.deactivateAll();
+  }
   else {
     function removeLastInstance(badtext, str) {
       var charpos = str.lastIndexOf(badtext);
