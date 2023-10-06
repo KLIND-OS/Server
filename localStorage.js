@@ -32,7 +32,8 @@ class LocalStorage {
         "budiky",
         "login-background",
         "bootType",
-        "getStartedClosed"
+        "getStartedClosed",
+        "color-filters"
     ]
     static startsWith = [
         "tinymce-",

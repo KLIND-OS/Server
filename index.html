@@ -93,6 +93,7 @@
   <script src="sheetseditor.js"></script>
   <script src="libs/exceljs.js"></script>
   <script src="diskmanager.js"></script>
+  <script src="colorFilters.js"></script>
   <script>
     if (localStorage.getItem("installed") != "true") {
       window.location.replace("install.html");
@@ -101,7 +102,7 @@
 </head>
 
 <body onmousedown="mouseDown()" onmouseup="mouseUp()" onload="onloadscripst();" onclick="onclickbody()" id="body">
-
+  <div class="filter"></div>
   <div class="connection-lost-element" style="display: none;">
     <div class="connection-lost">
       <h1>Spojení bylo ztraceno</h1>
@@ -974,6 +975,42 @@
         </div>
         <img class="arrowdownhelp" src="icons/arrowdown.png" alt="arrow down" style="height: 50px; width: 50px; display: none; position: absolute; bottom: 0; transition: ease 0.5s all;">
       </div>
+      <div onclick="changewindowmain(this)" class="widgetList screenfilter Resizabl">
+        <div class="widget-header">
+          <div class="headerclass">
+            <span style="float: left;">Úprava obrazu</span>
+            <div onclick="windows.close(this, 'screenfilter')" class="close"></div>
+            <div onclick="windows.mini(this, 'screenfilter')" class="mini"></div>
+          </div>
+        </div>
+        <h1>Filtry</h1>
+        <p>Pro deaktivaci všech filtrů (např když si nastavíte filtr a nepůjde nic přečíst) stiskněte AltGr + F</p>
+        <h2>Aktivní filtry</h2>
+        <div class="activeFilters"></div>
+        <h2>Přidat filtr</h2>
+        <div class="addFilter">
+          <select class="filterSelect" onchange="ColorFilters.changeSelection(this)">
+            <option value="brightness" default>Jas</option>
+            <option value="contrast">Kontrast</option>
+            <option value="hue-rotate">Otočit odstnín</option>
+            <option value="invert">Převrátit barvy</option>
+            <option value="saturate">Saturace</option>
+            <option value="sepia">Sépie</option>
+            <option value="grayscale">Černo-bílé</option>
+          </select>
+          <div class="values-helptext">
+            <div class="brightness">Hodnota jasu je v procentech. Od 0% do 1000%. 100% je výchozí hodnota.</div>
+            <div class="contrast" style="display: none;">Hodnota kontrastu je v procentech. Od 0% do 500%. 100% je výchozí hodnota</div>
+            <div class="hue-rotate" style="display: none;">Hodnota otočení odstínu je v 'deg' (stupně). Např 90deg (90 stupňů)</div>
+            <div class="invert" style="display: none;">Hodnota převrácení barvy je v procentech. Od 0% do 100%. Výchozí hodnota je 0%.</div>
+            <div class="saturate" style="display: none;">Hodnota saturace je v procentech. Výchozí hodnota je 100%.</div>
+            <div class="sepia" style="display: none;">Hodnota sépie je v procentech. Výchozí hodnota je 0%.</div>
+            <div class="grayscale" style="display: none;">Hodnota černo-bílé je v procentech. Od 0% do 100%. Výchozí hodnota je 0%.</div>
+          </div>
+          <input type="text" class="valueFilter" placeholder="Hodnota filtru">
+          <button onclick="ColorFilters.addFilter(this.parentElement);">Přidat filtr</button>
+        </div>
+      </div>
     </div>
     <div id="klindows" class="klindows">
       <div id="openedapps">
@@ -1096,6 +1133,8 @@
               icon="icons/diskmanager.png">Správce disků</a></li>
           <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('getstarted');"
                 icon="icons/getstarted.png">Prohlídka</a></li>
+          <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('screenfilter');"
+                icon="icons/screenfilter.png">Úprava obrazu</a></li>
         </ul>
       </div>
       <div id="fakedownbar" class="fakedownbar"></div>
@@ -1156,8 +1195,10 @@
             src="icons/document.png">
           <img onclick="windows.miniOpen('sheeteditor',this)" alt="Sheet editor" class="ikonadown sheeteditorikonadown"
             src="icons/spreadsheet.png">
-          <img onclick="windows.miniOpen('sheeteditor',this)" alt="Správce disků" class="ikonadown diskmanagerikonadown"
+          <img onclick="windows.miniOpen('diskmanager',this)" alt="Správce disků" class="ikonadown diskmanagerikonadown"
             src="icons/diskmanager.png">
+          <img onclick="windows.miniOpen('screenfilter',this)" alt="Úprava obrazu" class="ikonadown screenfilterikonadown"
+            src="icons/screenfilter.png">
         </div>
         <div class="appdiv">
           <h1 style="height: 43px;">Unknown</h1>
@@ -1209,6 +1250,9 @@
   <script>
     if (Boot.safeBoot) { 
       document.querySelector(".downbar").style.display = "none"; windows.open("emergencyMenu") 
+    }
+    else {
+      ColorFilters.onLoadLoad();
     }
   </script>
   <script src="getstartedfunctions.js"></script>
