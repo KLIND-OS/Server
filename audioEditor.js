@@ -40,5 +40,67 @@ var AudioEditor = {
     inputOutput(e) {
         var {value} = e
         window.LowLevelApi.Volume.Devices.set(value)
+    },
+    popup: {
+        showed: false,
+        timeout: undefined,
+        rest: () => {
+            var el = document.querySelector(".shortcut-media-popup")
+            if (AudioEditor.popup.showed) {
+                clearTimeout(AudioEditor.popup.timeout)
+                AudioEditor.popup.timeout = setTimeout(() => {
+                    el.style.opacity = "0"
+                    setTimeout(() => {
+                        el.style.display = "none"
+                    }, 500);
+                    AudioEditor.popup.showed = false;
+                }, 3000);
+            }
+            else {
+                el.style.display = "flex"
+                setTimeout(() => {
+                    el.style.opacity = "1"
+                }, 10);
+                AudioEditor.popup.showed = true;
+                AudioEditor.popup.timeout = setTimeout(() => {
+                    el.style.opacity = "0"
+                    setTimeout(() => {
+                        el.style.display = "none"
+                    }, 500);
+                    AudioEditor.popup.showed = false;
+                }, 3000);
+            }
+        },
+        // Popup functions
+        pause: () => {
+            document.querySelectorAll(".shortcut-media-popup img").forEach(el => el.style.display = "none")
+            document.querySelector(".shortcut-media-popup .pause-icon-popup").style.display = "block";
+            AudioEditor.popup.rest();
+        },
+        previous: () => {
+            document.querySelectorAll(".shortcut-media-popup img").forEach(el => el.style.display = "none")
+            document.querySelector(".shortcut-media-popup .previous-icon-popup").style.display = "block";
+            AudioEditor.popup.rest();
+        },
+        next: () => {
+            document.querySelectorAll(".shortcut-media-popup img").forEach(el => el.style.display = "none")
+            document.querySelector(".shortcut-media-popup .next-icon-popup").style.display = "block";
+            AudioEditor.popup.rest();
+        },
+        volumeUp: () => {
+            document.querySelectorAll(".shortcut-media-popup img").forEach(el => el.style.display = "none")
+            document.querySelector(".shortcut-media-popup .up-icon-popup").style.display = "block";
+            AudioEditor.popup.rest();
+        },
+        volumeDown: () => {
+            document.querySelectorAll(".shortcut-media-popup img").forEach(el => el.style.display = "none")
+            document.querySelector(".shortcut-media-popup .down-icon-popup").style.display = "block";
+            AudioEditor.popup.rest();
+        },
+        volumeMute: () => {
+            document.querySelectorAll(".shortcut-media-popup img").forEach(el => el.style.display = "none")
+            document.querySelector(".shortcut-media-popup .mute-icon-popup").style.display = "block";
+            AudioEditor.popup.rest();
+        }
     }
 }

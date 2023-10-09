@@ -2750,3 +2750,29 @@ table tr td input {
 .connection-lost h1 {
     font-size: 50px;
 }
+
+.shortcut-media-popup {
+    position: absolute;
+    z-index: 51223;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    height: 200px;
+    width: 200px;
+    background-color: rgba(0, 0, 0, .50);
+    backdrop-filter: blur(20px);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: ease 0.5s opacity;
+}
+
+.shortcut-media-popup img {
+    height: 55%;
+    width: 55%;
+    object-fit: contain;
+}
