@@ -29,7 +29,7 @@ class DiskManager {
                 div.appendChild(button1)
                 var button2 = document.createElement("button")
                 button2.textContent = "Přepsat celý oddíl složkou ze správce souborů"
-                button2.setAttribute("onclick", `DiskManager.partitionToMain('${partition}')`)
+                button2.setAttribute("onclick", `DiskManager.mainToPartition('${partition}')`)
                 div.appendChild(button2)
             });
             element.appendChild(div)
@@ -57,7 +57,7 @@ class DiskManager {
 
     static mainToPartition(partition) {
         BPrompt.prompt("Zadejte cestu složky", (folder) => {
-            folder = value.endsWith("/") ? folder : folder + "/"
+            folder = folder.endsWith("/") ? folder : folder + "/"
             if (mainFileManager.folderExist(folder)) {
                 window.LowLevelApi.writeDiskFromStorage(folder, partition)
             }
@@ -65,6 +65,5 @@ class DiskManager {
                 spawnNotification("Správce disků", "Tato složka neexistuje!")
             }
         })
-        spawnNotification("Správce souborů", "Tato funkce není dokončena. Funkce bude dostupná v následující aktualizaci.")
     }
 }
