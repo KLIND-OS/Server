@@ -1,6 +1,5 @@
 class LocalStorage {
     static systemLocalStorage = [
-        "volume",
         "customcss",
         "mode",
         "showedalertcookies",

@@ -65,8 +65,6 @@
   <script src="rigthclickmenu.js"></script>
   <script src="customapps.js"></script>
   <script src="screenshot.js"></script>
-  <script src="shellinklindos.js"></script>
-  <script src="shellinklindosconfig.js"></script>
   <script src="desktopIcons.js"></script>
   <script src="bouncy.js"></script>
   <script src="calculator.js"></script>
@@ -155,12 +153,14 @@
     </div>
   </div>
   <div style="display: none;" id="error" class="errors" oncontextmenu="return false;">
-    <h1 id="codeerror">0x0000000</h1>
-    <p id="infoerror">Žádné informace</p>
-    <p id="createdapp">Neznámé</p>
-    <button onclick="Boot.rebootAsSafeMode(true)" style="left: 50%;
-    position: relative;
-    transform: translateX(-50%);">Restartovat do save módu</button>
+    <div class="inner-error">
+      <h1 id="codeerror">0x0000000</h1>
+      <p id="infoerror">Žádné informace</p>
+      <p id="createdapp">Neznámé</p>
+      <button onclick="Boot.rebootAsSafeMode(true)" style="left: 50%;
+      position: relative;
+      transform: translateX(-50%);">Restartovat do save módu</button>
+    </div>
   </div>
   <script>
     // Load
@@ -270,7 +270,6 @@
           if (!Boot.safeBoot) control.dowhenlogin.loaded()
           new Howl({
             src: ['sounds/startup.mp3'],
-            volume: control.getVolume(),
             autoplay: true,
           });
           welcomePageCheck()
@@ -360,13 +359,13 @@
       <div class="outer-box">
         <div class="inner-box-power">
           <div class="element-power-inner-box" style="background-image: url('/icons/locksys.png')"
-            onclick="Power.lock();"></div>
+            onclick="Power.lock();">Zamknout</div>
           <div class="element-power-inner-box" style="background-image: url('/icons/closepower.png')"
-            onclick="Power.close();"></div>
+            onclick="Power.close();">Zavřít</div>
           <div class="element-power-inner-box" style="background-image: url('/icons/reloadsys.png')"
-            onclick="Power.reload();"></div>
+            onclick="Power.reload();">Restartovat</div>
           <div class="element-power-inner-box" style="background-image: url('/icons/poweroffsys.png')"
-            onclick="Power.turnoff();"></div>
+            onclick="Power.turnoff();">Vypnout</div>
         </div>
       </div>
     </div>
@@ -557,8 +556,8 @@
             <div onclick="windows.mini(this, 'info')" class="mini"></div>
           </div>
         </div>
-        <span onclick="starttajnedva()">Připojení k internetu: </span><span id="internetsss"></span><br>
-        <span>Verze KLIND OS: </span><span id="versionwrite" onclick="tajnever()">unknown</span><br>
+        <span onclick="tajnettri();">Připojení k internetu: </span><span id="internetsss"></span><br>
+        <span>Verze KLIND OS: </span><span id="versionwrite">unknown</span><br>
         <span>Velikost obrazovky: <span id="screensizewrite">unknown</span></span><br>
         <span style="display: none;">Velikost KLIND OS okna: <span id="windowsizewrite">unknown</span></span>
         <span>Časové pásmo: <span id="timezonewrite">unknown</span></span><br>
@@ -578,15 +577,6 @@
           </div>
         </div>
         <iframe src="ter"></iframe>
-      </div>
-
-      <div onclick="changewindowmain(this);" class="widgetList shellinklindos Resizabl">
-        <div class="widget-header">
-          <div class="headerclass"><span>ShellInKLINDOS Client</span>
-            <div onclick="windows.close(this, 'ShellInKLINDOS Client')" class="close"></div>
-          </div>
-        </div>
-        <iframe src="about:blank"></iframe>
       </div>
 
       <div onclick="changewindowmain(this);" class="widgetList napoveda Resizabl" style="position: absolute;">
@@ -744,7 +734,6 @@
         <p>Zvukové efekty <a
             href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=14572">Pixabay</a>
         </p>
-        <p>API pro svátky: <a href="https://svatky.adresa.info/">svatky.adresa.info/</a></p>
         <p>6.1 trialer song by <a href="https://www.chosic.com/free-music/all/">www.chosic.com/free-music/all/</a></p>
         <p>Další ikony: <a href="https://www.flaticon.com/free-icons/downloading">Flaticon</a></p>
       </div>
@@ -801,6 +790,7 @@
           </div>
         </div>
         <h1 style="text-align: center;">Zvuky</h1>
+        <select class="outputSelect" onchange="AudioEditor.inputOutput(this)"></select>
         <div class="slidecontainer">
           <input type="range" min="0" max="100" value="50" class="slider" id="myRange"
             oninput="AudioEditor.input(this)">
@@ -1016,11 +1006,6 @@
       <div id="openedapps">
         <span></span>
       </div>
-      <div id="tajne" class="tajne" style="display: none;"><button
-          style="position: absolute; right: 0; font-size: 1.5em; "
-          onclick="document.getElementById('tajne').style.display = 'none';">X</button><button id="startgame"
-          onclick="startgame()">Start</button><iframe src="game" style="display: none;" id="hratajna"></iframe></div>
-
       <div class="alertcookies" id="alertcookies">
         <h1>Tato stránka bude ukládat soubory cookies do vašeho počítače pro ukládání informací a nastavení.</h1>
         <button onclick="closealertcookies()">Rozumím</button>
@@ -1089,9 +1074,9 @@
         <ul id="liststartmenu">
           <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('poznamky');"
               icon="icons/poznamky.png">Poznámky</a></li>
-          <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('kalk');tajnettri();"
+          <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('kalk');"
               icon="icons/kalkulacka.png">Kalkulačka</a></li>
-          <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('nas');starttajne();"
+          <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('nas');"
               icon="icons/nas.png">Nastavení</a></li>
           <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('filemanager');"
               icon="icons/filemanager.png">Správce Souborů</a></li>

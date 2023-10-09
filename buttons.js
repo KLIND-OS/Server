@@ -154,89 +154,13 @@ var mode = {
         fileManagerOpen();
     }
 }
-var clickstajnever = 0;
-function tajnever() {
-    clickstajnever++
-    if (clickstajnever == 1) {
-        setTimeout(() => {
-            if (clickstajnever == 5) {
-                document.getElementById("tajne").style.display = "block";
-                clickstajnever = 0;
-            }
-            else {
-                clickstajnever = 0;
-            }
-        }, 2000);
-    }
-    else if (clickstajnever == 5) {
-        document.getElementById("tajne").style.display = "block";
-        clickstajnever = 0;
-    }
-}
-var sadjaijsdhijasdhasd = "false";
-var clickstajnevers = 0;
-function starttajne() {
-    clickstajnevers++
-    if (clickstajnevers == 1) {
-        setTimeout(() => {
-            if (clickstajnevers == 6) {
-                clickstajnevers = 0;
-                sadjaijsdhijasdhasd = "true";
-            }
-            else {
-                clickstajnevers = 0;
-            }
-        }, 2000);
-    }
-    else if (clickstajnevers == 6) {
-        clickstajnevers = 0;
-        sadjaijsdhijasdhasd = "true";
-    }
-}
-var sadhiashdijahsdn = "false";
-var sdjadasdjiasd = 0;
-var clickstajneverass = 0;
-var customtajne;
-function starttajnedva() {
-    if (sadjaijsdhijasdhasd == "true") {
 
-        clickstajneverass++
-        if (clickstajneverass == 1) {
-            setTimeout(() => {
-                clickstajneverass = 0;
-            }, 3500);
-        }
-        else if (clickstajneverass == 9) {
-            sadjaijsdhijasdhasd = "false";
-            clickstajneverass = 0;
-            var customtajne = Math.floor(Math.random() * 30);
-            if (customtajne > -1 && customtajne < 10) {
-                openbrowser('jebaited.mp4');
-            }
-            else if (customtajne > 9 && customtajne < 21) {
-                openbrowser('jebaitedcz.mp4');
-            }
-            else if (customtajne > 20 && customtajne < 28) {
-                openbrowser('rickroll.mp4');
-            }
-            else {
-                console.log("Never gonna give you up!")
-                sadhiashdijahsdn = "true";
-                skjdoahsdijhasd = 0;
-            }
-        }
-    }
-    else {
-    }
-}
 var skjdoahsdijhasd = 0;
 function tajnettri() {
     skjdoahsdijhasd++
     if (skjdoahsdijhasd == 69) {
-        if (sadhiashdijahsdn == "true") {
-            skjdoahsdijhasd = 0;
-            openbrowser('putin.mp4');
-        }
+        skjdoahsdijhasd = 0;
+        windows.open("brow", 'putin.mp4');
     }
 }
 function startgame() {
@@ -258,10 +182,6 @@ function turnoff() {
         alert('Vypnuto');
     }, 200);
     window.close();
-}
-function openbrowser(url) {
-    windows.open('brow', [url]);
-
 }
 var dt = new Date();
 var year = dt.getFullYear();

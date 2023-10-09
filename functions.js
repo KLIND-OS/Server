@@ -67,7 +67,6 @@ var control = {
     playSound: (location) => {
         var x = new Howl({
             src: [location],
-            volume: Math.round((AudioEditor.value / 100) * 10) / 10,
             autoplay: true
         });
         x.on('end', function () {
@@ -79,7 +78,6 @@ var control = {
     playSong: (location, otherSettings, autoplay) => {
         var x = new Howl({
             src: [location],
-            volume: Math.round((AudioEditor.value / 100) * 10) / 10,
             autoplay: autoplay || true,
             ...otherSettings
         });
@@ -89,7 +87,6 @@ var control = {
         playingSongs.push(x);
         return x;
     },
-    getVolume: () => Math.round((AudioEditor.value / 100) * 10) / 10,
     notify: spawnNotification,
     fileManager: Object.assign({}, {
         fileSelect: (callBack) => {
