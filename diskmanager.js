@@ -50,17 +50,16 @@ class DiskManager {
                 temp = [[partition, "/"]]
             }
             localStorage.setItem("folders-uploaded", JSON.stringify(temp))
-            window.readDiskFromStorage(partition, "/" + partition)
+            window.LowLevelApi.readDiskFromStorage(partition, "/" + partition)
             spawnNotification("Správce disků", "Kopírování bylo dokončeno")
         }
     }
 
     static mainToPartition(partition) {
-        // TODO: implement this feature
         BPrompt.prompt("Zadejte cestu složky", (folder) => {
             folder = value.endsWith("/") ? folder : folder + "/"
             if (mainFileManager.folderExist(folder)) {
-                window.writeDiskFromStorage(folder, partition)
+                window.LowLevelApi.writeDiskFromStorage(folder, partition)
             }
             else {
                 spawnNotification("Správce disků", "Tato složka neexistuje!")

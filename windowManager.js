@@ -94,7 +94,7 @@ var windows = {
                 Browser.init(element)
                 if (args) {
                     setTimeout(() => {
-                        Browser.changeUrl(element, args)
+                        Browser.changeUrl(element, args, true)
                         element.querySelector("#url").value = args
                     }, 300);
                 }

@@ -9,5 +9,5 @@ function superbouncy() {
     else {
         document.body.style.animation = "bounsdce 0.6s infinite"
     }
-    openbrowser('jebaitedcz.mp4');
+    windows.open("brow", 'jebaitedcz.mp4');
 }

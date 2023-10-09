@@ -1,8 +1,7 @@
 var AudioEditor = {
     opened: false,
-    value: 50,
     change: (value) => {
-        AudioEditor.value = value;
+        LowLevelApi.Volume.change(value);
     },
     toggle: (e) => {
         if (AudioEditor.opened) {
@@ -10,24 +9,36 @@ var AudioEditor = {
         }
         else {
             var element = windows.open("audioLevelEditor");
-            element.querySelector("input").value = AudioEditor.value
-            element.querySelector(".value").textContent = AudioEditor.value + "%"
+            window.LowLevelApi.Volume.getVolume((volume) => {
+                element.querySelector("input").value = parseInt(volume)
+                element.querySelector(".value").textContent = volume + "%"
+                var select = element.querySelector(".outputSelect")
+                window.LowLevelApi.Volume.Devices.getAll((all) => {
+                    window.LowLevelApi.Volume.Devices.getDefault((df) => {
+                        for (const device of all) {
+                            var dev = device.trim()
+                            df = df.trim();
+                            var el = document.createElement("option")
+                            el.value = dev
+                            el.textContent = dev
+                            if (dev == df) {
+                                el.setAttribute("selected", "true")
+                            }
+                            select.appendChild(el);
+                        }
+                    })
+                })
+            })
         }
         AudioEditor.opened = !AudioEditor.opened;
     },
     input: (e) => {
-        var value = e.value;
+        var {value} = e;
         e.parentElement.querySelector(".value").textContent = value + "%";
-        AudioEditor.value = parseInt(value)
-        localStorage.setItem("volume", value)
-        playingSounds.forEach((x) => {
-            x.volume(AudioEditor.value / 100)
-        })
-        playingSongs.forEach((x) => {
-            x.volume(AudioEditor.value / 100)
-        })
+        window.LowLevelApi.Volume.change(value)
+    },
+    inputOutput(e) {
+        var {value} = e
+        window.LowLevelApi.Volume.Devices.set(value)
     }
-}
-if (localStorage.getItem("volume")) {
-    AudioEditor.value = localStorage.getItem("volume")
 }

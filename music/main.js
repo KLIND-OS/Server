@@ -100,11 +100,7 @@ function playPlaylist(playlist, sliderElement) {
       var percent = sliderElement.value / 100;
       setTrackPosition(percent);
     });
-    setInterval(() => {
-        if (player) {
-            player.volume(parent.control.getVolume());
-        }
-    },100)
+    
   
     playTrack();
     function nextTrack() {
