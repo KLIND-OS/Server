@@ -1018,6 +1018,17 @@ body {
     z-index: 23;
 }
 
+.imageeditor {
+    background-color: white;
+    position: absolute !important;
+    width: 880px;
+    min-height: 560px;
+    height: 560px;
+    overflow: hidden;
+    min-width: 880px;
+    z-index: 23;
+}
+
 .screenfilter {
     background-color: white;
     position: absolute !important;
@@ -1386,6 +1397,7 @@ table tr td input {
 
 .logindva button {
     height: 50px;
+    font-size: 20px;
 }
 
 .logindva input {

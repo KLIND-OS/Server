@@ -307,7 +307,7 @@
       <img id="userimg" class="userimg" src="icons/user.png">
       <p id="username">Error</p>
       <p id="pokusy"></p>
-      <input class="loginpass" type="password" id="password" placeholder="Password">
+      <input class="loginpass" type="password" id="password" placeholder="Heslo">
       <button onclick="submitlogin()">Přihlásit se</button>
       <button id="sdsdaasd" class="facelolsad" onclick="loadfaces()">Rozpoznávání Obličeje</button>
     </div>
@@ -1009,6 +1009,16 @@
           <button onclick="ColorFilters.addFilter(this.parentElement);">Přidat filtr</button>
         </div>
       </div>
+      <div onclick="changewindowmain(this)" class="widgetList imageeditor Resizabl">
+        <div class="widget-header">
+          <div class="headerclass">
+            <span style="float: left;">Editor obrázku</span>
+            <div onclick="windows.close(this, 'imageeditor')" class="close"></div>
+            <div onclick="windows.mini(this, 'imageeditor')" class="mini"></div>
+          </div>
+        </div>
+        <iframe style="height: calc(100% - 20px); width: 100%;" src="imageeditor" frameborder="0"></iframe>
+      </div>
     </div>
     <div id="klindows" class="klindows">
       <div id="openedapps">
@@ -1128,6 +1138,8 @@
                 icon="icons/getstarted.png">Prohlídka</a></li>
           <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('screenfilter');"
                 icon="icons/screenfilter.png">Úprava obrazu</a></li>
+          <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('imageeditor');"
+                icon="icons/image-editor.png">Editor obrázků</a></li>
         </ul>
       </div>
       <div id="fakedownbar" class="fakedownbar"></div>
@@ -1192,6 +1204,8 @@
             src="icons/diskmanager.png">
           <img onclick="windows.miniOpen('screenfilter',this)" alt="Úprava obrazu" class="ikonadown screenfilterikonadown"
             src="icons/screenfilter.png">
+          <img onclick="windows.miniOpen('imageeditor',this)" alt="Editor obrázků" class="ikonadown imageeditorikonadown"
+            src="icons/image-editor.png">
         </div>
         <div class="appdiv">
           <h1 style="height: 43px;">Unknown</h1>
@@ -1224,7 +1238,7 @@
         <img id="intrnetyes" src="icons/internet.png" style="float: right;" class="ikonadown"
           onclick="windows.open('info')">
         <img src="/icons/audioeditor.png" style="float: right; display: block;" class="ikonadown audioLevelEditorIcon"
-          onclick="AudioEditor.toggle(this)">
+          onclick="AudioEditor.toggle(this)">ř
       </div>
     </div>
 
