@@ -84,8 +84,11 @@ if (localStorage.getItem('customicon') != null) {
 }
 function logout() {
     document.querySelector(".loginfirst").style.top = "0px"
+    control.loged = false;
     document.querySelector(".login").classList.remove("displaynone")
-    control.loged = true;
+    setTimeout(() => {
+        document.querySelector(".login").style.opacity = "1"
+    }, 10);
 }
 if (localStorage.getItem('username') != null) {
     const usernamecookie = localStorage.getItem('username');
@@ -99,11 +102,14 @@ function submitlogin() {
     else if (password == "") { }
     else if (hashed == passwordcookie) {
         pokusy = 5;
-        document.querySelector(".login").classList.add("displaynone");
-        document.querySelector("#password").value = "";
-        document.getElementById("pokusy").innerHTML = "";
+        document.querySelector(".login").style.opacity = "0";
         control.dowhenlogin.loged()
         control.loged = true;
+        setTimeout(() => {
+            document.querySelector(".login").classList.add("displaynone");
+            document.querySelector("#password").value = "";
+            document.getElementById("pokusy").innerHTML = "";
+        }, 500);
     }
     else {
         if (pokusy == 1) {
@@ -113,7 +119,6 @@ function submitlogin() {
             var asdhjklasjd = setInterval(() => {
                 casyasjk--;
                 document.getElementById("pokusy").innerHTML = "Na " + casyasjk + "s se ti<br>zablokuje přihlášení.";
-
             }, 1000);
             setTimeout(() => {
                 document.getElementById("pokusy").innerHTML = "";

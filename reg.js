@@ -4,6 +4,7 @@ function loadreg() {
             const reglogin = localStorage.getItem("reg.login")
             if (reglogin == passwordcookie + "**." + "false") {
                 document.querySelector(".login").classList.add("displaynone");
+                document.querySelector(".login").style.opacity = "0";
                 login = "false";
                 control.loged = true;
             }

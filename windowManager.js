@@ -281,14 +281,19 @@ var windows = {
         var el = element.parentElement.parentElement.parentElement
         var special = windows.list.special[name]
         if (special != undefined && special[1] !== false) {
-            special[1](el)
+            var returnValue = special[1](el)
         }
-        el.style.scale = "0.9";
-        el.style.opacity = "0"
-
-        setTimeout(() => {
-            el.remove();
-        }, 200);
+        else {
+            var returnValue = undefined
+        }
+        if (returnValue !== true) {
+            el.style.scale = "0.9";
+            el.style.opacity = "0"
+    
+            setTimeout(() => {
+                el.remove();
+            }, 200);
+        }
     },
     mini: (element, name) => {
         var location = windows.list.names.indexOf(name)
