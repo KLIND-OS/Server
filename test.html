@@ -4,54 +4,6 @@
   <title>Editable JSON Array to Table</title>
 </head>
 <body>
-  <div id="table-container"></div>
-  <button id="save-button">Save Changes</button>
-
-  <script>
-    var jsonArrayData = [
-      ['John', 25, 'New York'],
-      ['Jane', 30, 'San Francisco'],
-      ['Bob', 22, 'Los Angeles']
-    ];
-
-    function jsonArrayToEditableTable(jsonArrayData) {
-      var table = '<table border="1" id="editable-table">';
-      
-      for (var i = 0; i < jsonArrayData.length; i++) {
-        table += '<tr>';
-        for (var j = 0; j < jsonArrayData[i].length; j++) {
-          table += '<td contenteditable="true">' + jsonArrayData[i][j] + '</td>';
-        }
-        table += '</tr>';
-      }
-      
-      table += '</table>';
-      return table;
-    }
-
-    function saveChanges() {
-      var editedTable = document.getElementById('editable-table');
-      var rows = editedTable.getElementsByTagName('tr');
-      var editedData = [];
-
-      for (var i = 0; i < rows.length; i++) {
-        var rowData = [];
-        var cells = rows[i].getElementsByTagName('td');
-        for (var j = 0; j < cells.length; j++) {
-          rowData.push(cells[j].textContent);
-        }
-        editedData.push(rowData);
-      }
-
-      // You can use the 'editedData' array to save or update your data as needed
-      console.log(editedData);
-    }
-
-    var tableContainer = document.getElementById('table-container');
-    tableContainer.innerHTML = jsonArrayToEditableTable(jsonArrayData);
-
-    var saveButton = document.getElementById('save-button');
-    saveButton.addEventListener('click', saveChanges);
-  </script>
+  <input type="file" name="" id="">
 </body>
 </html>

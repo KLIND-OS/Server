@@ -225,6 +225,9 @@
             document.getElementById("klindows").style.backgroundImage = "url(" + mainFileManager.getContent(localStorage.getItem('background')) + ")";
           }
         }
+        else {
+          document.getElementById("klindows").style.backgroundImage = "url(wallpapers/default.jpg)"
+        }
       }
       else {
         document.getElementById("klindows").style.backgroundImage = "url('images/safeModeBackground.png')";
@@ -747,6 +750,7 @@
         </p>
         <p>6.1 trialer song by <a href="https://www.chosic.com/free-music/all/">www.chosic.com/free-music/all/</a></p>
         <p>Další ikony: <a href="https://www.flaticon.com/free-icons/downloading">Flaticon</a></p>
+        <p>Výchozí pozadí: <a href="https://www.freepik.com/free-vector/colourful-spiral-lines-wavy-background_7388088.htm">Freepik</a></p>
       </div>
       <div onclick="changewindowmain(this)" class="widgetList about Resizabl">
         <div class="widget-header">
@@ -1174,6 +1178,15 @@
                 icon="icons/printer.png">Správce tiskáren</a></li>
         </ul>
       </div>
+      <div class="clockdate">
+        <div class="time">
+          <span id="timess">Error</span>
+        </div>
+        <div class="date">
+          <span id="dateclock">Error</span>
+        </div>
+        <script src="dateclock.js"></script>
+      </div>
       <div id="fakedownbar" class="fakedownbar"></div>
       <div id="downbar" class="downbar">
         <div id="logo" class="logo" onclick="openstartmenu()">
@@ -1249,15 +1262,7 @@
 
         </div>
 
-        <div class="clockdate">
-          <div class="time">
-            <span id="timess">Error</span>
-          </div>
-          <div class="date">
-            <span id="dateclock">Error</span>
-          </div>
-          <script src="dateclock.js"></script>
-        </div>
+       
         <div class="clock jednaclock" onclick="opendate()" cursor="pointer">
           <span id="time">Error</span>
         </div>

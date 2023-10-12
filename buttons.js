@@ -78,8 +78,29 @@ function customappopensadj(name, code) {
     iframe.src = code;
 }
 
+var clockmenuopened = false;
+var clockmenuopening = false
 function opendate() {
-    document.querySelector(".clockdate").classList.toggle("displayblock")
+    if (!clockmenuopening) {
+        if (!clockmenuopened) {
+            document.querySelector(".clockdate").classList.add("displayblock")
+            setTimeout(() => {
+                document.querySelector(".clockdate").style.bottom = "50px"
+                clockmenuopening = true
+                setTimeout(() => clockmenuopening = false, 500);
+            }, 10);
+            clockmenuopened = true
+        }
+        else {
+            document.querySelector(".clockdate").style.bottom = "-600px"
+            clockmenuopening = true
+            setTimeout(() => {
+                document.querySelector(".clockdate").classList.remove("displayblock")
+                clockmenuopening = false
+            }, 500);
+            clockmenuopened = false
+        }
+    }
 }
 function searchstartmenu() {
     var a, txtValue; 

@@ -1350,12 +1350,14 @@ body {
 .clockdate {
     position: absolute;
     right: 0;
-    bottom: 50px;
+    bottom: -600px;
     display: block;
     background-color: white;
     width: 350px;
     height: 600px;
     display: none;
+    border-start-start-radius: 15px;
+    transition: ease 0.5s bottom;
 }
 
 .clockdate .time {
@@ -1386,6 +1388,8 @@ table tr td input {
     position: absolute;
     z-index: 99999;
     background-color: black;
+    opacity: 1;
+    transition: ease 0.5s opacity;
 }
 
 .userimg {
