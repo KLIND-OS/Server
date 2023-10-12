@@ -92,6 +92,9 @@
   <script src="libs/exceljs.js"></script>
   <script src="diskmanager.js"></script>
   <script src="colorFilters.js"></script>
+  <script src="printermanager.js"></script>
+  <script src="packageinstaller.js"></script>
+  <script src="donotdisturb.js"></script>
   <script>
     if (localStorage.getItem("installed") != "true") {
       window.location.replace("install.html");
@@ -106,7 +109,7 @@
       <h1>Spojení bylo ztraceno</h1>
       <p>Spojení s lokálním serverem bylo ztraceno. Může to být způsobeno chybou lokálního serveru.</p>
       <p>Pokouším se připojit znovu<span class="testingAnimation">.</span></p>
-      <button onclick="window.close()">Vypnout počítač</button>
+      <button onclick="LowLevelApi.Power.poweroff()">Vypnout počítač</button>
     </div>
   </div>
   <div class="welcomePage" style="display: none;">
@@ -891,9 +894,7 @@
         <div class="widget-header">
           <div class="headerclass">
             <span style="float: left;">Sheets editor</span>
-            <div
-              onclick="WordEditor.save(this.parentElement.parentElement.parentElement)"
-              class="menupoznamky filesavefileconfig" id="save-button">Uložit</div>
+            <div class="menupoznamky filesavefileconfig" id="save-button">Uložit</div>
             <div onclick="windows.close(this, 'sheetseditor')" class="close"></div>
             <div onclick="windows.mini(this, 'sheetseditor')" class="mini"></div>
           </div>
@@ -1019,6 +1020,35 @@
         </div>
         <iframe style="height: calc(100% - 20px); width: 100%;" src="imageeditor" frameborder="0"></iframe>
       </div>
+      <div onclick="changewindowmain(this)" class="widgetList printermanager Resizabl">
+        <div class="widget-header">
+          <div class="headerclass">
+            <span style="float: left;">Správce tiskáren CUPS</span>
+            <div class="menupoznamky" onclick="window.open('https://wiki.archlinux.org/title/CUPS/Printer-specific_problems')">Zobrazit list ovladačů pro tiskárny</div>
+            <div class="menupoznamky" onclick="windows.open('packageinstaller', {type: 'printer'})">Manuálně nainstalovat ovladač podle názvu</div>
+            <div onclick="windows.close(this, 'printermanager')" class="close"></div>
+            <div onclick="windows.mini(this, 'printermanager')" class="mini"></div>
+          </div>
+        </div>
+        <webview id="webviewprinter" style="height: calc(100% - 20px); width: 100%;" src="about:blank" allowpopups></webview>
+      </div>
+      <div onclick="changewindowmain(this)" class="widgetList packageinstaller Resizabl">
+        <div class="widget-header">
+          <div class="headerclass">
+            <span style="float: left;">Instalátor balíčků</span>
+            <div onclick="windows.close(this, 'packageinstaller')" class="close"></div>
+          </div>
+        </div>
+        <h1>Instalátor balíčků</h1>
+        <p class="printerdriverstext" style="display: none;">Zde si můžete nainstalovat ovladače pro vaši tiskárnu.</p>
+        <span>Repozitář: <select class="repo">
+          <option value="official" selected>Arch Linux Oficiální Repozitář</option>
+          <option value="aur">Arch Linux Uživatelský Repozitář (AUR)</option>
+        </select></span><br>
+        <p class="helptext"></p>
+        <span>Název: <input type="text" class="packagename"></span>
+        <button onclick="PackageInstaller.installPackage(this.parentElement)">Nainstlovat</button>
+      </div>
     </div>
     <div id="klindows" class="klindows">
       <div id="openedapps">
@@ -1140,6 +1170,8 @@
                 icon="icons/screenfilter.png">Úprava obrazu</a></li>
           <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('imageeditor');"
                 icon="icons/image-editor.png">Editor obrázků</a></li>
+          <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('printermanager');"
+                icon="icons/printer.png">Správce tiskáren</a></li>
         </ul>
       </div>
       <div id="fakedownbar" class="fakedownbar"></div>
@@ -1206,6 +1238,8 @@
             src="icons/screenfilter.png">
           <img onclick="windows.miniOpen('imageeditor',this)" alt="Editor obrázků" class="ikonadown imageeditorikonadown"
             src="icons/image-editor.png">
+          <img onclick="windows.miniOpen('printermanager',this)" alt="Správce tiskáren" class="ikonadown printermanagerikonadown"
+            src="icons/printer.png">
         </div>
         <div class="appdiv">
           <h1 style="height: 43px;">Unknown</h1>
@@ -1244,6 +1278,9 @@
 
     <div class="notification-center-element" style="display: none;">
       <h1 style="color: white; text-align: center; margin-top: 5px;">Notifikace</h1>
+      <div class="donotdisturbdiv">
+        <input onclick="DoNotDisturb.click(this)" type="checkbox" class="donotdisturbcheckbox"> <span>Nerušit</span>
+      </div>
     </div>
 
   </div>
@@ -1256,7 +1293,8 @@
   <script src="connection-local.js"></script>
   <script>
     if (Boot.safeBoot) { 
-      document.querySelector(".downbar").style.display = "none"; windows.open("emergencyMenu") 
+      document.querySelector(".downbar").style.display = "none";
+      windows.open("emergencyMenu");
     }
     else {
       ColorFilters.onLoadLoad();
