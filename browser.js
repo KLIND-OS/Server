@@ -24,9 +24,10 @@ class Browser {
         input.value = browser.src;
       }
     }, 200);
+    // TODO: Fix
     browser.addEventListener('did-fail-load', (event) => {
-      browser.src = "game/index.html"
-      browser.setAttribute("sr", browser.src)
+      /* browser.src = "game/index.html"
+      browser.setAttribute("sr", browser.src) */
     });
   }
   static goBack(window) {

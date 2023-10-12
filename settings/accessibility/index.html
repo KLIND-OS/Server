@@ -8,18 +8,33 @@
     <style>
         :root {
             --pocet: 3;
+            --spanvalue: 1;
         }
     </style>
     <link rel="stylesheet" href="./../style.css">
     <script src="./../mouse.js" defer></script>
     <script src="/isiframe.js"></script>
+    <script>
+        function submit() {
+            parent.control.fileManager.fileSelect({
+                success:e=>{
+                    path = e[5]+e[0]
+                    localStorage.setItem("background-lockScreen", path)
+                    parent.loadBackgroundLockScreen()
+                    parent.spawnNotification("Nastavení","Pozadí bylo nastaveno")
+                },
+                closed: () => {
+                    parent.spawnNotification("Nastavení","Výběr souboru byl přerušen!")
+                }
+            })
+        }
+    </script>
 </head>
 <body onmouseup="mouseUp()" onmousedown="mouseDown()" >
     <div id="firstcursor"></div>
     <div id="secondcursor" class="secondcursor"></div>
     <div class="button" onclick="window.location.replace('..')"><- Zpět</div>
-    <div class="button" onclick="window.location.replace('svetlytmavy')">Světlý / Tmavý</div>
-    <div class="button" onclick="window.location.replace('vlastnistyl')">Vlastní styl</div>
+    <div class="button" onclick="window.location.replace('motiv')">Motiv</div>
     <script src="./../main.js" defer></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Světlý / Tmavý</title>
+    <title>Motiv</title>
     <style>
         :root {
             --pocet: 3;
@@ -13,23 +13,13 @@
     <link rel="stylesheet" href="./../../style.css">
     <script src="./../../mouse.js" defer></script>
     <script src="/isiframe.js"></script>
-    <script>
-        function svetly() {
-            parent.mode.light()
-            window.location.reload()
-        }
-        function tmavy() {
-            parent.mode.dark()
-            window.location.reload()
-        }
-    </script>
 </head>
 <body onmouseup="mouseUp()" onmousedown="mouseDown()" >
     <div id="firstcursor"></div>
     <div id="secondcursor" class="secondcursor"></div>
     <div class="button" onclick="window.location.replace('..')"><- Zpět</div>
-    <div class="button" onclick="svetly()">Světlý</div>
-    <div class="button" onclick="tmavy()">Tmavý</div>
+    <div class="button" onclick="window.location.replace('svetlytmavy')">Světlý / Tmavý</div>
+    <div class="button" onclick="window.location.replace('vlastnistyl')">Vlastní styl</div>
     <script src="./../../main.js" defer></script>
 </body>
 </html>

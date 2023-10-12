@@ -1,8 +1,3 @@
-let daste = new Date();
-let sjhd = daste.getDate();
-let msodaisd = ["ledna", "února", "března", "dubna", "května", "června", "července", "srpna", "září", "října", "listopadu", "prosince"][daste.getMonth()];
-let asjdod = daste.getFullYear();
-let datepoznamky = sjhd + ". " + msodaisd + " " + asjdod + " ";
 function bhdasv() {
     document.querySelector('.poznamkymenu').classList.remove('displaynone');
 }
@@ -17,6 +12,11 @@ function closepoznamkynas() {
 }
 function poznamkykeypress(element) {
     var valutextareapoznamky = element.value;
+    let daste = new Date();
+    let sjhd = daste.getDate();
+    let msodaisd = ["ledna", "února", "března", "dubna", "května", "června", "července", "srpna", "září", "října", "listopadu", "prosince"][daste.getMonth()];
+    let asjdod = daste.getFullYear();
+    let datepoznamky = sjhd + ". " + msodaisd + " " + asjdod + " ";
     var poznamkajedna = valutextareapoznamky
         .replace("!date ", datepoznamky)
         .replace("!ahoj ", "Ahoj,\n")

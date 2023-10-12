@@ -32,7 +32,7 @@ class LocalStorage {
         "login-background",
         "bootType",
         "getStartedClosed",
-        "color-filters"
+        "color-filters",
     ]
     static startsWith = [
         "tinymce-",

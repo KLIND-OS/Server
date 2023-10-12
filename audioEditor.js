@@ -40,6 +40,12 @@ var AudioEditor = {
     inputOutput(e) {
         var {value} = e
         window.LowLevelApi.Volume.Devices.set(value)
+        setTimeout(() => {
+            window.LowLevelApi.Volume.getVolume((volume) => {
+                e.parentElement.querySelector(".slider").value = parseInt(volume)
+                e.parentElement.querySelector(".value").textContent = volume + "%"
+            })
+        }, 10);
     },
     popup: {
         showed: false,

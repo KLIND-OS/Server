@@ -177,11 +177,7 @@ function getCssProperty(elmId, property) {
     return window.getComputedStyle(elem, null).getPropertyValue(property);
 }
 function turnoff() {
-    document.body.style.display = "none";
-    setTimeout(() => {
-        alert('Vypnuto');
-    }, 200);
-    window.close();
+    LowLevelApi.Power.poweroff()
 }
 var dt = new Date();
 var year = dt.getFullYear();
