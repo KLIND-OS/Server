@@ -58,37 +58,8 @@
             document.getElementById("druhy").style.display = "none";
             document.getElementById("cistainstall").style.display = "block";
         }
-        function fromklindos() {
-            document.getElementById("druhy").style.display = "none";
-            document.getElementById("fromklindos").style.display = "block";
-        }
 
-        function thischange(e) {
-            const reader = new FileReader();
-            reader.addEventListener("load", () => {
-                var result = JSON.parse(reader.result)
-                var make = false;
-                for (var i = 0; i < result.length; i++) {
-                    if (result[i][0] == "updatesklindows" && result[i][1] == version) {
-                        make = true;
-                        break
-                    }
-                }
-                if (make) {
-                    localStorage.clear()
-                    for (var i = 0; i < result.length; i++) {
-                        localStorage.setItem(result[i][0], result[i][1])
-                    }
-                    alert('Instalace byla dokončena!')
-                    window.location.replace("/");
-                }
-                else {
-                    alert("Tento soubor je na jinou verzi KLIND OS. Aktualizujte soubor.")
-                    window.location.reload();
-                }
-            })
-            reader.readAsText(e)
-        }
+        
     </script>
     <div class="installdiv">
         <div id="prvni">
@@ -101,7 +72,6 @@
         <div id="druhy" style="display: none;">
             <h1 class="title">Vyberte typ instalace</h1>
             <div class="left" onclick="cistainstall();">Čistá instalace</div>
-            <div class="right" onclick="fromklindos();">Instalace z .klindos souboru</div>
         </div>
         <div id="cistainstall" style="display: none;">
             <h1 class="title">Čistá instalace</h1>
@@ -111,11 +81,6 @@
             <input id="password" type="password" placeholder="Heslo">
 
             <div class="buttonnext" onclick="install()">Zahájit instalaci</div>
-        </div>
-        <div id="fromklindos" style="display: none;">
-            <h1 class="title">Instalace pomocí .klindos souboru</h1>
-            <p style="text-align: center;">Nahrajte .klindos soubor a systém se Vám automaticky nainstaluje.</p>
-            <input id="codeofklindows" type="file" onchange="thischange(this.files[0])">
         </div>
         <div id="installing" style="display: none;">
             <h1 class="title">Instaluji...</h1>

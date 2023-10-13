@@ -105,7 +105,7 @@ iframe {
     position: fixed;
     left: 45px;
     background-image: url('icons/searchicon.png');
-    background-position: 10px 12px;
+    background-position: 10px 10px;
     background-repeat: no-repeat;
     width: 355px;
     font-size: 16px;
@@ -2416,10 +2416,15 @@ table tr td input {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(184, 184, 184, 1);
+    background-color: rgba(184, 184, 184, 1);
     box-shadow:
         inset .05em .05em 0 rgba(0, 0, 0, .1),
         inset 0 -.05em 0 rgba(0, 0, 0, .07);
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(158, 158, 158);
 }
 
 .inner-box-power {

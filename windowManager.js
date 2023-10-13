@@ -6,16 +6,15 @@ var windows = {
         classes: [".poznamky", ".kalkulacka", ".stopky", ".nastaveni", ".browser", ".terminal", ".player", ".informationklindows", ".reg", ".kalendar", ".budik", ".prevodsys", ".updateklind", ".napoveda", ".faceset", ".record", ".filemanager", ".fileproperties", ".fileeditor", ".zdroje", ".about", ".audioLevelEditor", ".installapp", ".procesy", ".viewtext", ".musicplayer", ".cleaner", ".emergencymenu", ".wordeditor", ".sheetseditor", ".diskmanager", ".getstarted", ".screenfilter", ".imageeditor", ".printermanager", ".packageinstaller"],
         ikonadown: [".poznamkyikonadown", ".kalkikonadown", ".stopikonadown", ".nasikonadown", ".browikonadown", ".terikonadown", ".playerikonadown", ".infoikonadown", ".regikonadown", ".kalenikonadown", ".budikikonadown", ".prevodikonadown", ".updateikonadown", ".napikonadown", ".facesetikonadown", ".recordikonadown", ".filemanagerikonadown", false, ".fileeditorikonadown", ".zdrojeikonadown", ".aboutikonadown", false, ".installappikonadown", ".procesyikonadown", false, ".musicplayerikonadown", ".cleanerikonadown", false, ".wordeditorikonadown", ".sheeteditorikonadown", ".diskmanagerikonadown", false, ".screenfilterikonadown", ".imageeditorikonadown", ".printermanagerikonadown", false],
         special: {
-            poznamky: [(element) => { loadpoznamky(element) }, () => { closepoznamkymenu() }, false],
+            poznamky: [(element) => { loadpoznamky(element) }, () => { closepoznamkymenu(); closepoznamkynas(); }, false],
             info: [infoApp.loadInfo, false, false],
             my: [(element) => { element.querySelector("#myaccount").innerHTML = localStorage.getItem("username"); }, false, false],
-            faceset: [(element) => { if (facerecrpi) { element.querySelector(".facesetiframe").src = "facesetrpi.html"; } }, false, false],
             filemanager: [(element, args) => {
                 var url = "/filemanager/"
                 if (localStorage.getItem('mode') == "dark") url += "?dark"
 
                 if (args && args.mode == "select") {
-                    if (url.indexOf("?") != -1) url += "?select"
+                    if (url.indexOf("?") == -1) url += "?select"
                     else url += "&select"
                     var index = openGetFile.length
                     openGetFile.push([element, args.callBack])
