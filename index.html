@@ -225,7 +225,12 @@
           }
         }
         else {
-          document.getElementById("klindows").style.backgroundImage = "url(wallpapers/default.jpg)"
+          if (localStorage.getItem("mode") == "dark") {
+            document.getElementById("klindows").style.backgroundImage = "url(wallpapers/dark.jpg)"
+          }
+          else {
+            document.getElementById("klindows").style.backgroundImage = "url(wallpapers/light.jpg)"
+          }
         }
       }
       else {
@@ -747,9 +752,9 @@
         <p>Zvukové efekty <a
             href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=14572">Pixabay</a>
         </p>
-        <p>6.1 trialer song by <a href="https://www.chosic.com/free-music/all/">www.chosic.com/free-music/all/</a></p>
         <p>Další ikony: <a href="https://www.flaticon.com/free-icons/downloading">Flaticon</a></p>
-        <p>Výchozí pozadí: <a href="https://www.freepik.com/free-vector/colourful-spiral-lines-wavy-background_7388088.htm">Freepik</a></p>
+        <p>Světlé výchozí pozadí: <a href="https://wallpapercave.com/w/wp8561104">WallpaperCave</a></p>
+        <p>Tmavé výchozí pozadí: <a href="https://www.freepik.com/free-vector/colourful-spiral-lines-wavy-background_7388088.htm">Freepik</a></p>
       </div>
       <div onclick="changewindowmain(this)" class="widgetList about Resizabl">
         <div class="widget-header">
@@ -1050,7 +1055,7 @@
         </select></span><br>
         <p class="helptext"></p>
         <span>Název: <input type="text" class="packagename"></span>
-        <button onclick="PackageInstaller.installPackage(this.parentElement)">Nainstlovat</button>
+        <button onclick="PackageInstaller.installPackage(this.parentElement)">Nainstalovat</button>
       </div>
     </div>
     <div id="klindows" class="klindows">
@@ -1276,7 +1281,7 @@
         <img id="intrnetyes" src="icons/internet.png" style="float: right;" class="ikonadown"
           onclick="windows.open('info')">
         <img src="/icons/audioeditor.png" style="float: right; display: block;" class="ikonadown audioLevelEditorIcon"
-          onclick="AudioEditor.toggle(this)">ř
+          onclick="AudioEditor.toggle(this)">
       </div>
     </div>
 
