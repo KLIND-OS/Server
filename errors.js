@@ -1,7 +1,7 @@
 function error(code, info, app) {
     if (developermode == "false") {
         new Howl({
-            src: ['sounds/error.mp3'],
+            src: ["sounds/error.mp3"],
             volume: 1,
             autoplay: true,
         });

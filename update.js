@@ -1,6 +1,6 @@
 function updatereload() {
     if (connectedsss == "false") {
-        spawnNotification("Aktualizace", 'Internet není k dispozici! Aktualizace nelze načíst!')
+        spawnNotification("Aktualizace", "Internet není k dispozici! Aktualizace nelze načíst!");
     }
     else {
         localStorage.setItem("adasjdsad", "dbajsdbjhansbd");
@@ -10,7 +10,7 @@ function updatereload() {
 function detectUpdates() {
     if (localStorage.getItem("updatesklindows") != null) {
         try {
-            const updateshotove = localStorage.getItem("updatesklindows")
+            const updateshotove = localStorage.getItem("updatesklindows");
             if (version == updateshotove) {
 
             }

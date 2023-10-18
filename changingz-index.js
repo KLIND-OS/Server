@@ -2,7 +2,7 @@ var openedwindowindex;
 var pejfd = document.querySelector(".koks");
 function changewindowmain(asdasdasdasdd) {
     openedwindowindex = asdasdasdasdd;
-    trychange()
+    trychange();
 }
 function trychange() {
     pejfd.classList.remove("windowedmtjhjass");

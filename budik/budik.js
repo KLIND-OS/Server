@@ -12,16 +12,16 @@ setInterval(()=>{
     let minutess = dates.getMinutes();
     let secondss = dates.getSeconds();
     if(hourss > 24){
-      hourss = hourss - 24;
+        hourss = hourss - 24;
     }
     if(secondss < 10){
-      secondss = "0" + secondss;
+        secondss = "0" + secondss;
     }
     if(minutess < 10){
-      minutess = "0" + minutess;
+        minutess = "0" + minutess;
     }
     if(hourss < 10){
-      hourss = "0" + hourss;
+        hourss = "0" + hourss;
     }
     timebudik = hourss + ":" + minutess;
 });
@@ -32,7 +32,7 @@ function addbudik() {
         if (budik != "") {
             budikarray[budikarraymax] = budik;
             budikarraymax++;
-            budikasndjbasjdbhajksbdkjasdjk++
+            budikasndjbasjdbhajksbdkjasdjk++;
             document.getElementById("budiky").innerHTML = "Active alarms: "+budikarray.join()+"<br>"+"Number of active alarms: "+budikasndjbasjdbhajksbdkjasdjk;
             localstoragebudiky = budikarray.join("-");
             localStorage.setItem("budiky", localstoragebudiky);
@@ -50,10 +50,10 @@ setInterval(() => {
     if (budikarray.indexOf(timebudik)>-1) {
         budikarray[budikarray.indexOf(timebudik)]="";
         soundssadsadasdsa = new Howl({
-            src: ['/alarm.mp3'],
+            src: ["/alarm.mp3"],
             volume: 0.5
         });
-        soundssadsadasdsa.play()
+        soundssadsadasdsa.play();
         budikasndjbasjdbhajksbdkjasdjk--;
         document.getElementById("budiky").innerHTML = "Active alarms: "+budikarray.join()+"<br>"+"Number of active alarms: "+budikasndjbasjdbhajksbdkjasdjk;
         localstoragebudiky = budikarray.join("-");
@@ -63,13 +63,13 @@ setInterval(() => {
 }, 1);
 function loadbudiky() {
     try {
-    localstoragebudiky = localStorage.getItem("budiky");
-    if (localstoragebudiky != null||localstoragebudiky != ""|localstoragebudiky != " "|localstoragebudiky != undefined) {
-        budikarray = localstoragebudiky.split("-");
-        budikarraymax = budikarray.length;
-        budikasndjbasjdbhajksbdkjasdjk = budikarray.length;
-        document.getElementById("budiky").innerHTML = "Active alarms: "+budikarray.join()+"<br>"+"Number of active alarms: "+budikasndjbasjdbhajksbdkjasdjk;
-    }}catch {}
+        localstoragebudiky = localStorage.getItem("budiky");
+        if (localstoragebudiky != null||localstoragebudiky != ""|localstoragebudiky != " "|localstoragebudiky != undefined) {
+            budikarray = localstoragebudiky.split("-");
+            budikarraymax = budikarray.length;
+            budikasndjbasjdbhajksbdkjasdjk = budikarray.length;
+            document.getElementById("budiky").innerHTML = "Active alarms: "+budikarray.join()+"<br>"+"Number of active alarms: "+budikasndjbasjdbhajksbdkjasdjk;
+        }}catch {}
 }
 function deleteallbudiky() {
     budikarray = new Array();

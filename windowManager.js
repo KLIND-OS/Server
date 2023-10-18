@@ -1,4 +1,4 @@
-var videofileids = []
+var videofileids = [];
 
 var windows = {
     list: {
@@ -6,24 +6,24 @@ var windows = {
         classes: [".poznamky", ".kalkulacka", ".stopky", ".nastaveni", ".browser", ".terminal", ".player", ".informationklindows", ".reg", ".kalendar", ".budik", ".prevodsys", ".updateklind", ".napoveda", ".faceset", ".record", ".filemanager", ".fileproperties", ".fileeditor", ".zdroje", ".about", ".audioLevelEditor", ".installapp", ".procesy", ".viewtext", ".musicplayer", ".cleaner", ".emergencymenu", ".wordeditor", ".sheetseditor", ".diskmanager", ".getstarted", ".screenfilter", ".imageeditor", ".printermanager", ".packageinstaller"],
         ikonadown: [".poznamkyikonadown", ".kalkikonadown", ".stopikonadown", ".nasikonadown", ".browikonadown", ".terikonadown", ".playerikonadown", ".infoikonadown", ".regikonadown", ".kalenikonadown", ".budikikonadown", ".prevodikonadown", ".updateikonadown", ".napikonadown", ".facesetikonadown", ".recordikonadown", ".filemanagerikonadown", false, ".fileeditorikonadown", ".zdrojeikonadown", ".aboutikonadown", false, ".installappikonadown", ".procesyikonadown", false, ".musicplayerikonadown", ".cleanerikonadown", false, ".wordeditorikonadown", ".sheeteditorikonadown", ".diskmanagerikonadown", false, ".screenfilterikonadown", ".imageeditorikonadown", ".printermanagerikonadown", false],
         special: {
-            poznamky: [(element) => { loadpoznamky(element) }, () => { closepoznamkymenu(); closepoznamkynas(); }, false],
+            poznamky: [(element) => { loadpoznamky(element); }, () => { closepoznamkymenu(); closepoznamkynas(); }, false],
             info: [infoApp.loadInfo, false, false],
             my: [(element) => { element.querySelector("#myaccount").innerHTML = localStorage.getItem("username"); }, false, false],
             filemanager: [(element, args) => {
-                var url = "/filemanager/"
-                if (localStorage.getItem('mode') == "dark") url += "?dark"
+                var url = "/filemanager/";
+                if (localStorage.getItem("mode") == "dark") url += "?dark";
 
                 if (args && args.mode == "select") {
-                    if (url.indexOf("?") == -1) url += "?select"
-                    else url += "&select"
-                    var index = openGetFile.length
-                    openGetFile.push([element, args.callBack])
-                    element.querySelector(".close").setAttribute("onclick", "openGetFile[" + index + "][1]['closed']();windows.close(this,'filemanager')")
-                    element.querySelector(".mini").remove()
+                    if (url.indexOf("?") == -1) url += "?select";
+                    else url += "&select";
+                    var index = openGetFile.length;
+                    openGetFile.push([element, args.callBack]);
+                    element.querySelector(".close").setAttribute("onclick", "openGetFile[" + index + "][1]['closed']();windows.close(this,'filemanager')");
+                    element.querySelector(".mini").remove();
                     element.querySelector(".headerclass span").textContent = "Vyberte soubor";
-                    url += "&index=" + index
+                    url += "&index=" + index;
                 }
-                element.querySelector("#filemanageriframe").src = url
+                element.querySelector("#filemanageriframe").src = url;
             }, false, false],
             fileeditor: [
                 (element, args) => {
@@ -32,8 +32,8 @@ var windows = {
                         element.querySelector(".fileeditorimage").style.display = "none";
                         element.querySelector(".fileeditortext").style.display = "block";
                         element.querySelector(".fileeditorvideo").style.display = "none";
-                        element.querySelector("#textareafileeditorimage").value = file[4]
-                        element.setAttribute("filelocation", file[5] + file[0])
+                        element.querySelector("#textareafileeditorimage").value = file[4];
+                        element.setAttribute("filelocation", file[5] + file[0]);
                         element.querySelector(".filesavefileconfig").style.display = "block";
                         element.querySelector(".imgwallpaperfileconfig").style.display = "none";
 
@@ -42,8 +42,8 @@ var windows = {
                         element.querySelector(".fileeditorimage").style.display = "block";
                         element.querySelector(".fileeditortext").style.display = "none";
                         element.querySelector(".fileeditorvideo").style.display = "none";
-                        element.querySelector("#fileeditorimageimg").src = file[4]
-                        element.setAttribute("filelocation", file[5] + file[0])
+                        element.querySelector("#fileeditorimageimg").src = file[4];
+                        element.setAttribute("filelocation", file[5] + file[0]);
                         element.querySelector(".filesavefileconfig").style.display = "none";
                         element.querySelector(".imgwallpaperfileconfig").style.display = "block";
                     }
@@ -53,14 +53,14 @@ var windows = {
                         element.querySelector(".filesavefileconfig").style.display = "none";
                         element.querySelector(".fileeditorvideo").style.display = "flex";
                         element.querySelector(".imgwallpaperfileconfig").style.display = "none";
-                        element.querySelector("video source").setAttribute("type", file[2])
-                        element.querySelector("video source").setAttribute("src", file[4])
+                        element.querySelector("video source").setAttribute("type", file[2]);
+                        element.querySelector("video source").setAttribute("src", file[4]);
                         const player = new Plyr(element.querySelectorAll("#player"), {
                             iconUrl: "icons/plyr.svg"
-                        })
-                        videofileids.push(player)
-                        element.setAttribute("plyr-id", videofileids.length - 1)
-                        element.setAttribute("file-type", "video")
+                        });
+                        videofileids.push(player);
+                        element.setAttribute("plyr-id", videofileids.length - 1);
+                        element.setAttribute("file-type", "video");
                         player.play();
                     }
                     else {
@@ -68,12 +68,12 @@ var windows = {
                         element.querySelector(".fileeditortext").style.display = "block";
                         element.querySelector(".fileeditoraudio").style.display = "none";
                         element.querySelector(".fileeditorvideo").style.display = "none";
-                        element.querySelector("#textareafileeditorimage").value = file[4]
-                        element.setAttribute("filelocation", file[5] + file[0])
+                        element.querySelector("#textareafileeditorimage").value = file[4];
+                        element.setAttribute("filelocation", file[5] + file[0]);
                         element.querySelector(".filesavefileconfig").style.display = "block";
                         element.querySelector(".imgwallpaperfileconfig").style.display = "none";
                     }
-                    if (localStorage.getItem('mode') == "dark") {
+                    if (localStorage.getItem("mode") == "dark") {
                         element.querySelector("#textareafileeditorimage").style.color = "white";
                     }
                     else {
@@ -83,26 +83,26 @@ var windows = {
                 (win) => {
                     if (win.getAttribute("file-type") == "video") {
                         const windowId = win.getAttribute("plyr-id");
-                        videofileids[windowId].destroy()
-                        delete videofileids[windowId]
+                        videofileids[windowId].destroy();
+                        delete videofileids[windowId];
                     }
                 },
                 false
             ],
             brow: [(element, args) => {
-                Browser.init(element)
+                Browser.init(element);
                 if (args) {
                     setTimeout(() => {
-                        Browser.changeUrl(element, args, true)
-                        element.querySelector("#url").value = args
+                        Browser.changeUrl(element, args, true);
+                        element.querySelector("#url").value = args;
                     }, 300);
                 }
             }, false, false],
             installapp: [
                 (element, args) => {
-                    CustomApp.loadWindow(element)
+                    CustomApp.loadWindow(element);
                     if (args?.file) {
-                        CustomApp.loadFromUri(args.file[4])
+                        CustomApp.loadFromUri(args.file[4]);
                     }
                 },
                 false, false
@@ -110,10 +110,10 @@ var windows = {
             viewtext: [
                 (element, args) => {
                     if (args.text) {
-                        element.querySelector('textarea').value = args.text.toString();
+                        element.querySelector("textarea").value = args.text.toString();
                     }
                     if (args.title) {
-                        element.querySelector('.widget-header .headerclass span').textContent = args.title.toString();
+                        element.querySelector(".widget-header .headerclass span").textContent = args.title.toString();
                     }
                 },
                 false, false
@@ -129,11 +129,11 @@ var windows = {
             ter: [
                 (win, args) => {
                     if (args && args.file) {
-                        var wind = win.querySelector("iframe").contentWindow
+                        var wind = win.querySelector("iframe").contentWindow;
 
                         wind.addEventListener("DOMContentLoaded", () => {
-                            wind.sandbox.specialCommands(":run "+args.file)
-                        })
+                            wind.sandbox.specialCommands(":run "+args.file);
+                        });
                     }
                 },
                 false,
@@ -144,7 +144,7 @@ var windows = {
                     if (!(args && args.file)) {
                         throw new Error("File must be specified");
                     }
-                    win.setAttribute("filelocation", args.file[5] + args.file[0])
+                    win.setAttribute("filelocation", args.file[5] + args.file[0]);
 
                     function convertDataUriToHtml(dataUri, successCallback, errorCallback) {
                         const base64Data = dataUri.split(",")[1];
@@ -152,43 +152,43 @@ var windows = {
                         const arrayBuffer = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0)).buffer;
                     
                         mammoth.convertToHtml({ arrayBuffer })
-                        .then((result) => {
-                            successCallback(result.value);
-                        })
-                        .catch((error) => { errorCallback(error)})
+                            .then((result) => {
+                                successCallback(result.value);
+                            })
+                            .catch((error) => { errorCallback(error);});
                     }
 
                     if (localStorage.getItem("mode") == "dark") {
-                        var skin = "oxide-dark"
+                        var skin = "oxide-dark";
                     }
                     else {
-                        var skin = "oxide"
+                        var skin = "oxide";
                     }
 
                     tinymce.init({
                         selector: ".window.wordeditor .wordeditor-element",
-                        height: '400px',
-                        menubar: 'edit insert format',
-                        plugins: 'advlist autolink lists link image charmap anchor',
-                        toolbar: 'fontselect fontsizeselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+                        height: "400px",
+                        menubar: "edit insert format",
+                        plugins: "advlist autolink lists link image charmap anchor",
+                        toolbar: "fontselect fontsizeselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
                         theme: "silver",
                         skin: skin,
                         resize: false,
                         height: "calc(100% - 20px)",
                         language: "cs",
                         setup: function (editor) {
-                            editor.on('init', function () {
+                            editor.on("init", function () {
                                 if (args.file[2] == "text/html") {
-                                    editor.setContent(args.file[4])
+                                    editor.setContent(args.file[4]);
                                 }
                                 else {
                                     convertDataUriToHtml(args.file[4], (html)  => {
-                                        editor.setContent(html)
-                                    }, (error) => console.error(error))
+                                        editor.setContent(html);
+                                    }, (error) => console.error(error));
                                 }
                             });
                         }
-                    })
+                    });
 
                 },
                 false,
@@ -197,7 +197,7 @@ var windows = {
             sheetseditor: [
                 (win, args) => {
                     if (args && args.file) {
-                        SheetsEditor.init(win, args.file)
+                        SheetsEditor.init(win, args.file);
                     }
                     else {
                         throw new Error("File must be specified");
@@ -235,20 +235,20 @@ var windows = {
         appIds: {}
     },
     open: (name, args) => {
-        var location = windows.list.names.indexOf(name)
-        var classofelement = windows.list.classes[location]
+        var location = windows.list.names.indexOf(name);
+        var classofelement = windows.list.classes[location];
         if (classofelement == false) {
             error("0x0000144", "Pokus o otevření pragramu které nemá okno.", "KLIND OS | Window Manager");
         }
         else {
-            var special = windows.list.special[name]
-            var element = document.querySelector(".oknadisplaynone").querySelector(classofelement)
-            let newelement = element.cloneNode(true)
-            newelement.classList.add("window")
-            newelement.classList.add("openedwin")
-            newelement.style.opacity = "0"
-            newelement.style.scale = "0.9"
-            document.querySelector(".oknepatrizde").appendChild(newelement)
+            var special = windows.list.special[name];
+            var element = document.querySelector(".oknadisplaynone").querySelector(classofelement);
+            let newelement = element.cloneNode(true);
+            newelement.classList.add("window");
+            newelement.classList.add("openedwin");
+            newelement.style.opacity = "0";
+            newelement.style.scale = "0.9";
+            document.querySelector(".oknepatrizde").appendChild(newelement);
             reloaddraggable();
             if (localStorage.getItem("mode") == "dark") {
                 var x, i;
@@ -269,25 +269,25 @@ var windows = {
             newelement.style.opacity = "1";
             newelement.style.scale = "1";
 
-            newelement.click()
+            newelement.click();
             if (special != undefined && special[0] !== false) {
-                special[0](newelement, args)
+                special[0](newelement, args);
             }
-            return newelement
+            return newelement;
         }
     },
     close: (element, name) => {
-        var el = element.parentElement.parentElement.parentElement
-        var special = windows.list.special[name]
+        var el = element.parentElement.parentElement.parentElement;
+        var special = windows.list.special[name];
         if (special != undefined && special[1] !== false) {
-            var returnValue = special[1](el)
+            var returnValue = special[1](el);
         }
         else {
-            var returnValue = undefined
+            var returnValue = undefined;
         }
         if (returnValue !== true) {
             el.style.scale = "0.9";
-            el.style.opacity = "0"
+            el.style.opacity = "0";
     
             setTimeout(() => {
                 el.remove();
@@ -295,10 +295,10 @@ var windows = {
         }
     },
     mini: (element, name) => {
-        var location = windows.list.names.indexOf(name)
-        var special = windows.list.special[name]
-        var ikonadown = windows.list.ikonadown[location]
-        var mainElement = element.parentElement.parentElement.parentElement
+        var location = windows.list.names.indexOf(name);
+        var special = windows.list.special[name];
+        var ikonadown = windows.list.ikonadown[location];
+        var mainElement = element.parentElement.parentElement.parentElement;
         if (ikonadown === false) {
             error("0x0000142", "Pokus o minimalizaci okna, které nemá script na minimalizaci.", "KLIND OS | Window Manager");
         }
@@ -312,53 +312,53 @@ var windows = {
             if (special != undefined && special[2] !== false) {
                 special[2](mainElement);
             }
-            var el = document.querySelector(".downiconsApps").appendChild(newElement)
+            var el = document.querySelector(".downiconsApps").appendChild(newElement);
             mainElement.style.opacity = "0";
             mainElement.style.scale = "0.9";
 
             setTimeout(() => {
                 mainElement.classList.remove("openedwin");
-            }, 200)
+            }, 200);
             setTimeout(() => {
-                el.style.transform = ""
+                el.style.transform = "";
                 el.addEventListener("click", () => {
-                    var appdiv = document.querySelector(".appdiv")
-                    appdiv.querySelector(".canvasSection").innerHTML = ""
+                    var appdiv = document.querySelector(".appdiv");
+                    appdiv.querySelector(".canvasSection").innerHTML = "";
                     appdiv.style.display = "none";
-                })
+                });
                 el.addEventListener("mouseover", (e) => {
                     if (localStorage.getItem("filePreview")) {
                         var el = e.target;
                         var id = el.getAttribute("windowId");
-                        var element = windows.list.appIds[id]
+                        var element = windows.list.appIds[id];
                         element.style.display = "block";
-                        var appdiv = document.querySelector(".appdiv")
-                        appdiv.querySelector(".canvasSection").innerHTML = '<div class="loading">Loading&#8230;</div>'
+                        var appdiv = document.querySelector(".appdiv");
+                        appdiv.querySelector(".canvasSection").innerHTML = "<div class=\"loading\">Loading&#8230;</div>";
                         appdiv.querySelector("h1").textContent = element.querySelector(".headerclass span").textContent;
                         var left = e.clientX - 150;
                         if (left < 10) {
-                            appdiv.style.left = "10px"
+                            appdiv.style.left = "10px";
                         }
                         else {
-                            appdiv.style.left = left + "px"
+                            appdiv.style.left = left + "px";
                         }
                         appdiv.style.display = "block";
-                        element.style.clipPath = "inset(0 100% 0 0)"
+                        element.style.clipPath = "inset(0 100% 0 0)";
                         html2canvas(element).then(function (canvas) {
                             canvas.style.height = "auto";
                             canvas.style.width = "auto";
                             canvas.style.maxHeight = "100%";
                             canvas.style.maxWidth = "100%";
                             canvas.style.borderRadius = "10px";
-                            element.style.clipPath = ""
+                            element.style.clipPath = "";
                             element.style.display = "none";
-                            appdiv.querySelector(".canvasSection").innerHTML = ""
-                            appdiv.querySelector(".canvasSection").appendChild(canvas)
+                            appdiv.querySelector(".canvasSection").innerHTML = "";
+                            appdiv.querySelector(".canvasSection").appendChild(canvas);
                         });
                     }
-                })
+                });
                 el.addEventListener("mouseout", (e) => {
-                    var appdiv = document.querySelector(".appdiv")
+                    var appdiv = document.querySelector(".appdiv");
                     appdiv.querySelector(".canvasSection").innerHTML = "";
                     appdiv.style.display = "none";
                 });
@@ -376,22 +376,22 @@ var windows = {
     },
     miniOpen: (_, thiselement) => {
         setTimeout(() => {
-            var id = thiselement.getAttribute("windowId")
+            var id = thiselement.getAttribute("windowId");
             var mainElement = windows.list.appIds[id];
             mainElement.classList.add("openedwin");
             setTimeout(() => {
                 mainElement.style.opacity = "1";
                 mainElement.style.scale = "1";
-                mainElement.click()
-                thiselement.style.transform = "scale(0)"
+                mainElement.click();
+                thiselement.style.transform = "scale(0)";
                 windows.list.appIds[id] = undefined;
                 setTimeout(() => {
                     thiselement.remove();
                 }, 200);
-            },10)
+            },10);
         }, 150);
     }
-}
+};
 
 
 
