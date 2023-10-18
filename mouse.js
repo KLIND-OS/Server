@@ -1,7 +1,7 @@
 var x;
 var y;
 var cursortype = "normal";
-document.addEventListener('mousemove', e => {
+document.addEventListener("mousemove", e => {
     const tgt = e.target;
     const classofelement = tgt.classList.value;
     if (
@@ -33,7 +33,7 @@ document.addEventListener('mousemove', e => {
     }
     else {
         cursortype = "normal";
-        document.getElementById("secondcursor").style.backgroundColor = "black"
+        document.getElementById("secondcursor").style.backgroundColor = "black";
         document.getElementById("firstcursor").style.width = "2em";
         document.getElementById("firstcursor").style.height = "2em";
         document.getElementById("firstcursor").style.marginLeft = "0em";
@@ -77,10 +77,10 @@ document.addEventListener("mouseover", printMouseover);
 document.addEventListener("mouseout", printMouseout);
 function mouseDown() {
     if (cursortype == "pointer") {
-        cursortype = "downpointer"
+        cursortype = "downpointer";
     }
     else {
-        cursortype = "down"
+        cursortype = "down";
     }
     document.getElementById("firstcursor").style.width = "1em";
     document.getElementById("firstcursor").style.height = "1em";
@@ -93,11 +93,11 @@ function mouseUp() {
         document.getElementById("firstcursor").style.height = "3em";
         document.getElementById("firstcursor").style.marginLeft = "-0.5em";
         document.getElementById("firstcursor").style.marginTop = "-0.5em";
-        cursortype = "normal"
+        cursortype = "normal";
     }
     else {
-        cursortype = "normal"
-        document.getElementById("secondcursor").style.backgroundColor = "black"
+        cursortype = "normal";
+        document.getElementById("secondcursor").style.backgroundColor = "black";
         document.getElementById("firstcursor").style.width = "2em";
         document.getElementById("firstcursor").style.height = "2em";
         document.getElementById("firstcursor").style.marginLeft = "0em";

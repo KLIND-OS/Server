@@ -11,11 +11,11 @@ function allStorage() {
     return archive;
 }
 function downloadAsFile(filename, text) {
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    element.setAttribute('download', filename);
+    var element = document.createElement("a");
+    element.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(text));
+    element.setAttribute("download", filename);
 
-    element.style.display = 'none';
+    element.style.display = "none";
     document.body.appendChild(element);
 
     element.click();
@@ -24,30 +24,30 @@ function downloadAsFile(filename, text) {
 }
 
 function prevedsystem() {
-    var as = new Date
-    downloadAsFile(as.getDate().toString() + "." + (as.getMonth() + 1) + "." + as.toString().split(" ")[3] + ".klindos", JSON.stringify(allStorage()))
+    var as = new Date;
+    downloadAsFile(as.getDate().toString() + "." + (as.getMonth() + 1) + "." + as.toString().split(" ")[3] + ".klindos", JSON.stringify(allStorage()));
 }
 function submitnjahsbdjksabd(e) {
     control.fileManager.fileSelect({
         success: (file_array) => {
-            var result = JSON.parse(file_array[4])
+            var result = JSON.parse(file_array[4]);
             var make = false;
             for (var i = 0; i < result.length; i++) {
                 if (result[i][0] == "updatesklindows" && result[i][1] == version) {
                     make = true;
-                    break
+                    break;
                 }
             }
             if (make) {
-                localStorage.clear()
+                localStorage.clear();
                 for (var i = 0; i < result.length; i++) {
-                    localStorage.setItem(result[i][0], result[i][1])
+                    localStorage.setItem(result[i][0], result[i][1]);
                 }
-                window.location.reload()
+                window.location.reload();
             }
             else {
-                spawnNotification("Převod systému", "Tento soubor je na jinou verzi KLIND OS. Aktualizujte soubor.")
+                spawnNotification("Převod systému", "Tento soubor je na jinou verzi KLIND OS. Aktualizujte soubor.");
             }
         },closed: () => {}
-    })
+    });
 }

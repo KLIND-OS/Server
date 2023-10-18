@@ -26,7 +26,7 @@ var Power = {
     reload: () => {
         document.querySelector(".inner-box-power").classList.remove("openBackground");
         setTimeout(() => {
-            LowLevelApi.Power.reboot()
+            LowLevelApi.Power.reboot();
         }, 800);
     },
     turnoff: () => {
@@ -35,4 +35,4 @@ var Power = {
             turnoff();
         }, 800);
     }
-}
+};

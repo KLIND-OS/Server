@@ -33,13 +33,13 @@ class LocalStorage {
         "bootType",
         "getStartedClosed",
         "color-filters",
-    ]
+    ];
     static startsWith = [
         "tinymce-",
         "SandboxConsole"
-    ]
-    static customApps = []
+    ];
+    static customApps = [];
     static getAllLocalStorages() {
-        return [LocalStorage.systemLocalStorage.concat(LocalStorage.customApps), LocalStorage.startsWith]
+        return [LocalStorage.systemLocalStorage.concat(LocalStorage.customApps), LocalStorage.startsWith];
     }
 }

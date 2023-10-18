@@ -1,7 +1,7 @@
 var x;
 var y;
 var cursortype;
-document.addEventListener('mousemove', e => {
+document.addEventListener("mousemove", e => {
     const tgt = e.target;
     const classofelement = tgt.classList.value;
     if (
@@ -15,7 +15,7 @@ document.addEventListener('mousemove', e => {
     }
     else {
         cursortype = "normal";
-        document.getElementById("secondcursor").style.backgroundColor = "black"
+        document.getElementById("secondcursor").style.backgroundColor = "black";
         document.getElementById("firstcursor").style.width = "2em";
         document.getElementById("firstcursor").style.height = "2em";
         document.getElementById("firstcursor").style.marginLeft = "0em";
@@ -50,7 +50,7 @@ function mouseDown() {
 
 }
 function mouseUp() {
-    document.getElementById("secondcursor").style.backgroundColor = "black"
+    document.getElementById("secondcursor").style.backgroundColor = "black";
     document.getElementById("firstcursor").style.width = "2em";
     document.getElementById("firstcursor").style.height = "2em";
     document.getElementById("firstcursor").style.marginLeft = "0em";

@@ -15,8 +15,8 @@ function getSvatek() {
     let d = new Date();
     let den = d.getDate()-1;
     let mesic = d.getMonth();
-    return svatky[mesic][den]
+    return svatky[mesic][den];
 }
 setInterval(() => {
     document.querySelector("#svatekname").textContent = getSvatek();
-}, 5000)
+}, 5000);

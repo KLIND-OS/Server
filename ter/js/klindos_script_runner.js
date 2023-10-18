@@ -4,7 +4,7 @@ function runKLINDOSScript(path) {
         return Sandbox.model.addHistory({
             command: command,
             result: "This is not a ks file. Use only .ks file!"
-        })
+        });
     }
     else {
         var content = mainFileManager.getContent(path);
@@ -19,12 +19,12 @@ function runKLINDOSScript(path) {
                 command: command,
                 result: "Starting .ks script..."
             });
-            var result = content.split("\n")
+            var result = content.split("\n");
             for (var i = 0; i < result.length; i++) {
-                var scriptcom = result[i]
+                var scriptcom = result[i];
                 if (scriptcom.indexOf("echo: ") == 0) {
                     //echo
-                    var splited = scriptcom.split('"')[1]
+                    var splited = scriptcom.split("\"")[1];
                     this.model.addHistory({
                         command: "",
                         result: splited
@@ -36,7 +36,7 @@ function runKLINDOSScript(path) {
                 }
                 else if (scriptcom.indexOf("run:: ") == 0) {
                     //run js
-                    var runcom = scriptcom.replace("run:: ", "")
+                    var runcom = scriptcom.replace("run:: ", "");
                     this.model.addHistory({
                         command: "",
                         result: eval(runcom)
@@ -44,8 +44,8 @@ function runKLINDOSScript(path) {
                 }
                 else if (scriptcom.indexOf("run: ") == 0) {
                     //run js
-                    var runcom = scriptcom.replace("run: ", "")
-                    eval(runcom)
+                    var runcom = scriptcom.replace("run: ", "");
+                    eval(runcom);
                 }
                 else {
                     return this.model.addHistory({
@@ -54,7 +54,7 @@ function runKLINDOSScript(path) {
                     });
                 }
             }
-            return true
+            return true;
         }
     }
 }

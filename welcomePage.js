@@ -14,7 +14,7 @@ function loadWelcomePage() {
 function skipwelcomeVideo() {
     document.querySelector(".welcomePage").style.display = "none";
     document.querySelector(".welcomePage video").pause();
-    document.querySelector(".welcomePage video").onended = () => { }
+    document.querySelector(".welcomePage video").onended = () => { };
     localStorage.removeItem("welcomePage");
 }
 function welcomePageCheck() {

@@ -2,7 +2,7 @@ var OSName = "Unknown OS";
 if (navigator.appVersion.indexOf("Win") != -1) OSName = "Windows";
 else if (navigator.appVersion.indexOf("Mac") != -1) OSName = "MacOS";
 else if (navigator.appVersion.indexOf("Linux") != -1) OSName = "Linux";
-else OSName = "Other"
+else OSName = "Other";
 
 if (developermode == "false") {
     if (OSName == "MacOS") {

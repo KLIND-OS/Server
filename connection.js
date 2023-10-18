@@ -1,4 +1,4 @@
-var connectedsss = true
+var connectedsss = true;
 function monitorConnection() {
     try {
         var predchozisad = "true";
@@ -20,10 +20,10 @@ function monitorConnection() {
                 } else {
                     offline();
                 }
-            }
+            };
             xhr.onerror = () => {
                 offline();
-            }
+            };
             xhr.send();
         }
         function offline() {

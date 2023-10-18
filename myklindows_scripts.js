@@ -1,22 +1,22 @@
 function changepass(element) {
     var newpass = hashCode(element.querySelector("#changepassinputvalue").value);
     if (login == "false") {
-        localStorage.setItem("reg.login", newpass + "**.false")
+        localStorage.setItem("reg.login", newpass + "**.false");
     }
     else if (login == "true") {
-        localStorage.setItem("reg.login", newpass + "**.true")
+        localStorage.setItem("reg.login", newpass + "**.true");
     }
     if (consolelog == "false") {
-        localStorage.setItem("reg.consolelog", newpass + "**.false")
+        localStorage.setItem("reg.consolelog", newpass + "**.false");
     }
     else if (consolelog == "true") {
-        localStorage.setItem("reg.consolelog", newpass + "**.true")
+        localStorage.setItem("reg.consolelog", newpass + "**.true");
     }
     if (autolocklogin == "false") {
-        localStorage.setItem("reg.autolocklogin", newpass + "**.false")
+        localStorage.setItem("reg.autolocklogin", newpass + "**.false");
     }
     else if (autolocklogin == "false") {
-        localStorage.setItem("reg.autolocklogin", newpass + "**.true")
+        localStorage.setItem("reg.autolocklogin", newpass + "**.true");
     }
     localStorage.setItem("password", newpass);
     window.location.reload();

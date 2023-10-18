@@ -1,7 +1,7 @@
 function loadreg() {
     if (localStorage.getItem("reg.login") != null) {
         setTimeout(() => {
-            const reglogin = localStorage.getItem("reg.login")
+            const reglogin = localStorage.getItem("reg.login");
             if (reglogin == passwordcookie + "**." + "false") {
                 document.querySelector(".login").classList.add("displaynone");
                 document.querySelector(".login").style.opacity = "0";
@@ -19,7 +19,7 @@ function loadreg() {
         setTimeout(() => {
             const reglogins = localStorage.getItem("reg.consolelog");
             if (reglogins == passwordcookie + "**." + "false") {
-                consolelog = "false"
+                consolelog = "false";
             }
             else if (reglogins == passwordcookie + "**." + "true") { }
             else if (reglogins == "") { }
@@ -32,7 +32,7 @@ function loadreg() {
         setTimeout(() => {
             const regloginss = localStorage.getItem("reg.autolocklogin");
             if (regloginss == passwordcookie + "**." + "false") {
-                autolocklogin = "false"
+                autolocklogin = "false";
             }
             else if (regloginss == passwordcookie + "**." + "true") { }
             else if (regloginss == "") { }
@@ -46,16 +46,16 @@ function submitreg(elmnt) {
     var change = elmnt.querySelector("#changesss").value;
     var values = elmnt.querySelector("#valuesss").value;
     if (change == "login") {
-        localStorage.setItem("reg.login", passwordcookie + "**." + values)
-        spawnNotification("Editor registrů", "Registr login byl aktualizován!")
+        localStorage.setItem("reg.login", passwordcookie + "**." + values);
+        spawnNotification("Editor registrů", "Registr login byl aktualizován!");
     }
     else if (change == "consolelog") {
-        localStorage.setItem("reg.consolelog", passwordcookie + "**." + values)
-        spawnNotification("Editor registrů", "Registr consolelog byl aktualizován!")
+        localStorage.setItem("reg.consolelog", passwordcookie + "**." + values);
+        spawnNotification("Editor registrů", "Registr consolelog byl aktualizován!");
     }
     else if (change == "autolocklogin") {
-        localStorage.setItem("reg.autolocklogin", passwordcookie + "**." + values)
-        spawnNotification("Editor registrů", "Registr autolocklogin byl aktualizován!")
+        localStorage.setItem("reg.autolocklogin", passwordcookie + "**." + values);
+        spawnNotification("Editor registrů", "Registr autolocklogin byl aktualizován!");
     }
     else {
 

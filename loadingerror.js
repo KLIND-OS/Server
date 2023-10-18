@@ -2,7 +2,7 @@ setTimeout(() => {
     var isloadid = "";
     try { isloadid = document.querySelector(".displaynoneimpor").classList[1] == "displaynoneimpor"; }
     catch {
-        isloadid = false
+        isloadid = false;
     }
     if (isloadid == false) {
         setTimeout(() => {
