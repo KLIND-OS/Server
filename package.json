@@ -1,0 +1,19 @@
+{
+  "name": "klind-os",
+  "version": "1.0.0",
+  "description": "Zde se ukládá verze KLIND OS která běží na serveru. Více info zde: http://jzitnik.is-a.dev",
+  "main": "EasyJS.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lintfix": "eslint . --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.51.0"
+  }
+}
