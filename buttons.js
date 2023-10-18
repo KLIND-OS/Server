@@ -162,6 +162,7 @@ var mode = {
             x[i].classList.remove("black");
         }
         localStorage.setItem("mode", "light");
+        if (localStorage.getItem("background") == null) document.getElementById("klindows").style.backgroundImage = "url(wallpapers/light.jpg)"
         fileManagerOpen();
     },
     dark: () => {
@@ -172,6 +173,7 @@ var mode = {
             x[i].classList.add("black");
         }
         localStorage.setItem("mode", "dark");
+        if (localStorage.getItem("background") == null) document.getElementById("klindows").style.backgroundImage = "url(wallpapers/dark.jpg)"
         fileManagerOpen();
     }
 }
