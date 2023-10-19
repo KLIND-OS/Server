@@ -36,7 +36,8 @@ class LocalStorage {
     ];
     static startsWith = [
         "tinymce-",
-        "SandboxConsole"
+        "SandboxConsole",
+        "plyr",
     ];
     static customApps = [];
     static getAllLocalStorages() {
