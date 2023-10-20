@@ -2,9 +2,9 @@ var videofileids = [];
 
 var windows = {
     list: {
-        names: ["poznamky", "kalk", "stop", "nas", "brow", "ter", "player", "info", "reg", "kalen", "budik", "prevod", "update", "nap", "faceset", "record", "filemanager", "fileproperties", "fileeditor", "zdroje", "about", "audioLevelEditor", "installapp", "procesy", "viewtext", "musicplayer", "cleaner", "emergencyMenu", "wordeditor", "sheetseditor", "diskmanager", "getstarted", "screenfilter", "imageeditor", "printermanager", "packageinstaller"],
-        classes: [".poznamky", ".kalkulacka", ".stopky", ".nastaveni", ".browser", ".terminal", ".player", ".informationklindows", ".reg", ".kalendar", ".budik", ".prevodsys", ".updateklind", ".napoveda", ".faceset", ".record", ".filemanager", ".fileproperties", ".fileeditor", ".zdroje", ".about", ".audioLevelEditor", ".installapp", ".procesy", ".viewtext", ".musicplayer", ".cleaner", ".emergencymenu", ".wordeditor", ".sheetseditor", ".diskmanager", ".getstarted", ".screenfilter", ".imageeditor", ".printermanager", ".packageinstaller"],
-        ikonadown: [".poznamkyikonadown", ".kalkikonadown", ".stopikonadown", ".nasikonadown", ".browikonadown", ".terikonadown", ".playerikonadown", ".infoikonadown", ".regikonadown", ".kalenikonadown", ".budikikonadown", ".prevodikonadown", ".updateikonadown", ".napikonadown", ".facesetikonadown", ".recordikonadown", ".filemanagerikonadown", false, ".fileeditorikonadown", ".zdrojeikonadown", ".aboutikonadown", false, ".installappikonadown", ".procesyikonadown", false, ".musicplayerikonadown", ".cleanerikonadown", false, ".wordeditorikonadown", ".sheeteditorikonadown", ".diskmanagerikonadown", false, ".screenfilterikonadown", ".imageeditorikonadown", ".printermanagerikonadown", false],
+        names: ["poznamky", "kalk", "stop", "nas", "brow", "ter", "player", "info", "reg", "kalen", "budik", "prevod", "update", "nap", "faceset", "record", "filemanager", "fileproperties", "fileeditor", "zdroje", "about", "audioLevelEditor", "installapp", "procesy", "viewtext", "musicplayer", "cleaner", "emergencyMenu", "wordeditor", "sheetseditor", "diskmanager", "getstarted", "screenfilter", "imageeditor", "printermanager", "packageinstaller", "inputdevices"],
+        classes: [".poznamky", ".kalkulacka", ".stopky", ".nastaveni", ".browser", ".terminal", ".player", ".informationklindows", ".reg", ".kalendar", ".budik", ".prevodsys", ".updateklind", ".napoveda", ".faceset", ".record", ".filemanager", ".fileproperties", ".fileeditor", ".zdroje", ".about", ".audioLevelEditor", ".installapp", ".procesy", ".viewtext", ".musicplayer", ".cleaner", ".emergencymenu", ".wordeditor", ".sheetseditor", ".diskmanager", ".getstarted", ".screenfilter", ".imageeditor", ".printermanager", ".packageinstaller", ".inputdevices"],
+        ikonadown: [".poznamkyikonadown", ".kalkikonadown", ".stopikonadown", ".nasikonadown", ".browikonadown", ".terikonadown", ".playerikonadown", ".infoikonadown", ".regikonadown", ".kalenikonadown", ".budikikonadown", ".prevodikonadown", ".updateikonadown", ".napikonadown", ".facesetikonadown", ".recordikonadown", ".filemanagerikonadown", false, ".fileeditorikonadown", ".zdrojeikonadown", ".aboutikonadown", false, ".installappikonadown", ".procesyikonadown", false, ".musicplayerikonadown", ".cleanerikonadown", false, ".wordeditorikonadown", ".sheeteditorikonadown", ".diskmanagerikonadown", false, ".screenfilterikonadown", ".imageeditorikonadown", ".printermanagerikonadown", false, ".inputdevicesikonadown"],
         special: {
             poznamky: [(element) => { loadpoznamky(element); }, () => { closepoznamkymenu(); closepoznamkynas(); }, false],
             info: [infoApp.loadInfo, false, false],
@@ -228,6 +228,11 @@ var windows = {
             ],
             packageinstaller: [
                 (win, args) => PackageInstaller.init(win, args),
+                false,
+                false
+            ],
+            inputdevices: [
+                win => InputDevices.init(win),
                 false,
                 false
             ]

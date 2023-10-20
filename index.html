@@ -93,6 +93,7 @@
   <script src="printermanager.js"></script>
   <script src="packageinstaller.js"></script>
   <script src="donotdisturb.js"></script>
+  <script src="inputDevices.js"></script>
   <script>
     if (localStorage.getItem("installed") != "true") {
       window.location.replace("install.html");
@@ -1056,6 +1057,17 @@
         <span>Název: <input type="text" class="packagename"></span>
         <button onclick="PackageInstaller.installPackage(this.parentElement)">Nainstalovat</button>
       </div>
+      <div onclick="changewindowmain(this)" class="widgetList inputdevices Resizabl">
+        <div class="widget-header">
+          <div class="headerclass">
+            <span style="float: left;">Vstupní zvuková zařízení</span>
+            <div onclick="windows.close(this, 'inputdevices')" class="close"></div>
+            <div onclick="windows.mini(this, 'inputdevices')" class="mini"></div>
+          </div>
+        </div>
+        <h1>Výchozí vstupní zvukové zařízení</h1>
+        <select class="select"></select>
+      </div>
     </div>
     <div id="klindows" class="klindows">
       <div id="openedapps">
@@ -1172,13 +1184,15 @@
           <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('diskmanager');"
               icon="icons/diskmanager.png">Správce disků</a></li>
           <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('getstarted');"
-                icon="icons/getstarted.png">Prohlídka</a></li>
+              icon="icons/getstarted.png">Prohlídka</a></li>
           <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('screenfilter');"
-                icon="icons/screenfilter.png">Úprava obrazu</a></li>
+              icon="icons/screenfilter.png">Úprava obrazu</a></li>
           <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('imageeditor');"
-                icon="icons/image-editor.png">Editor obrázků</a></li>
+              icon="icons/image-editor.png">Editor obrázků</a></li>
           <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('printermanager');"
-                icon="icons/printer.png">Správce tiskáren</a></li>
+              icon="icons/printer.png">Správce tiskáren</a></li>
+          <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('inputdevices');"
+              icon="icons/inputdevices.png">Vstupní zvuková zařízení</a></li>
         </ul>
       </div>
       <div class="clockdate">
@@ -1256,6 +1270,8 @@
             src="icons/image-editor.png">
           <img onclick="windows.miniOpen('printermanager',this)" alt="Správce tiskáren" class="ikonadown printermanagerikonadown"
             src="icons/printer.png">
+          <img onclick="windows.miniOpen('inputdevices',this)" alt="Vstupní zvuková zařízení" class="ikonadown inputdevicesikonadown"
+            src="icons/inputdevices.png">
         </div>
         <div class="appdiv">
           <h1 style="height: 43px;">Unknown</h1>
