@@ -336,7 +336,6 @@ var windows = {
                         var el = e.target;
                         var id = el.getAttribute("windowId");
                         var element = windows.list.appIds[id];
-                        element.style.display = "block";
                         var appdiv = document.querySelector(".appdiv");
                         appdiv.querySelector(".canvasSection").innerHTML = "<div class=\"loading\">Loading&#8230;</div>";
                         appdiv.querySelector("h1").textContent = element.querySelector(".headerclass span").textContent;
@@ -348,20 +347,34 @@ var windows = {
                             appdiv.style.left = left + "px";
                         }
                         appdiv.style.display = "block";
-                        element.style.clipPath = "inset(0 100% 0 0)";
+                        element.style.display = "block";
                         element.style.opacity = "1";
-                        html2canvas(element).then(function (canvas) {
-                            canvas.style.height = "auto";
-                            canvas.style.width = "auto";
-                            canvas.style.maxHeight = "100%";
-                            canvas.style.maxWidth = "100%";
-                            canvas.style.borderRadius = "10px";
-                            element.style.clipPath = "";
+                        element.style.scale = "1";
+                        const oldinset = element.style.inset
+                        element.style.inset = "auto";
+                        const oldboxshadow = element.style.boxShadow
+                        element.style.boxShadow = "none"
+
+                        element.querySelectorAll(".ui-resizable-handle").forEach(handle => handle.style.display = "none")
+                        domtoimage.toPng(element)
+                        .then(result => {
+                            const image = document.createElement("img")
+                            image.src = result
+                            image.style.height = "auto";
+                            image.style.width = "auto";
+                            image.style.maxHeight = "100%";
+                            image.style.maxWidth = "100%";
+                            image.style.borderRadius = "10px";
                             element.style.display = "none";
                             element.style.opacity = "0";
+                            element.style.scale = "0.9";
+                            element.style.inset = oldinset;
+                            element.style.boxShadow = oldboxshadow
+                            element.querySelectorAll(".ui-resizable-handle").forEach(handle => handle.style.display = "")
+
                             appdiv.querySelector(".canvasSection").innerHTML = "";
-                            appdiv.querySelector(".canvasSection").appendChild(canvas);
-                        });
+                            appdiv.querySelector(".canvasSection").appendChild(image);
+                        })
                     }
                 });
                 el.addEventListener("mouseout", (e) => {
