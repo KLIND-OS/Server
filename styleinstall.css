@@ -56,14 +56,13 @@ body {
     margin: 10px;
 }
 
-#druhy .left,
-#druhy .right {
+#druhy .left {
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
     height: 50px;
-    width: calc(100% / 2 - 2px);
+    width: calc(100% - 2px);
     border: 1px solid black;
     cursor: pointer;
     bottom: 0;
