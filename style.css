@@ -429,7 +429,7 @@ iframe {
 
 .poznamky textarea {
     width: 100%;
-    height: calc(100 - 20px);
+    height: calc(100% - 20px);
     resize: none;
     background-color: transparent;
     border: none !important;
