@@ -349,6 +349,7 @@ var windows = {
                         }
                         appdiv.style.display = "block";
                         element.style.clipPath = "inset(0 100% 0 0)";
+                        element.style.opacity = "1";
                         html2canvas(element).then(function (canvas) {
                             canvas.style.height = "auto";
                             canvas.style.width = "auto";
@@ -357,6 +358,7 @@ var windows = {
                             canvas.style.borderRadius = "10px";
                             element.style.clipPath = "";
                             element.style.display = "none";
+                            element.style.opacity = "0";
                             appdiv.querySelector(".canvasSection").innerHTML = "";
                             appdiv.querySelector(".canvasSection").appendChild(canvas);
                         });
