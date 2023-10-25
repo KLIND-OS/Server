@@ -14,7 +14,7 @@ setTimeout(() => {
         document.querySelector(".jstetujeste").classList.add("displayblockimport");
         sadjijashdhjkahsdjhajsdj = setTimeout(() => {
             logout();
-            document.getElementById("pokusy").innerHTML = "Nebyl ste tu dlouho<br>proto jsme vás<br>radši odhlásili";
+            document.getElementById("pokusy").innerHTML = "Nebyl jste tu dlouho<br>proto jsme vás<br>radši odhlásili";
             document.querySelector(".jstetujeste").classList.remove("displayblockimport");
             aggainlockauto();
         }, 300000);
@@ -26,7 +26,7 @@ function aggainlockauto() {
             document.querySelector(".jstetujeste").classList.add("displayblockimport");
             sadjijashdhjkahsdjhajsdj = setTimeout(() => {
                 logout();
-                document.getElementById("pokusy").innerHTML = "Nebyl ste tu dlouho<br>proto jsme vás<br>radši odhlásili";
+                document.getElementById("pokusy").innerHTML = "Nebyl jste tu dlouho<br>proto jsme vás<br>radši odhlásili";
                 document.querySelector(".jstetujeste").classList.remove("displayblockimport");
                 aggainlockauto();
             }, 300000);
