@@ -2845,3 +2845,17 @@ table tr td input {
     margin-left: 30px;
     color: white;
 }
+
+.window #grid-container table {
+    border-collapse: collapse;
+}
+
+.window #grid-container table th, .window #grid-container table td {
+    border: 1px solid black;
+    padding: 2px;
+}
+
+.window.black #grid-container table th, .window.black #grid-container table td {
+    border: 1px solid white;
+    padding: 2px;
+}
