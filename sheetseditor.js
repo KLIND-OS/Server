@@ -76,11 +76,32 @@ class SheetsEditor {
             // Update headers row with new column header
             const headersRow = grid.querySelector("tr");
             const newHeaderCell = document.createElement("th");
-            newHeaderCell.textContent = String.fromCharCode(64 + colCount);
+            function getColumnName(colCount) {
+                if (colCount > 702) {
+                    spawnNotification("Sheets editor", "You're fucking dumbass. I HATE YOU")
+                    return "dumbass"
+                }
+                let columnName = '';
+                while (colCount > 0) {
+                    let modulo = colCount % 26;
+                    if (modulo === 0) {
+                        columnName = 'Z' + columnName;
+                        colCount = Math.floor(colCount / 26) - 1;
+                    } else {
+                        columnName = String.fromCharCode(64 + modulo) + columnName;
+                        colCount = Math.floor(colCount / 26);
+                    }
+                }
+                return columnName;
+            }
+            newHeaderCell.textContent = getColumnName(colCount);
             headersRow.appendChild(newHeaderCell);
 
             // Add data cells to each row
             grid.querySelectorAll("tr").forEach((row, rowIndex) => {
+                if (rowIndex === 0) {
+                    return;
+                }
                 const dataCell = document.createElement("td");
                 dataCell.contentEditable = true;
                 row.appendChild(dataCell);
@@ -101,10 +122,6 @@ class SheetsEditor {
             if (colCount > 1) {
                 colCount--;
                 const grid = win.querySelector("table");
-
-                // Update headers row by removing the last header cell
-                const headersRow = grid.querySelector("tr");
-                headersRow.removeChild(headersRow.lastChild);
 
                 // Remove the last cell in each row
                 grid.querySelectorAll("tr").forEach((row) => {
@@ -139,7 +156,7 @@ class SheetsEditor {
             // Loop through the grid to get cell values and add them to the worksheet
             const grid = win.querySelector("table");
             grid.querySelectorAll("tr").forEach((row, rowIndex) => {
-                const worksheetRow = worksheet.getRow(rowIndex + 1);
+                const worksheetRow = worksheet.getRow(rowIndex);
 
                 row.querySelectorAll("td").forEach((cell, colIndex) => {
                     worksheetRow.getCell(colIndex + 1).value = cell.textContent;
