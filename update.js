@@ -1,11 +1,16 @@
-function updatereload() {
-    if (connectedsss == "false") {
-        spawnNotification("Aktualizace", "Internet není k dispozici! Aktualizace nelze načíst!");
-    }
-    else {
-        localStorage.setItem("adasjdsad", "dbajsdbjhansbd");
-        window.location.reload();
-    }
+function updatereload(el) {
+    const text = el.parentElement.querySelector(".updateStatus")
+    LowLevelApi.Updates.update((percentage, t) => {
+        if (percentage === true) {
+            text.textContent = "Aktualizace dokončena! Systém bude restartován."
+            setTimeout(() => {
+                window.location.reload()
+            }, 2000);
+        }
+        else {
+            text.textContent = `${percentage} ${t}`
+        }
+    })
 }
 function detectUpdates() {
     if (localStorage.getItem("updatesklindows") != null) {
