@@ -1208,11 +1208,11 @@ body {
 .about {
     background-color: white;
     position: absolute !important;
-    width: 725px;
-    min-height: 300px;
-    height: 300px;
+    width: 853px;
+    min-height: 420px;
+    height: 420px;
     overflow: hidden;
-    min-width: 725px;
+    min-width: 853px;
     z-index: 23;
 }
 
