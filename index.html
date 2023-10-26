@@ -107,9 +107,8 @@
   <div class="connection-lost-element" style="display: none;">
     <div class="connection-lost">
       <h1>Spojení bylo ztraceno</h1>
-      <p>Spojení s lokálním serverem bylo ztraceno. Může to být způsobeno chybou lokálního serveru.</p>
+      <p>Spojení s lokálním serverem bylo ztraceno. Může to být způsobeno chybou lokálního serveru nebo probíhající aktulazizací.</p>
       <p>Pokouším se připojit znovu<span class="testingAnimation">.</span></p>
-      <button onclick="LowLevelApi.Power.poweroff()">Vypnout počítač</button>
     </div>
   </div>
   <div class="welcomePage" style="display: none;">
@@ -1196,6 +1195,8 @@
               icon="icons/inputdevices.png">Vstupní zvuková zařízení</a></li>
           <li><a oncontextmenu="rightclickApp(this)" onclick="LowLevelApi.Apps.openBluetooth()"
               icon="icons/bluetooth.png">Bluetooth</a></li>
+          <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('update')"
+              icon="icons/update.png">Aktualizace</a></li>
         </ul>
       </div>
       <div class="clockdate">
