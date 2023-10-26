@@ -12,7 +12,6 @@ class LocalStorage {
         "background",
         "folders-uploaded",
         "installed",
-        "adasjdsad",
         "autotaskschovat",
         "username",
         "password",
