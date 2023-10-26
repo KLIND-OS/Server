@@ -247,14 +247,7 @@
         }
       }
 
-      if (localStorage.getItem("adasjdsad") == "dbajsdbjhansbd") {
-        // Update login
-        localStorage.setItem("adasjdsad", "false");
-        document.querySelector(".login").classList.add("displaynone");
-        windows.open("update");
-      }
-      else { }
-
+      
       if (localStorage.getItem("clocktype") == "first") {
         prvniclock();
       }
@@ -564,8 +557,8 @@
             <div onclick="windows.mini(this, 'update')" class="mini"></div>
           </div>
         </div>
-        <p>Žádné nadcházející aktualizace</p>
-        <button onclick="updatereload()">Zkontrolovat aktualizace</button>
+        <p class="updateStatus"></p>
+        <button onclick="updatereload(this)">Aktualizovat</button>
       </div>
 
       <div onclick="changewindowmain(this);" class="widgetList informationklindows Resizabl">
