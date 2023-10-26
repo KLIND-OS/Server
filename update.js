@@ -4,7 +4,7 @@ function updatereload(el) {
         if (percentage === true) {
             text.textContent = "Aktualizace dokončena! Systém bude restartován."
             setTimeout(() => {
-                window.location.reload()
+                LowLevelApi.Power.reboot()
             }, 2000);
         }
         else {
