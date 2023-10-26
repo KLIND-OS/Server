@@ -78,14 +78,14 @@ class SheetsEditor {
             const newHeaderCell = document.createElement("th");
             function getColumnName(colCount) {
                 if (colCount > 702) {
-                    spawnNotification("Sheets editor", "You're fucking dumbass. I HATE YOU")
-                    return "dumbass"
+                    spawnNotification("Sheets editor", "You're fucking dumbass. I HATE YOU");
+                    return "dumbass";
                 }
-                let columnName = '';
+                let columnName = "";
                 while (colCount > 0) {
                     let modulo = colCount % 26;
                     if (modulo === 0) {
-                        columnName = 'Z' + columnName;
+                        columnName = "Z" + columnName;
                         colCount = Math.floor(colCount / 26) - 1;
                     } else {
                         columnName = String.fromCharCode(64 + modulo) + columnName;
