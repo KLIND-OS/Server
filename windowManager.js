@@ -350,31 +350,31 @@ var windows = {
                         element.style.display = "block";
                         element.style.opacity = "1";
                         element.style.scale = "1";
-                        const oldinset = element.style.inset
+                        const oldinset = element.style.inset;
                         element.style.inset = "auto";
-                        const oldboxshadow = element.style.boxShadow
-                        element.style.boxShadow = "none"
+                        const oldboxshadow = element.style.boxShadow;
+                        element.style.boxShadow = "none";
 
-                        element.querySelectorAll(".ui-resizable-handle").forEach(handle => handle.style.display = "none")
+                        element.querySelectorAll(".ui-resizable-handle").forEach(handle => handle.style.display = "none");
                         domtoimage.toPng(element)
-                        .then(result => {
-                            const image = document.createElement("img")
-                            image.src = result
-                            image.style.height = "auto";
-                            image.style.width = "auto";
-                            image.style.maxHeight = "100%";
-                            image.style.maxWidth = "100%";
-                            image.style.borderRadius = "10px";
-                            element.style.display = "none";
-                            element.style.opacity = "0";
-                            element.style.scale = "0.9";
-                            element.style.inset = oldinset;
-                            element.style.boxShadow = oldboxshadow
-                            element.querySelectorAll(".ui-resizable-handle").forEach(handle => handle.style.display = "")
+                            .then(result => {
+                                const image = document.createElement("img");
+                                image.src = result;
+                                image.style.height = "auto";
+                                image.style.width = "auto";
+                                image.style.maxHeight = "100%";
+                                image.style.maxWidth = "100%";
+                                image.style.borderRadius = "10px";
+                                element.style.display = "none";
+                                element.style.opacity = "0";
+                                element.style.scale = "0.9";
+                                element.style.inset = oldinset;
+                                element.style.boxShadow = oldboxshadow;
+                                element.querySelectorAll(".ui-resizable-handle").forEach(handle => handle.style.display = "");
 
-                            appdiv.querySelector(".canvasSection").innerHTML = "";
-                            appdiv.querySelector(".canvasSection").appendChild(image);
-                        })
+                                appdiv.querySelector(".canvasSection").innerHTML = "";
+                                appdiv.querySelector(".canvasSection").appendChild(image);
+                            });
                     }
                 });
                 el.addEventListener("mouseout", (e) => {
