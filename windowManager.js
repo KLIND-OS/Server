@@ -415,3 +415,6 @@ var windows = {
 
 
 
+var Apps = {
+    
+}
