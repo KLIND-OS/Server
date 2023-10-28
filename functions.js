@@ -105,8 +105,9 @@ var control = {
     }
 };
 class App {
-    constructor({ name, onStart, hidden }) {
-        if (windows.list.names.includes(name)) {
+    windows = []
+    constructor({ name, hidden }) {
+        if (Object.keys(Apps).includes(name)) {
             throw new Error("App with this name already exists. Name must be a unique.");
         }
         else {
@@ -114,31 +115,26 @@ class App {
                 var element = document.createElement("li");
                 var a = document.createElement("a");
                 a.textContent = name;
-                a.onclick = () => { windows.open(name); };
+                a.onclick = () => { windows.open(Apps[name]); };
                 element.appendChild(a);
                 document.querySelector("#liststartmenu").appendChild(element);
             }
             else {
                 hidden = true;
             }
-            windows.list.names.push(name);
-            windows.list.classes.push(false);
-            windows.list.ikonadown.push(false);
-            windows.list.special[name] = [onStart, false, false];
+            
             this.info = {
                 name: name,
-                onStart: onStart,
                 inStartMenu: hidden,
             };
             LocalStorage.customApps.push(name);
         }
     }
-    createWindow({ buttons, content }) {
-        var name = this.info.name;
-
+    createWindow({ name, buttons, content, defaultWindow, onStart}) {
+        var idName = this.info.name + "-" + name;
         var okno = document.createElement("div");
         okno.classList.add("widgetList");
-        okno.classList.add(name.replaceAll(" ", ""));
+        okno.classList.add(idName.replaceAll(" ", ""));
         okno.classList.add("Resizabl");
         okno.setAttribute("onclick", "changewindowmain(this);");
 
@@ -154,7 +150,7 @@ class App {
         if (buttons.close != undefined) {
             var closeBtn = document.createElement("div");
             closeBtn.classList.add("close");
-            closeBtn.setAttribute("onclick", "windows.close(this,'" + name + "')");
+            closeBtn.setAttribute("onclick", "windows.close(this,'" + idName + "')");
             headerClass.appendChild(closeBtn);
             var closeaction = buttons.close;
         }
@@ -164,7 +160,7 @@ class App {
         if (buttons.mini != undefined) {
             var miniBtn = document.createElement("div");
             miniBtn.classList.add("mini");
-            miniBtn.setAttribute("onclick", "windows.mini(this,'" + name + "')");
+            miniBtn.setAttribute("onclick", "windows.mini(this,'" + idName + "')");
             headerClass.appendChild(miniBtn);
             var miniaction = buttons.mini;
         }
@@ -172,8 +168,10 @@ class App {
             var miniaction = false;
         }
 
-        windows.list.special[name][1] = closeaction;
-        windows.list.special[name][2] = miniaction;
+        windows.list.names.push(idName);
+        windows.list.classes.push("." + idName.replaceAll(" ", ""));
+        windows.list.ikonadown.push(false);
+        windows.list.special[name] = [onStart, closeaction, miniaction];
 
         widgetHeader.appendChild(headerClass);
 
@@ -183,27 +181,23 @@ class App {
         var final = document.querySelector(".oknadisplaynone").appendChild(okno);
         final.innerHTML += content;
 
-        var location = windows.list.names.indexOf(name);
-        windows.list.classes[location] = "." + name.replaceAll(" ", "");
-
-        this.window = final;
-    }
-    createMiniIcon() {
-        var appname = this.info.name;
-
         var element = document.createElement("img");
-        element.src = CustomApp.getIcon(appname);
-        element.alt = appname;
-        element.setAttribute("onclick", "windows.miniOpen('" + appname + "',this)");
+        element.src = CustomApp.getIcon(name);
+        element.alt = idName;
+        element.setAttribute("onclick", "windows.miniOpen('" + idName + "',this)");
         element.classList.add("ikonadown");
-        element.classList.add(appname.replaceAll(" ", "") + "ikonadown");
+        element.classList.add(idName.replaceAll(" ", "") + "ikonadown");
 
-        var final = document.querySelector(".downiconsAppNone").appendChild(element);
+        var finals = document.querySelector(".downiconsAppNone").appendChild(element);
 
-        var location = windows.list.names.indexOf(appname);
-        windows.list.ikonadown[location] = "." + appname.replaceAll(" ", "") + "ikonadown";
+        var location = windows.list.names.indexOf(idName);
+        windows.list.ikonadown[location] = "." + idName.replaceAll(" ", "") + "ikonadown";
 
-        this.miniIcon = final;
+        if (defaultWindow) Apps[this.info.name] = idName
+
+        this.windows.push({element: final, ikonaDown: finals, open: () => windows.open(idName) })
+
+        return {element: final, ikonaDown: finals, open: () => windows.open(idName)}
     }
     storage = {
         set: (key, value) => {
