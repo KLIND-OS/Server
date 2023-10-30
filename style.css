@@ -1298,6 +1298,18 @@ body {
 .alertcookies button:hover {
     background-color: saddlebrown;
 }
+.browser .browerr {
+    padding: 10px;
+    box-sizing: border-box;
+}
+.browser .browerr, .browser .iframegamebrow {
+    width: 100%;
+    height: calc(100% - 64px);
+    background-color: white;position: absolute; display: none;
+}
+.browser .browerr * {
+    color: black;
+}
 .browser .controls {
     display: flex;
 }
