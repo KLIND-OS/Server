@@ -26,9 +26,7 @@ class Browser {
                 input.value = browser.src;
             }
         }, 200);
-        // TODO: Fix
         browser.addEventListener("did-fail-load", (event) => {
-            console.log
             if (event.isMainFrame) {
                 if (event.errorCode == -106) {
                     const iframegamebrow = win.querySelector(".iframegamebrow")

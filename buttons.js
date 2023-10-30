@@ -207,10 +207,10 @@ var year = dt.getFullYear();
 setInterval(() => {
     if (consolelog != "false") {
         console.clear();
-        console.log("%cVarování!", "color: red; font:bold; font-family:monospace; font-size: 40px");
-        console.log("Chyby můžete nahlašovat na stránku https://github.com/JZITNIK-github/KLIND-OS/issues");
-        console.log("Používáním téhlé stránky soulasíte s tím že stránka bude do vašeho počítače ukládat soubory cookies.");
-        console.log("KLIND OS od KLIND");
+        mainConsole.log("%cVarování!", "color: red; font:bold; font-family:monospace; font-size: 40px");
+        mainConsole.log("Chyby můžete nahlašovat na stránku https://github.com/JZITNIK-github/KLIND-OS/issues");
+        mainConsole.log("Používáním téhlé stránky soulasíte s tím že stránka bude do vašeho počítače ukládat soubory cookies.");
+        mainConsole.log("KLIND OS od KLIND");
     }
 }, 5000);
 function changefavicon(vari) {
