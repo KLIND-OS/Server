@@ -1,7 +1,14 @@
+var updating = false;
 function updatereload(el) {
+    if (updating) return spawnNotification("Aktualizace", "Aktualizace již probíhá")
+
     const text = el.parentElement.querySelector(".updateStatus")
+    updating = true;
+    el.parentElement.setAttribute("updating", true)
     LowLevelApi.Updates.update((percentage, t) => {
         if (percentage === true) {
+            el.parentElement.setAttribute("updating", false)
+            updating = false;
             text.textContent = "Aktualizace dokončena! Systém bude restartován."
             setTimeout(() => {
                 LowLevelApi.Power.reboot()
@@ -26,5 +33,12 @@ function detectUpdates() {
     }
     else {
         window.location.href = "update.html";
+    }
+}
+function closeUpdates(win) {
+    if (win.getAttribute("updating") == "true") {
+        spawnNotification("Aktualizace", "Při aktualizaci nezavírejte okno.")
+        // Block closing window
+        return true
     }
 }
