@@ -1,9 +1,11 @@
 class Browser {
-    static changeUrl(window, url, dontAddHTTPS) {
+    static changeUrl(win, url, dontAddHTTPS) {
         if (dontAddHTTPS != true && !/^https?:\/\//i.test(url)) {
             url = "http://" + url;
         }
-        const browser = window.querySelector("#brow");
+        const browser = win.querySelector("#brow");
+        win.querySelector(".iframegamebrow").style.display = "none"
+        win.querySelector(".browerr").style.display = "none"
         browser.src = url;
         browser.setAttribute("sr", url);
     }
@@ -26,8 +28,20 @@ class Browser {
         }, 200);
         // TODO: Fix
         browser.addEventListener("did-fail-load", (event) => {
-            /* browser.src = "game/index.html"
-      browser.setAttribute("sr", browser.src) */
+            console.log
+            if (event.isMainFrame) {
+                if (event.errorCode == -106) {
+                    const iframegamebrow = win.querySelector(".iframegamebrow")
+                    iframegamebrow.src = "game/index.html"
+                    iframegamebrow.style.display = "block"
+                }
+                else {
+                    const browerr = win.querySelector(".browerr")
+                    browerr.querySelector("#errorcodebrow").textContent = event.errorCode
+                    browerr.querySelector("#errornamebrow").textContent = event.errorDescription
+                    browerr.style.display = "block"
+                }
+            }
         });
     }
     static goBack(window) {

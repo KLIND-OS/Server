@@ -546,6 +546,13 @@
           <button onclick="Browser.changeUrl(this.parentElement.parentElement, this.parentElement.parentElement.querySelector('#url').value)">Odeslat</button>
           <button onclick="Browser.reload(this.parentElement.parentElement)">Reload</button>
         </div>
+        <div class="browerr">
+          <h1>Error!</h1>
+          <p>Nastala chyba při načítání stránky.</p>
+          <p>Error code: <span id="errorcodebrow"></span></p>
+          <p>Error name: <span id="errornamebrow"></span></p>
+        </div>
+        <iframe src="about:blank" class="iframegamebrow"></iframe>
         <webview id="brow" src="about:blank" allowpopups sr="about:blank" nodeintegration></webview>
       </div>
 
