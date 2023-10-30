@@ -18,10 +18,10 @@ class Boot {
         if (Boot.safeBoot) {
             clearInterval(bootMessageId);
             console.clear();
-            console.log("%cSafeMode: Bezpečnostní zpráva byla vypnuta!", "color: red; font:bold; font-family:monospace; font-size: 30px");
+            mainConsole.log("%cSafeMode: Bezpečnostní zpráva byla vypnuta!", "color: red; font:bold; font-family:monospace; font-size: 30px");
         }
         else {
-            console.log("%cSafeMode: Systém není spuštěn v nouzovém módu!", "color: red; font:bold; font-family:monospace; font-size: 30px");
+            mainConsole.log("%cSafeMode: Systém není spuštěn v nouzovém módu!", "color: red; font:bold; font-family:monospace; font-size: 30px");
         }
     }
 }
@@ -33,9 +33,9 @@ if (Boot.safeBoot) {
     setInterval(() => consolelog = "false", 50);
     var bootMessageId = setInterval(() => {
         console.clear();
-        console.log("%cSafeMode!", "color: red; font:bold; font-family:monospace; font-size: 40px");
-        console.log("%cPočítač je spuštěný v nouzovém režimu! Některé funkce nemusí fungovat.", "color: red; font:bold; font-family:monospace; font-size: 25px");
-        console.log("%cPokud chcete vypnout tuhle zprávu pošlete 'Boot.disableMessageSafeMode()", "color: green; font:bold; font-family:monospace; font-size: 15px");
+        mainConsole.log("%cSafeMode!", "color: red; font:bold; font-family:monospace; font-size: 40px");
+        mainConsole.log("%cPočítač je spuštěný v nouzovém režimu! Některé funkce nemusí fungovat.", "color: red; font:bold; font-family:monospace; font-size: 25px");
+        mainConsole.log("%cPokud chcete vypnout tuhle zprávu pošlete 'Boot.disableMessageSafeMode()", "color: green; font:bold; font-family:monospace; font-size: 15px");
     }, 200);
 }
 
