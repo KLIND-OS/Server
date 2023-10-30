@@ -235,6 +235,11 @@ var windows = {
                 win => InputDevices.init(win),
                 false,
                 false
+            ],
+            update: [
+                false,
+                win => closeUpdates(win),
+                false
             ]
         },
         appIds: {}
@@ -415,3 +420,6 @@ var windows = {
 
 
 
+var Apps = {
+    
+}
