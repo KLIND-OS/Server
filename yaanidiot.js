@@ -6,17 +6,19 @@ function asdkjasldjklasdjkl(min, max) {
 function idiot() {
     var app = new App({
         name: "Idiot",
-        onStart: () => { },
         hidden: true,
     });
     app.createWindow({
+        name: "Idiot",
         buttons: {},
-        content: "<h1>You are an idiot!</h1>"
+        content: "<h1>You are an idiot!</h1>",
+        defaultWindow: true,
+        onStart: () => {}
     });
     var x = 0;
     setInterval(() => {
         if (x < 50) {
-            windows.open("Idiot");
+            windows.open(Apps["Idiot"])
             x++;
         }
     }, 500);
