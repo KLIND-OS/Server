@@ -307,9 +307,15 @@ var mainFileManager = {
             );
         } else {
             let base64ContentArray = uri.split(",");
-            let mimeType = base64ContentArray[0].match(
-                /[^:\s*]\w+\/[\w-+\d.]+(?=[;| ])/
-            )[0];
+            try {
+                var mimeType = base64ContentArray[0].match(
+                    /[^:\s*]\w+\/[\w-+\d.]+(?=[;| ])/
+                )[0];
+            }
+            catch {
+                // Set default mimetype
+                var mimeType = null
+            }
             var type = mimeType;
 
             function x() {
