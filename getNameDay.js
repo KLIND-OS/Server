@@ -12,11 +12,11 @@ svatky.push(["Igor", "Olivie, Oliver", "Bohumil", "František", "Eliška", "Hanu
 svatky.push(["Felix", "Památka zesnulých (dušičky)", "Hubert", "Karel", "Miriam", "Liběna", "Saskie", "Bohumír", "Bohdan", "Evžen", "Martin", "Benedikt", "Tibor", "Sáva", "Leopold", "Otmar", "Mahulena, Den boje za svobodu a demokracii", "Romana", "Alžběta", "Nikola", "Albert", "Cecílie", "Klement", "Emílie", "Kateřina", "Artur", "Xenie", "René", "Zina", "Ondřej"]);
 svatky.push(["Iva", "Blanka", "Svatoslav", "Barbora", "Jitka", "Mikuláš", "Benjamín", "Květoslava", "Vratislav", "Julie", "Dana", "Simona", "Lucie", "Lýdie", "Radana", "Albína", "Daniel", "Miloslav", "Ester", "Dagmar", "Natálie", "Šimon", "Vlasta", "Adam, Eva, Štědrý den", "1. svátek vánoční", "Štěpán, 2. svátek vánoční", "Žaneta", "Bohumila", "Judita", "David", "Silvestr"]);
 function getSvatek() {
-    let d = new Date();
-    let den = d.getDate()-1;
-    let mesic = d.getMonth();
-    return svatky[mesic][den];
+  let d = new Date();
+  let den = d.getDate()-1;
+  let mesic = d.getMonth();
+  return svatky[mesic][den];
 }
 setInterval(() => {
-    document.querySelector("#svatekname").textContent = getSvatek();
+  document.querySelector("#svatekname").textContent = getSvatek();
 }, 5000);

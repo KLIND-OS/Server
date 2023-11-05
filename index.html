@@ -24,6 +24,7 @@
   <script src="config.js"></script>
   <script src="prevodsystemu.js"></script>
   <script src="sources/babel.min.js"></script>
+  <script src="consolelog.js"></script>
   <script src="sources/polifill.min.js"></script>
   <script src="sources/uuid.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1075,6 +1076,26 @@
         <h1>Výchozí vstupní zvukové zařízení</h1>
         <select class="select"></select>
       </div>
+      <div onclick="changewindowmain(this)" class="widgetList logs Resizabl">
+        <div class="widget-header">
+          <div class="headerclass">
+            <span style="float: left;">Logy</span>
+            <div onclick="windows.close(this, 'logs')" class="close"></div>
+            <div onclick="windows.mini(this, 'logs')" class="mini"></div>
+          </div>
+        </div>
+        <div class="logsspan"></div>
+      </div>
+      <div onclick="changewindowmain(this)" class="widgetList nohuplogs Resizabl">
+        <div class="widget-header">
+          <div class="headerclass">
+            <span style="float: left;">Nohup Logy</span>
+            <div onclick="windows.close(this, 'nohuplogs')" class="close"></div>
+            <div onclick="windows.mini(this, 'nohuplogs')" class="mini"></div>
+          </div>
+        </div>
+        <div class="logsspan"></div>
+      </div>
     </div>
     <div id="klindows" class="klindows">
       <div id="openedapps">
@@ -1204,6 +1225,10 @@
               icon="icons/bluetooth.png">Bluetooth</a></li>
           <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('update')"
               icon="icons/update.png">Aktualizace</a></li>
+          <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('logs')"
+              icon="icons/logs.png">Logy</a></li>
+          <li><a oncontextmenu="rightclickApp(this)" onclick="windows.open('nohuplogs')"
+              icon="icons/logs.png">Nohup Logy</a></li>
         </ul>
       </div>
       <div class="clockdate">
@@ -1283,6 +1308,10 @@
             src="icons/printer.png">
           <img onclick="windows.miniOpen('inputdevices',this)" alt="Vstupní zvuková zařízení" class="ikonadown inputdevicesikonadown"
             src="icons/inputdevices.png">
+          <img onclick="windows.miniOpen('logs',this)" alt="Logy" class="ikonadown logsikonadown"
+            src="icons/logs.png">
+          <img onclick="windows.miniOpen('nohuplogs',this)" alt="Nohup Logy" class="ikonadown nohuplogsikonadown"
+            src="icons/logs.png">
         </div>
         <div class="appdiv">
           <h1 style="height: 43px;">Unknown</h1>
