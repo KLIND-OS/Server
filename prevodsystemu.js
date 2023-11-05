@@ -1,53 +1,53 @@
 function allStorage() {
 
-    var archive = [],
-        keys = Object.keys(localStorage),
-        i = 0, key;
+  var archive = [],
+    keys = Object.keys(localStorage),
+    i = 0, key;
 
-    for (; key = keys[i]; i++) {
-        archive.push([key, localStorage.getItem(key)]);
-    }
+  for (; key = keys[i]; i++) {
+    archive.push([key, localStorage.getItem(key)]);
+  }
 
-    return archive;
+  return archive;
 }
 function downloadAsFile(filename, text) {
-    var element = document.createElement("a");
-    element.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(text));
-    element.setAttribute("download", filename);
+  var element = document.createElement("a");
+  element.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(text));
+  element.setAttribute("download", filename);
 
-    element.style.display = "none";
-    document.body.appendChild(element);
+  element.style.display = "none";
+  document.body.appendChild(element);
 
-    element.click();
+  element.click();
 
-    document.body.removeChild(element);
+  document.body.removeChild(element);
 }
 
 function prevedsystem() {
-    var as = new Date;
-    downloadAsFile(as.getDate().toString() + "." + (as.getMonth() + 1) + "." + as.toString().split(" ")[3] + ".klindos", JSON.stringify(allStorage()));
+  var as = new Date;
+  downloadAsFile(as.getDate().toString() + "." + (as.getMonth() + 1) + "." + as.toString().split(" ")[3] + ".klindos", JSON.stringify(allStorage()));
 }
 function submitnjahsbdjksabd(e) {
-    control.fileManager.fileSelect({
-        success: (file_array) => {
-            var result = JSON.parse(file_array[4]);
-            var make = false;
-            for (var i = 0; i < result.length; i++) {
-                if (result[i][0] == "updatesklindows" && result[i][1] == version) {
-                    make = true;
-                    break;
-                }
-            }
-            if (make) {
-                localStorage.clear();
-                for (var i = 0; i < result.length; i++) {
-                    localStorage.setItem(result[i][0], result[i][1]);
-                }
-                window.location.reload();
-            }
-            else {
-                spawnNotification("Převod systému", "Tento soubor je na jinou verzi KLIND OS. Aktualizujte soubor.");
-            }
-        },closed: () => {}
-    });
+  control.fileManager.fileSelect({
+    success: (file_array) => {
+      var result = JSON.parse(file_array[4]);
+      var make = false;
+      for (var i = 0; i < result.length; i++) {
+        if (result[i][0] == "updatesklindows" && result[i][1] == version) {
+          make = true;
+          break;
+        }
+      }
+      if (make) {
+        localStorage.clear();
+        for (var i = 0; i < result.length; i++) {
+          localStorage.setItem(result[i][0], result[i][1]);
+        }
+        window.location.reload();
+      }
+      else {
+        spawnNotification("Převod systému", "Tento soubor je na jinou verzi KLIND OS. Aktualizujte soubor.");
+      }
+    },closed: () => {}
+  });
 }
