@@ -1018,7 +1018,7 @@ body {
     z-index: 23;
 }
 
-.logs {
+.logs, .nohuplogs {
     background-color: white;
     position: absolute !important;
     width: 300px;

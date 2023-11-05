@@ -1,20 +1,20 @@
 $(function () {
-    $(".fakedownbar").on({
-        mouseover: function () {
-            downbarover();
-        },
-        mouseout: function () {
-            downbarout();
-        }
-    });
+  $(".fakedownbar").on({
+    mouseover: function () {
+      downbarover();
+    },
+    mouseout: function () {
+      downbarout();
+    }
+  });
 });
 $(function () {
-    $(".downbar").on({
-        mouseover: function () {
-            downbarover();
-        },
-        mouseout: function () {
-            downbarout();
-        }
-    });
+  $(".downbar").on({
+    mouseover: function () {
+      downbarover();
+    },
+    mouseout: function () {
+      downbarout();
+    }
+  });
 });
