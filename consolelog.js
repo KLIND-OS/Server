@@ -40,16 +40,22 @@ class Logs {
 
 
 console.log = function () {
-  var message = "";
-  for (var i = 0; i < arguments.length; i++) {
-    if (typeof arguments[i] == "object") {
-      message += (JSON && JSON.stringify ? JSON.stringify(arguments[i]) : arguments[i]) + " ";
-    } else {
-      message += arguments[i] + " ";
+  try {
+    var message = "";
+    for (var i = 0; i < arguments.length; i++) {
+      if (typeof arguments[i] == "object") {
+        message += (JSON && JSON.stringify ? JSON.stringify(arguments[i]) : arguments[i]) + " ";
+      } else {
+        message += arguments[i] + " ";
+      }
     }
+    mainConsole.logs.push(message);
+    mainConsole.log(message);
   }
-  mainConsole.logs.push(message);
-  mainConsole.log(message);
+  catch {
+    console.error("Nepovedlo se uložit log do databáze.")
+    console.log(arguments)
+  }
 };
 
 console.log("Spouštím log daemon...");
