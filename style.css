@@ -2888,3 +2888,8 @@ table tr td input {
     border: 1px solid white;
     padding: 2px;
 }
+
+.iframeWrapper {
+    height: 100%;
+    width: 100%;
+}

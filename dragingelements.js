@@ -1,4 +1,3 @@
-
 var noresizeClasslist = [
   "terminal",
   "audioLevelEditor"
