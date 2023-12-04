@@ -4,7 +4,10 @@ var cursortype = "normal";
 document.addEventListener("mousemove", e => {
   const tgt = e.target;
   const classofelement = tgt.classList.value;
-  if (
+  if (tgt.tagName === "WEBVIEW") {
+    printMouseout();
+  }
+  else if (
     classofelement.indexOf("items-1") > -1 ||
         classofelement.indexOf("items-2") > -1 ||
         classofelement.indexOf("items-3") > -1 ||
