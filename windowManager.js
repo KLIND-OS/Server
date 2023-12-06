@@ -237,7 +237,33 @@ var windows = {
         false
       ],
       update: [
-        false,
+        win => {
+          LowLevelApi.Branch.getSelected((selectedBranch) => {
+            LowLevelApi.Branch.getAvailable((availableBranches) => {
+              const select = win.querySelector(".branchChoice");
+              select.innerHTML = "";
+              
+              for (const branch of availableBranches) {
+                const option = document.createElement("option");
+                option.textContent = branch;
+                option.value = branch;
+                option.selected = selectedBranch == branch;
+                select.appendChild(option);
+              }
+            })
+          })
+          win.querySelector(".branchChoice").onchange = () => {
+            const value = win.querySelector(".branchChoice").value;
+            LowLevelApi.Branch.setBranch(value, (response) => {
+              if (response) {
+                spawnNotification("Branch Manager", "Branch byl úspěšně přepsán! Nový build dostanete při aktualizaci.")
+              }
+              else {
+                spawnNotification("Branch Manager", "Nastala chyba")
+              }
+            })
+          }
+        },
         win => closeUpdates(win),
         false
       ],

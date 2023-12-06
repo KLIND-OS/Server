@@ -949,6 +949,8 @@ body {
     overflow: hidden;
     z-index: 23;
     overflow: hidden;
+    min-height: 300px;
+    min-width: 300px;
 }
 
 .updateklind p {
