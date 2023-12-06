@@ -1,4 +1,3 @@
-
 var noresizeClasslist = [
   "terminal",
   "audioLevelEditor"
@@ -120,6 +119,14 @@ function reloaddraggable() {
       start: (targets) => {
         var target = targets.target;
         target.setAttribute("isFullscreen", "false");
+        document.querySelectorAll("iframe").forEach(node => {
+          node.style.pointerEvents = "none";
+        })
+      },
+      stop: (targets) => {
+        document.querySelectorAll("iframe").forEach(node => {
+          node.style.pointerEvents = "";
+        })
       }
     });
   }
