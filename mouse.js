@@ -18,7 +18,6 @@ setInterval(() => {
 document.addEventListener("mousemove", e => {
   const tgt = e.target;
   const classofelement = tgt.classList.value;
-  console.log(tgt.classList.value);
   // TODO: Be able to catch mousemove event when on iframe.
   if (tgt.tagName === "WEBVIEW" || tgt.classList.contains("iframeWrapper")) {
     printMouseout();

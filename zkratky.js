@@ -2,7 +2,10 @@ var keysDown = new Array();
 var shortCutsFunctions = [];
 window.onkeydown = function (e) {
   keysDown.push(e.key + "true");
-  if (keysDown.indexOf("Controltrue") > -1 && keysDown.indexOf("ltrue") > -1) {
+  if (e.key == "Meta") {
+    openstartmenu();
+  }
+  else if (keysDown.indexOf("Controltrue") > -1 && keysDown.indexOf("ltrue") > -1) {
     logout();
     keysDown = new Array();
   }
