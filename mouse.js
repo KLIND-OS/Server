@@ -1,10 +1,28 @@
 var x;
 var y;
 var cursortype = "normal";
+
+setInterval(() => {
+  const allIframes = document.querySelectorAll("iframe");
+  allIframes.forEach(iframe => {
+    if (iframe.getAttribute("iframeEdited") !== "ano") {
+      iframe.setAttribute("iframeEdited", "ano")
+      const div = document.createElement("div");
+      div.className = "iframeWrapper";
+      iframe.parentNode.insertBefore(div, iframe);
+      div.appendChild(iframe);
+    }
+  })
+}, 1000)
+
 document.addEventListener("mousemove", e => {
   const tgt = e.target;
   const classofelement = tgt.classList.value;
-  if (
+  // TODO: Be able to catch mousemove event when on iframe.
+  if (tgt.tagName === "WEBVIEW" || tgt.classList.contains("iframeWrapper")) {
+    printMouseout();
+  }
+  else if (
     classofelement.indexOf("items-1") > -1 ||
         classofelement.indexOf("items-2") > -1 ||
         classofelement.indexOf("items-3") > -1 ||
