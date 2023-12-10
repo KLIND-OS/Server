@@ -1326,6 +1326,7 @@ body {
     height: calc(100% - 64px);
     background-color: white;
     position: absolute;
+    display: none;
 }
 .browser .browerr, .browser .iframegamebrow {
   display: none;

@@ -5,6 +5,7 @@ class Browser {
     }
     const browser = win.querySelector("#brow");
     win.querySelector(".iframegamebrow").style.display = "none";
+    win.querySelector(".iframeWrapper").style.display = "none";
     win.querySelector(".browerr").style.display = "none";
     browser.src = url;
     browser.setAttribute("sr", url);
@@ -29,9 +30,11 @@ class Browser {
     browser.addEventListener("did-fail-load", (event) => {
       if (event.isMainFrame) {
         if (event.errorCode == -106) {
+          const iframeWrapper = win.querySelector(".iframeWrapper");
           const iframegamebrow = win.querySelector(".iframegamebrow");
           iframegamebrow.src = "game/index.html";
           iframegamebrow.style.display = "block";
+          iframeWrapper.style.display = "block";
         }
         else {
           const browerr = win.querySelector(".browerr");
