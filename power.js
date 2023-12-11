@@ -1,3 +1,6 @@
+function turnoff() {
+  LowLevelApi.Power.poweroff();
+}
 var Power = {
   open: () => {
     document.querySelector(".power-element").style.display = "block";
