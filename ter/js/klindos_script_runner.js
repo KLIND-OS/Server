@@ -7,7 +7,7 @@ function runKLINDOSScript(path) {
     });
   }
   else {
-    var content = mainFileManager.getContent(path);
+    var content = mainFileManager.getTextContent(path);
     if (content == false) {
       return Sandbox.model.addHistory({
         command: command,
@@ -31,7 +31,7 @@ function runKLINDOSScript(path) {
           });
         }
         else if (scriptcom.indexOf("::") == 0 || scriptcom.replaceAll(" ", "") == "") {
-          //comment
+          // This is a comment in the code. Just continue
           continue;
         }
         else if (scriptcom.indexOf("run:: ") == 0) {

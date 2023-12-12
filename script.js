@@ -102,21 +102,39 @@ function opendate() {
     }
   }
 }
+function odstranitDiakritiku(text) {
+  return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
 function searchstartmenu() {
   var a, txtValue; 
   var input = document.getElementById("searchstartmenu"); 
-  var filter = input.value.toUpperCase(); 
   var ul = document.getElementById("liststartmenu"); 
-  var li = ul.getElementsByTagName("li"); 
-  for (var i = 0; i < li.length; i++) { 
+  var li = ul.getElementsByTagName("li");
+  var isShowed = false;
+  ul.querySelector(".searchHelpLi").style.display = "none";
+  for (var i = 0; i < li.length; i++) {
+    if (li[i].classList.contains("searchHelpLi")) continue;
     a = li[i].getElementsByTagName("a")[0]; 
     txtValue = a.textContent || a.innerText; 
-    if (txtValue.toUpperCase().indexOf(filter) > -1) { 
+    var text = odstranitDiakritiku(txtValue.toUpperCase());
+    var filterText = odstranitDiakritiku(input.value.toUpperCase());
+    if (text.indexOf(filterText) > -1) {
+      isShowed = true;
       li[i].style.display = ""; 
     } 
     else { 
       li[i].style.display = "none"; 
     }
+  }
+  if (!isShowed) {
+    if (input.value.length > 20) {
+      var showInputValue = input.value.split("", 20).join("").trim() + "..."
+    }
+    else {
+      var showInputValue = input.value;
+    }
+    ul.querySelector(".searchHelpLi #searchHelpText").textContent = showInputValue;
+    ul.querySelector(".searchHelpLi").style.display = "";
   }
 }
 
@@ -135,6 +153,11 @@ document.addEventListener("DOMContentLoaded",() => {
   });
 });
 
+function searchSearchedOnInternet() {
+  const defaultSearchEngine = localStorage.getItem("searchEngine") || SearchEngine.default;
+  SearchEngine.search(document.querySelector("#searchstartmenu").value, defaultSearchEngine);
+}
+
 function custompozadisubmit() {
   var checkBoxnas = document.getElementById("custombackcheck");
 
@@ -147,7 +170,7 @@ function custompozadisubmit() {
 }
 function submitcss(value) {
   var path = new File(value).fullPath;
-  var contentoffile = mainFileManager.getContent(path);
+  var contentoffile = mainFileManager.getTextContent(path);
   var element = document.getElementById("customcssstyleelement");
   element.innerHTML = contentoffile;
   localStorage.setItem("customcss", path);

@@ -1341,7 +1341,7 @@ body {
 }
 .browser .controls #url {
     height: 40px;
-    width: calc(100% - 240px);
+    width: calc(100% - 180px);
 }
 .browser .controls button {
     width: 60px;
@@ -2891,6 +2891,8 @@ table tr td input {
 .window #grid-container table th, .window #grid-container table td {
     border: 1px solid black;
     padding: 2px;
+    width: 20px;
+    height: 20px;
 }
 
 .window.black #grid-container table th, .window.black #grid-container table td {
