@@ -171,7 +171,7 @@ class App {
     windows.list.names.push(idName);
     windows.list.classes.push("." + idName.replaceAll(" ", ""));
     windows.list.ikonadown.push(false);
-    windows.list.special[name] = [onStart, closeaction, miniaction];
+    windows.list.special[idName] = [onStart, closeaction, miniaction];
 
     widgetHeader.appendChild(headerClass);
 
