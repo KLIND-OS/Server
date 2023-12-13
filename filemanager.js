@@ -131,6 +131,36 @@ var mainFileManager = {
     }
     windows.open("fileproperties");
   },
+  saveText: (location, file) => {
+    var value = JSON.parse(localStorage.getItem("files-uploaded"));
+    for (var i = 0; i < value.length; i++) {
+      if (value[i][5] + value[i][0] == location) {
+        var time = new Date().toString();
+        value[i][3] = time;
+        const sdsa = `data:${value[i][2]};base64,` + Base64.encode(file)
+        value[i][4] = sdsa;
+        value[i][1] = lengthInUtf8Bytes(sdsa);
+        continue;
+      }
+    }
+    try {
+      localStorage.setItem("files-uploaded", JSON.stringify(value));
+    } catch (e) {
+      spawnNotification(
+        "Správce souborů",
+        "Tento soubor je moc velký na to aby byl uložen."
+      );
+      console.log("File is too big to be saved. Error: " + e.toString());
+    }
+    var windowasjdh = document.querySelectorAll(".window");
+    for (var i = 0; i < windowasjdh.length; i++) {
+      if (windowasjdh[i].querySelector("#filemanageriframe") != undefined) {
+        windowasjdh[i]
+          .querySelector("#filemanageriframe")
+          .contentWindow.FileManager.readFiles();
+      }
+    }
+  },
   save: (location, file) => {
     var value = JSON.parse(localStorage.getItem("files-uploaded"));
     for (var i = 0; i < value.length; i++) {
@@ -185,6 +215,11 @@ var mainFileManager = {
     } catch {
       return false;
     }
+  },
+  getTextContent: (location) => {
+    const content = mainFileManager.getContent(location)
+    if (content === false) return false
+    return Base64.decode(content.split(",")[1])
   },
   folderExist: (location) => {
     try {
@@ -400,9 +435,14 @@ class File {
   open() {
     return mainFileManager.open(this.decodeToArray());
   }
-  save(content) {
-    this.content = content;
-    mainFileManager.save(this.fullPath, this.content);
+  saveText(content) {
+    const sdsa = `data:${this.type};base64,` + Base64.encode(content)
+    this.content = sdsa;
+    mainFileManager.save(this.fullPath, sdsa);
+  }
+  save(dataUri) {
+    this.content = dataUri;
+    mainFileManager.save(this.fullPath, dataUri);
   }
   remove() {
     var value = JSON.parse(localStorage.getItem("files-uploaded"));

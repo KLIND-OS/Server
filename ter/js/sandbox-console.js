@@ -436,7 +436,7 @@
 					})
 				}
 				else {
-					var content = mainFileManager.getContent(path);
+					var content = mainFileManager.getTextContent(path);
 					if (content == false) {
 						return this.model.addHistory({
 							command : command,

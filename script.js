@@ -102,21 +102,39 @@ function opendate() {
     }
   }
 }
+function odstranitDiakritiku(text) {
+  return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
 function searchstartmenu() {
   var a, txtValue; 
   var input = document.getElementById("searchstartmenu"); 
-  var filter = input.value.toUpperCase(); 
   var ul = document.getElementById("liststartmenu"); 
-  var li = ul.getElementsByTagName("li"); 
-  for (var i = 0; i < li.length; i++) { 
+  var li = ul.getElementsByTagName("li");
+  var isShowed = false;
+  ul.querySelector(".searchHelpLi").style.display = "none";
+  for (var i = 0; i < li.length; i++) {
+    if (li[i].classList.contains("searchHelpLi")) continue;
     a = li[i].getElementsByTagName("a")[0]; 
     txtValue = a.textContent || a.innerText; 
-    if (txtValue.toUpperCase().indexOf(filter) > -1) { 
+    var text = odstranitDiakritiku(txtValue.toUpperCase());
+    var filterText = odstranitDiakritiku(input.value.toUpperCase());
+    if (text.indexOf(filterText) > -1) {
+      isShowed = true;
       li[i].style.display = ""; 
     } 
     else { 
       li[i].style.display = "none"; 
     }
+  }
+  if (!isShowed) {
+    if (input.value.length > 20) {
+      var showInputValue = input.value.split("", 20).join("").trim() + "..."
+    }
+    else {
+      var showInputValue = input.value;
+    }
+    ul.querySelector(".searchHelpLi #searchHelpText").textContent = showInputValue;
+    ul.querySelector(".searchHelpLi").style.display = "";
   }
 }
 
@@ -135,6 +153,11 @@ document.addEventListener("DOMContentLoaded",() => {
   });
 });
 
+function searchSearchedOnInternet() {
+  const defaultSearchEngine = SearchEngine.default;
+  SearchEngine.search(document.querySelector("#searchstartmenu").value, defaultSearchEngine);
+}
+
 function custompozadisubmit() {
   var checkBoxnas = document.getElementById("custombackcheck");
 
@@ -147,12 +170,12 @@ function custompozadisubmit() {
 }
 function submitcss(value) {
   var path = new File(value).fullPath;
-  var contentoffile = mainFileManager.getContent(path);
+  var contentoffile = mainFileManager.getTextContent(path);
   var element = document.getElementById("customcssstyleelement");
   element.innerHTML = contentoffile;
   localStorage.setItem("customcss", path);
 }
-//sdasd
+
 var mode = {
   light: () => {
     var x, i;
@@ -199,11 +222,8 @@ function getCssProperty(elmId, property) {
   var elem = document.getElementById(elmId);
   return window.getComputedStyle(elem, null).getPropertyValue(property);
 }
-function turnoff() {
-  LowLevelApi.Power.poweroff();
-}
-var dt = new Date();
-var year = dt.getFullYear();
+
+
 setInterval(() => {
   if (consolelog != "false") {
     console.clear();
@@ -213,13 +233,6 @@ setInterval(() => {
     mainConsole.log("KLIND OS od KLIND");
   }
 }, 5000);
-function changefavicon(vari) {
-  try {
-    document.getElementById("favicon").setAttribute("href", vari);
-  } catch {
-
-  }
-}
 
 function loadbetaicon() {
   if (beta) {
@@ -236,94 +249,3 @@ function loadbetaicon() {
 var login;
 var autolocklogin;
 var developermode;
-function onclickbody() {
-
-}
-function fixWindow() {
-  var x = document.querySelectorAll(".window");
-  for (i = 0; i < x.length; i++) {
-    var rect = x[i].getBoundingClientRect();
-    if (x[i].style.left == "") {
-      var sirka = rect.left + x[i].offsetWidth;
-    }
-    else {
-      var sirka = parseInt(x[i].style.left.replace("px", "")) + x[i].offsetWidth;
-    }
-    if (x[i].style.top == "") {
-      var vyska = rect.top + x[i].offsetHeight;
-    }
-    else {
-      var vyska = parseInt(x[i].style.top.replace("px", "")) + x[i].offsetHeight;
-    }
-    if (sirka > window.innerWidth) {
-      if (window.innerWidth - x[i].offsetWidth > -1) {
-        x[i].style.left = window.innerWidth - x[i].offsetWidth + "px";
-      }
-      else {
-        x[i].style.left = "0px";
-      }
-    }
-    if (vyska > window.innerHeight) {
-      if (window.innerHeight - x[i].offsetHeight > -1) {
-        x[i].style.top = window.innerHeight - x[i].offsetHeight + "px";
-      }
-      else {
-        x[i].style.top = "0px";
-      }
-    }
-    else {
-      if (rect.left < 0) {
-        x[i].style.left = "0px";
-      }
-      if (rect.top < 0) {
-        x[i].style.top = "0px";
-      }
-    }
-  }
-  x = document.querySelectorAll(".ikonaklindows");
-  for (i = 0; i < x.length; i++) {
-    var rect = x[i].getBoundingClientRect();
-    if (x[i].style.left == "") {
-      var sirka = rect.left + x[i].offsetWidth;
-    }
-    else {
-      var sirka = parseInt(x[i].style.left.replace("px", "")) + x[i].offsetWidth;
-    }
-    if (x[i].style.top == "") {
-      var vyska = rect.top + x[i].offsetHeight;
-    }
-    else {
-      var vyska = parseInt(x[i].style.top.replace("px", "")) + x[i].offsetHeight;
-    }
-    if (sirka > window.innerWidth) {
-      x[i].style.left = "0px";
-      x[i].style.top = "0px";
-    }
-    if (vyska > window.innerHeight) {
-      x[i].style.left = "0px";
-      x[i].style.top = "0px";
-    }
-    else {
-      if (rect.left < 0) {
-        x[i].style.left = "0px";
-        x[i].style.top = "0px";
-      }
-      if (rect.top < 0) {
-        x[i].style.top = "0px";
-        x[i].style.left = "0px";
-      }
-    }
-
-    var id = x[i].getAttribute("id");
-    var array = JSON.parse(localStorage.getItem("desktop-icons"));
-    array[id][2][0] = x[i].style.left.replace("px", "");
-    array[id][2][1] = x[i].style.top.replace("px", "");
-    localStorage.setItem("desktop-icons", JSON.stringify(array));
-  }
-}
-window.addEventListener("resize", function () {
-  fixWindow();
-});
-setInterval(() => {
-  fixWindow();
-}, 3000);
