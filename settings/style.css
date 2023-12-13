@@ -58,3 +58,7 @@ body.dark {
     pointer-events: none;
     transition: ease 0.2s background;
 }
+
+select {
+  all: unset;
+}

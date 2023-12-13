@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded",() => {
 });
 
 function searchSearchedOnInternet() {
-  const defaultSearchEngine = localStorage.getItem("searchEngine") || SearchEngine.default;
+  const defaultSearchEngine = SearchEngine.default;
   SearchEngine.search(document.querySelector("#searchstartmenu").value, defaultSearchEngine);
 }
 
