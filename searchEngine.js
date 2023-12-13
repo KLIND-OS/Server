@@ -1,5 +1,5 @@
 class SearchEngine {
-  static default = "brave"
+  static default = localStorage.getItem("searchEngine") || "brave"
   static supportedEngines = {
     brave: "https://search.brave.com/search?q=",
     seznam: "https://search.seznam.cz/?q=",
@@ -18,4 +18,10 @@ class SearchEngine {
       throw new Error("Unsupported search engine!");
     }
   }
+  static setDefault(engine) {
+    this.default = engine;
+    localStorage.setItem("searchEngine", engine);
+  }
 }
+
+window.SearchEngine = SearchEngine;
