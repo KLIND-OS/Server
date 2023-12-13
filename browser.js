@@ -18,6 +18,11 @@ class Browser {
       browser.src = url;
     }, 200);
   }
+  static download(win) {
+    const url = win.querySelector("#url").value;
+    const webview = win.querySelector("webview");
+    webview.downloadURL(url);
+  }
   static init(win) {
     const browser = win.querySelector("#brow");
     const input = win.querySelector("#url");

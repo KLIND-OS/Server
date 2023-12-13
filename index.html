@@ -34,7 +34,8 @@
   <title>Načítání...</title>
   <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="buttons.js"></script>
+  <script src="script.js"></script>
+  <script src="fixwindow.js"></script>
   <script src="windowManager.js"></script>
   <script src="windowchanging.js"></script>
   <script src="libs/jquery-3.6.0.js"></script>
@@ -96,6 +97,9 @@
   <script src="donotdisturb.js"></script>
   <script src="inputDevices.js"></script>
   <script src="libs/dom-to-image.min.js"></script>
+  <script src="base64.js"></script>
+  <script src="searchEngine.js"></script>
+  <script src="autoClassConstruction.js"></script>
   <script>
     if (localStorage.getItem("installed") != "true") {
       window.location.replace("install.html");
@@ -103,7 +107,7 @@
   </script>
 </head>
 
-<body onmousedown="mouseDown()" onmouseup="mouseUp()" onload="onloadscripst();" onclick="onclickbody()" id="body">
+<body onmousedown="mouseDown()" onmouseup="mouseUp()" onload="onloadscripst();" id="body">
   <div class="filter"></div>
   <div class="connection-lost-element" style="display: none;">
     <div class="connection-lost">
@@ -210,7 +214,7 @@
 
         if (localStorage.getItem("customcss") != null) {
           const customcssarcookie = localStorage.getItem("customcss")
-          var contentofcustomcss = mainFileManager.getContent(customcssarcookie)
+          var contentofcustomcss = mainFileManager.getTextContent(customcssarcookie)
           var elementustomcss = document.getElementById("customcssstyleelement")
           elementustomcss.innerHTML = contentofcustomcss
         }
@@ -278,6 +282,13 @@
           });
           welcomePageCheck()
         }, 700);
+        function changefavicon(vari) {
+          try {
+            document.getElementById("favicon").setAttribute("href", vari);
+          } catch {
+
+          }
+        }
         changefavicon("logo.ico");
         if (showversionontitle == "true") {
           document.title = titleklindows + " " + version;
@@ -545,6 +556,7 @@
           <button onclick="Browser.goForward(this.parentElement.parentElement)">Dopředu</button>
           <input id="url" type="url" placeholder="Url adresa">
           <button onclick="Browser.changeUrl(this.parentElement.parentElement, this.parentElement.parentElement.querySelector('#url').value)">Odeslat</button>
+          <button onclick="Browser.download(this.parentElement.parentElement)">Stáhnout</button>
           <button onclick="Browser.reload(this.parentElement.parentElement)">Reload</button>
         </div>
         <div class="browerr">
@@ -718,7 +730,7 @@
           <div class="headerclass">
             <span style="float: left;">Soubor</span>
             <div
-              onclick="mainFileManager.save(this.parentElement.parentElement.parentElement.getAttribute('filelocation'), this.parentElement.parentElement.parentElement.querySelector('#textareafileeditorimage').value)"
+              onclick="mainFileManager.saveText(this.parentElement.parentElement.parentElement.getAttribute('filelocation'), this.parentElement.parentElement.parentElement.querySelector('#textareafileeditorimage').value)"
               class="menupoznamky filesavefileconfig">Uložit</div>
             <div
               onclick="mainFileManager.setWallpaper(this.parentElement.parentElement.parentElement.getAttribute('filelocation'))"
@@ -1244,6 +1256,7 @@
               icon="icons/logs.png">Nohup Logy</a></li>
           <li><a oncontextmenu="rightclickApp(this)" onclick="LowLevelApi.Apps.openNetwork()"
               icon="icons/network.png">Správce sítě</a></li>
+          <li class="searchHelpLi" style="display: none;"><a onclick="searchSearchedOnInternet()">Vyhledat "<span id="searchHelpText"></span>" na internetu</a></li>
         </ul>
       </div>
       <div class="clockdate">

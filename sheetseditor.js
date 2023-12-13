@@ -205,7 +205,7 @@ class SheetsEditor {
     var data = dataURI.slice(commaIndex + 1);
 
     // Decode the base64-encoded data
-    var binaryData = atob(data);
+    var binaryData = window.atob(data);
 
     // Create a Uint8Array to hold the binary data
     var arrayBuffer = new ArrayBuffer(binaryData.length);

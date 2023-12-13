@@ -32,6 +32,8 @@ class LocalStorage {
     "bootType",
     "getStartedClosed",
     "color-filters",
+    "welcomePage",
+    "searchEngine"
   ];
   static startsWith = [
     "tinymce-",

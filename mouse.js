@@ -5,7 +5,7 @@ var cursortype = "normal";
 setInterval(() => {
   const allIframes = document.querySelectorAll("iframe");
   allIframes.forEach(iframe => {
-    if (iframe.getAttribute("iframeEdited") !== "ano") {
+    if (iframe.getAttribute("iframeEdited") !== "ano" && iframe.className !== "tox-edit-area__iframe") {
       iframe.setAttribute("iframeEdited", "ano")
       const div = document.createElement("div");
       div.className = "iframeWrapper";
