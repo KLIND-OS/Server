@@ -300,41 +300,43 @@ var windows = {
       var special = windows.list.special[name];
       var element = document.querySelector(".oknadisplaynone").querySelector(classofelement);
       let newelement = element.cloneNode(true);
-      newelement.querySelector(".headerclass").addEventListener("dblclick", (e) => {
-        var widthOfWindow = window.innerWidth;
-        var heightOfWindow = window.innerHeight;
-        var mouseX = e.clientX;
-        var mouseY = e.clientY;
-        var minWidth = parseInt($(newelement).css("min-width").replace("px", ""));
-        var minHeight = parseInt($(newelement).css("min-height").replace("px", ""));
+      if (newelement.querySelector(".headerclass")) {
+        newelement.querySelector(".headerclass").addEventListener("dblclick", (e) => {
+          var widthOfWindow = window.innerWidth;
+          var heightOfWindow = window.innerHeight;
+          var mouseX = e.clientX;
+          var mouseY = e.clientY;
+          var minWidth = parseInt($(newelement).css("min-width").replace("px", ""));
+          var minHeight = parseInt($(newelement).css("min-height").replace("px", ""));
 
-        if (newelement.getAttribute("isFullscreen") == "true") {
+          if (newelement.getAttribute("isFullscreen") == "true") {
+            newelement.style.transition = "ease 0.1s all";
+            setTimeout(() => {
+              newelement.setAttribute("isFullscreen", "false");
+              newelement.style.width = minWidth + "px";
+              newelement.style.height = minHeight + "px";
+              $(newelement).css("left", parseInt(mouseX - (minWidth / 2)));
+              $(newelement).css("top", mouseY - 10 + "px");
+              setTimeout(() => {
+                newelement.style.transition = "";
+              }, 200);
+            }, 10);
+
+            return;
+          }
           newelement.style.transition = "ease 0.1s all";
           setTimeout(() => {
-            newelement.setAttribute("isFullscreen", "false");
-            newelement.style.width = minWidth + "px";
-            newelement.style.height = minHeight + "px";
-            $(newelement).css("left", parseInt(mouseX - (minWidth / 2)));
-            $(newelement).css("top", mouseY - 10 + "px");
+            newelement.style.left = "0px";
+            newelement.style.top = "0px";
+            newelement.style.width = widthOfWindow + "px";
+            newelement.style.height = heightOfWindow - 50 + "px";
+            newelement.setAttribute("isFullscreen", "true");
             setTimeout(() => {
               newelement.style.transition = "";
             }, 200);
           }, 10);
-
-          return;
-        }
-        newelement.style.transition = "ease 0.1s all";
-        setTimeout(() => {
-          newelement.style.left = "0px";
-          newelement.style.top = "0px";
-          newelement.style.width = widthOfWindow + "px";
-          newelement.style.height = heightOfWindow - 50 + "px";
-          newelement.setAttribute("isFullscreen", "true");
-          setTimeout(() => {
-            newelement.style.transition = "";
-          }, 200);
-        }, 10);
-      })
+        })
+      }
       newelement.classList.add("window");
       newelement.classList.add("openedwin");
       newelement.style.opacity = "0";

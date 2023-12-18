@@ -21,6 +21,16 @@ window.onkeydown = function (e) {
     dialog();
     keysDown = new Array();
   }
+  else if (keysDown.indexOf("Alttrue") > -1 && keysDown.indexOf("F4true") > -1) {
+    // Close currently selected window
+    if (!openedwindowindex) return
+
+    const closeButton = openedwindowindex.querySelector(".headerclass .close");
+    if (!closeButton) return
+    if (closeButton.style.display == "none") return;
+
+    closeButton.click();
+  }
   else if (keysDown.indexOf("Alttrue") > -1 && keysDown.indexOf(";true") > -1) {
     if (appsopened.oppened) {
       appsopened.close();
