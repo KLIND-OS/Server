@@ -6,6 +6,11 @@ var BPrompt = {
     document.querySelector(".message-box").innerHTML = message;
     document.querySelector(".prompt-element").style.display = "block";
     document.querySelector(".prompt-element .input-box").focus();
+    document.querySelector(".prompt-element .input-box").addEventListener("keypress", (e) => {
+      if (e.key == "Enter") {
+        submitMessage();
+      }
+    })
   },
   confirm: (message, functio) => {
     currentfunconfirm = functio;

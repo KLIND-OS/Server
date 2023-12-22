@@ -1,27 +1,23 @@
 var keysDown = new Array();
 var shortCutsFunctions = [];
 window.onkeydown = function (e) {
-  keysDown.push(e.key + "true");
+  keysDown.push(e.key);
   if (e.key == "Meta") {
     openstartmenu();
   }
-  else if (keysDown.indexOf("Controltrue") > -1 && keysDown.indexOf("ltrue") > -1) {
+  else if (keysDown.indexOf("Control") > -1 && keysDown.indexOf("l") > -1) {
     logout();
-    keysDown = new Array();
   }
-  else if (keysDown.indexOf("AltGraphtrue") > -1 && keysDown.indexOf("rtrue") > -1 || keysDown.indexOf("AltGraphtrue") > -1 && keysDown.indexOf("¶true") > -1) {
+  else if (keysDown.indexOf("AltGraph") > -1 && keysDown.indexOf("r") > -1 || keysDown.indexOf("AltGraph") > -1 && keysDown.indexOf("¶") > -1) {
     openstartmenu();
-    keysDown = new Array();
   }
-  else if (keysDown.indexOf("AltGraphtrue") > -1 && keysDown.indexOf("htrue") > -1) {
+  else if (keysDown.indexOf("AltGraph") > -1 && keysDown.indexOf("h") > -1) {
     windows.open("nap");
-    keysDown = new Array();
   }
-  else if (keysDown.indexOf("AltGraphtrue") > -1 && keysDown.indexOf("ttrue") > -1) {
+  else if (keysDown.indexOf("AltGraph") > -1 && keysDown.indexOf("t") > -1) {
     dialog();
-    keysDown = new Array();
   }
-  else if (keysDown.indexOf("Alttrue") > -1 && keysDown.indexOf("F4true") > -1) {
+  else if (keysDown.indexOf("Alt") > -1 && keysDown.indexOf("F4") > -1) {
     // Close currently selected window
     if (!openedwindowindex) return
 
@@ -31,17 +27,36 @@ window.onkeydown = function (e) {
 
     closeButton.click();
   }
-  else if (keysDown.indexOf("Alttrue") > -1 && keysDown.indexOf(";true") > -1) {
+  else if (keysDown.indexOf("Alt") > -1 && keysDown.indexOf(";") > -1) {
     if (appsopened.oppened) {
       appsopened.close();
     }
     else {
       appsopened.open();
     }
-    keysDown = new Array();
   }
-  else if (keysDown.indexOf("AltGraphtrue") > -1 && keysDown.indexOf("ftrue") > -1 || keysDown.indexOf("AltGraphtrue") > -1 && keysDown.indexOf("[true") > -1) {
+  else if (keysDown.indexOf("AltGraph") > -1 && keysDown.indexOf("f") > -1 || keysDown.indexOf("AltGraph") > -1 && keysDown.indexOf("[") > -1) {
     ColorFilters.deactivateAll();
+  }
+  else if (keysDown.indexOf("Alt") > -1 && keysDown.indexOf("ArrowUp") > -1) {
+    if (!openedwindowindex) return
+
+    windowSizing.full(openedwindowindex)
+  }
+  else if (keysDown.indexOf("Alt") > -1 && keysDown.indexOf("ArrowLeft") > -1) {
+    if (!openedwindowindex) return
+
+    windowSizing.left(openedwindowindex)
+  }
+  else if (keysDown.indexOf("Alt") > -1 && keysDown.indexOf("ArrowRight") > -1) {
+    if (!openedwindowindex) return
+
+    windowSizing.right(openedwindowindex)
+  }
+  else if (keysDown.indexOf("Alt") > -1 && keysDown.indexOf("ArrowDown") > -1) {
+    if (!openedwindowindex) return
+
+    windowSizing.defaultNonEvent(openedwindowindex, 15, 15)
   }
   else {
     function removeLastInstance(badtext, str) {

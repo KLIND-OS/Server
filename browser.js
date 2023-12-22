@@ -26,6 +26,14 @@ class Browser {
   static init(win) {
     const browser = win.querySelector("#brow");
     const input = win.querySelector("#url");
+
+    // Submit when enter is pressed
+    input.addEventListener("keypress", (e) => {
+      if (e.key == "Enter") {
+        Browser.changeUrl(win, input.value);
+      }
+    })
+
     setInterval(() => {
       if (browser.getAttribute("sr") !== browser.src) {
         browser.setAttribute("sr", browser.src);

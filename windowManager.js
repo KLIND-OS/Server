@@ -310,31 +310,11 @@ var windows = {
           var minHeight = parseInt($(newelement).css("min-height").replace("px", ""));
 
           if (newelement.getAttribute("isFullscreen") == "true") {
-            newelement.style.transition = "ease 0.1s all";
-            setTimeout(() => {
-              newelement.setAttribute("isFullscreen", "false");
-              newelement.style.width = minWidth + "px";
-              newelement.style.height = minHeight + "px";
-              $(newelement).css("left", parseInt(mouseX - (minWidth / 2)));
-              $(newelement).css("top", mouseY - 10 + "px");
-              setTimeout(() => {
-                newelement.style.transition = "";
-              }, 200);
-            }, 10);
-
-            return;
+            windowSizing.default(newelement, e)
           }
-          newelement.style.transition = "ease 0.1s all";
-          setTimeout(() => {
-            newelement.style.left = "0px";
-            newelement.style.top = "0px";
-            newelement.style.width = widthOfWindow + "px";
-            newelement.style.height = heightOfWindow - 50 + "px";
-            newelement.setAttribute("isFullscreen", "true");
-            setTimeout(() => {
-              newelement.style.transition = "";
-            }, 200);
-          }, 10);
+          else {
+            windowSizing.full(newelement)
+          }
         })
       }
       newelement.classList.add("window");
