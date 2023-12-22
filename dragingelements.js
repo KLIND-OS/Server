@@ -27,79 +27,33 @@ function reloaddraggable() {
           var heightOfWindow = window.innerHeight;
           var centerOfWindow = widthOfWindow / 2;
           var centerOfWindowY = heightOfWindow / 2;
-          var mouseX = e.originalEvent.originalEvent.clientX;
-          var mouseY = e.originalEvent.originalEvent.clientY;
-          var minWidth = parseInt($(target).css("min-width").replace("px", ""));
-          var minHeight = parseInt($(target).css("min-height").replace("px", ""));
+          
           var odchylka = 3;
           if (target.getAttribute("isFullscreen") == "true") {
-            target.style.transition = "ease 0.1s all";
-            setTimeout(() => {
-              target.setAttribute("isFullscreen", "false");
-              target.style.width = minWidth + "px";
-              target.style.height = minHeight + "px";
-              $(target).css("left", parseInt(mouseX - (minWidth / 2)));
-              $(target).css("top", mouseY - 10 + "px");
-              setTimeout(() => {
-                target.style.transition = "";
-              }, 200);
-            }, 10);
+            windowSizing.default(target, e.originalEvent.originalEvent)
           }
           else {
             target.setAttribute("isFullscreen", "false");
             if (
               top <= odchylka * 7 &&
-                            centerOfElement < centerOfWindow + (centerOfWindow / odchylka) &&
-                            centerOfElement > centerOfWindow - (centerOfWindow / odchylka)
+                centerOfElement < centerOfWindow + (centerOfWindow / odchylka) &&
+                centerOfElement > centerOfWindow - (centerOfWindow / odchylka)
             ) {
-              // Fullscreen
-              target.style.transition = "ease 0.1s all";
-              setTimeout(() => {
-                target.style.left = "0px";
-                target.style.top = "0px";
-                target.style.width = widthOfWindow + "px";
-                target.style.height = heightOfWindow - 50 + "px";
-                target.setAttribute("isFullscreen", "true");
-                setTimeout(() => {
-                  target.style.transition = "";
-                }, 200);
-              }, 10);
+              windowSizing.full(target);
             }
             else if (
               left <= odchylka * 7 &&
-                            centerOfElementY < centerOfWindowY + (centerOfWindowY / odchylka) &&
-                            centerOfElementY > centerOfWindowY - (centerOfWindowY / odchylka)
+                centerOfElementY < centerOfWindowY + (centerOfWindowY / odchylka) &&
+                centerOfElementY > centerOfWindowY - (centerOfWindowY / odchylka)
             ) {
-              // Left
-              target.style.transition = "ease 0.1s all";
-              setTimeout(() => {
-                target.style.top = "0px";
-                target.style.left = "0px";
-                target.style.height = heightOfWindow - 50 + "px";
-                target.style.width = parseInt(widthOfWindow / 2) + "px";
-                target.setAttribute("isFullscreen", "true");
-                setTimeout(() => {
-                  target.style.transition = "";
-                }, 200);
-              }, 10);
+              windowSizing.left(target);
             }
             else if (
               widthOfWindow - (left + width) <= odchylka * 7 &&
-                            centerOfElementY < centerOfWindowY + (centerOfWindowY / odchylka) &&
-                            centerOfElementY > centerOfWindowY - (centerOfWindowY / odchylka)
+                centerOfElementY < centerOfWindowY + (centerOfWindowY / odchylka) &&
+                centerOfElementY > centerOfWindowY - (centerOfWindowY / odchylka)
             ) {
-              // Right
-              target.style.transition = "ease 0.1s all";
-              setTimeout(() => {
-                target.style.top = "0px";
-                target.style.left = parseInt(window.innerWidth / 2) + "px";
-                target.style.height = heightOfWindow - 50 + "px";
-                target.style.width = parseInt(widthOfWindow / 2) + "px";
-                target.setAttribute("isFullscreen", "true");
-                setTimeout(() => {
-                  target.style.transition = "";
-                }, 200);
-              }, 10);
+              windowSizing.right(target);
             }
           }
         }
@@ -137,6 +91,89 @@ function reloaddraggable() {
     }
   }
 }
+
+const windowSizing = {
+  full: (target) => {
+    var widthOfWindow = window.innerWidth;
+    var heightOfWindow = window.innerHeight;
+    // Fullscreen
+    target.style.transition = "ease 0.1s all";
+    setTimeout(() => {
+      target.style.left = "0px";
+      target.style.top = "0px";
+      target.style.width = widthOfWindow + "px";
+      target.style.height = heightOfWindow - 50 + "px";
+      target.setAttribute("isFullscreen", "true");
+      setTimeout(() => {
+        target.style.transition = "";
+      }, 200);
+    }, 10);
+  },
+  left: (target) => {
+    var widthOfWindow = window.innerWidth;
+    var heightOfWindow = window.innerHeight;
+    target.style.transition = "ease 0.1s all";
+    setTimeout(() => {
+      target.style.top = "0px";
+      target.style.left = "0px";
+      target.style.height = heightOfWindow - 50 + "px";
+      target.style.width = parseInt(widthOfWindow / 2) + "px";
+      target.setAttribute("isFullscreen", "true");
+      setTimeout(() => {
+        target.style.transition = "";
+      }, 200);
+    }, 10);
+  },
+  right: (target) => {
+    var widthOfWindow = window.innerWidth;
+    var heightOfWindow = window.innerHeight;
+    target.style.transition = "ease 0.1s all";
+    setTimeout(() => {
+      target.style.top = "0px";
+      target.style.left = parseInt(window.innerWidth / 2) + "px";
+      target.style.height = heightOfWindow - 50 + "px";
+      target.style.width = parseInt(widthOfWindow / 2) + "px";
+      target.setAttribute("isFullscreen", "true");
+      setTimeout(() => {
+        target.style.transition = "";
+      }, 200);
+    }, 10);
+  },
+  default: (target, e) => {
+    var mouseX = e.clientX;
+    var mouseY = e.clientY;
+    var minWidth = parseInt($(target).css("min-width").replace("px", ""));
+    var minHeight = parseInt($(target).css("min-height").replace("px", ""));
+    target.style.transition = "ease 0.1s all";
+    setTimeout(() => {
+      target.setAttribute("isFullscreen", "false");
+      target.style.width = minWidth + "px";
+      target.style.height = minHeight + "px";
+      $(target).css("left", parseInt(mouseX - (minWidth / 2)));
+      $(target).css("top", mouseY - 10 + "px");
+      setTimeout(() => {
+        target.style.transition = "";
+      }, 200);
+    }, 10);
+  },
+  defaultNonEvent: (target, left, top) => {
+    var minWidth = parseInt($(target).css("min-width").replace("px", ""));
+    var minHeight = parseInt($(target).css("min-height").replace("px", ""));
+    target.style.transition = "ease 0.1s all";
+    setTimeout(() => {
+      target.setAttribute("isFullscreen", "false");
+      target.style.width = minWidth + "px";
+      target.style.height = minHeight + "px";
+      $(target).css("left", left + "px");
+      $(target).css("top", top + "px");
+      setTimeout(() => {
+        target.style.transition = "";
+      }, 200);
+    }, 10);
+
+  }
+}
+
 $(function () {
   $(".dragebleiconondesktop").draggable({
     start: function (event, ui) {
