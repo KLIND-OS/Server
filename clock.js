@@ -35,7 +35,7 @@ function asduiashgdi() {
     }
     time.innerHTML = hours + ":" + minutes + ":" + seconds + " " + day_night;
     document.querySelector("#timess").innerHTML = hours + ":" + minutes + ":" + seconds + " " + day_night;
-  });
+  }, 1000);
 
   setInterval(() => {
     const timedva = document.querySelector("#timedva");
@@ -58,6 +58,5 @@ function asduiashgdi() {
       hourss = "0" + hourss;
     }
     timedva.textContent = hourss + ":" + minutess + ":" + secondss + " ";
-    var timedvavar = hourss + ":" + minutess + ":" + secondss;
-  });
+  }, 1000);
 }
