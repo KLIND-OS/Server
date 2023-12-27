@@ -88,12 +88,14 @@ function reloaddraggable() {
     var all = document.querySelectorAll(".window." + noresizeClasslist[i]);
     for (var j = 0; j < all.length; j++) {
       $(all[j]).resizable("destroy");
+      all[j].setAttribute("notresizable", "true")
     }
   }
 }
 
 const windowSizing = {
   full: (target) => {
+    if (target.getAttribute("notresizable") === "true") return
     var widthOfWindow = window.innerWidth;
     var heightOfWindow = window.innerHeight;
     // Fullscreen
@@ -110,6 +112,7 @@ const windowSizing = {
     }, 10);
   },
   left: (target) => {
+    if (target.getAttribute("notresizable") === "true") return
     var widthOfWindow = window.innerWidth;
     var heightOfWindow = window.innerHeight;
     target.style.transition = "ease 0.1s all";
@@ -125,6 +128,7 @@ const windowSizing = {
     }, 10);
   },
   right: (target) => {
+    if (target.getAttribute("notresizable") === "true") return
     var widthOfWindow = window.innerWidth;
     var heightOfWindow = window.innerHeight;
     target.style.transition = "ease 0.1s all";
@@ -140,6 +144,7 @@ const windowSizing = {
     }, 10);
   },
   default: (target, e) => {
+    if (target.getAttribute("notresizable") === "true") return
     var mouseX = e.clientX;
     var mouseY = e.clientY;
     var minWidth = parseInt($(target).css("min-width").replace("px", ""));
@@ -157,6 +162,7 @@ const windowSizing = {
     }, 10);
   },
   defaultNonEvent: (target, left, top) => {
+    if (target.getAttribute("notresizable") === "true") return
     var minWidth = parseInt($(target).css("min-width").replace("px", ""));
     var minHeight = parseInt($(target).css("min-height").replace("px", ""));
     target.style.transition = "ease 0.1s all";
