@@ -300,14 +300,14 @@ var windows = {
       var special = windows.list.special[name];
       var element = document.querySelector(".oknadisplaynone").querySelector(classofelement);
       let newelement = element.cloneNode(true);
-      if (newelement.querySelector(".headerclass")) {
+      newelement.classList.add("window");
+      newelement.classList.add("openedwin");
+      newelement.style.opacity = "0";
+      newelement.style.scale = "0.9";
+      document.querySelector(".oknepatrizde").appendChild(newelement);
+      reloaddraggable();
+      if (newelement.querySelector(".headerclass") && newelement.getAttribute("notresizable") !== "true") {
         newelement.querySelector(".headerclass").addEventListener("dblclick", (e) => {
-          var widthOfWindow = window.innerWidth;
-          var heightOfWindow = window.innerHeight;
-          var mouseX = e.clientX;
-          var mouseY = e.clientY;
-          var minWidth = parseInt($(newelement).css("min-width").replace("px", ""));
-          var minHeight = parseInt($(newelement).css("min-height").replace("px", ""));
 
           if (newelement.getAttribute("isFullscreen") == "true") {
             windowSizing.default(newelement, e)
@@ -317,12 +317,6 @@ var windows = {
           }
         })
       }
-      newelement.classList.add("window");
-      newelement.classList.add("openedwin");
-      newelement.style.opacity = "0";
-      newelement.style.scale = "0.9";
-      document.querySelector(".oknepatrizde").appendChild(newelement);
-      reloaddraggable();
       if (localStorage.getItem("mode") == "dark") {
         var x, i;
         x = document.querySelectorAll(".window");

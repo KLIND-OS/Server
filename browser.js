@@ -3,6 +3,19 @@ class Browser {
     if (dontAddHTTPS != true && !/^https?:\/\//i.test(url)) {
       url = "http://" + url;
     }
+    const urlObject = new URL(url);
+
+    if (
+      urlObject.hostname == window.location.hostname &&
+      urlObject.port == window.location.port
+    ) {
+      const browerr = win.querySelector(".browerr");
+      browerr.querySelector("#errorcodebrow").textContent = 0;
+      browerr.querySelector("#errornamebrow").textContent = "This website is blocked!";
+      browerr.style.display = "block";
+      return
+    }
+
     const browser = win.querySelector("#brow");
     win.querySelector(".iframegamebrow").style.display = "none";
     win.querySelector(".iframeWrapper").style.display = "none";
@@ -49,7 +62,7 @@ class Browser {
           iframegamebrow.style.display = "block";
           iframeWrapper.style.display = "block";
         }
-        else {
+        else if ([-105, -109].includes(event.errorCode)) {
           const browerr = win.querySelector(".browerr");
           browerr.querySelector("#errorcodebrow").textContent = event.errorCode;
           browerr.querySelector("#errornamebrow").textContent = event.errorDescription;
