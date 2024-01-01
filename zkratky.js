@@ -1,6 +1,7 @@
 var keysDown = new Array();
 var shortCutsFunctions = [];
 window.onkeydown = function (e) {
+  if (keysDown.includes(e.key)) return
   keysDown.push(e.key);
   if (e.key == "Meta") {
     openstartmenu();
