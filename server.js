@@ -20,13 +20,13 @@ liveReloadServer.server.once("connection", () => {
 
 if (process.argv[2] == "dev") {
   watcher
-    .on('add', (e) => {
+    .on('add', () => {
       liveReloadServer.refresh("/");
     })
-    .on('change', (e) => {
+    .on('change', () => {
       liveReloadServer.refresh("/");
     })
-    .on('unlink', (e) => {
+    .on('unlink', () => {
       liveReloadServer.refresh("/");
     });
 }
