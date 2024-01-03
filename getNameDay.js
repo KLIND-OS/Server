@@ -19,4 +19,5 @@ function getSvatek() {
 }
 setInterval(() => {
   document.querySelector("#svatekname").textContent = getSvatek();
-}, 5000);
+}, 60000);
+
