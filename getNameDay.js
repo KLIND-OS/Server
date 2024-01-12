@@ -20,4 +20,5 @@ function getSvatek() {
 setInterval(() => {
   document.querySelector("#svatekname").textContent = getSvatek();
 }, 60000);
+document.querySelector("#svatekname").textContent = getSvatek();
 
