@@ -38,7 +38,7 @@ function monitorConnection() {
     }
     setInterval(() => {
       ajax();
-    }, 1000);
+    }, 10000);
   }
   catch { }
 }
