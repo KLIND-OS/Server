@@ -18,7 +18,7 @@ def count_lines_in_files(folder_path):
             file_path = os.path.join(root, file)
 
             
-            if is_text_file(file) and not 'libs/' in file_path and not '.git/' in file_path:
+            if is_text_file(file) and not 'libs/' in file_path and not '.git/' in file_path and not 'node_modules/' in file_path:
             #if is_text_file(file):
                 try:
                     
