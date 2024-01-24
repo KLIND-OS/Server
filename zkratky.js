@@ -1,6 +1,7 @@
 var keysDown = new Array();
 var shortCutsFunctions = [];
 window.onkeydown = function (e) {
+  if (keysDown.includes(e.key)) return
   keysDown.push(e.key);
   if (e.key == "Meta") {
     openstartmenu();
@@ -11,7 +12,7 @@ window.onkeydown = function (e) {
   else if (keysDown.indexOf("AltGraph") > -1 && keysDown.indexOf("r") > -1 || keysDown.indexOf("AltGraph") > -1 && keysDown.indexOf("¶") > -1) {
     openstartmenu();
   }
-  else if (keysDown.indexOf("AltGraph") > -1 && keysDown.indexOf("h") > -1) {
+  else if (keysDown.indexOf("AltGraph") > -1 && keysDown.indexOf("h") > -1 || keysDown.indexOf("AltGraph") > -1 && keysDown.indexOf("`") > -1) {
     windows.open("nap");
   }
   else if (keysDown.indexOf("AltGraph") > -1 && keysDown.indexOf("t") > -1) {
