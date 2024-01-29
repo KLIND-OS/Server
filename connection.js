@@ -39,6 +39,7 @@ function monitorConnection() {
     setInterval(() => {
       ajax();
     }, 10000);
+    ajax();
   }
   catch { }
 }
