@@ -2902,3 +2902,25 @@ table tr td input {
     height: 100%;
     width: 100%;
 }
+
+.batteryStatus {
+  height: 50px;
+  float: right;
+  display: flex;
+  justify-content: end;
+  padding: 5px;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 50px;
+  align-items: center;
+}
+
+.batteryStatus img {
+  height: 70%;
+  width: 33px;
+}
+
+.batteryStatus span {
+  /* color: white; */
+  font-size: 15px;
+}
