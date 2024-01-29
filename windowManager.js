@@ -318,20 +318,12 @@ var windows = {
         })
       }
       if (localStorage.getItem("mode") == "dark") {
-        var x, i;
-        x = document.querySelectorAll(".window");
-        for (i = 0; i < x.length; i++) {
-          x[i].style.backgroundColor = "#3b3838";
-          x[i].classList.add("black");
-        }
+        newelement.style.backgroundColor = "#3b3838";
+        newelement.classList.add("black");
       }
       else {
-        var x, i;
-        x = document.querySelectorAll(".window");
-        for (i = 0; i < x.length; i++) {
-          x[i].style.backgroundColor = "white";
-          x[i].classList.remove("black");
-        }
+        newelement.style.backgroundColor = "white";
+        newelement.classList.remove("black");
       }
       newelement.style.opacity = "1";
       newelement.style.scale = "1";
