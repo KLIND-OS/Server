@@ -10,13 +10,13 @@ class WordEditor {
     else {
       BPrompt.confirm("Soubor musí být převeden do formátu HTML aby se mohl uložit. Chcete pokračovat?", reponse => {
         if (reponse) {
-          var storage = JSON.parse(localStorage.getItem("files-uploaded"));
+          var storage = storage.getSync("files-uploaded");
           for (var i = 0; i < storage.length; i++) {
             if (storage[i][5] + storage[i][0] == fileLocation) {
               storage[i][2] = "text/html";
               storage[i][4] = content;
               storage[i][1] = lengthInUtf8Bytes(content);
-              localStorage.setItem("files-uploaded", JSON.stringify(storage));
+              storage.setSync("files-uploaded", storage);
     
               var windowasjdh = document.querySelectorAll(".window");
               for (var i = 0; i < windowasjdh.length; i++) {
