@@ -8,7 +8,6 @@ class LocalStorage {
     "customapps",
     "desktop-icons",
     "fa1c2e",
-    "files-uploaded",
     "background",
     "folders-uploaded",
     "installed",
