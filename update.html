@@ -53,7 +53,19 @@
         }],
         [6.3, "", () => {}],
         [6.4, "", () => {}],
-        [6.5, "", () => {}]
+        [6.5, "", () => {}],
+        [6.6, "<p>Změnit místo pro uložení souborů</p>", () => {
+          JSON.parse(localStorage["files-uploaded"]).forEach(file => {
+              const content = storage.getSync(file[5])
+              if (Object.keys(content).length == 0) {
+                  const data = [file];
+                  storage.setSync(file[5], data)
+              } else {
+                  content.push(file);
+                  storage.setSync(file[5], content)
+              }
+          })
+        }]
     ]
 </script>
 <script>

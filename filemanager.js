@@ -131,9 +131,12 @@ var mainFileManager = {
     windows.open("fileproperties");
   },
   saveText: (location, file) => {
-    var value = storage.getSync("files-uploaded");
+    let lastSlashIndex = location.lastIndexOf("/");
+    let directory = location.substring(0, lastSlashIndex + 1);
+    let filename = location.substring(lastSlashIndex + 1);
+    var value = storage.getSync(directory);
     for (var i = 0; i < value.length; i++) {
-      if (value[i][5] + value[i][0] == location) {
+      if (value[i][0] == filename) {
         var time = new Date().toString();
         value[i][3] = time;
         const sdsa = `data:${value[i][2]};base64,` + Base64.encode(file);
@@ -143,7 +146,7 @@ var mainFileManager = {
       }
     }
     try {
-      storage.setSync("files-uploaded", value);
+      storage.setSync(directory, value);
     } catch (e) {
       spawnNotification(
         "Správce souborů",
@@ -161,9 +164,12 @@ var mainFileManager = {
     }
   },
   save: (location, file) => {
-    var value = storage.getSync("files-uploaded");
+    let lastSlashIndex = location.lastIndexOf("/");
+    let directory = location.substring(0, lastSlashIndex + 1);
+    let filename = location.substring(lastSlashIndex + 1);
+    var value = storage.getSync(directory);
     for (var i = 0; i < value.length; i++) {
-      if (value[i][5] + value[i][0] == location) {
+      if (value[i][0] == filename) {
         var time = new Date().toString();
         value[i][1] = lengthInUtf8Bytes(file);
         value[i][3] = time;
@@ -172,7 +178,7 @@ var mainFileManager = {
       }
     }
     try {
-      storage.setSync("files-uploaded", value);
+      storage.setSync(directory, value);
     } catch (e) {
       spawnNotification(
         "Správce souborů",
@@ -200,13 +206,11 @@ var mainFileManager = {
       namefile = locationsplit[locationsplit.length - 1];
       folder =
         removebyindex(locationsplit, locationsplit.length - 1).join("/") + "/";
-      var stored = storage.getSync("files-uploaded");
+      var stored = storage.getSync(folder);
       if (stored) {
         for (var i = 0; i < stored.length; i++) {
-          if (stored[i][5] == folder) {
-            if (stored[i][0] == namefile) {
-              return stored[i][4];
-            }
+          if (stored[i][0] == namefile) {
+            return stored[i][4];
           }
         }
       }
@@ -235,30 +239,27 @@ var mainFileManager = {
     return false;
   },
   allFiles: (folder) => {
+    if (folder != "/") folder = folder + "/";
     try {
-      var stored = storage.getSync("files-uploaded");
+      var stored = storage.getSync(folder);
     } catch {
       return new Array();
     }
-    var files = new Array();
-    if (folder != "/") folder = folder + "/";
-    for (var i = 0; i < stored.length; i++) {
-      if (stored[i][5] == folder) {
-        files.push(stored[i]);
-      }
-    }
-    return files;
+    return stored;
   },
   getFile: (location) => {
-    var stored = storage.getSync("files-uploaded");
+    let lastSlashIndex = location.lastIndexOf("/");
+    let directory = location.substring(0, lastSlashIndex + 1);
+    let filename = location.substring(lastSlashIndex + 1);
+    var stored = storage.getSync(directory);
     for (var i = 0; i < stored.length; i++) {
-      if (stored[i][5] + stored[i][0] == location) {
+      if (stored[i][0] == filename) {
         return stored[i];
       }
     }
   },
   createAppShortCut: (appName, fileName) => {
-    var stored = storage.getSync("files-uploaded");
+    var stored = storage.getSync("/");
     const time = new Date().toString();
     const content = "open:" + appName;
 
@@ -271,7 +272,7 @@ var mainFileManager = {
         content,
         "/",
       ]);
-      storage.setSync("files-uploaded", stored);
+      storage.setSync("/", stored);
 
       var windowasjdh = document.querySelectorAll(".window");
       for (var i = 0; i < windowasjdh.length; i++) {
@@ -295,7 +296,7 @@ var mainFileManager = {
       name = "x" + name;
       mainFileManager.createFile({ name, type, content, parentFolder });
     } else {
-      var array = storage.getSync("files-uploaded");
+      var array = storage.getSync(parentFolder);
       var add = [
         name,
         lengthInUtf8Bytes(content),
@@ -305,7 +306,7 @@ var mainFileManager = {
         parentFolder,
       ];
       array.push(add);
-      storage.setSync("files-uploaded", array);
+      storage.setSync(parentFolder, array);
       return add;
     }
   },
@@ -350,54 +351,30 @@ var mainFileManager = {
       var type = mimeType;
 
       function x() {
-        storage.has("files-uploaded", (_, has) => {
-          if (has) {
-            var stored = storage.getSync("files-uploaded");
-            stored.push([
-              filename,
-              lengthInUtf8Bytes(uri),
-              type,
-              new Date().toString(),
-              uri,
-              parentFolder,
-            ]);
-            try {
-              storage.setSync("files-uploaded", stored);
-            } catch (e) {
-              spawnNotification(
-                "Správce souborů",
-                "Není dostatek místa na úložišti. Více info <a href='https://www.gwtproject.org/doc/latest/DevGuideHtml5Storage.html'>zde</a>.",
-              );
-              console.log(
-                "File is too big to be uploaded. Error message: " +
-                  e.toString(),
-              );
-            }
-          } else {
-            prozatim = [
-              [
-                filename,
-                lengthInUtf8Bytes(uri),
-                type,
-                new Date().toString(),
-                uri,
-                parentFolder,
-              ],
-            ];
-            try {
-              storage.setSync("files-uploaded", prozatim);
-            } catch (e) {
-              spawnNotification(
-                "Správce souborů",
-                "Není dostatek místa na úložišti. Více info <a href='https://www.gwtproject.org/doc/latest/DevGuideHtml5Storage.html'>zde</a>.",
-              );
-              console.log(
-                "File is too big to be uploaded. Error message: " +
-                  e.toString(),
-              );
-            }
-          }
-        });
+        var stored = storage.getSync(parentFolder);
+        if (Object.keys(stored).length == 0) {
+          stored = [];
+        }
+        stored.push([
+          filename,
+          lengthInUtf8Bytes(uri),
+          type,
+          new Date().toString(),
+          uri,
+          parentFolder,
+        ]);
+        try {
+          storage.setSync(parentFolder, stored);
+        } catch (e) {
+          spawnNotification(
+            "Správce souborů",
+            "Není dostatek místa na úložišti. Více info <a href='https://www.gwtproject.org/doc/latest/DevGuideHtml5Storage.html'>zde</a>.",
+          );
+          console.log(
+            "File is too big to be uploaded. Error message: " +
+              e.toString(),
+          );
+        }
       }
 
       if (type == "text/plain") {
@@ -446,11 +423,11 @@ class File {
     mainFileManager.save(this.fullPath, dataUri);
   }
   remove() {
-    var value = storage.getSync("files-uploaded");
+    var value = storage.getSync(this.parentFolder);
     for (var i = 0; i < value.length; i++) {
       if (value[i][5] + value[i][0] === this.fullPath) {
         var newarray = removebyindex(value, i);
-        storage.setSync("files-uploaded", newarray);
+        storage.setSync(this.parentFolder, newarray);
         return true;
       }
     }
