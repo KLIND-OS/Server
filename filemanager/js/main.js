@@ -327,8 +327,8 @@ var FileManager = {
       if (newname == null || newname.length == 0) {
 
       }
-      else if (newname.length > 30) {
-        parent.spawnNotification("Správce Souborů", "Název souborů nesmí být delší jak 30 znaků.");
+      else if (newname.length > 100) {
+        parent.spawnNotification("Správce Souborů", "Název souborů nesmí být delší jak 100 znaků.");
       }
       else if (newname.indexOf("/") > -1 || newname.indexOf("\\") > -1) {
         parent.spawnNotification("Správce Souborů", "'/' a '\\' jsou zakázané znaky.");
@@ -392,8 +392,8 @@ var FileManager = {
           parent.spawnNotification("Správce Souborů", "Soubor se stejným názvem už existuje.");
         }
         else {
-          if (name.length > 30) {
-            parent.spawnNotification("Správce Souborů", "Název souborů nesmí být delší jak 30 znaků.");
+          if (name.length > 100) {
+            parent.spawnNotification("Správce Souborů", "Název souborů nesmí být delší jak 100 znaků.");
           }
           else {
             if (name.indexOf("/") > -1 || name.indexOf("\\") > -1) {
@@ -532,8 +532,8 @@ var FileManager = {
           parent.spawnNotification("Správce Souborů", "Soubor se stejným názvem už existuje.");
         }
         else {
-          if (name.length > 30) {
-            parent.spawnNotification("Správce Souborů", "Název souborů nesmí být delší jak 30 znaků.");
+          if (name.length > 100) {
+            parent.spawnNotification("Správce Souborů", "Název souborů nesmí být delší jak 100 znaků.");
           }
           else {
             if (name.indexOf("/") > -1 || name.indexOf("\\") > -1) {

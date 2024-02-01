@@ -174,7 +174,7 @@ var mainFileManager = {
         value[i][1] = lengthInUtf8Bytes(file);
         value[i][3] = time;
         value[i][4] = file;
-        continue;
+        break;
       }
     }
     try {
