@@ -41,7 +41,7 @@ function prevedsystem() {
     }));
   })
 }
-function submitnjahsbdjksabd(e) {
+function submitnjahsbdjksabd() {
   control.fileManager.fileSelect({
     success: (file_array) => {
       var result = JSON.parse(file_array[4]);
