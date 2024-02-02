@@ -64,7 +64,8 @@ var windows = {
             element.querySelector("video source").setAttribute("type", file[2]);
             element.querySelector("video source").setAttribute("src", file[4]);
             const player = new Plyr(element.querySelectorAll("#player"), {
-              iconUrl: "icons/plyr.svg"
+              iconUrl: "icons/plyr.svg",
+              controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'airplay', 'fullscreen']
             });
             videofileids.push(player);
             element.setAttribute("plyr-id", videofileids.length - 1);
