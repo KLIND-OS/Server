@@ -96,7 +96,7 @@ var CustomApp = {
                         .then(function success(versionasd) {
                           zip.file("install.js").async("text")
                             .then(function success(installScript) {
-                              if (versionasd === version) {
+                              if (versionasd.trim() === version.trim()) {
                                 var name = sdajdh;
                                 // name, script, image
                                 var scripts = localStorage.getItem("customapps");

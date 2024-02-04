@@ -172,12 +172,12 @@ class SheetsEditor {
         const reader = new FileReader();
         reader.onload = function () {
           const dataURI = reader.result;
-          var storage = JSON.parse(localStorage.getItem("files-uploaded"));
+          var storage = storage.getSync(file_array[5]);
           for (var i = 0; i < storage.length; i++) {
-            if (storage[i][5] + storage[i][0] == file_array[5] + file_array[0]) {
+            if (storage[i][0] == file_array[0]) {
               storage[i][4] = dataURI;
               storage[i][1] = lengthInUtf8Bytes(dataURI);
-              localStorage.setItem("files-uploaded", JSON.stringify(storage));
+              storage.setSync(file_array[5], storage);
 
               var windowasjdh = document.querySelectorAll(".window");
               for (var i = 0; i < windowasjdh.length; i++) {

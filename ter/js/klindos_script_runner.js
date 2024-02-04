@@ -7,7 +7,7 @@ function runKLINDOSScript(path) {
     });
   }
   else {
-    var content = mainFileManager.getTextContent(path);
+    var content = parent.mainFileManager.getTextContent(path);
     if (content == false) {
       return Sandbox.model.addHistory({
         command: command,

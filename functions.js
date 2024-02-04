@@ -125,7 +125,7 @@ class App {
             
       this.info = {
         name: name,
-        inStartMenu: hidden,
+        inStartMenu: !hidden,
       };
       LocalStorage.customApps.push(name);
     }
