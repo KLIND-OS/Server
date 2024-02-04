@@ -64,9 +64,8 @@ var mainFileManager = {
     if (file[2] == "klindos/app") {
       parent.windows.open(file[4].split(":")[1]);
       return;
-    }
-    else if (file[2] == "klindos/installer") {
-      parent.windows.open("installapp", {"file": file});
+    } else if (file[2] == "klindos/installer") {
+      parent.windows.open("installapp", { file: file });
       return;
     }
 
@@ -86,7 +85,7 @@ var mainFileManager = {
     if (possible.length == 0) {
       spawnNotification(
         "Správce souborů",
-        "Nemáte staženou aplikaci která by uměla otevřít tento soubor. Otevírám v textovém editoru."
+        "Nemáte staženou aplikaci která by uměla otevřít tento soubor. Otevírám v textovém editoru.",
       );
       windows.open("fileeditor", {
         file: file,
@@ -120,7 +119,7 @@ var mainFileManager = {
     document.querySelector("#filename").innerHTML = file[0];
     document.querySelector("#filesize").innerHTML = humanFileSize(
       file[1],
-      true
+      true,
     );
     document.querySelector("#filechange").innerHTML = file[3];
     document.querySelector("#filelocation").innerHTML = file[5] + file[0];
@@ -132,23 +131,26 @@ var mainFileManager = {
     windows.open("fileproperties");
   },
   saveText: (location, file) => {
-    var value = JSON.parse(localStorage.getItem("files-uploaded"));
+    let lastSlashIndex = location.lastIndexOf("/");
+    let directory = location.substring(0, lastSlashIndex + 1);
+    let filename = location.substring(lastSlashIndex + 1);
+    var value = storage.getSync(directory);
     for (var i = 0; i < value.length; i++) {
-      if (value[i][5] + value[i][0] == location) {
+      if (value[i][0] == filename) {
         var time = new Date().toString();
         value[i][3] = time;
-        const sdsa = `data:${value[i][2]};base64,` + Base64.encode(file)
+        const sdsa = `data:${value[i][2]};base64,` + Base64.encode(file);
         value[i][4] = sdsa;
         value[i][1] = lengthInUtf8Bytes(sdsa);
         continue;
       }
     }
     try {
-      localStorage.setItem("files-uploaded", JSON.stringify(value));
+      storage.setSync(directory, value);
     } catch (e) {
       spawnNotification(
         "Správce souborů",
-        "Tento soubor je moc velký na to aby byl uložen."
+        "Tento soubor je moc velký na to aby byl uložen.",
       );
       console.log("File is too big to be saved. Error: " + e.toString());
     }
@@ -162,22 +164,25 @@ var mainFileManager = {
     }
   },
   save: (location, file) => {
-    var value = JSON.parse(localStorage.getItem("files-uploaded"));
+    let lastSlashIndex = location.lastIndexOf("/");
+    let directory = location.substring(0, lastSlashIndex + 1);
+    let filename = location.substring(lastSlashIndex + 1);
+    var value = storage.getSync(directory);
     for (var i = 0; i < value.length; i++) {
-      if (value[i][5] + value[i][0] == location) {
+      if (value[i][0] == filename) {
         var time = new Date().toString();
         value[i][1] = lengthInUtf8Bytes(file);
         value[i][3] = time;
         value[i][4] = file;
-        continue;
+        break;
       }
     }
     try {
-      localStorage.setItem("files-uploaded", JSON.stringify(value));
+      storage.setSync(directory, value);
     } catch (e) {
       spawnNotification(
         "Správce souborů",
-        "Tento soubor je moc velký na to aby byl uložen."
+        "Tento soubor je moc velký na to aby byl uložen.",
       );
       console.log("File is too big to be saved. Error: " + e.toString());
     }
@@ -201,13 +206,11 @@ var mainFileManager = {
       namefile = locationsplit[locationsplit.length - 1];
       folder =
         removebyindex(locationsplit, locationsplit.length - 1).join("/") + "/";
-      var stored = JSON.parse(localStorage.getItem("files-uploaded"));
+      var stored = storage.getSync(folder);
       if (stored) {
         for (var i = 0; i < stored.length; i++) {
-          if (stored[i][5] == folder) {
-            if (stored[i][0] == namefile) {
-              return stored[i][4];
-            }
+          if (stored[i][0] == namefile) {
+            return stored[i][4];
           }
         }
       }
@@ -217,9 +220,9 @@ var mainFileManager = {
     }
   },
   getTextContent: (location) => {
-    const content = mainFileManager.getContent(location)
-    if (content === false) return false
-    return Base64.decode(content.split(",")[1])
+    const content = mainFileManager.getContent(location);
+    if (content === false) return false;
+    return Base64.decode(content.split(",")[1]);
   },
   folderExist: (location) => {
     try {
@@ -236,32 +239,27 @@ var mainFileManager = {
     return false;
   },
   allFiles: (folder) => {
+    if (folder != "/") folder = folder + "/";
     try {
-      var stored = JSON.parse(localStorage.getItem("files-uploaded"));
+      var stored = storage.getSync(folder);
     } catch {
       return new Array();
     }
-    var files = new Array();
-    if (folder != "/") folder = folder + "/";
-    for (var i = 0; i < stored.length; i++) {
-      if (stored[i][5] == folder) {
-        files.push(stored[i]);
-      }
-    }
-    return files;
+    return stored;
   },
   getFile: (location) => {
-    var stored = JSON.parse(localStorage.getItem("files-uploaded"));
+    let lastSlashIndex = location.lastIndexOf("/");
+    let directory = location.substring(0, lastSlashIndex + 1);
+    let filename = location.substring(lastSlashIndex + 1);
+    var stored = storage.getSync(directory);
     for (var i = 0; i < stored.length; i++) {
-      if (stored[i][5] + stored[i][0] == location) {
+      if (stored[i][0] == filename) {
         return stored[i];
       }
     }
   },
   createAppShortCut: (appName, fileName) => {
-    var stored = localStorage.getItem("files-uploaded");
-    if (stored == null) stored = new Array();
-    else stored = JSON.parse(stored);
+    var stored = storage.getSync("/");
     const time = new Date().toString();
     const content = "open:" + appName;
 
@@ -274,7 +272,7 @@ var mainFileManager = {
         content,
         "/",
       ]);
-      localStorage.setItem("files-uploaded", JSON.stringify(stored));
+      storage.setSync("/", stored);
 
       var windowasjdh = document.querySelectorAll(".window");
       for (var i = 0; i < windowasjdh.length; i++) {
@@ -298,7 +296,7 @@ var mainFileManager = {
       name = "x" + name;
       mainFileManager.createFile({ name, type, content, parentFolder });
     } else {
-      var array = JSON.parse(localStorage.getItem("files-uploaded")) || [];
+      var array = storage.getSync(parentFolder);
       var add = [
         name,
         lengthInUtf8Bytes(content),
@@ -308,7 +306,7 @@ var mainFileManager = {
         parentFolder,
       ];
       array.push(add);
-      localStorage.setItem("files-uploaded", JSON.stringify(array));
+      storage.setSync(parentFolder, array);
       return add;
     }
   },
@@ -338,65 +336,44 @@ var mainFileManager = {
         "Soubor se stejným názvem v kořenové složce již existuje. Vyberte nový název souboru",
         (n) => {
           mainFileManager.saveFromUri(uri, n);
-        }
+        },
       );
     } else {
       let base64ContentArray = uri.split(",");
       try {
         var mimeType = base64ContentArray[0].match(
-          /[^:\s*]\w+\/[\w-+\d.]+(?=[;| ])/
+          /[^:\s*]\w+\/[\w-+\d.]+(?=[;| ])/,
         )[0];
-      }
-      catch {
+      } catch {
         // Set default mimetype
         var mimeType = null;
       }
       var type = mimeType;
 
       function x() {
-        if (localStorage.getItem("files-uploaded")) {
-          var stored = JSON.parse(localStorage.getItem("files-uploaded"));
-          stored.push([
-            filename,
-            lengthInUtf8Bytes(uri),
-            type,
-            new Date().toString(),
-            uri,
-            parentFolder,
-          ]);
-          try {
-            localStorage.setItem("files-uploaded", JSON.stringify(stored));
-          } catch (e) {
-            spawnNotification(
-              "Správce souborů",
-              "Není dostatek místa na úložišti. Více info <a href='https://www.gwtproject.org/doc/latest/DevGuideHtml5Storage.html'>zde</a>."
-            );
-            console.log(
-              "File is too big to be uploaded. Error message: " + e.toString()
-            );
-          }
-        } else {
-          prozatim = [
-            [
-              filename,
-              lengthInUtf8Bytes(uri),
-              type,
-              new Date().toString(),
-              uri,
-              parentFolder,
-            ],
-          ];
-          try {
-            localStorage.setItem("files-uploaded", JSON.stringify(prozatim));
-          } catch (e) {
-            spawnNotification(
-              "Správce souborů",
-              "Není dostatek místa na úložišti. Více info <a href='https://www.gwtproject.org/doc/latest/DevGuideHtml5Storage.html'>zde</a>."
-            );
-            console.log(
-              "File is too big to be uploaded. Error message: " + e.toString()
-            );
-          }
+        var stored = storage.getSync(parentFolder);
+        if (Object.keys(stored).length == 0) {
+          stored = [];
+        }
+        stored.push([
+          filename,
+          lengthInUtf8Bytes(uri),
+          type,
+          new Date().toString(),
+          uri,
+          parentFolder,
+        ]);
+        try {
+          storage.setSync(parentFolder, stored);
+        } catch (e) {
+          spawnNotification(
+            "Správce souborů",
+            "Není dostatek místa na úložišti. Více info <a href='https://www.gwtproject.org/doc/latest/DevGuideHtml5Storage.html'>zde</a>.",
+          );
+          console.log(
+            "File is too big to be uploaded. Error message: " +
+              e.toString(),
+          );
         }
       }
 
@@ -407,7 +384,8 @@ var mainFileManager = {
       } else {
         x();
       }
-      if (messages) spawnNotification("Stahování", "Soubor byl stažen do kořenové složky");
+      if (messages)
+        spawnNotification("Stahování", "Soubor byl stažen do kořenové složky");
     }
   },
 };
@@ -436,7 +414,7 @@ class File {
     return mainFileManager.open(this.decodeToArray());
   }
   saveText(content) {
-    const sdsa = `data:${this.type};base64,` + Base64.encode(content)
+    const sdsa = `data:${this.type};base64,` + Base64.encode(content);
     this.content = sdsa;
     mainFileManager.save(this.fullPath, sdsa);
   }
@@ -445,11 +423,11 @@ class File {
     mainFileManager.save(this.fullPath, dataUri);
   }
   remove() {
-    var value = JSON.parse(localStorage.getItem("files-uploaded"));
+    var value = storage.getSync(this.parentFolder);
     for (var i = 0; i < value.length; i++) {
       if (value[i][5] + value[i][0] === this.fullPath) {
         var newarray = removebyindex(value, i);
-        localStorage.setItem("files-uploaded", JSON.stringify(newarray));
+        storage.setSync(this.parentFolder, newarray);
         return true;
       }
     }

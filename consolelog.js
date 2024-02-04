@@ -50,7 +50,7 @@ console.log = function () {
       }
     }
     mainConsole.logs.push(message);
-    mainConsole.log(arguments);
+    mainConsole.log(...arguments);
   }
   catch {
     console.error("Nepovedlo se uložit log do databáze.")
