@@ -122,7 +122,7 @@ class App {
       else {
         hidden = true;
       }
-            
+      
       this.info = {
         name: name,
         inStartMenu: !hidden,
