@@ -5,10 +5,12 @@ function loadBattery() {
       document.querySelector("#batteryLevel").textContent = `${level}%`
 
       if (battery.charging) {
-        document.querySelector("#batteryIcon").src = "icons/batteryCharging.png";
+        document.querySelector("#batteryIcon").style.display = "none";
+        document.querySelector("#batteryIconCharging").style.display = "block";
       }
       else {
-        document.querySelector("#batteryIcon").src = "icons/battery.png";
+        document.querySelector("#batteryIcon").style.display = "block";
+        document.querySelector("#batteryIconCharging").style.display = "none";
       }
     })
     .catch(err => {
