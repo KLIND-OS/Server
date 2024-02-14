@@ -23,7 +23,6 @@ module.exports = {
     "models/*",
     "*tinymce*",
     "*sandbox-console.js",
-    "EasyJS.js",
     "*howler*",
     "*evo-calendar*",
     "face/js/*",

@@ -1,7 +1,7 @@
 var keysDown = new Array();
 var shortCutsFunctions = [];
 window.onkeydown = function (e) {
-  if (keysDown.includes(e.key)) return
+  if (keysDown.includes(e.key)) return;
   keysDown.push(e.key);
   if (e.key == "Meta") {
     openstartmenu();
@@ -20,10 +20,10 @@ window.onkeydown = function (e) {
   }
   else if (keysDown.indexOf("Alt") > -1 && keysDown.indexOf("F4") > -1) {
     // Close currently selected window
-    if (!openedwindowindex) return
+    if (!openedwindowindex) return;
 
     const closeButton = openedwindowindex.querySelector(".headerclass .close");
-    if (!closeButton) return
+    if (!closeButton) return;
     if (closeButton.style.display == "none") return;
 
     closeButton.click();
@@ -40,24 +40,24 @@ window.onkeydown = function (e) {
     ColorFilters.deactivateAll();
   }
   else if (keysDown.indexOf("Alt") > -1 && keysDown.indexOf("ArrowUp") > -1) {
-    if (!openedwindowindex) return
+    if (!openedwindowindex) return;
 
-    windowSizing.full(openedwindowindex)
+    windowSizing.full(openedwindowindex);
   }
   else if (keysDown.indexOf("Alt") > -1 && keysDown.indexOf("ArrowLeft") > -1) {
-    if (!openedwindowindex) return
+    if (!openedwindowindex) return;
 
-    windowSizing.left(openedwindowindex)
+    windowSizing.left(openedwindowindex);
   }
   else if (keysDown.indexOf("Alt") > -1 && keysDown.indexOf("ArrowRight") > -1) {
-    if (!openedwindowindex) return
+    if (!openedwindowindex) return;
 
-    windowSizing.right(openedwindowindex)
+    windowSizing.right(openedwindowindex);
   }
   else if (keysDown.indexOf("Alt") > -1 && keysDown.indexOf("ArrowDown") > -1) {
-    if (!openedwindowindex) return
+    if (!openedwindowindex) return;
 
-    windowSizing.defaultNonEvent(openedwindowindex, 15, 15)
+    windowSizing.defaultNonEvent(openedwindowindex, 15, 15);
   }
   else {
     function removeLastInstance(badtext, str) {

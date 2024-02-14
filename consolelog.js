@@ -27,7 +27,7 @@ class Logs {
           p.textContent = log;
           logSpan.appendChild(p);
         }
-      })
+      });
     }
     win.setAttribute("inter", setInterval(load, 2000));
     load();
@@ -53,8 +53,8 @@ console.log = function () {
     mainConsole.log(...arguments);
   }
   catch {
-    console.error("Nepovedlo se uložit log do databáze.")
-    console.log(arguments)
+    console.error("Nepovedlo se uložit log do databáze.");
+    console.log(arguments);
   }
 };
 
