@@ -1,11 +1,8 @@
 {
   "name": "klind-os",
   "version": "1.0.0",
-  "description": "Zde se ukládá verze KLIND OS která běží na serveru. Více info zde: http://jzitnik.dev",
-  "main": "EasyJS.js",
-  "directories": {
-    "example": "examples"
-  },
+  "description": "KLIND OS GUI napsané v JavaScriptu.",
+  "main": "index.html",
   "scripts": {
     "dev": "node server dev",
     "start": "node server",

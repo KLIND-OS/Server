@@ -14,6 +14,10 @@ Zde se ukládá verze KLIND OS která běží na serveru. Napsáno pouze v HTML,
    npm run dev
    ```
 
+# Jak se napojit na server
+
+Pro připojení na server využijte [KLIND-OS-Client](https://github.com/JZITNIK-github/KLIND-OS-Client).
+
 # ESLint
 
 1. Spusťte ESLint:
