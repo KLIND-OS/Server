@@ -37,10 +37,10 @@ var windows = {
             element.querySelector(".imgwallpaperfileconfig").style.display = "none";
             element.setAttribute("filelocation", file[5] + file[0]);
             if (file[4] == "") {
-              element.querySelector("#textareafileeditorimage").value = ""
+              element.querySelector("#textareafileeditorimage").value = "";
             }
             else {
-              const data = file[4].split(',')[1];
+              const data = file[4].split(",")[1];
               element.querySelector("#textareafileeditorimage").value = Base64.decode(data);
             }
           }
@@ -65,7 +65,7 @@ var windows = {
             element.querySelector("video source").setAttribute("src", file[4]);
             const player = new Plyr(element.querySelectorAll("#player"), {
               iconUrl: "icons/plyr.svg",
-              controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'airplay', 'fullscreen']
+              controls: ["play-large", "play", "progress", "current-time", "mute", "volume", "captions", "settings", "airplay", "fullscreen"]
             });
             videofileids.push(player);
             element.setAttribute("plyr-id", videofileids.length - 1);
@@ -77,7 +77,7 @@ var windows = {
             element.querySelector(".fileeditortext").style.display = "block";
             element.querySelector(".fileeditorvideo").style.display = "none";
             element.querySelector(".fileeditoraudio").style.display = "none";
-            const data = file[4].split(',')[1];
+            const data = file[4].split(",")[1];
             element.querySelector("#textareafileeditorimage").value = Base64.decode(data);
             element.setAttribute("filelocation", file[5] + file[0]);
             element.querySelector(".filesavefileconfig").style.display = "block";
@@ -189,7 +189,7 @@ var windows = {
             setup: function (editor) {
               editor.on("init", function () {
                 if (args.file[2] == "text/html") {
-                  if (args.file[4] == "") return
+                  if (args.file[4] == "") return;
                   editor.setContent(Base64.decode(args.file[4].split(",")[1]));
                 }
                 else {
@@ -261,19 +261,19 @@ var windows = {
                 option.selected = selectedBranch == branch;
                 select.appendChild(option);
               }
-            })
-          })
+            });
+          });
           win.querySelector(".branchChoice").onchange = () => {
             const value = win.querySelector(".branchChoice").value;
             LowLevelApi.Branch.setBranch(value, (response) => {
               if (response) {
-                spawnNotification("Branch Manager", "Branch byl úspěšně přepsán! Nový build dostanete při aktualizaci.")
+                spawnNotification("Branch Manager", "Branch byl úspěšně přepsán! Nový build dostanete při aktualizaci.");
               }
               else {
-                spawnNotification("Branch Manager", "Nastala chyba")
+                spawnNotification("Branch Manager", "Nastala chyba");
               }
-            })
-          }
+            });
+          };
         },
         win => closeUpdates(win),
         false
@@ -311,12 +311,12 @@ var windows = {
         newelement.querySelector(".headerclass").addEventListener("dblclick", (e) => {
 
           if (newelement.getAttribute("isFullscreen") == "true") {
-            windowSizing.default(newelement, e)
+            windowSizing.default(newelement, e);
           }
           else {
-            windowSizing.full(newelement)
+            windowSizing.full(newelement);
           }
-        })
+        });
       }
       if (localStorage.getItem("mode") == "dark") {
         newelement.style.backgroundColor = "#3b3838";

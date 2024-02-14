@@ -10,7 +10,7 @@ var BPrompt = {
       if (e.key == "Enter") {
         submitMessage();
       }
-    })
+    });
   },
   confirm: (message, functio) => {
     currentfunconfirm = functio;

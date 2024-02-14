@@ -8,7 +8,7 @@ class WordEditor {
     var file = mainFileManager.getFile(fileLocation);
 
     if (file[2] == "text/html") {
-      mainFileManager.saveText(fileLocation, content)
+      mainFileManager.saveText(fileLocation, content);
     }
     else {
       BPrompt.confirm("Soubor musí být převeden do formátu HTML aby se mohl uložit. Chcete pokračovat?", reponse => {
