@@ -1,5 +1,6 @@
 class Browser {
   static changeUrl(win, url, dontAddHTTPS) {
+    // TODO: Fix data uri
     if (dontAddHTTPS != true && !/^https?:\/\//i.test(url)) {
       url = "http://" + url;
     }

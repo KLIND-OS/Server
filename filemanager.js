@@ -327,6 +327,7 @@ var mainFileManager = {
     }
   },
   saveFromUri(uri, filename, parentFolder = "/", messages = true) {
+    mainConsole.log("URI:", uri);
     if (filename == null) {
       BPrompt.prompt("Vyberte název souboru", (n) => {
         mainFileManager.saveFromUri(uri, n);
@@ -350,40 +351,31 @@ var mainFileManager = {
       }
       var type = mimeType;
 
-      function x() {
-        var stored = storage.getSync(parentFolder);
-        if (Object.keys(stored).length == 0) {
-          stored = [];
-        }
-        stored.push([
-          filename,
-          lengthInUtf8Bytes(uri),
-          type,
-          new Date().toString(),
-          uri,
-          parentFolder,
-        ]);
-        try {
-          storage.setSync(parentFolder, stored);
-        } catch (e) {
-          spawnNotification(
-            "Správce souborů",
-            "Není dostatek místa na úložišti. Více info <a href='https://www.gwtproject.org/doc/latest/DevGuideHtml5Storage.html'>zde</a>.",
-          );
-          console.log(
-            "File is too big to be uploaded. Error message: " +
-              e.toString(),
-          );
-        }
+      var stored = storage.getSync(parentFolder);
+      if (Object.keys(stored).length == 0) {
+        stored = [];
+      }
+      stored.push([
+        filename,
+        lengthInUtf8Bytes(uri),
+        type,
+        new Date().toString(),
+        uri,
+        parentFolder,
+      ]);
+
+      try {
+        storage.setSync(parentFolder, stored);
+      } catch (e) {
+        spawnNotification(
+          "Správce souborů",
+          "Není dostatek místa na úložišti. Více info <a href='https://www.gwtproject.org/doc/latest/DevGuideHtml5Storage.html'>zde</a>.",
+        );
+        console.log(
+          "File is too big to be uploaded. Error message: " + e.toString(),
+        );
       }
 
-      if (type == "text/plain") {
-        var data = uri.split(",")[1];
-        uri = decodeURIComponent(data);
-        x();
-      } else {
-        x();
-      }
       if (messages)
         spawnNotification("Stahování", "Soubor byl stažen do kořenové složky");
     }
