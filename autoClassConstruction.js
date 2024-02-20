@@ -1,7 +1,7 @@
 class ClassConstructor {
   static _getRandomName() {
-    let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = "";
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     const charactersLength = characters.length;
     let counter = 0;
     while (counter < 20) {
@@ -20,4 +20,4 @@ class ClassConstructor {
 }
 const ClList = {
 
-}
+};

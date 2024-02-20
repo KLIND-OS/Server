@@ -128,7 +128,7 @@ function searchstartmenu() {
   }
   if (!isShowed) {
     if (input.value.length > 20) {
-      var showInputValue = input.value.split("", 20).join("").trim() + "..."
+      var showInputValue = input.value.split("", 20).join("").trim() + "...";
     }
     else {
       var showInputValue = input.value;

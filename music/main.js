@@ -3,39 +3,24 @@ function changeArray(index, arr) {
   const secondPart = arr.slice(0, index);
   return firstPart.concat(secondPart);
 }
+
 const urlParams = new URLSearchParams(document.location.search);
 
 var filePath = urlParams.get("filePath");
 var startFile = filePath.split("/")[filePath.split("/").length - 1];
-var fileFolder = filePath.replace(filePath.split("/")[filePath.split("/").length - 1],"").split("/");
+var fileFolder = filePath
+  .replace(filePath.split("/")[filePath.split("/").length - 1], "")
+  .split("/");
 fileFolder.pop();
 fileFolder = fileFolder.join("/");
 
-
 // Load songs
-var allSongsFromFolder = parent.mainFileManager.allFiles(fileFolder);
-var allFiltered = new Array();
-allSongsFromFolder.forEach((x) => {
-  if (x[2].split("/")[0]=="audio") allFiltered.push(x);
-});
-var startIndex;
-for (var i = 0; i < allFiltered.length; i++) {
-  if (allFiltered[i][0] == startFile) {
-    startIndex = i;
-    break;
-  }
-}
-var playlistFull = changeArray(startIndex, allFiltered);
-var finalPlayList = new Array();
-for (var i = 0; i < playlistFull.length; i++) {
-  finalPlayList.push(playlistFull[i][4]);
-}
 
 function playPlaylist(playlist, sliderElement) {
   var currentIndex = 0;
   var player = null;
   var isSeeking = false;
-  
+
   function playTrack() {
     if (player) {
       player.stop();
@@ -45,34 +30,35 @@ function playPlaylist(playlist, sliderElement) {
     if (currentIndex >= playlist.length) {
       return;
     }
-    var songname = playlistFull[currentIndex][0];
+    const parts = playlist[currentIndex].split("/");
+    var songname = parts[parts.length - 1];
     document.getElementById("name").textContent = songname;
     var track = playlist[currentIndex];
     player = new Howl({
       src: [track],
-      onend: function() {
+      onend: function () {
         currentIndex++;
         playTrack();
       },
-      onplay: function() {
+      onplay: function () {
         requestAnimationFrame(updateSlider);
-      }
+      },
     });
     player.play();
   }
-  
+
   function pauseTrack() {
     if (player) {
       player.pause();
     }
   }
-  
+
   function resumeTrack() {
     if (player) {
       player.play();
     }
   }
-  
+
   function setTrackPosition(percent) {
     if (player) {
       var duration = player.duration();
@@ -80,7 +66,7 @@ function playPlaylist(playlist, sliderElement) {
       player.seek(position);
     }
   }
-  
+
   function updateSlider() {
     if (!isSeeking && player) {
       var duration = player.duration();
@@ -90,18 +76,17 @@ function playPlaylist(playlist, sliderElement) {
     }
     requestAnimationFrame(updateSlider);
   }
-  
-  sliderElement.addEventListener("mousedown", function() {
+
+  sliderElement.addEventListener("mousedown", function () {
     isSeeking = true;
   });
-  
-  sliderElement.addEventListener("mouseup", function() {
+
+  sliderElement.addEventListener("mouseup", function () {
     isSeeking = false;
     var percent = sliderElement.value / 100;
     setTrackPosition(percent);
   });
-    
-  
+
   playTrack();
   function nextTrack() {
     currentIndex++;
@@ -110,7 +95,7 @@ function playPlaylist(playlist, sliderElement) {
     }
     playTrack();
   }
-    
+
   function previousTrack() {
     currentIndex--;
     if (currentIndex < 0) {
@@ -126,18 +111,48 @@ function playPlaylist(playlist, sliderElement) {
     previous: previousTrack,
   };
 }
+var sliderElement, playlistPlayer, playing;
 
-var sliderElement = document.getElementById("slider");
+(async () => {
+  var allSongsFromFolder = await parent.mainFileManager.allFiles(fileFolder);
+  var allFiltered = new Array();
+  allSongsFromFolder.forEach((x) => {
+    const parts = x.split(".");
+    if (
+      ["mp3", "waw", "ogg", "aac", "m4a", "wma"].includes(
+        parts[parts.length - 1],
+      )
+    )
+      allFiltered.push(x);
+  });
+  var startIndex;
+  for (var i = 0; i < allFiltered.length; i++) {
+    if (allFiltered[i] == startFile) {
+      startIndex = i;
+      break;
+    }
+  }
 
-var playlistPlayer = playPlaylist(finalPlayList, sliderElement);
-var playing = true;
+  var playlistFull = changeArray(startIndex, allFiltered);
+  var finalPlayList = new Array();
+  for (var i = 0; i < playlistFull.length; i++) {
+    finalPlayList.push(
+      "http://localhost:9999" + fileFolder + "/" + playlistFull[i],
+    );
+  }
+
+  sliderElement = document.getElementById("slider");
+
+  playlistPlayer = playPlaylist(finalPlayList, sliderElement);
+  playing = true;
+})();
+
 function playPause() {
   if (playing) {
     playlistPlayer.pause();
     document.getElementById("playpause").textContent = "Play";
     playing = false;
-  }
-  else {
+  } else {
     playlistPlayer.play();
     document.getElementById("playpause").textContent = "Pause";
     playing = true;

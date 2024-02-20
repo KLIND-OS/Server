@@ -14,7 +14,7 @@ class Browser {
       browerr.querySelector("#errorcodebrow").textContent = 0;
       browerr.querySelector("#errornamebrow").textContent = "This website is blocked!";
       browerr.style.display = "block";
-      return
+      return;
     }
 
     const browser = win.querySelector("#brow");
@@ -46,7 +46,7 @@ class Browser {
       if (e.key == "Enter") {
         Browser.changeUrl(win, input.value);
       }
-    })
+    });
 
     setInterval(() => {
       if (browser.getAttribute("sr") !== browser.src) {
