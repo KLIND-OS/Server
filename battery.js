@@ -2,7 +2,7 @@ function loadBattery() {
   navigator.getBattery()
     .then(battery => {
       const level = Math.round(battery.level * 100);
-      document.querySelector("#batteryLevel").textContent = `${level}%`
+      document.querySelector("#batteryLevel").textContent = `${level}%`;
 
       if (battery.charging) {
         document.querySelector("#batteryIcon").style.display = "none";
@@ -14,10 +14,10 @@ function loadBattery() {
       }
     })
     .catch(err => {
-      error()
-    })
+      error();
+    });
 }
 
-setInterval(loadBattery, 2000)
-loadBattery()
+setInterval(loadBattery, 2000);
+loadBattery();
 

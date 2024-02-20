@@ -28,8 +28,8 @@ function allFiles(callback) {
     for (const key in data) {
       newObj[key.replaceAll("$", "/")] = data[key];
     }
-    callback(newObj)
-  })
+    callback(newObj);
+  });
 }
 
 function prevedsystem() {
@@ -39,7 +39,7 @@ function prevedsystem() {
       localStorage: allStorage(),
       files: data
     }));
-  })
+  });
 }
 function submitnjahsbdjksabd() {
   control.fileManager.fileSelect({
@@ -60,7 +60,7 @@ function submitnjahsbdjksabd() {
         storage.clear(function(error) {
           if (error) throw error;
           for (const key in result.files) {
-            window.storage.setSync(key, result.files[key])
+            window.storage.setSync(key, result.files[key]);
           }
           window.location.reload();
         });

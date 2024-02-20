@@ -23,7 +23,7 @@ class _DownloadStatus {
     _DownloadStatus.content[randomNumber] = element;
     setTimeout(() => {
       element.style.opacity = "1";
-    }, 10)
+    }, 10);
     return randomNumber;
   }
 }
@@ -43,38 +43,40 @@ class DownloadStatus {
   }
   finish() {
     const element = _DownloadStatus.content[this.id];
-    element.querySelector("#percentage").textContent = `Hotovo!`;
-    element.querySelector(".progressDownload").style.width = `100%`;
+    element.querySelector("#percentage").textContent = "Hotovo!";
+    element.querySelector(".progressDownload").style.width = "100%";
     this.id = null;
 
     setTimeout(() => {
       element.style.opacity = "0";
       setTimeout(() => {
         element.remove();
-      }, 200)
-    }, 1200)
+      }, 200);
+    }, 1200);
   }
   error() {
     const element = _DownloadStatus.content[this.id];
     const percentageel = element.querySelector("#percentage");
-    percentageel.textContent = `Chyba!`;
+    percentageel.textContent = "Chyba!";
     percentageel.style.color = "red";
 
-    element.querySelector(".progressDownload").style.width = `0%`;
+    element.querySelector(".progressDownload").style.width = "0%";
     this.id = null;
 
     setTimeout(() => {
       element.style.opacity = "0";
       setTimeout(() => {
         element.remove();
-      }, 200)
-    }, 5000)
+      }, 200);
+    }, 5000);
   }
   converting() {
     const element = _DownloadStatus.content[this.id];
     const percentageel = element.querySelector("#percentage");
-    percentageel.textContent = `Převádění...`;
+    percentageel.textContent = "Převádění...";
 
-    element.querySelector(".progressDownload").style.width = `0%`;
+    element.querySelector(".progressDownload").style.width = "0%";
   }
 }
+
+window.DownloadStatus = DownloadStatus;

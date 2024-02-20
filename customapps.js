@@ -145,15 +145,11 @@ var CustomApp = {
 
       });
   },
-  loadFromUri(uri) {
-    var byteString = window.atob(uri.split(",")[1]);
-    var mimeString = "klindos/installer";
-    var arrayBuffer = new ArrayBuffer(byteString.length);
-    var uint8Array = new Uint8Array(arrayBuffer);
-    for (var i = 0; i < byteString.length; i++) {
-      uint8Array[i] = byteString.charCodeAt(i);
-    }
-    var blob = new Blob([uint8Array], { type: mimeString });
+  async loadFromUri(path) {
+    const binaryData = await mainFileManager.getContent(path);
+    const uint8Array = Uint8Array.from(binaryData, char => char.charCodeAt(0));
+
+    var blob = new Blob([uint8Array], { type: "application/zip"});
     CustomApp.add(blob, true);
   }
 };

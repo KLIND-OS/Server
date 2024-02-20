@@ -105,7 +105,7 @@ saveImgBtn.addEventListener("click", saveImage);
 chooseImgBtn.addEventListener("click", () => {
   parent.control.fileManager.fileSelect({
     success: (file) => {
-      previewImg.src = file[4];
+      previewImg.src = "http://localhost:9999" + file;
       previewImg.addEventListener("load", () => {
         resetFilterBtn.click();
         document.querySelector(".container").classList.remove("disable");

@@ -6,14 +6,14 @@ setInterval(() => {
   const allIframes = document.querySelectorAll("iframe");
   allIframes.forEach(iframe => {
     if (iframe.getAttribute("iframeEdited") !== "ano" && iframe.className !== "tox-edit-area__iframe") {
-      iframe.setAttribute("iframeEdited", "ano")
+      iframe.setAttribute("iframeEdited", "ano");
       const div = document.createElement("div");
       div.className = "iframeWrapper";
       iframe.parentNode.insertBefore(div, iframe);
       div.appendChild(iframe);
     }
-  })
-}, 1000)
+  });
+}, 1000);
 
 document.addEventListener("mousemove", e => {
   const tgt = e.target;

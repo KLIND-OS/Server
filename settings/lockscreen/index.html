@@ -17,8 +17,7 @@
     <script>
         function submit() {
             parent.control.fileManager.fileSelect({
-                success:e=>{
-                    path = e[5]+e[0]
+                success:path=>{
                     localStorage.setItem("background-lockScreen", path)
                     parent.loadBackgroundLockScreen()
                     parent.spawnNotification("Nastavení","Pozadí bylo nastaveno")

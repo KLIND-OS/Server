@@ -1,5 +1,5 @@
 class SearchEngine {
-  static default = localStorage.getItem("searchEngine") || "brave"
+  static default = localStorage.getItem("searchEngine") || "brave";
   static supportedEngines = {
     brave: "https://search.brave.com/search?q=",
     seznam: "https://search.seznam.cz/?q=",
@@ -7,10 +7,10 @@ class SearchEngine {
     bing: "https://www.bing.com/search?q=",
     yahoo: "https://search.yahoo.com/search?p=",
     duckduckgo: "https://duckduckgo.com/?q=",
-  }
+  };
   static search(query, searchEngine=this.default) {
     const encodedQuery = encodeURIComponent(query);
-    const baseUrl = this.supportedEngines[searchEngine]
+    const baseUrl = this.supportedEngines[searchEngine];
     if (baseUrl) {
       windows.open("brow", baseUrl + encodedQuery);
     }

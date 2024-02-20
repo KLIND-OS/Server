@@ -26,20 +26,20 @@ var appsopened = {
         for (var i = 0; i < appsopened.count; i++) {
           if (i == appsopened.selected) {
             innerHTMLvalue +=
-              '<div class="selected buttonopenedapps ' +
+              "<div class=\"selected buttonopenedapps " +
               appsopened.list[i][0] +
-              'vybranydiv" onclick="appsopened.openwin(' +
+              "vybranydiv\" onclick=\"appsopened.openwin(" +
               i +
-              ')">' +
+              ")\">" +
               appsopened.list[i][1] +
               "</div>";
           } else {
             innerHTMLvalue +=
-              '<div class="buttonopenedapps ' +
+              "<div class=\"buttonopenedapps " +
               appsopened.list[i][0] +
-              'vybranydiv" onclick="appsopened.openwin(' +
+              "vybranydiv\" onclick=\"appsopened.openwin(" +
               i +
-              ')">' +
+              ")\">" +
               appsopened.list[i][1] +
               "</div>";
           }
@@ -48,21 +48,21 @@ var appsopened = {
         for (var i = 0; i < appsopened.count; i++) {
           if (appsopened.list[i][2] == openedwindowindex) {
             innerHTMLvalue +=
-              '<div class="selected buttonopenedapps ' +
+              "<div class=\"selected buttonopenedapps " +
               appsopened.list[i][0] +
-              'vybranydiv" onclick="appsopened.openwin(' +
+              "vybranydiv\" onclick=\"appsopened.openwin(" +
               i +
-              ')">' +
+              ")\">" +
               appsopened.list[i][1] +
               "</div>";
             appsopened.selected = i;
           } else {
             innerHTMLvalue +=
-              '<div class="buttonopenedapps ' +
+              "<div class=\"buttonopenedapps " +
               appsopened.list[i][0] +
-              'vybranydiv" onclick="appsopened.openwin(' +
+              "vybranydiv\" onclick=\"appsopened.openwin(" +
               i +
-              ')">' +
+              ")\">" +
               appsopened.list[i][1] +
               "</div>";
           }
