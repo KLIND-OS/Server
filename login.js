@@ -31,17 +31,16 @@ setInterval(() => {
     " " +
     d.getFullYear();
 }, 1000);
-function loadBackgroundLockScreen() {
+async function loadBackgroundLockScreen() {
   var path = localStorage.getItem("background-lockScreen");
-  var content = mainFileManager.getContent(path);
   if (path == "" || path == null) {
-  } else if (content == false) {
+  } else if (await mainFileManager.fileExists(path)) {
+    document.querySelector(".loginfirst").style.backgroundImage =
+      "url(http://localhost:9999" + path + ")";
+  } else {
     control.dowhenlogin.add(() => {
       spawnNotification("UI", "Obrázek pro zamykací obrazovku nebyl nalezen!");
     });
-  } else {
-    document.querySelector(".loginfirst").style.backgroundImage =
-      "url(" + content + ")";
   }
 }
 loadBackgroundLockScreen();

@@ -1,23 +1,20 @@
 class Browser {
   static changeUrl(win, url, dontAddHTTPS) {
-    if (!dontAddHTTPS) {
-      try {
-        var urlObject = new URL(url);
-      } catch {
-        var urlObject = new URL("http://" + url);
-      }
-      if (
-        urlObject.hostname == window.location.hostname &&
-        urlObject.port == window.location.port &&
-        urlObject.pathname != "/developer.html"
-      ) {
-        const browerr = win.querySelector(".browerr");
-        browerr.querySelector("#errorcodebrow").textContent = 0;
-        browerr.querySelector("#errornamebrow").textContent =
-          "This website is blocked!";
-        browerr.style.display = "block";
-        return;
-      }
+    if (dontAddHTTPS != true && !/^https?:\/\//i.test(url)) {
+      url = "http://" + url;
+    }
+    const urlObject = new URL(url);
+
+    if (
+      urlObject.hostname == window.location.hostname &&
+      urlObject.port == window.location.port &&
+      urlObject.pathname != "/developer.html"
+    ) {
+      const browerr = win.querySelector(".browerr");
+      browerr.querySelector("#errorcodebrow").textContent = 0;
+      browerr.querySelector("#errornamebrow").textContent = "This website is blocked!";
+      browerr.style.display = "block";
+      return;
     }
 
     const browser = win.querySelector("#brow");
@@ -65,11 +62,11 @@ class Browser {
           iframegamebrow.src = "game/index.html";
           iframegamebrow.style.display = "block";
           iframeWrapper.style.display = "block";
-        } else if ([-105, -109].includes(event.errorCode)) {
+        }
+        else if ([-105, -109].includes(event.errorCode)) {
           const browerr = win.querySelector(".browerr");
           browerr.querySelector("#errorcodebrow").textContent = event.errorCode;
-          browerr.querySelector("#errornamebrow").textContent =
-            event.errorDescription;
+          browerr.querySelector("#errornamebrow").textContent = event.errorDescription;
           browerr.style.display = "block";
         }
       }

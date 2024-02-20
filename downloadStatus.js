@@ -78,3 +78,5 @@ class DownloadStatus {
     element.querySelector(".progressDownload").style.width = "0%";
   }
 }
+
+window.DownloadStatus = DownloadStatus;

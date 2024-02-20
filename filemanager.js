@@ -36,50 +36,120 @@ function humanFileSize(bytes, si = false, dp = 1) {
 }
 var mainFileManager = {
   openWith: {
-    "text/plain": [
-      ["Textový editor", (file) => windows.open("fileeditor", { file: file })],
+    txt: [
+      ["Textový editor", (path) => windows.open("fileeditor", { path: path })],
     ],
-    "application/vnd.openxmlformats-officedocument.wordprocessingml.document": [
-      ["Word editor", (file) => windows.open("wordeditor", { file: file })],
+    docx: [
+      ["Word editor", (path) => windows.open("wordeditor", { path: path })],
     ],
-    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": [
-      ["Sheets editor", (file) => windows.open("sheetseditor", { file: file })],
+    xlsx: [
+      ["Sheets editor", (path) => windows.open("sheetseditor", { path: path })],
     ],
-    "text/html": [
-      ["Word editor", (file) => windows.open("wordeditor", { file: file })],
+    html: [
+      ["Word editor", (path) => windows.open("wordeditor", { path: path })],
     ],
-    image: [["Obrázky", (file) => windows.open("fileeditor", { file: file })]],
-    video: [
-      ["Přehrávač videa", (file) => windows.open("fileeditor", { file: file })],
+    jpg: [["Obrázky", (file) => windows.open("fileeditor", { path: file })]],
+    jpeg: [["Obrázky", (file) => windows.open("fileeditor", { path: file })]],
+    png: [["Obrázky", (file) => windows.open("fileeditor", { path: file })]],
+    gif: [["Obrázky", (file) => windows.open("fileeditor", { path: file })]],
+    svg: [["Obrázky", (file) => windows.open("fileeditor", { path: file })]],
+    webp: [["Obrázky", (file) => windows.open("fileeditor", { path: file })]],
+    ico: [["Obrázky", (file) => windows.open("fileeditor", { path: file })]],
+    mp4: [
+      ["Přehrávač videa", (file) => windows.open("fileeditor", { path: file })],
     ],
-    audio: [
+    avi: [
+      ["Přehrávač videa", (file) => windows.open("fileeditor", { path: file })],
+    ],
+    mov: [
+      ["Přehrávač videa", (file) => windows.open("fileeditor", { path: file })],
+    ],
+    mkv: [
+      ["Přehrávač videa", (file) => windows.open("fileeditor", { path: file })],
+    ],
+    wmv: [
+      ["Přehrávač videa", (file) => windows.open("fileeditor", { path: file })],
+    ],
+    mpg: [
+      ["Přehrávač videa", (file) => windows.open("fileeditor", { path: file })],
+    ],
+    mpeg: [
+      ["Přehrávač videa", (file) => windows.open("fileeditor", { path: file })],
+    ],
+    webm: [
+      ["Přehrávač videa", (file) => windows.open("fileeditor", { path: file })],
+    ],
+    "3gp": [
+      ["Přehrávač videa", (file) => windows.open("fileeditor", { path: file })],
+    ],
+    ogv: [
+      ["Přehrávač videa", (file) => windows.open("fileeditor", { path: file })],
+    ],
+    mp3: [
       [
         "Přehrávač hudby",
-        (file) => windows.open("musicplayer", { filePath: file[5] + file[0] }),
+        (file) => windows.open("musicplayer", { filePath: file }),
+      ],
+    ],
+    waw: [
+      [
+        "Přehrávač hudby",
+        (file) => windows.open("musicplayer", { filePath: file }),
+      ],
+    ],
+    ogg: [
+      [
+        "Přehrávač hudby",
+        (file) => windows.open("musicplayer", { filePath: file }),
+      ],
+    ],
+    aac: [
+      [
+        "Přehrávač hudby",
+
+        (file) => windows.open("musicplayer", { filePath: file }),
+      ],
+    ],
+    m4a: [
+      [
+        "Přehrávač hudby",
+        (file) => windows.open("musicplayer", { filePath: file }),
+      ],
+    ],
+    wma: [
+      [
+        "Přehrávač hudby",
+        (file) => windows.open("musicplayer", { filePath: file }),
       ],
     ],
   },
   openingFile: undefined,
-  open: (file) => {
-    if (file[2] == "klindos/app") {
-      parent.windows.open(file[4].split(":")[1]);
+  open: async (infolder, file) => {
+    if (!file.includes(".")) {
+      spawnNotification(
+        "Správce souborů",
+        "Nebylo možné zjistit typ souboru. Otevírám jako textový soubor.",
+      );
+      windows.open("fileeditor", {
+        path: infolder + file,
+      });
       return;
-    } else if (file[2] == "klindos/installer") {
-      parent.windows.open("installapp", { file: file });
+    }
+    const parts = file.split(".");
+    const type = parts[parts.length - 1];
+
+    if (type == "kapp") {
+      const content = await mainFileManager.getTextContent(infolder + file);
+      parent.windows.open(content.split(":")[1]);
+      return;
+    } else if (type == "kapk") {
+      parent.windows.open("installapp", { path: infolder + file });
       return;
     }
 
     var possible = [];
-    if (Object.keys(mainFileManager.openWith).includes(file[2])) {
-      possible = [...possible, ...mainFileManager.openWith[file[2]]];
-    }
-
-    for (const type of Object.keys(mainFileManager.openWith)) {
-      if (!type.includes("/")) {
-        if (type == file[2].split("/")[0]) {
-          possible = [...possible, ...mainFileManager.openWith[type]];
-        }
-      }
+    if (Object.keys(mainFileManager.openWith).includes(type)) {
+      possible = [...possible, ...mainFileManager.openWith[type]];
     }
 
     if (possible.length == 0) {
@@ -88,12 +158,12 @@ var mainFileManager = {
         "Nemáte staženou aplikaci která by uměla otevřít tento soubor. Otevírám v textovém editoru.",
       );
       windows.open("fileeditor", {
-        file: file,
+        path: infolder + file,
       });
     } else if (possible.length == 1) {
-      possible[0][1](file);
+      possible[0][1](infolder + file);
     } else {
-      mainFileManager.openingFile = [possible, file];
+      mainFileManager.openingFile = [possible, infolder + file];
       var element = document.querySelector(".selectApp .apps ");
 
       for (var i = 0; i < possible.length; i++) {
@@ -115,45 +185,32 @@ var mainFileManager = {
     script(mainFileManager.openingFile[1]);
     mainFileManager.openingFile = undefined;
   },
-  properties: (file) => {
-    document.querySelector("#filename").innerHTML = file[0];
+  properties: async (file) => {
+    const path = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir() + "/usrfiles",
+      file,
+    );
+
+    const stats = await LowLevelApi.filesystem.stat(path);
+
+    const parts = file.split("/");
+    const name = parts[parts.length - 1];
+    document.querySelector("#filename").innerHTML = name;
     document.querySelector("#filesize").innerHTML = humanFileSize(
-      file[1],
+      stats.size,
       true,
     );
-    document.querySelector("#filechange").innerHTML = file[3];
-    document.querySelector("#filelocation").innerHTML = file[5] + file[0];
-    if (file[2] != "") {
-      document.querySelector("#filetype").innerHTML = file[2];
-    } else {
-      document.querySelector("#filetype").innerHTML = "neznámé";
-    }
+    document.querySelector("#filechange").innerHTML = stats.mtime;
+    document.querySelector("#filelocation").innerHTML = file;
     windows.open("fileproperties");
   },
-  saveText: (location, file) => {
-    let lastSlashIndex = location.lastIndexOf("/");
-    let directory = location.substring(0, lastSlashIndex + 1);
-    let filename = location.substring(lastSlashIndex + 1);
-    var value = storage.getSync(directory);
-    for (var i = 0; i < value.length; i++) {
-      if (value[i][0] == filename) {
-        var time = new Date().toString();
-        value[i][3] = time;
-        const sdsa = `data:${value[i][2]};base64,` + Base64.encode(file);
-        value[i][4] = sdsa;
-        value[i][1] = lengthInUtf8Bytes(sdsa);
-        continue;
-      }
-    }
-    try {
-      storage.setSync(directory, value);
-    } catch (e) {
-      spawnNotification(
-        "Správce souborů",
-        "Tento soubor je moc velký na to aby byl uložen.",
-      );
-      console.log("File is too big to be saved. Error: " + e.toString());
-    }
+  saveText: async (location, file) => {
+    const path = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir() + "/usrfiles",
+      location,
+    );
+    await LowLevelApi.filesystem.writeFile(path, file, { encoding: "utf8" });
+
     var windowasjdh = document.querySelectorAll(".window");
     for (var i = 0; i < windowasjdh.length; i++) {
       if (windowasjdh[i].querySelector("#filemanageriframe") != undefined) {
@@ -163,29 +220,15 @@ var mainFileManager = {
       }
     }
   },
-  save: (location, file) => {
-    let lastSlashIndex = location.lastIndexOf("/");
-    let directory = location.substring(0, lastSlashIndex + 1);
-    let filename = location.substring(lastSlashIndex + 1);
-    var value = storage.getSync(directory);
-    for (var i = 0; i < value.length; i++) {
-      if (value[i][0] == filename) {
-        var time = new Date().toString();
-        value[i][1] = lengthInUtf8Bytes(file);
-        value[i][3] = time;
-        value[i][4] = file;
-        break;
-      }
-    }
-    try {
-      storage.setSync(directory, value);
-    } catch (e) {
-      spawnNotification(
-        "Správce souborů",
-        "Tento soubor je moc velký na to aby byl uložen.",
-      );
-      console.log("File is too big to be saved. Error: " + e.toString());
-    }
+  save: async (location, binary) => {
+    const path = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir() + "/usrfiles",
+      location,
+    );
+    await LowLevelApi.filesystem.writeFile(path, binary, {
+      encoding: "binary",
+    });
+
     var windowasjdh = document.querySelectorAll(".window");
     for (var i = 0; i < windowasjdh.length; i++) {
       if (windowasjdh[i].querySelector("#filemanageriframe") != undefined) {
@@ -198,120 +241,100 @@ var mainFileManager = {
   setWallpaper: (location) => {
     localStorage.setItem("background", location);
     document.getElementById("klindows").style.backgroundImage =
-      "url(" + mainFileManager.getContent(location) + ")";
+      "url(http://localhost:9999" + location + ")";
   },
-  getContent: (location) => {
-    try {
-      locationsplit = location.split("/");
-      namefile = locationsplit[locationsplit.length - 1];
-      folder =
-        removebyindex(locationsplit, locationsplit.length - 1).join("/") + "/";
-      var stored = storage.getSync(folder);
-      if (stored) {
-        for (var i = 0; i < stored.length; i++) {
-          if (stored[i][0] == namefile) {
-            return stored[i][4];
-          }
-        }
-      }
-      return false;
-    } catch {
+  getContent: async (location) => {
+    if (!(await mainFileManager.fileExists(location))) {
       return false;
     }
-  },
-  getTextContent: (location) => {
-    const content = mainFileManager.getContent(location);
-    if (content === false) return false;
-    return Base64.decode(content.split(",")[1]);
-  },
-  folderExist: (location) => {
-    try {
-      var stored = JSON.parse(localStorage.getItem("folders-uploaded"));
-    } catch {
-      return false;
-    }
-    if (stored == null) return false;
-    for (var i = 0; i < stored.length; i++) {
-      if (stored[i][1] + stored[i][0] == location) {
-        return true;
-      }
-    }
-    return false;
-  },
-  allFiles: (folder) => {
-    if (folder != "/") folder = folder + "/";
-    try {
-      var stored = storage.getSync(folder);
-    } catch {
-      return new Array();
-    }
-    return stored;
-  },
-  getFile: (location) => {
-    let lastSlashIndex = location.lastIndexOf("/");
-    let directory = location.substring(0, lastSlashIndex + 1);
-    let filename = location.substring(lastSlashIndex + 1);
-    var stored = storage.getSync(directory);
-    for (var i = 0; i < stored.length; i++) {
-      if (stored[i][0] == filename) {
-        return stored[i];
-      }
-    }
-  },
-  createAppShortCut: (appName, fileName) => {
-    var stored = storage.getSync("/");
-    const time = new Date().toString();
-    const content = "open:" + appName;
+    const path = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir() + "/usrfiles",
+      location,
+    );
 
-    if (mainFileManager.getContent("/" + fileName) == false) {
-      stored.push([
-        fileName,
-        lengthInUtf8Bytes(content),
-        "klindos/app",
-        time,
-        content,
-        "/",
-      ]);
-      storage.setSync("/", stored);
-
-      var windowasjdh = document.querySelectorAll(".window");
-      for (var i = 0; i < windowasjdh.length; i++) {
-        if (windowasjdh[i].querySelector("#filemanageriframe") != undefined) {
-          windowasjdh[i]
-            .querySelector("#filemanageriframe")
-            .contentWindow.FileManager.readFiles();
-        }
-      }
-    } else {
-      mainFileManager.createAppShortCut(appName, fileName + "x");
-    }
+    const data = LowLevelApi.filesystem.readFile(path, "binary");
+    return data;
   },
-  createFile: ({
-    name,
-    type = "text/plain",
-    content = "",
-    parentFolder = "/",
-  }) => {
-    if (mainFileManager.fileExists(name + parentFolder)) {
+  getTextContent: async (location) => {
+    if (!(await mainFileManager.fileExists(location))) {
+      return false;
+    }
+    const path = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir() + "/usrfiles",
+      location,
+    );
+    const content = await LowLevelApi.filesystem.readFile(path, "utf8");
+    return content;
+  },
+  folderExist: async (location) => {
+    const path = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir() + "/usrfiles",
+      location,
+    );
+    return LowLevelApi.filesystem.exists(path);
+  },
+  allFiles: async (folder) => {
+    const path = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir() + "/usrfiles",
+      folder,
+    );
+
+    const items = await parent.LowLevelApi.filesystem.readdir(path);
+    const files = [];
+
+    for (const item of items) {
+      try {
+        const filePath = parent.LowLevelApi.filesystem.path.join(path, item);
+        const fileStat = await parent.LowLevelApi.filesystem.stat(filePath);
+
+        if (fileStat.isFile()) {
+          files.push(item);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    return files;
+  },
+  createAppShortCut: async (appName, fileName) => {
+    if (await mainFileManager.fileExists("/" + fileName + ".kapp")) {
+      return mainFileManager.createAppShortCut(appName, fileName + "x");
+    }
+
+    await mainFileManager.createFile({
+      name: fileName + ".kapp",
+    });
+    await mainFileManager.saveText("/" + fileName + ".kapp", "open:" + appName);
+  },
+  createFile: async ({ name, parentFolder = "/" }) => {
+    if (await mainFileManager.fileExists(parentFolder + name)) {
       name = "x" + name;
-      mainFileManager.createFile({ name, type, content, parentFolder });
+      await mainFileManager.createFile({ name, parentFolder });
     } else {
-      var array = storage.getSync(parentFolder);
-      var add = [
-        name,
-        lengthInUtf8Bytes(content),
-        type,
-        new Date().toString(),
-        content,
-        parentFolder,
-      ];
-      array.push(add);
-      storage.setSync(parentFolder, array);
-      return add;
+      const path = LowLevelApi.filesystem.path.join(
+        LowLevelApi.filesystem.os.homedir() + "/usrfiles",
+        parentFolder + name,
+      );
+      await LowLevelApi.filesystem.open(path, "w");
+      return true;
     }
   },
-  fileExists: (path) =>
-    mainFileManager.getContent(path) === false ? false : true,
+  fileExists: async (filepath) => {
+    const path = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir() + "/usrfiles",
+      filepath,
+    );
+    return await LowLevelApi.filesystem.exists(path);
+  },
+  isFile: async (filepath) => {
+    const path = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir() + "/usrfiles",
+      filepath,
+    );
+    const stats = await LowLevelApi.filesystem.stat(path);
+    return stats.isFile();
+  },
   addProgramToOpenApps: (typesOfFilesShouldBeOpened, script, name) => {
     var types =
       typeof typesOfFilesShouldBeOpened == "object"
@@ -326,106 +349,7 @@ var mainFileManager = {
       }
     }
   },
-  saveFromUri(uri, filename, parentFolder = "/", messages = true) {
-    mainConsole.log("URI:", uri);
-    if (filename == null) {
-      BPrompt.prompt("Vyberte název souboru", (n) => {
-        mainFileManager.saveFromUri(uri, n);
-      });
-    } else if (mainFileManager.fileExists(parentFolder + filename)) {
-      BPrompt.prompt(
-        "Soubor se stejným názvem v kořenové složce již existuje. Vyberte nový název souboru",
-        (n) => {
-          mainFileManager.saveFromUri(uri, n);
-        },
-      );
-    } else {
-      let base64ContentArray = uri.split(",");
-      try {
-        var mimeType = base64ContentArray[0].match(
-          /[^:\s*]\w+\/[\w-+\d.]+(?=[;| ])/,
-        )[0];
-      } catch {
-        // Set default mimetype
-        var mimeType = null;
-      }
-      var type = mimeType;
-
-      var stored = storage.getSync(parentFolder);
-      if (Object.keys(stored).length == 0) {
-        stored = [];
-      }
-      stored.push([
-        filename,
-        lengthInUtf8Bytes(uri),
-        type,
-        new Date().toString(),
-        uri,
-        parentFolder,
-      ]);
-
-      try {
-        storage.setSync(parentFolder, stored);
-      } catch (e) {
-        spawnNotification(
-          "Správce souborů",
-          "Není dostatek místa na úložišti. Více info <a href='https://www.gwtproject.org/doc/latest/DevGuideHtml5Storage.html'>zde</a>.",
-        );
-        console.log(
-          "File is too big to be uploaded. Error message: " + e.toString(),
-        );
-      }
-
-      if (messages)
-        spawnNotification("Stahování", "Soubor byl stažen do kořenové složky");
-    }
-  },
 };
-class File {
-  constructor(file) {
-    if (!file) throw new Error("File does not exist!");
-    this.name = file[0];
-    this.size = file[1];
-    this.type = file[2];
-    this.lastChange = file[3];
-    this.content = file[4];
-    this.parentFolder = file[5];
-    this.fullPath = this.parentFolder + this.name;
-  }
-  decodeToArray() {
-    return [
-      this.name,
-      this.size,
-      this.type,
-      this.lastChange,
-      this.content,
-      this.parentFolder,
-    ];
-  }
-  open() {
-    return mainFileManager.open(this.decodeToArray());
-  }
-  saveText(content) {
-    const sdsa = `data:${this.type};base64,` + Base64.encode(content);
-    this.content = sdsa;
-    mainFileManager.save(this.fullPath, sdsa);
-  }
-  save(dataUri) {
-    this.content = dataUri;
-    mainFileManager.save(this.fullPath, dataUri);
-  }
-  remove() {
-    var value = storage.getSync(this.parentFolder);
-    for (var i = 0; i < value.length; i++) {
-      if (value[i][5] + value[i][0] === this.fullPath) {
-        var newarray = removebyindex(value, i);
-        storage.setSync(this.parentFolder, newarray);
-        return true;
-      }
-    }
-    throw new Error("File does not exist!");
-  }
-}
 function fileManagerOpen() {
   if (localStorage.getItem("mode") == "dark") {
     for (
