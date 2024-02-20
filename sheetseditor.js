@@ -1,5 +1,5 @@
 class SheetsEditor {
-  static async init(win, file_array) {
+  static async init(win, file_path) {
     // Initialize variables to keep track of the current number of rows and columns
     let rowCount = 10;
     let colCount = 10;
@@ -168,56 +168,26 @@ class SheetsEditor {
           type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         });
 
-        // Create a data URI from the Blob
         const reader = new FileReader();
-        reader.onload = function () {
-          const dataURI = reader.result;
-          var storage = storage.getSync(file_array[5]);
-          for (var i = 0; i < storage.length; i++) {
-            if (storage[i][0] == file_array[0]) {
-              storage[i][4] = dataURI;
-              storage[i][1] = lengthInUtf8Bytes(dataURI);
-              storage.setSync(file_array[5], storage);
-
-              var windowasjdh = document.querySelectorAll(".window");
-              for (var i = 0; i < windowasjdh.length; i++) {
-                if (
-                  windowasjdh[i].querySelector("#filemanageriframe") !=
-                  undefined
-                ) {
-                  windowasjdh[i]
-                    .querySelector("#filemanageriframe")
-                    .contentWindow.FileManager.readFiles();
-                }
-              }
-              return;
-            }
-          }
+        reader.onload = async function () {
+          const binary = reader.result;
+          await mainFileManager.save(file_path, binary)
+          
         };
-        reader.readAsDataURL(blob);
+        reader.readAsBinaryString(blob);
       });
     });
     createExcelGrid(rowCount, colCount);
 
-    var dataURI = file_array[4];
-    var commaIndex = dataURI.indexOf(",");
-    var contentType = file_array[2];
-    var data = dataURI.slice(commaIndex + 1);
+    var binaryData = await mainFileManager.getContent(file_path);
 
-    // Decode the base64-encoded data
-    var binaryData = window.atob(data);
-
-    // Create a Uint8Array to hold the binary data
-    var arrayBuffer = new ArrayBuffer(binaryData.length);
-    var uint8Array = new Uint8Array(arrayBuffer);
-
-    // Copy the binary data into the Uint8Array
+    var buffer = new ArrayBuffer(binaryData.length);
+    var bufferView = new Uint8Array(buffer);
     for (var i = 0; i < binaryData.length; i++) {
-      uint8Array[i] = binaryData.charCodeAt(i);
+        bufferView[i] = binaryData.charCodeAt(i);
     }
 
-    // Create a Blob from the Uint8Array
-    var blob = new Blob([uint8Array], { type: contentType });
+    var blob = new Blob([buffer], { type: "application/vnd.ms-excel" });
 
     const workbook = new ExcelJS.Workbook();
     await workbook.xlsx.load(blob);

@@ -4,59 +4,55 @@ function lengthInUtf8Bytes(str) {
   var m = encodeURIComponent(str).match(/%[89ABab]/g);
   return str.length + (m ? m.length : 0);
 }
-function downloadAsFile(filename, text) {
-  var element = document.createElement("a");
-  element.style.display = "none";
-  element.setAttribute("href", "data:text/plain;charset=utf-8," + encodeURIComponent(text));
-  element.setAttribute("download", filename);
 
-  element.style.display = "none";
-  document.body.appendChild(element);
-
-  element.click();
-
-  document.body.removeChild(element);
-}
-
-document.addEventListener("contextmenu", function (e) {
-  if (!selectmode) {
-    if (e.target.classList == "element") {
-      rightclickad = document.querySelector(".rightclick");
-      rightclickad.setAttribute("idel", e.target.getAttribute("idel"));
-      rightclickad.style.left = e.clientX + "px";
-      rightclickad.style.top = e.clientY + "px";
-      rightclickad.style.display = "block";
+document.addEventListener(
+  "contextmenu",
+  function (e) {
+    if (!selectmode) {
+      if (e.target.classList == "element") {
+        rightclickad = document.querySelector(".rightclick");
+        rightclickad.setAttribute("idel", e.target.getAttribute("idel"));
+        rightclickad.style.left = e.clientX + "px";
+        rightclickad.style.top = e.clientY + "px";
+        rightclickad.style.display = "block";
+      } else if (e.target.parentElement.classList == "element") {
+        rightclickad = document.querySelector(".rightclick");
+        rightclickad.setAttribute(
+          "idel",
+          e.target.parentElement.getAttribute("idel"),
+        );
+        rightclickad.style.left = e.clientX + "px";
+        rightclickad.style.top = e.clientY + "px";
+        rightclickad.style.display = "block";
+      } else if (e.target.classList == "elmnt") {
+        rightclickad = document.querySelector(".rightclicktwo");
+        rightclickad.setAttribute(
+          "idel",
+          e.target.querySelector("p").innerHTML,
+        );
+        rightclickad.style.left = e.clientX + "px";
+        rightclickad.style.top = e.clientY + "px";
+        rightclickad.style.display = "block";
+      } else if (e.target.parentElement.classList == "elmnt") {
+        rightclickad = document.querySelector(".rightclicktwo");
+        rightclickad.setAttribute(
+          "idel",
+          e.target.parentElement.querySelector("p").innerHTML,
+        );
+        rightclickad.style.left = e.clientX + "px";
+        rightclickad.style.top = e.clientY + "px";
+        rightclickad.style.display = "block";
+      } else if (e.target.classList.contains("main")) {
+        rightclickad = document.querySelector(".rightclickthree");
+        rightclickad.style.left = e.clientX + "px";
+        rightclickad.style.top = e.clientY + "px";
+        rightclickad.style.display = "block";
+      }
     }
-    else if (e.target.parentElement.classList == "element") {
-      rightclickad = document.querySelector(".rightclick");
-      rightclickad.setAttribute("idel", e.target.parentElement.getAttribute("idel"));
-      rightclickad.style.left = e.clientX + "px";
-      rightclickad.style.top = e.clientY + "px";
-      rightclickad.style.display = "block";
-    }
-    else if (e.target.classList == "elmnt") {
-      rightclickad = document.querySelector(".rightclicktwo");
-      rightclickad.setAttribute("idel", e.target.querySelector("p").innerHTML);
-      rightclickad.style.left = e.clientX + "px";
-      rightclickad.style.top = e.clientY + "px";
-      rightclickad.style.display = "block";
-    }
-    else if (e.target.parentElement.classList == "elmnt") {
-      rightclickad = document.querySelector(".rightclicktwo");
-      rightclickad.setAttribute("idel", e.target.parentElement.querySelector("p").innerHTML);
-      rightclickad.style.left = e.clientX + "px";
-      rightclickad.style.top = e.clientY + "px";
-      rightclickad.style.display = "block";
-    }
-    else if (e.target.classList.contains("main")) {
-      rightclickad = document.querySelector(".rightclickthree");
-      rightclickad.style.left = e.clientX + "px";
-      rightclickad.style.top = e.clientY + "px";
-      rightclickad.style.display = "block";
-    }
-  }
-  e.preventDefault();
-}, false);
+    e.preventDefault();
+  },
+  false,
+);
 
 var parseExcel = function (file) {
   var reader = new FileReader();
@@ -65,15 +61,15 @@ var parseExcel = function (file) {
     var asdajksdhjasd = [];
     var data = e.target.result;
     var workbook = XLSX.read(data, {
-      type: "binary"
+      type: "binary",
     });
 
     workbook.SheetNames.forEach(function (sheetName) {
-      // Here is your object
-      var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+      var XL_row_object = XLSX.utils.sheet_to_row_object_array(
+        workbook.Sheets[sheetName],
+      );
 
       asdajksdhjasd.push(XL_row_object);
-
     });
     FileManager.uploadToLocalStorage(file, JSON.stringify(asdajksdhjasd));
     document.querySelector("#fileupload").value = "";
@@ -110,8 +106,10 @@ function humanFileSize(bytes, si = false, dp = 1) {
   do {
     bytes /= thresh;
     ++u;
-  } while (Math.round(Math.abs(bytes) * r) / r >= thresh && u < units.length - 1);
-
+  } while (
+    Math.round(Math.abs(bytes) * r) / r >= thresh &&
+    u < units.length - 1
+  );
 
   return bytes.toFixed(dp) + " " + units[u];
 }
@@ -130,115 +128,159 @@ window.addEventListener("click", function (e) {
   }
 });
 var FileManager = {
-  readFiles: () => {
+  readFiles: async () => {
     if (selectmode) {
-      document.querySelector(".main").innerHTML = "<header><p>Správce Souborů <span>" + infolder + "</span></p></header>";
-    }
-    else {
-      document.querySelector(".main").innerHTML = "<header><p>Správce Souborů <span>" + infolder + "</span></p><!--<div class=\"mainelement\" onclick=\"FileManager.upload();\"></div>--!><div class=\"secondelement\" onclick=\"FileManager.createFolder();\"></div><div class=\"thirdelement\" onclick=\"FileManager.createFile();\"></div><div class=\"fourthelement\" onclick=\"FileManager.readFiles();\"></div></header>";
+      document.querySelector(".main").innerHTML =
+        "<header><p>Správce Souborů <span>" + infolder + "</span></p></header>";
+    } else {
+      document.querySelector(".main").innerHTML =
+        "<header><p>Správce Souborů <span>" +
+        infolder +
+        '</span></p><!--<div class="mainelement" onclick="FileManager.upload();"></div>--!><div class="secondelement" onclick="FileManager.createFolder();"></div><div class="thirdelement" onclick="FileManager.createFile();"></div><div class="fourthelement" onclick="FileManager.readFiles();"></div></header>';
     }
     if (infolder != "/") {
       var element = document.createElement("div");
       element.classList.add("elmnt");
       element.setAttribute("onclick", "FileManager.goto('..')");
-      element.setAttribute("idel", i);
       element.setAttribute("cursor", "pointer");
       element.innerHTML = "<p cursor='pointer'>..</p>";
 
       document.querySelector(".main").appendChild(element);
     }
-    var folders = JSON.parse(localStorage.getItem("folders-uploaded"));
-    if (folders) {
-      for (var i = 0; i < folders.length; i++) {
-        if (folders[i][1] == infolder) {
+
+    const items = await parent.LowLevelApi.filesystem.readdir(
+      parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
+    );
+
+    for (const folder of items) {
+      try {
+        const folderPath = parent.LowLevelApi.filesystem.path.join(
+          parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
+          folder,
+        );
+        const folderStat = await parent.LowLevelApi.filesystem.stat(folderPath);
+
+        if (!folderStat.isFile()) {
           var element = document.createElement("div");
           element.classList.add("elmnt");
-          element.setAttribute("onclick", "FileManager.goto('" + folders[i][0] + "/')");
-          element.setAttribute("idel", i);
+          element.setAttribute(
+            "onclick",
+            "FileManager.goto('" + folder + "/')",
+          );
+          element.setAttribute("idel", folder);
           element.setAttribute("cursor", "pointer");
-          element.innerHTML = "<p cursor='pointer'>" + folders[i][0] + "</p>";
+          element.innerHTML = "<p cursor='pointer'>" + folder + "</p>";
 
           document.querySelector(".main").appendChild(element);
         }
+      } catch (e) {
+        console.error(e);
       }
     }
-    var stored = storage.getSync(infolder);
-    if (stored) {
-      for (var i = 0; i < stored.length; i++) {
-        var element = document.createElement("div");
-        element.classList.add("element");
-        element.setAttribute("onclick", "FileManager.openFile(" + i + ")");
-        element.setAttribute("idel", i);
-        element.setAttribute("cursor", "pointer");
-        element.innerHTML = "<p cursor='pointer'>" + stored[i][0] + "</p><span>" + humanFileSize(stored[i][1], true) + "</span>";
 
-        document.querySelector(".main").appendChild(element);
+    for (const file of items) {
+      try {
+        const filePath = parent.LowLevelApi.filesystem.path.join(
+          parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
+          file,
+        );
+        const fileStat = await parent.LowLevelApi.filesystem.stat(filePath);
+
+        if (fileStat.isFile()) {
+          var element = document.createElement("div");
+          element.classList.add("element");
+          element.setAttribute(
+            "onclick",
+            "FileManager.openFile(`" + file + "`)",
+          );
+          function removeLastFromString(str, substr) {
+            var lastIndex = str.lastIndexOf(substr);
+            if (lastIndex !== -1) {
+              return str.substring(0, lastIndex);
+            } else {
+              return str;
+            }
+          }
+          const displayname = removeLastFromString(file, ".lnk");
+          element.setAttribute("idel", file);
+          element.setAttribute("cursor", "pointer");
+          element.innerHTML =
+            "<p cursor='pointer'>" +
+            displayname +
+            "</p><span>" +
+            humanFileSize(fileStat.size, true) +
+            "</span>";
+
+          document.querySelector(".main").appendChild(element);
+        }
+      } catch (e) {
+        console.error(e);
       }
     }
   },
-  openFile: (isdd) => {
+  openFile: async (isdd) => {
     if (!selectmode) {
-      var stored = storage.getSync(infolder);
-      var file = stored[isdd];
-      if (file[2] == "klindos/shortcut") {
-        var content = file[4];
-        if (content.includes(":") && content.split(":")[0].trim() == "open" && content.split(":")[1] !== "") {
+      if (isdd.endsWith(".lnk")) {
+        const systemPath = parent.LowLevelApi.filesystem.path.join(
+          parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles",
+          infolder + isdd,
+        );
+        const content = await parent.LowLevelApi.filesystem.readFile(
+          systemPath,
+          "utf8",
+        );
+        if (
+          content.includes(":") &&
+          content.split(":")[0].trim() == "open" &&
+          content.split(":")[1] !== ""
+        ) {
           var path = content.split(":")[1];
-          if (parent.mainFileManager.fileExists(path)) {
-            parent.mainFileManager.open(parent.mainFileManager.getFile(path));
-          }
-          else if (parent.mainFileManager.folderExist(path)) {
-            FileManager.goto(path.replace("/", "") + "/");
-          }
-          else {
-            parent.spawnNotification("Správce souborů", "Soubor nebo složka neexistuje!");
+          if (await parent.mainFileManager.fileExists(path)) {
+            if (await parent.mainFileManager.isFile(path)) {
+              let lastIndex = path.lastIndexOf("/");
+              let firstPart = path.substring(0, lastIndex);
+              let secondPart = path.substring(lastIndex + 1);
+              parent.mainFileManager.open(firstPart, secondPart);
+            } else {
+              FileManager.goto(path.replace("/", "") + "/");
+            }
+          } else {
+            parent.spawnNotification(
+              "Správce souborů",
+              "Soubor nebo složka neexistuje!",
+            );
           }
         }
+        return;
       }
-      else if (file[2] == "klindos/script") {
-        const path = file[5]+file[0];
-        parent.windows.open("ter", {file:path});
-      }
-      else {
-        parent.mainFileManager.open(stored[isdd]);
-      }
-    }
-    else {
-      var stored = storage.getSync(infolder);
+      parent.mainFileManager.open(infolder, isdd);
+    } else {
+      const path = infolder + isdd;
       var index = window.location.href.split("index=")[1];
-      parent.openGetFile[index][1]["success"](stored[isdd]);
+      parent.openGetFile[index][1]["success"](path);
       var element = parent.openGetFile[index][0].querySelector(".close");
       parent.openGetFile = removebyindex(parent.openGetFile, index);
       parent.windows.close(element, "filemanager");
     }
   },
-  remove: (idel) => {
-    var value = storage.getSync(infolder);
-    var newarray = removebyindex(value, idel);
-    storage.setSync(infolder, newarray);
+  remove: async (filename) => {
+    const path = parent.LowLevelApi.filesystem.path.join(
+      parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
+      filename,
+    );
+
+    await parent.LowLevelApi.filesystem.unlink(path);
+
     FileManager.readFiles();
   },
-  removeFolder: (idel) => {
-    var value = JSON.parse(localStorage.getItem("folders-uploaded"));
-    for (var i = 0; i < value.length; i++) {
-      if (value[i][1] == infolder && value[i][0] == idel) {
-        value = removebyindex(value, i);
-        continue;
-      }
-    }
-    for (var i = 0; i < value.length; i++) {
-      if (value[i][1].indexOf(infolder + idel + "/") == 0) {
-        value = removebyindex(value, i);
-        continue;
-      }
-    }
-    storage.remove(infolder + idel + "/");
-    if (value.length > 0) {
-      localStorage.setItem("folders-uploaded", JSON.stringify(value));
-    }
-    else {
-      localStorage.removeItem("folders-uploaded");
-    }
+  removeFolder: async (foldername) => {
+    const path = parent.LowLevelApi.filesystem.path.join(
+      parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
+      foldername,
+    );
+
+    await parent.LowLevelApi.filesystem.rm(path, { recursive: true });
+
     FileManager.readFiles();
   },
   goto: (folder) => {
@@ -249,36 +291,37 @@ var FileManager = {
       }
       infolder = nocasdjhuasd.slice(0, -2).join("");
       FileManager.readFiles();
-    }
-    else {
+    } else {
       infolder += folder;
       FileManager.readFiles();
     }
-    document.querySelector("header p").innerHTML = "Správce Souborů <span>" + infolder + "</span>";
+    document.querySelector("header p").innerHTML =
+      "Správce Souborů <span>" + infolder + "</span>";
   },
   createFolder: () => {
-    parent.BPrompt.prompt("Zadejte název složky:", (name) => {
+    parent.BPrompt.prompt("Zadejte název složky:", async (name) => {
       if (name == null || name.length == 0) {
-
-      }
-      else {
+        // Nothing
+      } else {
         if (name.indexOf("/") > -1 || name.indexOf(".") > -1) {
-          parent.spawnNotification("Správce Souborů", "'/' a '.' jsou zakázané znaky!");
-        }
-        else {
-          if (FileManager.folderExists(name)) {
-            parent.spawnNotification("Správce Souborů", "Složka se stejným názvem již v této složce existuje.");
-          }
-          else {
-
-            var array = JSON.parse(localStorage.getItem("folders-uploaded"));
-            if (array) {
-              array.push([name, infolder]);
-            }
-            else {
-              array = [[name, infolder]];
-            }
-            localStorage.setItem("folders-uploaded", JSON.stringify(array));
+          parent.spawnNotification(
+            "Správce Souborů",
+            "'/' a '.' jsou zakázané znaky!",
+          );
+        } else {
+          if (await FileManager.folderExists(name)) {
+            parent.spawnNotification(
+              "Správce Souborů",
+              "Složka se stejným názvem již v této složce existuje.",
+            );
+          } else {
+            const path = parent.LowLevelApi.filesystem.path.join(
+              parent.LowLevelApi.filesystem.os.homedir() +
+                "/usrfiles" +
+                infolder,
+              name,
+            );
+            await parent.LowLevelApi.filesystem.mkdir(path);
 
             FileManager.readFiles();
           }
@@ -286,283 +329,216 @@ var FileManager = {
       }
     });
   },
-  folderExists: (name) => {
-    var value = JSON.parse(localStorage.getItem("folders-uploaded"));
-    if (value) {
-      newarray = [];
-      for (var i = 0; i < value.length; i++) {
-        if (value[i][1] == infolder) {
-          newarray.push(value[i]);
-        }
-      }
-      for (var i = 0; i < newarray.length; i++) {
-        if (newarray[i][0] == name) {
-          return true;
-        }
-      }
-    }
-    return false;
-  },
-  fileExist: (name) => {
-    var value = storage.getSync(infolder);
-    if (value) {
-      newarray = [];
-      for (var i = 0; i < value.length; i++) {
-        if (value[i][5] == infolder) {
-          newarray.push(value[i]);
-        }
-      }
-      for (var i = 0; i < newarray.length; i++) {
-        if (newarray[i][0] == name) {
-          return true;
-        }
-      }
-    }
-    return false;
-  },
-  rename: (idel) => {
-    var value = storage.getSync(infolder);
+  folderExists: async (name) => {
+    const path = parent.LowLevelApi.filesystem.path.join(
+      parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
+      name,
+    );
 
-    parent.BPrompt.prompt("Zadejte nové jméno souboru.", (newname) => {
+    return await parent.LowLevelApi.filesystem.exists(path);
+  },
+  fileExist: async (name) => {
+    const path = parent.LowLevelApi.filesystem.path.join(
+      parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
+      name,
+    );
+
+    return await parent.LowLevelApi.filesystem.exists(path);
+  },
+  rename: async (filename) => {
+    const path = parent.LowLevelApi.filesystem.path.join(
+      parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
+      filename,
+    );
+    parent.BPrompt.prompt("Zadejte nové jméno souboru.", async (newname) => {
       if (newname == null || newname.length == 0) {
-
+      } else if (newname.length > 100) {
+        parent.spawnNotification(
+          "Správce Souborů",
+          "Název souborů nesmí být delší jak 100 znaků.",
+        );
+      } else if (newname.indexOf("/") > -1 || newname.indexOf("\\") > -1) {
+        parent.spawnNotification(
+          "Správce Souborů",
+          "'/' a '\\' jsou zakázané znaky.",
+        );
+      } else if (await FileManager.fileExist(newname)) {
+        parent.spawnNotification(
+          "Správce Souborů",
+          "Tento název souboru je již v této složce použit!",
+        );
+      } else {
+        const newpath = parent.LowLevelApi.filesystem.path.join(
+          parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
+          newname,
+        );
+        await parent.LowLevelApi.filesystem.rename(path, newpath);
+        FileManager.readFiles();
       }
-      else if (newname.length > 100) {
-        parent.spawnNotification("Správce Souborů", "Název souborů nesmí být delší jak 100 znaků.");
-      }
-      else if (newname.indexOf("/") > -1 || newname.indexOf("\\") > -1) {
-        parent.spawnNotification("Správce Souborů", "'/' a '\\' jsou zakázané znaky.");
-      }
-      else if (FileManager.fileExist(newname)) {
-        parent.spawnNotification("Správce Souborů", "Tento název souboru je již v této složce použit!");
-      }
-      else {
-        value[idel][0] = newname;
-        storage.setSync(infolder, value);
-      }
-      FileManager.readFiles();
     });
   },
-  copy: (idel) => {
-    var value = storage.getSync(infolder);
-    clipboard = value[idel];
-    parent.spawnNotification("Správce Souborů", "Jděte do jakékoli složky a stiskněte CTRL + V pro vložení.");
+  copy: (filename) => {
+    const path = parent.LowLevelApi.filesystem.path.join(
+      parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
+      filename,
+    );
+    clipboard = [path, filename];
+    parent.spawnNotification(
+      "Správce Souborů",
+      "Jděte do jakékoli složky a stiskněte CTRL + V pro vložení.",
+    );
   },
-  paste: () => {
+  paste: async () => {
     if (clipboard != undefined) {
       var newclipboard = clipboard;
-      if (FileManager.fileExist(newclipboard[0])) {
-        parent.BPrompt.prompt("Soubor se stejným názvem již v této složce existuje. Zadejte nový název souboru.", (newname) => {
-          if (newname != "" && newname != null) {
-            clipboard[0] = newname;
-            FileManager.paste();
-          }
+      if (await FileManager.fileExist(newclipboard[1])) {
+        parent.BPrompt.prompt(
+          "Soubor se stejným názvem již v této složce existuje. Zadejte nový název souboru.",
+          async (newname) => {
+            if (newname != "" && newname != null) {
+              clipboard[1] = newname;
+              await FileManager.paste();
+            }
+          },
+        );
+      } else {
+        const destinationPath = parent.LowLevelApi.filesystem.path.join(
+          parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
+          clipboard[1],
+        );
+
+        const source = parent.LowLevelApi.filesystem.fs.createReadStream(
+          clipboard[0],
+        );
+        const destination =
+          parent.LowLevelApi.filesystem.fs.createWriteStream(destinationPath);
+
+        let bytesCopied = 0;
+        const fileSize = (
+          await parent.LowLevelApi.filesystem.stat(clipboard[0])
+        ).size;
+        const progressBar = new parent.window.DownloadStatus(clipboard[1]);
+
+        source.on("error", (err) => console.error("Error reading file:", err));
+        destination.on("error", (err) =>
+          console.error("Error writing file:", err),
+        );
+
+        source.on("data", (chunk) => {
+          bytesCopied += chunk.length;
+          const percentage = Math.floor((bytesCopied / fileSize) * 100);
+          progressBar.updatePercentage(percentage);
+        });
+
+        source.pipe(destination);
+
+        destination.on("finish", () => {
+          progressBar.finish();
+          FileManager.readFiles();
         });
       }
-      else {
-        var value = storage.getSync(infolder);
-        if (Object.keys(value).length === 0) {
-          value = [];
-        }
-        newclipboard[5] = infolder;
-        value.push(newclipboard);
-        try {
-          storage.setSync(infolder, value);
-        }
-        catch (e) {
-          parent.spawnNotification("Správce Souborů", "Není dostatek místa na úložišti. Více info <a href='https://www.gwtproject.org/doc/latest/DevGuideHtml5Storage.html'>zde</a>.");
-          console.log("File is too big to be uploaded. Error message: " + e.toString());
-        }
-
-      }
-      FileManager.readFiles();
     }
   },
-  properties: (idel) => {
-    var stored = storage.getSync(infolder);
-    parent.mainFileManager.properties(stored[idel]);
+  properties: (name) => {
+    const path = parent.LowLevelApi.filesystem.path.join(infolder, name);
+
+    parent.mainFileManager.properties(path);
   },
   createFile: () => {
-    parent.BPrompt.prompt("Vložte název souboru.", (name) => {
+    parent.BPrompt.prompt("Vložte název souboru.", async (name) => {
       if (name == null || name.length == 0) {
-
-      }
-      else {
-        if (FileManager.fileExist(name)) {
-          parent.spawnNotification("Správce Souborů", "Soubor se stejným názvem už existuje.");
-        }
-        else {
+      } else {
+        if (await FileManager.fileExist(name)) {
+          parent.spawnNotification(
+            "Správce Souborů",
+            "Soubor se stejným názvem už existuje.",
+          );
+        } else {
           if (name.length > 100) {
-            parent.spawnNotification("Správce Souborů", "Název souborů nesmí být delší jak 100 znaků.");
-          }
-          else {
+            parent.spawnNotification(
+              "Správce Souborů",
+              "Název souborů nesmí být delší jak 100 znaků.",
+            );
+          } else {
             if (name.indexOf("/") > -1 || name.indexOf("\\") > -1) {
-              parent.spawnNotification("Správce Souborů", "'/' a '\\' jsou zakázané znaky.");
-            }
-            else {
-              var time = new Date().toString();
-              var value = storage.getSync(infolder);
-              if (Object.keys(value).length == 0) {
-                value = [[name, 0, "text/plain", time, "", infolder]];
-              }
-              else {
-                value.push([name, 0, "text/plain", time, "", infolder]);
-              }
-              storage.setSync(infolder, value);
+              parent.spawnNotification(
+                "Správce Souborů",
+                "'/' a '\\' jsou zakázané znaky.",
+              );
+            } else {
+              const path = parent.LowLevelApi.filesystem.path.join(
+                parent.LowLevelApi.filesystem.os.homedir() +
+                  "/usrfiles" +
+                  infolder,
+                name,
+              );
+
+              parent.LowLevelApi.filesystem.fs.open(path, "w", (err, file) => {
+                FileManager.readFiles();
+              });
             }
           }
         }
       }
-      FileManager.readFiles();
     });
-
   },
-  convertTo: (idel) => {
-    var value = storage.getSync(infolder);
-    parent.BPrompt.prompt("Převod:<br><br>1 - Text<br>2 - Obrázek<br>3 - Zvuk<br>4 - Video<br>5 - KLIND OS Script<br>6 - KLIND OS Instalační balíček<br>7 - Word dokument<br>8 - Excel dokument<br>9 - HTML dokument<br>c - Vlastní", (to) => {
-      if (to == null || to.length == 0) {
-
-      }
-      else {
-        if (to == "1") {
-          value[idel][2] = "text/plain";
-          storage.setSync(infolder, value);
-        }
-        else if (to == "2") {
-          setTimeout(() => {
-            parent.BPrompt.prompt("Vyberte formát: 1 - JPEG 2 - PNG", (format) => {
-              if (format == "1") {
-                value[idel][2] = "image/jpeg";
-                storage.setSync(infolder, value);
-              }
-              else if (format == "2") {
-                value[idel][2] = "image/png";
-                storage.setSync(infolder, value);
-              }
-              else {
-                parent.spawnNotification("Správce Souborů", "Neplatný výběr.");
-              }
-            });
-          }, 200);
-        }
-        else if (to == "3") {
-          value[idel][2] = "audio/mpeg";
-          storage.setSync(infolder, value);
-        }
-        else if (to == "4") {
-          value[idel][2] = "video/mp4";
-          storage.setSync(infolder, value);
-        }
-        else if (to == "5") {
-          value[idel][2] = "klindos/script";
-          storage.setSync(infolder, value);
-        }
-        else if (to == "6") {
-          value[idel][2] = "klindos/installer";
-          storage.setSync(infolder, value);
-        }
-        else if (to == "7") {
-          value[idel][2] = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
-          storage.setSync(infolder, value);
-        }
-        else if (to == "8") {
-          value[idel][2] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-          storage.setSync(infolder, value);
-        }
-        else if (to == "9") {
-          value[idel][2] = "text/html";
-          storage.setSync(infolder, value);
-        }
-        else if (to == "c") {
-          setTimeout(() => {
-            parent.BPrompt.prompt("Vložte vlastní typ ve tvaru např. (text/plain)", (type) => {
-              value[idel][2] = type;
-              storage.setSync(infolder, value);
-            });
-          }, 200);
-        }
-        else {
-          parent.spawnNotification("Správce Souborů", "Neplatný výběr.");
-        }
-      }
-    });
-    FileManager.readFiles();
-  },
-  downloadFile: (idel) => {
-    var value = storage.getSync(infolder)[idel];
-    if (value[2].split("/")[0] == "text") {
-      downloadAsFile(value[0], value[4]);
-    }
-    else if (value[2].split("/")[0] == "image" || value[2].split("/")[0] == "audio") {
-      if (value[4].indexOf("data:") > -1) {
-        var element = document.createElement("a");
-        element.href = value[4];
-        element.setAttribute("download", value[0]);
-        var elementdone = document.body.appendChild(element);
-        parent.spawnNotification("Správce Souborů", "Stahování začalo.");
-        elementdone.click();
-        elementdone.remove();
-      }
-      else {
-        parent.spawnNotification("Správce Souborů", "Obrázky z webu nemohou být stáhnuty.");
-      }
-    }
-  },
-  copyPath: (idel) => {
-    var path = infolder + storage.getSync(infolder)[idel][0];
+  copyPath: (name) => {
+    var path = infolder + name;
     parent.spawnNotification("Správce Souborů", "Cesta: " + path);
   },
   selectMode: () => {
     selectmode = true;
   },
   addShortcut: (idel) => {
-    var file = storage.getSync(infolder)[idel];
-    var path = infolder + file[0];
-
-    var fun = `try{mainFileManager.open(mainFileManager.getFile("${path.replaceAll("'", "\\'")}"))}catch {spawnNotification("Správce souborů","Tento soubor nebyl nalezen!")}`;
+    var fun = `try{mainFileManager.open('${infolder}', '${idel}')}catch {spawnNotification("Správce souborů","Tento soubor nebyl nalezen!")}`;
     parent.DesktopIcons.add({ run: fun, icon: "filemanager/images/file.png" });
   },
   createShortcut: () => {
-    parent.BPrompt.prompt("Vložte název zástupce.", (name) => {
+    parent.BPrompt.prompt("Vložte název zástupce.", async (name) => {
       if (name == null || name.length == 0) {
-
-      }
-      else {
-        if (FileManager.fileExist(name)) {
-          parent.spawnNotification("Správce Souborů", "Soubor se stejným názvem už existuje.");
-        }
-        else {
+      } else {
+        if (await FileManager.fileExist(name + ".lnk")) {
+          parent.spawnNotification(
+            "Správce Souborů",
+            "Soubor se stejným názvem už existuje.",
+          );
+        } else {
           if (name.length > 100) {
-            parent.spawnNotification("Správce Souborů", "Název souborů nesmí být delší jak 100 znaků.");
-          }
-          else {
+            parent.spawnNotification(
+              "Správce Souborů",
+              "Název souborů nesmí být delší jak 100 znaků.",
+            );
+          } else {
             if (name.indexOf("/") > -1 || name.indexOf("\\") > -1) {
-              parent.spawnNotification("Správce Souborů", "'/' a '\\' jsou zakázané znaky.");
-            }
-            else {
+              parent.spawnNotification(
+                "Správce Souborů",
+                "'/' a '\\' jsou zakázané znaky.",
+              );
+            } else {
               setTimeout(() => {
-                parent.BPrompt.prompt("Vložte cestu k souboru ke kterému chcete přidat zástupce.", (path) => {
-                  var time = new Date().toString();
-                  var value = storage.getSync(infolder);
-                  var content = "open:" + path;
-                  var file = [name, lengthInUtf8Bytes(content), "klindos/shortcut", time, content, infolder];
+                parent.BPrompt.prompt(
+                  "Vložte cestu k souboru ke kterému chcete přidat zástupce.",
+                  async (filepath) => {
+                    const path = parent.LowLevelApi.filesystem.path.join(
+                      parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles",
+                      infolder + name + ".lnk",
+                    );
+                    await parent.LowLevelApi.filesystem.writeFile(
+                      path,
+                      "open:" + filepath,
+                      { encoding: "utf8" },
+                    );
 
-                  if (Object.keys(value).length == 0) {
-                    value = [file];
-                  }
-                  else {
-                    value.push(file);
-                  }
-                  storage.setSync(infolder, value);
-                  FileManager.readFiles();
-                });
+                    FileManager.readFiles();
+                  },
+                );
               }, 50);
             }
           }
         }
       }
     });
-  }
+  },
 };
 var selectmode = false;
 var keysdown = [];
@@ -579,8 +555,7 @@ document.addEventListener("keyup", function () {
 var clipboard;
 if (window.location.href.indexOf("dark") > -1) {
   document.querySelector(".main").classList.add("dark");
-}
-else {
+} else {
   document.querySelector(".main").classList.add("light");
 }
 if (window.location.href.indexOf("select") > -1) {

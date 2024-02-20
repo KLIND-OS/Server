@@ -1,25 +1,31 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
-<head>
+  <head>
     <title>KLIND OS | Aktualizace</title>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <script src="info.js"></script>
     <script src="hash.js"></script>
-</head>
+  </head>
 
-<body style="text-align:center;margin:0;padding:0;">
+  <body style="text-align: center; margin: 0; padding: 0">
     <h1>KLIND OS | Aktualizace</h1>
-    <p>Toto je upozornění že tento server byl aktualizován na novou verzi KLIND OS.!</p>
-    <p>Pokud chcete pokračovat do KLIND OS, musíte si KLIND OS aktualizovat i na svém zařízení.</p>
+    <p>
+      Toto je upozornění že tento server byl aktualizován na novou verzi KLIND
+      OS.!
+    </p>
+    <p>
+      Pokud chcete pokračovat do KLIND OS, musíte si KLIND OS aktualizovat i na
+      svém zařízení.
+    </p>
     <p>Pokud aktualizujete, nebudete moct se vrátit na starší verzi.</p>
     <div class="actions">
-        <h2>Akce které se budou muset provést při aktualizaci:</h2>
-        <div class="act">
-            <p>Změna dat o vaší verzi</p>
-        </div>
+      <h2>Akce které se budou muset provést při aktualizaci:</h2>
+      <div class="act">
+        <p>Změna dat o vaší verzi</p>
+      </div>
     </div>
-    <button onclick="this.innerHTML = 'Probíhá aktualizace';
+    <button
+      onclick="this.innerHTML = 'Probíhá aktualizace';
             setTimeout(() => {
                 this.innerHTML = 'Skoro hotovo...';
                 setTimeout(() => {
@@ -27,69 +33,106 @@
                     document.getElementById('hotovo').style.display='';
                 }, 3488);
             }, 5712);
-            ">Aktualizovat</button>
-    <button id="hotovo" onclick="finish()" style="display: none;">Hotovo (klikněte pro potvrzení)</button>
+            "
+    >
+      Aktualizovat
+    </button>
+    <button id="hotovo" onclick="finish()" style="display: none">
+      Hotovo (klikněte pro potvrzení)
+    </button>
     <script>
-        function finish() {
-            for (var i = 0; i < todo.length; i++) {
-                todo[i]();
-            }
-            localStorage.setItem("updatesklindows", version);
-            localStorage.setItem("welcomePage", "true");
-            window.location.replace("index.html");
+      async function finish() {
+        for (var i = 0; i < todo.length; i++) {
+          await todo[i]();
         }
+        localStorage.setItem("updatesklindows", version);
+        localStorage.setItem("welcomePage", "true");
+        window.location.replace("index.html");
+      }
     </script>
-</body>
-
+  </body>
 </html>
 <script>
-    var messages = [
-        [6.1, "<p>Změna localStorage hodnoty pro pozadí na zamykací obrazovce.</p>", () => {
-            if (localStorage.getItem("background")) localStorage.setItem("background-lockScreen", localStorage.getItem("background"));
-        }],
-        [6.2, "<p>Odstranení všech vlastních aplikací z důvodu změny formátu.</p><p>Změna uložení hesla na nový formát.</p>", () => {
-            localStorage.removeItem("customapps");
-            localStorage.setItem("password", hashCode(localStorage.getItem("password")));
-        }],
-        [6.3, "", () => {}],
-        [6.4, "", () => {}],
-        [6.5, "", () => {}],
-        [6.6, "<p>Změnit místo pro uložení souborů</p>", () => {
-          JSON.parse(localStorage["files-uploaded"]).forEach(file => {
-              const content = storage.getSync(file[5])
-              if (Object.keys(content).length == 0) {
-                  const data = [file];
-                  storage.setSync(file[5], data)
-              } else {
-                  content.push(file);
-                  storage.setSync(file[5], content)
-              }
-          })
-          localStorage.removeItem("files-uploaded");
-        }]
-    ]
+  var messages = [
+    [
+      6.1,
+      "<p>Změna localStorage hodnoty pro pozadí na zamykací obrazovce.</p>",
+      () => {
+        if (localStorage.getItem("background"))
+          localStorage.setItem(
+            "background-lockScreen",
+            localStorage.getItem("background"),
+          );
+      },
+    ],
+    [
+      6.2,
+      "<p>Odstranení všech vlastních aplikací z důvodu změny formátu.</p><p>Změna uložení hesla na nový formát.</p>",
+      () => {
+        localStorage.removeItem("customapps");
+        localStorage.setItem(
+          "password",
+          hashCode(localStorage.getItem("password")),
+        );
+      },
+    ],
+    [6.3, "", () => {}],
+    [6.4, "", () => {}],
+    [6.5, "", () => {}],
+    [
+      6.6,
+      "<p>Změnit místo pro uložení souborů</p>",
+      () => {
+        JSON.parse(localStorage["files-uploaded"]).forEach((file) => {
+          const content = storage.getSync(file[5]);
+          if (Object.keys(content).length == 0) {
+            const data = [file];
+            storage.setSync(file[5], data);
+          } else {
+            content.push(file);
+            storage.setSync(file[5], content);
+          }
+        });
+        localStorage.removeItem("files-uploaded");
+      },
+    ],
+    [
+      6.7,
+      "<p>Migrace všech souborů</p>",
+      async () => {
+        const folders = localStorage["folders-uploaded"] || "[]";
+        await LowLevelApi.filesystem.migrations.migrateToBinary(
+          JSON.parse(folders),
+        );
+        localStorage.removeItem("folders-uploaded");
+      },
+    ],
+  ];
 </script>
 <script>
-    var startindex = undefined;
-    var endindex = undefined;
-    var todo = [];
-    for (var i = 0; i < messages.length; i++) {
-        if (messages[i][0] == localStorage.updatesklindows) {
-            startindex = i + 1
-        }
+  var startindex = undefined;
+  var endindex = undefined;
+  var todo = [];
+  for (var i = 0; i < messages.length; i++) {
+    if (messages[i][0] == localStorage.updatesklindows) {
+      startindex = i + 1;
     }
-    for (var i = 0; i < messages.length; i++) {
-        if (messages[i][0] == version) {
-            endindex = i
-        }
+  }
+  for (var i = 0; i < messages.length; i++) {
+    if (messages[i][0] == version) {
+      endindex = i;
     }
-    if (endindex == undefined) { endindex = messages.length }
-    else { endindex++; }
-    for (var i = startindex ? startindex : 0; i < endindex; i++) {
-        var info = messages[i]
-        if (info[2] !== undefined) {
-            todo.push(info[2])
-        }
-        document.querySelector(".act").innerHTML += info[1] ? info[1] : ""
+  }
+  if (endindex == undefined) {
+    endindex = messages.length;
+  } else {
+    endindex++;
+  }
+  for (var i = startindex ? startindex : 0; i < endindex; i++) {
+    var info = messages[i];
+    if (info[2] !== undefined) {
+      todo.push(info[2]);
     }
+    document.querySelector(".act").innerHTML += info[1] ? info[1] : "";
+  }
 </script>
