@@ -8,6 +8,7 @@ class JSSElement {
     this.children = children;
   }
 }
+
 class JSSStyle {
   type;
   value;
@@ -16,6 +17,7 @@ class JSSStyle {
     this.value = value;
   }
 }
+
 class JSSStyles {
   styles = [];
   constructor(list = []) {
@@ -30,11 +32,12 @@ class JSSStyles {
   }
 }
 
+// Simple compiler that i wrote
 class JSSCompiler {
   static compile(jssElement) {
     if (jssElement.selector.length == 0) {
       if (jssElement.styles.styles.length !== 0) {
-        throw new Error("Empty JSS element cannot have any styles.")
+        throw new Error("Empty JSS element cannot have any styles.");
       }
       let data = "";
       for (let child of jssElement.children) {
@@ -49,16 +52,21 @@ class JSSCompiler {
     data += "} ";
 
     for (let child of jssElement.children) {
-      child.selector = `${jssElement.selector} ${child.selector}`
-      data += this.compile(child);
+      // Why tf there is not other way to clone class.
+      const clone = Object.assign(
+        Object.create(Object.getPrototypeOf(child)),
+        child,
+      );
+      clone.selector = `${jssElement.selector} ${clone.selector}`;
+      data += this.compile(clone);
     }
 
     return data;
   }
-  static add(compiled) {
+  static add(css) {
     const head = document.querySelector("head");
     const style = document.createElement("style");
-    style.innerHTML = compiled;
-    head.appendChild(style)
+    style.innerHTML = css;
+    head.appendChild(style);
   }
 }

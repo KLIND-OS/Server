@@ -99,10 +99,16 @@
     </div>
     <div class="rightclicktwo" style="display: none">
       <div
-        class="choice first last"
+        class="choice first"
         onclick='FileManager.removeFolder(this.parentElement.getAttribute("idel"));document.querySelector(".rightclicktwo").style.display = "none"'
       >
         <p>Smazat</p>
+      </div>
+      <div
+        class="choice"
+        onclick='FileManager.renameFolder(this.parentElement.getAttribute("idel"));document.querySelector(".rightclicktwo").style.display = "none"'
+      >
+        <p>Přejmenovat</p>
       </div>
     </div>
     <div class="rightclickthree" style="display: none">

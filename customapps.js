@@ -112,10 +112,19 @@ var CustomApp = {
                                   }
                                   e.value = "";
                                   if (!not) {
-                                    eval(installScript);
-                                    all.push([name, script, image]);
-                                    localStorage.setItem("customapps", JSON.stringify(all));
-                                    window.location.reload();
+                                    if (installScript.trim().startsWith('"use async"')) {
+                                      this.window.installFinished = () => {
+                                        all.push([name, script, image]);
+                                        localStorage.setItem("customapps", JSON.stringify(all));
+                                        window.location.reload();
+                                      }
+                                      eval(installScript)
+                                    } else {
+                                      eval(installScript);
+                                      all.push([name, script, image]);
+                                      localStorage.setItem("customapps", JSON.stringify(all));
+                                      window.location.reload();
+                                    }
                                   }
                                 }
                                 else {
