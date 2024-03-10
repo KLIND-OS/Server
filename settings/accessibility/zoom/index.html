@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Motiv</title>
+    <style>
+      :root {
+        --pocet: 4;
+      }
+    </style>
+    <link rel="stylesheet" href="./../../style.css" />
+    <script src="./../../mouse.js" defer></script>
+    <script src="/isiframe.js"></script>
+  </head>
+  <body onmouseup="mouseUp()" onmousedown="mouseDown()">
+    <div id="firstcursor"></div>
+    <div id="secondcursor" class="secondcursor"></div>
+    <div class="button" onclick="window.location.replace('..')"><- Zpět</div>
+    <div class="button nohover">
+      <span>Zde si můžete nastavit zvětšení UI.</span>
+    </div>
+    <div class="button nohover">
+      <select cursor="pointer" class="searchselect"></select>
+    </div>
+    <div class="button" onclick="send()">Odeslat</div>
+    <script src="./../../main.js" defer></script>
+    <script>
+      const options = [175, 150, 125, 100, 75, 50, 25];
+      const defaultvalue = localStorage.getItem("zoom");
+      const select = document.querySelector(".searchselect");
+      options.forEach((option) => {
+        const optionElement = document.createElement("option");
+        optionElement.value = option / 100;
+        if (defaultvalue) {
+          optionElement.selected = defaultvalue * 100 == option;
+        } else if (option == 100) {
+          optionElement.selected = true;
+        }
+
+        optionElement.textContent = option + "%";
+        select.appendChild(optionElement);
+      });
+
+      function send() {
+        const value = document.querySelector(".searchselect").value;
+        parent.LowLevelApi.setZoom(parseFloat(value));
+        localStorage.setItem("zoom", value);
+      }
+    </script>
+  </body>
+</html>

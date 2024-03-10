@@ -14,13 +14,19 @@
     <link rel="stylesheet" href="./../style.css">
     <script src="./../mouse.js" defer></script>
     <script src="/isiframe.js"></script>
+    <script>
+        function submit() {
+          parent.LowLevelApi.Debugging.getRootAccess();
+          parent.spawnNotification("Root Access", "Přístup byl udělen!");
+        }
+    </script>
 </head>
 <body onmouseup="mouseUp()" onmousedown="mouseDown()" >
     <div id="firstcursor"></div>
     <div id="secondcursor" class="secondcursor"></div>
     <div class="button" onclick="window.location.replace('..')"><- Zpět</div>
-    <div class="button" onclick="window.location.replace('motiv')">Motiv</div>
-    <div class="button" onclick="window.location.replace('zoom')">Zvětšení</div>
+    <div class="button nohover"><span>Tato funkce Vám umožní získat přístup do root složky systému.</span></div>
+    <div class="button" onclick="submit()">Spustit</div>
     <script src="./../main.js" defer></script>
 </body>
 </html>
