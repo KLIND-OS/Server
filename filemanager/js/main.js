@@ -12,8 +12,8 @@ document.addEventListener(
       if (e.target.classList == "element") {
         rightclickad = document.querySelector(".rightclick");
         rightclickad.setAttribute("idel", e.target.getAttribute("idel"));
-        rightclickad.style.left = e.clientX + "px";
-        rightclickad.style.top = e.clientY + "px";
+        rightclickad.style.left = e.pageX + "px";
+        rightclickad.style.top = e.pageY + "px";
         rightclickad.style.display = "block";
       } else if (e.target.parentElement.classList == "element") {
         rightclickad = document.querySelector(".rightclick");
@@ -21,8 +21,8 @@ document.addEventListener(
           "idel",
           e.target.parentElement.getAttribute("idel"),
         );
-        rightclickad.style.left = e.clientX + "px";
-        rightclickad.style.top = e.clientY + "px";
+        rightclickad.style.left = e.pageX + "px";
+        rightclickad.style.top = e.pageY + "px";
         rightclickad.style.display = "block";
       } else if (e.target.classList == "elmnt") {
         rightclickad = document.querySelector(".rightclicktwo");
@@ -30,8 +30,8 @@ document.addEventListener(
           "idel",
           e.target.querySelector("p").innerHTML,
         );
-        rightclickad.style.left = e.clientX + "px";
-        rightclickad.style.top = e.clientY + "px";
+        rightclickad.style.left = e.pageX + "px";
+        rightclickad.style.top = e.pageY + "px";
         rightclickad.style.display = "block";
       } else if (e.target.parentElement.classList == "elmnt") {
         rightclickad = document.querySelector(".rightclicktwo");
@@ -39,13 +39,13 @@ document.addEventListener(
           "idel",
           e.target.parentElement.querySelector("p").innerHTML,
         );
-        rightclickad.style.left = e.clientX + "px";
-        rightclickad.style.top = e.clientY + "px";
+        rightclickad.style.left = e.pageX+ "px";
+        rightclickad.style.top = e.pageY + "px";
         rightclickad.style.display = "block";
       } else if (e.target.classList.contains("main")) {
         rightclickad = document.querySelector(".rightclickthree");
-        rightclickad.style.left = e.clientX + "px";
-        rightclickad.style.top = e.clientY + "px";
+        rightclickad.style.left = e.pageX + "px";
+        rightclickad.style.top = e.pageY+ "px";
         rightclickad.style.display = "block";
       }
     }
