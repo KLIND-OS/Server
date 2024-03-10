@@ -1,5 +1,5 @@
 function loadBattery() {
-  const { status, percentage, battery } = LowLevelApi.Battery.getBattery();
+  const { status, percentage, battery } = await LowLevelApi.Battery.getBattery();
 
   if (!battery) {
     document.querySelector(".batteryStatus").style.display = "none";
