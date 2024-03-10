@@ -1,4 +1,4 @@
-function loadBattery() {
+async function loadBattery() {
   const { status, percentage, battery } = await LowLevelApi.Battery.getBattery();
 
   if (!battery) {
