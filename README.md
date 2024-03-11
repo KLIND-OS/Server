@@ -16,7 +16,7 @@ Zde se ukládá verze KLIND OS která běží na serveru. Napsáno pouze v HTML,
 
 # Jak se napojit na server
 
-Pro připojení na server využijte [KLIND-OS-Client](https://github.com/JZITNIK-github/KLIND-OS-Client).
+Pro připojení na server využijte [KLIND-OS-Client](https://github.com/KLIND-OS/Client).
 
 # ESLint
 
