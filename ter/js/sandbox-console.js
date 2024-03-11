@@ -365,7 +365,7 @@
 		},
 		
 		// Checks for special commands. If any are found, performs their action and returns true
-		specialCommands: function(command) {
+		specialCommands: async function(command) {
 			if (command === ":clear") {
 				this.model.destroy();
 				return true;
@@ -436,7 +436,7 @@
 					})
 				}
 				else {
-					var content = parent.mainFileManager.getTextContent(path);
+					var content = await parent.mainFileManager.getTextContent(path);
 					if (content == false) {
 						return this.model.addHistory({
 							command : command,

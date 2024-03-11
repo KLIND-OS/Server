@@ -122,6 +122,7 @@ var mainFileManager = {
         (file) => windows.open("musicplayer", { filePath: file }),
       ],
     ],
+    ks: [["Terminál", (file) => windows.open("ter", { path: file })]],
   },
   openingFile: undefined,
   open: async (infolder, file) => {

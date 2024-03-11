@@ -332,11 +332,11 @@ var windows = {
       cleaner: [(win) => Cleaner.load(win), false, false],
       ter: [
         (win, args) => {
-          if (args && args.file) {
+          if (args && args.path) {
             var wind = win.querySelector("iframe").contentWindow;
 
             wind.addEventListener("DOMContentLoaded", () => {
-              wind.sandbox.specialCommands(":run " + args.file);
+              wind.sandbox.specialCommands(":run " + args.path);
             });
           }
         },

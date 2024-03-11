@@ -12,8 +12,8 @@ document.addEventListener(
       if (e.target.classList == "element") {
         rightclickad = document.querySelector(".rightclick");
         rightclickad.setAttribute("idel", e.target.getAttribute("idel"));
-        rightclickad.style.left = e.clientX + "px";
-        rightclickad.style.top = e.clientY + "px";
+        rightclickad.style.left = e.pageX + "px";
+        rightclickad.style.top = e.pageY + "px";
         rightclickad.style.display = "block";
       } else if (e.target.parentElement.classList == "element") {
         rightclickad = document.querySelector(".rightclick");
@@ -21,8 +21,8 @@ document.addEventListener(
           "idel",
           e.target.parentElement.getAttribute("idel"),
         );
-        rightclickad.style.left = e.clientX + "px";
-        rightclickad.style.top = e.clientY + "px";
+        rightclickad.style.left = e.pageX + "px";
+        rightclickad.style.top = e.pageY + "px";
         rightclickad.style.display = "block";
       } else if (e.target.classList == "elmnt") {
         rightclickad = document.querySelector(".rightclicktwo");
@@ -30,8 +30,8 @@ document.addEventListener(
           "idel",
           e.target.querySelector("p").innerHTML,
         );
-        rightclickad.style.left = e.clientX + "px";
-        rightclickad.style.top = e.clientY + "px";
+        rightclickad.style.left = e.pageX + "px";
+        rightclickad.style.top = e.pageY + "px";
         rightclickad.style.display = "block";
       } else if (e.target.parentElement.classList == "elmnt") {
         rightclickad = document.querySelector(".rightclicktwo");
@@ -39,13 +39,13 @@ document.addEventListener(
           "idel",
           e.target.parentElement.querySelector("p").innerHTML,
         );
-        rightclickad.style.left = e.clientX + "px";
-        rightclickad.style.top = e.clientY + "px";
+        rightclickad.style.left = e.pageX+ "px";
+        rightclickad.style.top = e.pageY + "px";
         rightclickad.style.display = "block";
       } else if (e.target.classList.contains("main")) {
         rightclickad = document.querySelector(".rightclickthree");
-        rightclickad.style.left = e.clientX + "px";
-        rightclickad.style.top = e.clientY + "px";
+        rightclickad.style.left = e.pageX + "px";
+        rightclickad.style.top = e.pageY+ "px";
         rightclickad.style.display = "block";
       }
     }
@@ -263,25 +263,37 @@ var FileManager = {
       parent.windows.close(element, "filemanager");
     }
   },
-  remove: async (filename) => {
-    const path = parent.LowLevelApi.filesystem.path.join(
-      parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
-      filename,
+  remove: (filename) => {
+    parent.BPrompt.confirm(
+      "Opravdu chcete odstranit tento soubor?",
+      async (res) => {
+        if (!res) return;
+        const path = parent.LowLevelApi.filesystem.path.join(
+          parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
+          filename,
+        );
+
+        await parent.LowLevelApi.filesystem.unlink(path);
+
+        FileManager.readFiles();
+      },
     );
-
-    await parent.LowLevelApi.filesystem.unlink(path);
-
-    FileManager.readFiles();
   },
-  removeFolder: async (foldername) => {
-    const path = parent.LowLevelApi.filesystem.path.join(
-      parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
-      foldername,
+  removeFolder: (foldername) => {
+    parent.BPrompt.confirm(
+      "Opravdu chcete odstranit tuto složku?",
+      async (res) => {
+        if (!res) return;
+        const path = parent.LowLevelApi.filesystem.path.join(
+          parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
+          foldername,
+        );
+
+        await parent.LowLevelApi.filesystem.rm(path, { recursive: true });
+
+        FileManager.readFiles();
+      },
     );
-
-    await parent.LowLevelApi.filesystem.rm(path, { recursive: true });
-
-    FileManager.readFiles();
   },
   goto: (folder) => {
     if (folder == "..") {
@@ -309,6 +321,13 @@ var FileManager = {
             "'/' a '.' jsou zakázané znaky!",
           );
         } else {
+          if (name.length > 100) {
+            parent.spawnNotification(
+              "Správce Souborů",
+              "Název složky nesmí být delší jak 100 znaků.",
+            );
+            return;
+          }
           if (await FileManager.folderExists(name)) {
             parent.spawnNotification(
               "Správce Souborů",
@@ -344,6 +363,38 @@ var FileManager = {
     );
 
     return await parent.LowLevelApi.filesystem.exists(path);
+  },
+  renameFolder: (foldername) => {
+    const path = parent.LowLevelApi.filesystem.path.join(
+      parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
+      foldername,
+    );
+    parent.BPrompt.prompt("Zadejte nové jméno složky.", async (newname) => {
+      if (newname == null || newname.length == 0) {
+      } else if (newname.length > 100) {
+        parent.spawnNotification(
+          "Správce souborů",
+          "Název složky nesmí být delší jak 100 znaků.",
+        );
+      } else if (newname.includes("/") || newname.includes("\\")) {
+        parent.spawnNotification(
+          "Správce Souborů",
+          "'/' a '\\' jsou zakázané znaky.",
+        );
+      } else if (await FileManager.folderExists(newname)) {
+        parent.spawnNotification(
+          "Správce Souborů",
+          "Tento název souboru je již v této složce použit!",
+        );
+      } else {
+        const newpath = parent.LowLevelApi.filesystem.path.join(
+          parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
+          newname,
+        );
+        await parent.LowLevelApi.filesystem.rename(path, newpath);
+        FileManager.readFiles();
+      }
+    });
   },
   rename: async (filename) => {
     const path = parent.LowLevelApi.filesystem.path.join(
