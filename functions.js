@@ -105,6 +105,14 @@ var control = {
   }
 };
 class App {
+  windowParser = {
+    parseName: (windowName) => {
+      return `${this.info.name}-${windowName}`
+    },
+    parseClass: (windowName) => {
+      return this.windowParser.parseName(windowName).replaceAll(" ", "");
+    }
+  }
   windows = [];
   constructor({ name, hidden }) {
     if (Object.keys(Apps).includes(name)) {
