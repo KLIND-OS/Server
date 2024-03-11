@@ -228,7 +228,7 @@ setInterval(() => {
   if (consolelog != "false") {
     console.clear();
     mainConsole.log("%cVarování!", "color: red; font:bold; font-family:monospace; font-size: 40px");
-    mainConsole.log("Chyby můžete nahlašovat na stránku https://github.com/JZITNIK-github/KLIND-OS/issues");
+    mainConsole.log("Chyby můžete nahlašovat na stránku https://github.com/KLIND-OS/ISO/issues");
     mainConsole.log("Používáním téhlé stránky soulasíte s tím že stránka bude do vašeho počítače ukládat soubory cookies.");
     mainConsole.log("KLIND OS od KLIND");
   }
