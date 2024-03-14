@@ -39,13 +39,13 @@ document.addEventListener(
           "idel",
           e.target.parentElement.querySelector("p").innerHTML,
         );
-        rightclickad.style.left = e.pageX+ "px";
+        rightclickad.style.left = e.pageX + "px";
         rightclickad.style.top = e.pageY + "px";
         rightclickad.style.display = "block";
       } else if (e.target.classList.contains("main")) {
         rightclickad = document.querySelector(".rightclickthree");
         rightclickad.style.left = e.pageX + "px";
-        rightclickad.style.top = e.pageY+ "px";
+        rightclickad.style.top = e.pageY + "px";
         rightclickad.style.display = "block";
       }
     }
@@ -439,8 +439,49 @@ var FileManager = {
       "Jděte do jakékoli složky a stiskněte CTRL + V pro vložení.",
     );
   },
+  copyFolder: (foldername) => {
+    const path = parent.LowLevelApi.filesystem.path.join(
+      parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
+      foldername,
+    );
+    clipboard = [path, foldername, true];
+    parent.spawnNotification(
+      "Správce Souborů",
+      "Jděte do jakékoli složky a stiskněte CTRL + V pro vložení.",
+    );
+  },
   paste: async () => {
     if (clipboard != undefined) {
+      if (clipboard[2]) {
+        if (await FileManager.folderExists(clipboard[1])) {
+          parent.BPrompt.prompt(
+            "Složka se stejným názvem již v této složce existuje. Zadejte nový název složky.",
+            async (newname) => {
+              if (newname != "" && newname != null) {
+                clipboard[1] = newname;
+                await FileManager.paste();
+              }
+            },
+          );
+        } else {
+          const destinationPath = parent.LowLevelApi.filesystem.path.join(
+            parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
+            clipboard[1],
+          );
+          const progressBar = new parent.window.DownloadStatus(clipboard[1]);
+          progressBar.customMessage("Kopírování...")
+          parent.LowLevelApi.filesystem.fsExtra.copy(clipboard[0], destinationPath, (err) => {
+            if (err) {
+              throw new Error("Nastala chyba!")
+            }
+            progressBar.finish()
+            FileManager.readFiles();
+          })
+        }
+
+        return;
+      }
+
       var newclipboard = clipboard;
       if (await FileManager.fileExist(newclipboard[1])) {
         parent.BPrompt.prompt(
