@@ -100,6 +100,12 @@
     <div class="rightclicktwo" style="display: none">
       <div
         class="choice first"
+        onclick='FileManager.copyFolder(this.parentElement.getAttribute("idel"));document.querySelector(".rightclicktwo").style.display = "none"'
+      >
+        <p>Kopírovat</p>
+      </div>
+      <div
+        class="choice first"
         onclick='FileManager.removeFolder(this.parentElement.getAttribute("idel"));document.querySelector(".rightclicktwo").style.display = "none"'
       >
         <p>Smazat</p>
