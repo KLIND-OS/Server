@@ -228,9 +228,11 @@ setInterval(() => {
   if (consolelog != "false") {
     console.clear();
     mainConsole.log("%cVarování!", "color: red; font:bold; font-family:monospace; font-size: 40px");
-    mainConsole.log("Chyby můžete nahlašovat na stránku https://github.com/KLIND-OS/ISO/issues");
-    mainConsole.log("Používáním téhlé stránky soulasíte s tím že stránka bude do vašeho počítače ukládat soubory cookies.");
-    mainConsole.log("KLIND OS od KLIND");
+    mainConsole.log("Pokud Vám někdo řekl ať sem něco pošlete, tak se na 99% procent jedná o PODVOD!")
+    mainConsole.log("Podvodník tímto způsubem může získat Vaše heslo nebo Vaše soukromé soubory.")
+    mainConsole.log("Předtím než sem něco pošlete buďte si 100% jistí, co dělate.")
+    mainConsole.log("Chyby můžete nahlašovat na stránku https://klindos.jzitnik.dev/report");
+    mainConsole.log("KLIND OS od JZITNIK");
   }
 }, 5000);
 
