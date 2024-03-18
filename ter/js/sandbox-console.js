@@ -281,7 +281,7 @@
 		},
 		
 		// The keydown handler, that controls all the input
-		keydown: function(e) {
+		keydown: async function(e) {
 			// Register shift, control and alt keydown
 			if ( _([16,17,18]).indexOf(e.which, true) > -1 ) this.ctrl = true;
 
@@ -301,7 +301,7 @@
 				this.currentHistory = "";
 	
 				// Run the command past the special commands to check for ':help' and ':clear' etc.
-				if ( !this.specialCommands( val ) ) {
+				if ( !await this.specialCommands( val ) ) {
 
 					// If if wasn't a special command, pass off to the Sandbox Model to evaluate and save
 					this.model.evaluate( val );
