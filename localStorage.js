@@ -33,7 +33,8 @@ class LocalStorage {
     "color-filters",
     "welcomePage",
     "searchEngine",
-    "zoom"
+    "zoom",
+    "nodePackages"
   ];
   static startsWith = [
     "tinymce-",
