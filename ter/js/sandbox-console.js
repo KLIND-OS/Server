@@ -386,6 +386,7 @@
 					result: parent.mainFileManager.getContent(command.substring(6)) ? parent.mainFileManager.getContent(command.substring(6)) : "File was not found."
 				})
 			}
+      // TODO: Fix
 			else if (command.indexOf(":ls") == 0) {
 				const parameters = command.substring(6)
 				console.log(parameters)
