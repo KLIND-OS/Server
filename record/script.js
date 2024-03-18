@@ -13,11 +13,11 @@ const downloadButton = document.querySelector("button#download");
  
  
 recordButton.addEventListener("click", () => {
-  if (recordButton.textContent === "Record") {
+  if (recordButton.textContent === "Nahrát") {
     startRecording();
   } else {
     stopRecording();
-    recordButton.textContent = "Record";
+    recordButton.textContent = "Nahrát";
     playButton.disabled = false;
     downloadButton.disabled = false;
   }
@@ -34,14 +34,15 @@ playButton.addEventListener("click", () => {
 });
  
  
-downloadButton.addEventListener("click", () => {
-  const blob = new Blob(recordedBlobs, {type: "video/mp4"});
-  const url = window.URL.createObjectURL(blob);
-  var file = parent.control.fileManager.createFile({
-    name: "test.mp4",
-    type: "video/mp4",
-    content: url,
+downloadButton.addEventListener("click", async () => {
+  await parent.control.fileManager.createFile({
+    name: "record.mp4",
   });
+  await parent.control.fileManager.save(
+    "/record.mp4",
+    recordedBlobs[recordedBlobs.length - 1]
+  )
+  
   parent.spawnNotification("Nahrávání","Soubor byl uložen pod názvem "+file[0]+" do kořenové složky.");
   parent.windows.open("filemanager");
 });
