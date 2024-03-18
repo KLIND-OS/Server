@@ -42,7 +42,7 @@ downloadButton.addEventListener("click", async () => {
     await parent.mainFileManager.save("/record.mp4", binary);
     parent.spawnNotification(
       "Nahrávání",
-      "Soubor byl uložen pod názvem " + file[0] + " do kořenové složky.",
+      "Soubor byl uložen do kořenové složky.",
     );
     parent.windows.open("filemanager");
   };
