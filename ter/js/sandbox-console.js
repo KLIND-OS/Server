@@ -383,7 +383,7 @@
 			else if (command.indexOf(":read") == 0) {
 				return this.model.addHistory({
 					command: command,
-					result: parent.mainFileManager.getContent(command.substring(6)) ? parent.mainFileManager.getContent(command.substring(6)) : "File was not found."
+					result: parent.mainFileManager.getContent(command.substring(6)) || "File was not found."
 				})
 			}
       // TODO: Fix
