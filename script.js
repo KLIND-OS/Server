@@ -72,12 +72,6 @@ function openstartmenu() {
   }
 }
 var showversionontitle;
-function customappopensadj(name, code) {
-  document.getElementById("cusakodshad").innerHTML = name;
-  var iframe = document.getElementById("sdhahijsdhgjasihdijahsdjh");
-  iframe.src = code;
-}
-
 var clockmenuopened = false;
 var clockmenuopening = false;
 function opendate() {
@@ -116,8 +110,8 @@ function searchstartmenu() {
     if (li[i].classList.contains("searchHelpLi")) continue;
     a = li[i].getElementsByTagName("a")[0]; 
     txtValue = a.textContent || a.innerText; 
-    var text = odstranitDiakritiku(txtValue.toUpperCase());
-    var filterText = odstranitDiakritiku(input.value.toUpperCase());
+    var text = odstranitDiakritiku(txtValue.toUpperCase()).trim();
+    var filterText = odstranitDiakritiku(input.value.toUpperCase()).trim();
     if (text.indexOf(filterText) > -1) {
       isShowed = true;
       li[i].style.display = ""; 
