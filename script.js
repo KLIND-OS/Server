@@ -245,3 +245,7 @@ function loadbetaicon() {
 var login;
 var autolocklogin;
 var developermode;
+
+window.close = () => {
+  throw new Error("Don't use window.close. Use LowLevelApi.Program.close(). GUI will start again right after that.")
+}
