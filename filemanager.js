@@ -186,6 +186,14 @@ var mainFileManager = {
     script(mainFileManager.openingFile[1]);
     mainFileManager.openingFile = undefined;
   },
+  stat: async (file) => {
+    const path = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir() + "/usrfiles",
+      file,
+    );
+    const stats = await LowLevelApi.filesystem.stat(path);
+    return stats
+  },
   properties: async (file) => {
     const path = LowLevelApi.filesystem.path.join(
       LowLevelApi.filesystem.os.homedir() + "/usrfiles",
@@ -403,14 +411,10 @@ var mainFileManager = {
       to,
     );
     if (await mainFileManager.folderExist(to)) {
-      throw new Error("Folder already exists in the path.")
+      throw new Error("Folder already exists in the path.");
     }
-    
-    LowLevelApi.filesystem.fsExtra.copy(
-      finalFrom,
-      finalTo,
-      callback,
-    );
+
+    LowLevelApi.filesystem.fsExtra.copy(finalFrom, finalTo, callback);
   },
 };
 function fileManagerOpen() {

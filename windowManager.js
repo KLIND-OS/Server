@@ -193,6 +193,24 @@ var windows = {
             element.querySelector(".imgwallpaperfileconfig").style.display =
               "none";
             element.setAttribute("filelocation", path);
+
+            const { size } = await mainFileManager.stat(path);
+            if (size / (1024 * 1024) > 1) {
+              BPrompt.confirm(
+                "Tento soubor je větší jak 1MB. Tento soubor otevíráte v text editoru. Počítač se může zaseknout. Opravdu chcete tento soubor otevřít?",
+                async (response) => {
+                  if (response) {
+                    const content = await mainFileManager.getTextContent(path);
+                    element.querySelector("#textareafileeditorimage").value =
+                      content;
+                  } else {
+                    element.querySelector(".headerclass .close").click();
+                  }
+                },
+              );
+              return;
+            }
+
             const content = await mainFileManager.getTextContent(path);
             element.querySelector("#textareafileeditorimage").value = content;
           } else if (
@@ -231,7 +249,10 @@ var windows = {
               "none";
             element
               .querySelector("video source")
-              .setAttribute("type", LowLevelApi.filesystem.mimeTypes.lookup(type));
+              .setAttribute(
+                "type",
+                LowLevelApi.filesystem.mimeTypes.lookup(type),
+              );
             element
               .querySelector("video source")
               .setAttribute("src", "http://localhost:9999" + path);
