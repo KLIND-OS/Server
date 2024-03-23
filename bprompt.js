@@ -18,7 +18,7 @@ var BPrompt = {
     document
       .querySelector(".prompt-element .input-box")
       .addEventListener("keydown", (e) => {
-        if ((e.key = "Escape")) {
+        if ((e.key == "Escape")) {
           document.querySelector(".prompt-element").style.display = "none";
           document.querySelector(".input-box").value = "";
         }
