@@ -141,10 +141,10 @@ var mainFileManager = {
 
     if (type == "kapp") {
       const content = await mainFileManager.getTextContent(infolder + file);
-      parent.windows.open(content.split(":")[1]);
+      windows.open(content.split(":")[1]);
       return;
     } else if (type == "kapk") {
-      parent.windows.open("installapp", { path: infolder + file });
+      windows.open("installapp", { path: infolder + file });
       return;
     }
 
@@ -185,6 +185,14 @@ var mainFileManager = {
     var script = mainFileManager.openingFile[0][index][1];
     script(mainFileManager.openingFile[1]);
     mainFileManager.openingFile = undefined;
+  },
+  stat: async (file) => {
+    const path = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir() + "/usrfiles",
+      file,
+    );
+    const stats = await LowLevelApi.filesystem.stat(path);
+    return stats
   },
   properties: async (file) => {
     const path = LowLevelApi.filesystem.path.join(
@@ -280,13 +288,13 @@ var mainFileManager = {
       folder,
     );
 
-    const items = await parent.LowLevelApi.filesystem.readdir(path);
+    const items = await LowLevelApi.filesystem.readdir(path);
     const files = [];
 
     for (const item of items) {
       try {
-        const filePath = parent.LowLevelApi.filesystem.path.join(path, item);
-        const fileStat = await parent.LowLevelApi.filesystem.stat(filePath);
+        const filePath = LowLevelApi.filesystem.path.join(path, item);
+        const fileStat = await LowLevelApi.filesystem.stat(filePath);
 
         if (fileStat.isFile()) {
           files.push(item);
@@ -349,6 +357,64 @@ var mainFileManager = {
         mainFileManager.openWith[type] = [[name, script]];
       }
     }
+  },
+  copyFile: async (from, to, callbackPercentage, callbackFinal) => {
+    // Note: All the paths must be full path.
+    // Correct: from: /folder/somefile.txt to: /folder2/somefile.txt
+    // Wrong: /folder/somefile.txt to: /folder2/
+    if (await mainFileManager.fileExists(to)) {
+      throw new Error("File on the new location already exist.");
+    }
+
+    const finalFrom = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir() + "/usrfiles",
+      from,
+    );
+
+    const finalTo = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir() + "/usrfiles",
+      to,
+    );
+
+    const source = LowLevelApi.filesystem.fs.createReadStream(finalFrom);
+    const destination = LowLevelApi.filesystem.fs.createWriteStream(finalTo);
+
+    let bytesCopied = 0;
+    const fileSize = (await LowLevelApi.filesystem.stat(finalFrom)).size;
+
+    source.on("error", (err) => console.error("Error reading file:", err));
+    destination.on("error", (err) => console.error("Error writing file:", err));
+
+    source.on("data", (chunk) => {
+      bytesCopied += chunk.length;
+      const percentage = Math.floor((bytesCopied / fileSize) * 100);
+      callbackPercentage(percentage);
+    });
+
+    source.pipe(destination);
+
+    destination.on("finish", () => {
+      callbackFinal();
+    });
+  },
+  copyFolder: async (from, to, callback) => {
+    // Note: All the paths must be full path.
+    // Correct: from: /sounds/Linkin Park to: /music/Linkin Park
+    // Wrong: /sounds/Linkin Park to: /music/
+
+    const finalFrom = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir() + "/usrfiles",
+      from,
+    );
+    const finalTo = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
+      to,
+    );
+    if (await mainFileManager.folderExist(to)) {
+      throw new Error("Folder already exists in the path.");
+    }
+
+    LowLevelApi.filesystem.fsExtra.copy(finalFrom, finalTo, callback);
   },
 };
 function fileManagerOpen() {

@@ -77,6 +77,13 @@ class DownloadStatus {
 
     element.querySelector(".progressDownload").style.width = "0%";
   }
+  customMessage(message) {
+    const element = _DownloadStatus.content[this.id];
+    const percentageel = element.querySelector("#percentage");
+    percentageel.textContent = message;
+
+    element.querySelector(".progressDownload").style.width = "0%";
+  }
 }
 
 window.DownloadStatus = DownloadStatus;

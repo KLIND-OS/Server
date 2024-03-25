@@ -39,13 +39,13 @@ document.addEventListener(
           "idel",
           e.target.parentElement.querySelector("p").innerHTML,
         );
-        rightclickad.style.left = e.pageX+ "px";
+        rightclickad.style.left = e.pageX + "px";
         rightclickad.style.top = e.pageY + "px";
         rightclickad.style.display = "block";
       } else if (e.target.classList.contains("main")) {
         rightclickad = document.querySelector(".rightclickthree");
         rightclickad.style.left = e.pageX + "px";
-        rightclickad.style.top = e.pageY+ "px";
+        rightclickad.style.top = e.pageY + "px";
         rightclickad.style.display = "block";
       }
     }
@@ -369,64 +369,72 @@ var FileManager = {
       parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
       foldername,
     );
-    parent.BPrompt.prompt("Zadejte nové jméno složky.", async (newname) => {
-      if (newname == null || newname.length == 0) {
-      } else if (newname.length > 100) {
-        parent.spawnNotification(
-          "Správce souborů",
-          "Název složky nesmí být delší jak 100 znaků.",
-        );
-      } else if (newname.includes("/") || newname.includes("\\")) {
-        parent.spawnNotification(
-          "Správce Souborů",
-          "'/' a '\\' jsou zakázané znaky.",
-        );
-      } else if (await FileManager.folderExists(newname)) {
-        parent.spawnNotification(
-          "Správce Souborů",
-          "Tento název souboru je již v této složce použit!",
-        );
-      } else {
-        const newpath = parent.LowLevelApi.filesystem.path.join(
-          parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
-          newname,
-        );
-        await parent.LowLevelApi.filesystem.rename(path, newpath);
-        FileManager.readFiles();
-      }
-    });
+    parent.BPrompt.prompt(
+      "Zadejte nové jméno složky.",
+      async (newname) => {
+        if (newname == null || newname.length == 0 || newname == foldername) {
+        } else if (newname.length > 100) {
+          parent.spawnNotification(
+            "Správce souborů",
+            "Název složky nesmí být delší jak 100 znaků.",
+          );
+        } else if (newname.includes("/") || newname.includes("\\")) {
+          parent.spawnNotification(
+            "Správce Souborů",
+            "'/' a '\\' jsou zakázané znaky.",
+          );
+        } else if (await FileManager.folderExists(newname)) {
+          parent.spawnNotification(
+            "Správce Souborů",
+            "Tento název souboru je již v této složce použit!",
+          );
+        } else {
+          const newpath = parent.LowLevelApi.filesystem.path.join(
+            parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
+            newname,
+          );
+          await parent.LowLevelApi.filesystem.rename(path, newpath);
+          FileManager.readFiles();
+        }
+      },
+      foldername,
+    );
   },
   rename: async (filename) => {
     const path = parent.LowLevelApi.filesystem.path.join(
       parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
       filename,
     );
-    parent.BPrompt.prompt("Zadejte nové jméno souboru.", async (newname) => {
-      if (newname == null || newname.length == 0) {
-      } else if (newname.length > 100) {
-        parent.spawnNotification(
-          "Správce Souborů",
-          "Název souborů nesmí být delší jak 100 znaků.",
-        );
-      } else if (newname.indexOf("/") > -1 || newname.indexOf("\\") > -1) {
-        parent.spawnNotification(
-          "Správce Souborů",
-          "'/' a '\\' jsou zakázané znaky.",
-        );
-      } else if (await FileManager.fileExist(newname)) {
-        parent.spawnNotification(
-          "Správce Souborů",
-          "Tento název souboru je již v této složce použit!",
-        );
-      } else {
-        const newpath = parent.LowLevelApi.filesystem.path.join(
-          parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
-          newname,
-        );
-        await parent.LowLevelApi.filesystem.rename(path, newpath);
-        FileManager.readFiles();
-      }
-    });
+    parent.BPrompt.prompt(
+      "Zadejte nové jméno souboru.",
+      async (newname) => {
+        if (newname == null || newname.length == 0 || newname == filename) {
+        } else if (newname.length > 100) {
+          parent.spawnNotification(
+            "Správce Souborů",
+            "Název souborů nesmí být delší jak 100 znaků.",
+          );
+        } else if (newname.indexOf("/") > -1 || newname.indexOf("\\") > -1) {
+          parent.spawnNotification(
+            "Správce Souborů",
+            "'/' a '\\' jsou zakázané znaky.",
+          );
+        } else if (await FileManager.fileExist(newname)) {
+          parent.spawnNotification(
+            "Správce Souborů",
+            "Tento název souboru je již v této složce použit!",
+          );
+        } else {
+          const newpath = parent.LowLevelApi.filesystem.path.join(
+            parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
+            newname,
+          );
+          await parent.LowLevelApi.filesystem.rename(path, newpath);
+          FileManager.readFiles();
+        }
+      },
+      filename,
+    );
   },
   copy: (filename) => {
     const path = parent.LowLevelApi.filesystem.path.join(
@@ -439,8 +447,54 @@ var FileManager = {
       "Jděte do jakékoli složky a stiskněte CTRL + V pro vložení.",
     );
   },
+  copyFolder: (foldername) => {
+    const path = parent.LowLevelApi.filesystem.path.join(
+      parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
+      foldername,
+    );
+    clipboard = [path, foldername, true];
+    parent.spawnNotification(
+      "Správce Souborů",
+      "Jděte do jakékoli složky a stiskněte CTRL + V pro vložení.",
+    );
+  },
   paste: async () => {
     if (clipboard != undefined) {
+      if (clipboard[2]) {
+        if (await FileManager.folderExists(clipboard[1])) {
+          parent.BPrompt.prompt(
+            "Složka se stejným názvem již v této složce existuje. Zadejte nový název složky.",
+            async (newname) => {
+              if (newname != "" && newname != null) {
+                clipboard[1] = newname;
+                await FileManager.paste();
+              }
+            },
+            clipboard[1],
+          );
+        } else {
+          const destinationPath = parent.LowLevelApi.filesystem.path.join(
+            parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
+            clipboard[1],
+          );
+          const progressBar = new parent.window.DownloadStatus(clipboard[1]);
+          progressBar.customMessage("Kopírování...");
+          parent.LowLevelApi.filesystem.fsExtra.copy(
+            clipboard[0],
+            destinationPath,
+            (err) => {
+              if (err) {
+                throw new Error("Nastala chyba!");
+              }
+              progressBar.finish();
+              FileManager.readFiles();
+            },
+          );
+        }
+
+        return;
+      }
+
       var newclipboard = clipboard;
       if (await FileManager.fileExist(newclipboard[1])) {
         parent.BPrompt.prompt(
@@ -451,6 +505,7 @@ var FileManager = {
               await FileManager.paste();
             }
           },
+          newclipboard[1],
         );
       } else {
         const destinationPath = parent.LowLevelApi.filesystem.path.join(

@@ -72,12 +72,6 @@ function openstartmenu() {
   }
 }
 var showversionontitle;
-function customappopensadj(name, code) {
-  document.getElementById("cusakodshad").innerHTML = name;
-  var iframe = document.getElementById("sdhahijsdhgjasihdijahsdjh");
-  iframe.src = code;
-}
-
 var clockmenuopened = false;
 var clockmenuopening = false;
 function opendate() {
@@ -116,8 +110,8 @@ function searchstartmenu() {
     if (li[i].classList.contains("searchHelpLi")) continue;
     a = li[i].getElementsByTagName("a")[0]; 
     txtValue = a.textContent || a.innerText; 
-    var text = odstranitDiakritiku(txtValue.toUpperCase());
-    var filterText = odstranitDiakritiku(input.value.toUpperCase());
+    var text = odstranitDiakritiku(txtValue.toUpperCase()).trim();
+    var filterText = odstranitDiakritiku(input.value.toUpperCase()).trim();
     if (text.indexOf(filterText) > -1) {
       isShowed = true;
       li[i].style.display = ""; 
@@ -228,9 +222,11 @@ setInterval(() => {
   if (consolelog != "false") {
     console.clear();
     mainConsole.log("%cVarování!", "color: red; font:bold; font-family:monospace; font-size: 40px");
-    mainConsole.log("Chyby můžete nahlašovat na stránku https://github.com/KLIND-OS/ISO/issues");
-    mainConsole.log("Používáním téhlé stránky soulasíte s tím že stránka bude do vašeho počítače ukládat soubory cookies.");
-    mainConsole.log("KLIND OS od KLIND");
+    mainConsole.log("Pokud Vám někdo řekl ať sem něco pošlete, tak se na 99% procent jedná o PODVOD!")
+    mainConsole.log("Podvodník tímto způsubem může získat Vaše heslo nebo Vaše soukromé soubory.")
+    mainConsole.log("Předtím než sem něco pošlete buďte si 100% jistí, co dělate.")
+    mainConsole.log("Chyby můžete nahlašovat na stránku https://klindos.jzitnik.dev/report");
+    mainConsole.log("KLIND OS od JZITNIK");
   }
 }, 5000);
 
@@ -249,3 +245,7 @@ function loadbetaicon() {
 var login;
 var autolocklogin;
 var developermode;
+
+window.close = () => {
+  throw new Error("Don't use window.close. Use LowLevelApi.Program.close(). GUI will start again right after that.")
+}
