@@ -92,7 +92,6 @@ var control = {
     fileSelect: (callBack) => {
       windows.open("filemanager", { mode: "select", callBack: callBack });
     },
-    FileConstructor: File
   }, mainFileManager),
   message: BPrompt,
   printScreen: (callback) => {
