@@ -80,7 +80,7 @@ const passwordcookie = localStorage.getItem("password");
 if (localStorage.getItem("customicon") != null) {
   const customicon = localStorage.getItem("customicon");
   if (customicon == "") {
-    document.getElementById("userimg").src = "icons/user.png";
+    document.getElementById("userimg").src = "icons/user.svg";
   } else {
     const content = mainFileManager.getContent(customicon);
     if (content == false) {
