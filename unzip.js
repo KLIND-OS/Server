@@ -10,22 +10,32 @@ class UnZip {
     );
     const parts = path.split("/");
     const filename = parts[parts.length - 1];
-    const folderName = filename.replace(new RegExp('.zip$'), '');
-    const currentFolder = path.replace(new RegExp("/" + filename + '$'), '')
+    const folderName = filename.replace(new RegExp(".zip$"), "");
+    const currentFolder = path.replace(new RegExp("/" + filename + "$"), "");
     const relativePathFolder = LowLevelApi.filesystem.path.join(
       LowLevelApi.filesystem.os.homedir(),
       "usrfiles",
       currentFolder,
       folderName,
-    )
+    );
 
-    await exec(`mkdir ${relativePathFolder}`)
-    await exec(`unzip ${relativePath} -d ${relativePathFolder}`)
+    if (
+      await mainFileManager.folderExist(
+        LowLevelApi.filesystem.path.join(currentFolder, folderName),
+      )
+    ) {
+      spawnNotification("UnZip", "Složka se stejným názvem již existuje!");
+      win.querySelector(".headerclass .close").click();
+      return;
+    }
 
-    win.querySelector("h1").textContent = "Otevírání bylo dokončeno!"
+    await exec(`mkdir ${relativePathFolder}`);
+    await exec(`unzip ${relativePath} -d ${relativePathFolder}`);
+
+    win.querySelector("h1").textContent = "Otevírání bylo dokončeno!";
 
     setTimeout(() => {
-      win.querySelector(".headerclass .close").click()
-    }, 3000)
+      win.querySelector(".headerclass .close").click();
+    }, 3000);
   }
 }

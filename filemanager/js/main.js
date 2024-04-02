@@ -645,6 +645,28 @@ var FileManager = {
       }
     });
   },
+  zipFolder: async (folder) => {
+    parent.spawnNotification("Správce souborů", "Začínám zipovat soubor");
+    const exec = parent.LowLevelApi.filesystem.promisify(
+      parent.LowLevelApi.child_process.exec,
+    );
+    const execPath = parent.LowLevelApi.filesystem.path.join(
+      parent.LowLevelApi.filesystem.os.homedir(),
+      "usrfiles",
+      infolder,
+      folder,
+    );
+
+    const zipPath = `${folder}.zip`;
+
+    await exec(`zip -r '../${zipPath}' ./*`, {
+      cwd: execPath,
+    });
+
+    parent.spawnNotification("Správce souborů", "Zipování bylo dokončeno");
+
+    FileManager.readFiles();
+  },
 };
 var selectmode = false;
 var keysdown = [];
