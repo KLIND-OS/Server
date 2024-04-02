@@ -1028,6 +1028,17 @@ body {
   z-index: 23;
 }
 
+.unzip {
+  background-color: white;
+  position: absolute !important;
+  width: 300px;
+  min-height: 300px;
+  height: 300px;
+  overflow: hidden;
+  min-width: 300px;
+  z-index: 23;
+}
+
 .logs,
 .nohuplogs {
   background-color: white;

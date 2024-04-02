@@ -123,6 +123,7 @@ var mainFileManager = {
       ],
     ],
     ks: [["Terminál", (file) => windows.open("ter", { path: file })]],
+    zip: [["UnZip", (file) => windows.open("unzip", { path: file })]],
   },
   openingFile: undefined,
   open: async (infolder, file) => {
@@ -192,7 +193,7 @@ var mainFileManager = {
       file,
     );
     const stats = await LowLevelApi.filesystem.stat(path);
-    return stats
+    return stats;
   },
   properties: async (file) => {
     const path = LowLevelApi.filesystem.path.join(

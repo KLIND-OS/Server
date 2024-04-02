@@ -42,6 +42,7 @@ var windows = {
       "inputdevices",
       "logs",
       "nohuplogs",
+      "unzip",
     ],
     classes: [
       ".poznamky",
@@ -83,6 +84,7 @@ var windows = {
       ".inputdevices",
       ".logs",
       ".nohuplogs",
+      ".unzip",
     ],
     ikonadown: [
       ".poznamkyikonadown",
@@ -124,6 +126,7 @@ var windows = {
       ".inputdevicesikonadown",
       ".logsikonadown",
       ".nohuplogsikonadown",
+      false,
     ],
     special: {
       poznamky: [
@@ -476,6 +479,11 @@ var windows = {
       nohuplogs: [
         (win) => Logs.initNohup(win),
         (win) => Logs.close(win),
+        false,
+      ],
+      unzip: [
+        (win, args) => UnZip.init(win, args.path),
+        false,
         false,
       ],
     },
