@@ -101,6 +101,7 @@
   <script src="base64.js"></script>
   <script src="searchEngine.js"></script>
   <script src="autoClassConstruction.js"></script>
+  <script src="unzip.js"></script>
   <script>
     if (localStorage.getItem("installed") != "true") {
       window.location.replace("install.html");
@@ -1106,6 +1107,16 @@
           </div>
         </div>
         <div class="logsspan"></div>
+      </div>
+      <div onclick="changewindowmain(this)" class="widgetList unzip Resizabl">
+        <div class="widget-header">
+          <div class="headerclass">
+            <span style="float: left;">UnZip</span>
+            <div onclick="windows.close(this, 'unzip')" class="close"></div>
+          </div>
+        </div>
+        <h1>Probíhá otevírání ZIP souboru.</h1>
+        <p>Prosím počkejte</p>
       </div>
     </div>
     <div id="klindows" class="klindows">
