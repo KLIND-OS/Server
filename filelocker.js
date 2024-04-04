@@ -30,12 +30,10 @@ class FileLocker {
   }
 
   static add(file) {
+    const bypass = this._generate();
     if (this.test(file)) {
       return;
     }
-
-    this._lockedFiles.add(file);
-    this._lockedStatus[file] = new Date().getTime();
 
     const id = setInterval(() => {
       const time = this._lockedStatus[file];
@@ -46,18 +44,12 @@ class FileLocker {
       }
     }, 5200);
 
+    this._lockedFiles.add(file);
+    this._lockedStatus[file] = new Date().getTime();
     this._intervals[file] = id;
-
-    const characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    let result = "";
-    const charactersLength = characters.length;
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    this._bypass[file] = result;
-
-    return result;
+    this._bypass[file] = bypass;
+    
+    return bypass;
   }
 
   static _generate() {
@@ -68,11 +60,6 @@ class FileLocker {
     for (let i = 0; i < length; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
-
-    if (Object.keys(this._intervals).includes(result)) {
-      return this._generate();
-    }
-
     return result;
   }
 
@@ -95,17 +82,10 @@ class FileLocker {
   }
 }
 
-class FileAlreadyLockedError extends Error {
-  constructor(message) {
-    this.message = message;
-    this.name = "FileAlreadyLockedError";
-  }
-}
-
 class FileUsedError {
   constructor(message) {
     this.message = message;
-    this.name = "FileAlreadyLockedError";
+    this.name = "FileUsedError";
   }
 }
 
