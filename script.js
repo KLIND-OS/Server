@@ -1,11 +1,11 @@
 var sdjhahsdjhasdjsd = 0;
-document.addEventListener("click", evt => {
+document.addEventListener("click", (evt) => {
   const flyoutElement = document.getElementById("backsix");
   const flyoutElements = document.getElementById("logo");
   let targetElement = evt.target; // clicked element
 
   do {
-    if (targetElement == flyoutElement | targetElement == flyoutElements) {
+    if ((targetElement == flyoutElement) | (targetElement == flyoutElements)) {
       return;
     }
     targetElement = targetElement.parentNode;
@@ -28,7 +28,9 @@ document.addEventListener("click", evt => {
 });
 var cookieEnabled = navigator.cookieEnabled;
 if (!cookieEnabled) {
-  alert("Tato stránka vyžaduje cookies. Prosím zapněte je v nastavení prohlížeče.");
+  alert(
+    "Tato stránka vyžaduje cookies. Prosím zapněte je v nastavení prohlížeče.",
+  );
   window.location.reload();
 }
 var openingtrue = false;
@@ -37,15 +39,15 @@ function openstartmenu() {
     setTimeout(() => {
       document.getElementById("searchstartmenu").focus();
     }, 130);
-        
+
     if (sdjhahsdjhasdjsd == 0) {
       sdjhahsdjhasdjsd++;
-    
+
       document.getElementById("items-1").style.top = "25px";
       document.getElementById("items-4").style.left = "25px";
       document.getElementById("items-2").style.top = "0px";
       document.getElementById("items-3").style.left = "0px";
-    
+
       document.querySelector(".startmenu").classList.add("display");
       openingtrue = true;
       setTimeout(() => {
@@ -54,14 +56,13 @@ function openstartmenu() {
       setTimeout(() => {
         openingtrue = false;
       }, 500);
-    }
-    else {
+    } else {
       sdjhahsdjhasdjsd = 0;
       document.getElementById("items-1").style.top = "0px";
       document.getElementById("items-4").style.left = "0px";
       document.getElementById("items-2").style.top = "25px";
       document.getElementById("items-3").style.left = "25px";
-    
+
       document.querySelector(".startmenu").classList.remove("opened");
       openingtrue = true;
       setTimeout(() => {
@@ -81,11 +82,10 @@ function opendate() {
       setTimeout(() => {
         document.querySelector(".clockdate").style.bottom = "50px";
         clockmenuopening = true;
-        setTimeout(() => clockmenuopening = false, 500);
+        setTimeout(() => (clockmenuopening = false), 500);
       }, 10);
       clockmenuopened = true;
-    }
-    else {
+    } else {
       document.querySelector(".clockdate").style.bottom = "-600px";
       clockmenuopening = true;
       setTimeout(() => {
@@ -100,56 +100,62 @@ function odstranitDiakritiku(text) {
   return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 function searchstartmenu() {
-  var a, txtValue; 
-  var input = document.getElementById("searchstartmenu"); 
-  var ul = document.getElementById("liststartmenu"); 
+  var a, txtValue;
+  var input = document.getElementById("searchstartmenu");
+  var ul = document.getElementById("liststartmenu");
   var li = ul.getElementsByTagName("li");
   var isShowed = false;
   ul.querySelector(".searchHelpLi").style.display = "none";
   for (var i = 0; i < li.length; i++) {
     if (li[i].classList.contains("searchHelpLi")) continue;
-    a = li[i].getElementsByTagName("a")[0]; 
-    txtValue = a.textContent || a.innerText; 
+    a = li[i].getElementsByTagName("a")[0];
+    txtValue = a.textContent || a.innerText;
     var text = odstranitDiakritiku(txtValue.toUpperCase()).trim();
     var filterText = odstranitDiakritiku(input.value.toUpperCase()).trim();
     if (text.indexOf(filterText) > -1) {
       isShowed = true;
-      li[i].style.display = ""; 
-    } 
-    else { 
-      li[i].style.display = "none"; 
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
     }
   }
   if (!isShowed) {
     if (input.value.length > 20) {
       var showInputValue = input.value.split("", 20).join("").trim() + "...";
-    }
-    else {
+    } else {
       var showInputValue = input.value;
     }
-    ul.querySelector(".searchHelpLi #searchHelpText").textContent = showInputValue;
+    ul.querySelector(".searchHelpLi #searchHelpText").textContent =
+      showInputValue;
     ul.querySelector(".searchHelpLi").style.display = "";
   }
 }
 
-document.addEventListener("DOMContentLoaded",() => {
-  document.querySelector("#searchstartmenu").addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && e.target.value !== "") {
-      e.preventDefault();
-      var allElement = document.querySelector("#liststartmenu").querySelectorAll("li");
-      for (const el of allElement) {
-        if (el.style.display !== "none") {
-          el.querySelector("a").click();
-          break;
+document.addEventListener("DOMContentLoaded", () => {
+  document
+    .querySelector("#searchstartmenu")
+    .addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && e.target.value !== "") {
+        e.preventDefault();
+        var allElement = document
+          .querySelector("#liststartmenu")
+          .querySelectorAll("li");
+        for (const el of allElement) {
+          if (el.style.display !== "none") {
+            el.querySelector("a").click();
+            break;
+          }
         }
       }
-    }
-  });
+    });
 });
 
 function searchSearchedOnInternet() {
   const defaultSearchEngine = SearchEngine.default;
-  SearchEngine.search(document.querySelector("#searchstartmenu").value, defaultSearchEngine);
+  SearchEngine.search(
+    document.querySelector("#searchstartmenu").value,
+    defaultSearchEngine,
+  );
 }
 
 function custompozadisubmit() {
@@ -179,7 +185,9 @@ var mode = {
       x[i].classList.remove("black");
     }
     localStorage.setItem("mode", "light");
-    if (localStorage.getItem("background") == null) document.getElementById("klindows").style.backgroundImage = "url(wallpapers/light.jpg)";
+    if (localStorage.getItem("background") == null)
+      document.getElementById("klindows").style.backgroundImage =
+        "url(wallpapers/light.jpg)";
     fileManagerOpen();
   },
   dark: () => {
@@ -190,9 +198,11 @@ var mode = {
       x[i].classList.add("black");
     }
     localStorage.setItem("mode", "dark");
-    if (localStorage.getItem("background") == null) document.getElementById("klindows").style.backgroundImage = "url(wallpapers/dark.jpg)";
+    if (localStorage.getItem("background") == null)
+      document.getElementById("klindows").style.backgroundImage =
+        "url(wallpapers/dark.jpg)";
     fileManagerOpen();
-  }
+  },
 };
 
 var skjdoahsdijhasd = 0;
@@ -217,15 +227,25 @@ function getCssProperty(elmId, property) {
   return window.getComputedStyle(elem, null).getPropertyValue(property);
 }
 
-
 setInterval(() => {
   if (consolelog != "false") {
     console.clear();
-    mainConsole.log("%cVarování!", "color: red; font:bold; font-family:monospace; font-size: 40px");
-    mainConsole.log("Pokud Vám někdo řekl ať sem něco pošlete, tak se na 99% procent jedná o PODVOD!")
-    mainConsole.log("Podvodník tímto způsubem může získat Vaše heslo nebo Vaše soukromé soubory.")
-    mainConsole.log("Předtím než sem něco pošlete buďte si 100% jistí, co dělate.")
-    mainConsole.log("Chyby můžete nahlašovat na stránku https://klindos.jzitnik.dev/report");
+    mainConsole.log(
+      "%cVarování!",
+      "color: red; font:bold; font-family:monospace; font-size: 40px",
+    );
+    mainConsole.log(
+      "Pokud Vám někdo řekl ať sem něco pošlete, tak se na 99% procent jedná o PODVOD!",
+    );
+    mainConsole.log(
+      "Podvodník tímto způsubem může získat Vaše heslo nebo Vaše soukromé soubory.",
+    );
+    mainConsole.log(
+      "Předtím než sem něco pošlete buďte si 100% jistí, co dělate.",
+    );
+    mainConsole.log(
+      "Chyby můžete nahlašovat na stránku https://klindos.jzitnik.dev/report",
+    );
     mainConsole.log("KLIND OS od JZITNIK");
   }
 }, 5000);
@@ -233,11 +253,11 @@ setInterval(() => {
 function loadbetaicon() {
   if (beta) {
     document.querySelector(".betadiv").classList.add("openedwin");
-  }
-  else if (version.indexOf("alpha") > -1) {
+  } else if (version.indexOf("alpha") > -1) {
     document.querySelector(".betadiv").classList.add("openedwin");
     setTimeout(() => {
-      document.title = titleklindows + " " + version + " | Pouze pro testovací účely!";
+      document.title =
+        titleklindows + " " + version + " | Pouze pro testovací účely!";
     }, 10000);
   }
 }
@@ -247,5 +267,15 @@ var autolocklogin;
 var developermode;
 
 window.close = () => {
-  throw new Error("Don't use window.close. Use LowLevelApi.Program.close(). GUI will start again right after that.")
+  throw new Error(
+    "Don't use window.close. Use LowLevelApi.Program.close(). GUI will start again right after that.",
+  );
+};
+
+async function fileEditorSaveText(location, text, bypass) {
+  try {
+    await mainFileManager.saveText(location, text, bypass);
+  } catch (FileUsedError) {
+    FileLocker.lockedError();
+  }
 }
