@@ -29,7 +29,7 @@ async function prevedsystem() {
     LowLevelApi.filesystem.path.join(path, "version.data"),
     version,
   );
-  await exec(`zip -r '.prevod.tmp' usrfiles localStorage.json version.data`, {
+  await exec(`zip -r '.prevod.tmp' usrfiles localStorage.json version.data -x usrfiles/Devices usrfiles/root`, {
     cwd: path,
   });
   await exec(`rm localStorage.json`, {
