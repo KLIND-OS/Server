@@ -18,7 +18,11 @@ class FileLocker {
     );
   }
 
-  static remove(file) {
+  static remove(file, bypass) {
+    if (this._bypass[file] !== bypass) {
+      return
+    }
+
     this._lockedFiles.delete(file);
     clearInterval(this._intervals[file]);
     delete this._intervals[file];
@@ -38,9 +42,9 @@ class FileLocker {
       const now = new Date().getTime();
 
       if (now - time > 10000) {
-        this.remove(file);
+        this.remove(file, bypass);
       }
-    }, 5000);
+    }, 5200);
 
     this._intervals[file] = id;
 

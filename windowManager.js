@@ -215,7 +215,7 @@ var windows = {
                       content;
                   } else {
                     clearInterval(intervalID);
-                    FileLocker.remove(path);
+                    FileLocker.remove(path, bypass);
                     element.querySelector(".headerclass .close").click();
                   }
                 },
@@ -307,7 +307,7 @@ var windows = {
                       content;
                   } else {
                     clearInterval(intervalID);
-                    FileLocker.remove(path);
+                    FileLocker.remove(path, bypass);
                     element.querySelector(".headerclass .close").click();
                   }
                 },
@@ -329,9 +329,10 @@ var windows = {
         (win) => {
           const intervalID = win.getAttribute("intervalID");
           const path = win.getAttribute("filelocation");
+          const bypass = win.getAttribute("bypass");
 
           clearInterval(intervalID);
-          FileLocker.remove(path);
+          FileLocker.remove(path, bypass);
 
           if (win.getAttribute("file-type") == "video") {
             const windowId = win.getAttribute("plyr-id");

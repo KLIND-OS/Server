@@ -384,7 +384,7 @@ var mainFileManager = {
     // Correct: from: /folder/somefile.txt to: /folder2/somefile.txt
     // Wrong: /folder/somefile.txt to: /folder2/
 
-    FileLocker.add(from);
+    const bypass = FileLocker.add(from);
     if (await mainFileManager.fileExists(to)) {
       throw new Error("File on the new location already exist.");
     }
@@ -417,7 +417,7 @@ var mainFileManager = {
     source.pipe(destination);
 
     destination.on("finish", () => {
-      FileLocker.remove(from)
+      FileLocker.remove(from, bypass)
       callbackFinal();
     });
   },
@@ -426,7 +426,7 @@ var mainFileManager = {
     // Correct: from: /sounds/Linkin Park to: /music/Linkin Park
     // Wrong: /sounds/Linkin Park to: /music/
 
-    FileLocker.add(from)
+    const bypass = FileLocker.add(from)
 
     const finalFrom = LowLevelApi.filesystem.path.join(
       LowLevelApi.filesystem.os.homedir() + "/usrfiles",
@@ -441,7 +441,7 @@ var mainFileManager = {
     }
 
     LowLevelApi.filesystem.fsExtra.copy(finalFrom, finalTo, () => {
-      FileLocker.remove(from)
+      FileLocker.remove(from, bypass)
       callback()
     });
   },

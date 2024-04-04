@@ -93,11 +93,11 @@ var Procesy = {
     }, 2000);
   },
   openIn: (i) => {
-    try { windows.open("viewtext", { text: Procesy.intervals[i][1].toString(), title: "Zobrazení procesu." }); } catch (e) { }
+    try { windows.open("viewtext", { text: Procesy.intervals[i][1].toString(), title: "Zobrazení procesu" }); } catch (e) { }
   },
   openEvent: (i) => {
     try {
-      windows.open("viewtext", { text: Procesy.events[i].func.toString(), title: "Zobrazení eventu:" });
+      windows.open("viewtext", { text: Procesy.events[i].func.toString(), title: "Zobrazení eventu" });
     } catch (e) { }
   },
   end: (e) => {

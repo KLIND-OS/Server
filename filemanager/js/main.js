@@ -486,7 +486,7 @@ var FileManager = {
             clipboard[1],
           );
         } else {
-          parent.FileLocker.add(clipboard[3]);
+          const bypass = parent.FileLocker.add(clipboard[3]);
           const destinationPath = parent.LowLevelApi.filesystem.path.join(
             parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
             clipboard[1],
@@ -502,7 +502,7 @@ var FileManager = {
               }
               progressBar.finish();
               FileManager.readFiles();
-              parent.FileLocker.remove(clipboard[3]);
+              parent.FileLocker.remove(clipboard[3], bypass);
             },
           );
         }
@@ -523,7 +523,7 @@ var FileManager = {
           newclipboard[1],
         );
       } else {
-        parent.FileLocker.add(clipboard[3]);
+        const bypass = parent.FileLocker.add(clipboard[3]);
         const destinationPath = parent.LowLevelApi.filesystem.path.join(
           parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
           clipboard[1],
@@ -557,7 +557,7 @@ var FileManager = {
         destination.on("finish", () => {
           progressBar.finish();
           FileManager.readFiles();
-          parent.FileLocker.remove(clipboard[3]);
+          parent.FileLocker.remove(clipboard[3], bypass);
         });
       }
     }

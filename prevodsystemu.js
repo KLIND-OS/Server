@@ -70,6 +70,8 @@ async function submitPrevodFile(filepath) {
   await exec(`mv ~/.prevod.tmp/usrfiles ~/usrfiles`)
 
   await exec(`rm -rf ~/.prevod.tmp`)
+
+  window.location.reload()
 }
 function submitnjahsbdjksabd() {
   control.fileManager.fileSelect({
