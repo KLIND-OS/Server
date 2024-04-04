@@ -50,7 +50,7 @@ var CustomApp = {
   remove: (element) => {
     var scripts = JSON.parse(localStorage.getItem("customapps"));
     for (var i = 0; i < scripts.length; i++) {
-      if (scripts[i][0] == element.trim()) {
+      if (scripts[i][0].trim() == element.trim()) {
         function removebyindex(array, index) {
           var doacgajs = [];
           for (var i = 0; i < array.length; i++) {
