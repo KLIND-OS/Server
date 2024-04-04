@@ -214,7 +214,23 @@ var mainFileManager = {
     document.querySelector("#filelocation").innerHTML = file;
     windows.open("fileproperties");
   },
-  saveText: async (location, file) => {
+  remove: async (location, bypass = "") => {
+    if (FileLocker.test(location, bypass)) {
+      throw new FileUsedError("This file is already used!");
+    }
+
+    const path = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir() + "/usrfiles",
+      location,
+    );
+
+    await LowLevelApi.filesystem.unlink(path);
+  },
+  saveText: async (location, file, bypass = "") => {
+    if (FileLocker.test(location, bypass)) {
+      throw new FileUsedError("This file is already used!");
+    }
+
     const path = LowLevelApi.filesystem.path.join(
       LowLevelApi.filesystem.os.homedir() + "/usrfiles",
       location,
@@ -230,7 +246,11 @@ var mainFileManager = {
       }
     }
   },
-  save: async (location, binary) => {
+  save: async (location, binary, bypass) => {
+    if (FileLocker.test(location, bypass)) {
+      throw new FileUsedError("This file is already used!");
+    }
+
     const path = LowLevelApi.filesystem.path.join(
       LowLevelApi.filesystem.os.homedir() + "/usrfiles",
       location,
@@ -363,6 +383,8 @@ var mainFileManager = {
     // Note: All the paths must be full path.
     // Correct: from: /folder/somefile.txt to: /folder2/somefile.txt
     // Wrong: /folder/somefile.txt to: /folder2/
+
+    FileLocker.add(from);
     if (await mainFileManager.fileExists(to)) {
       throw new Error("File on the new location already exist.");
     }
@@ -395,6 +417,7 @@ var mainFileManager = {
     source.pipe(destination);
 
     destination.on("finish", () => {
+      FileLocker.remove(from)
       callbackFinal();
     });
   },
@@ -402,6 +425,8 @@ var mainFileManager = {
     // Note: All the paths must be full path.
     // Correct: from: /sounds/Linkin Park to: /music/Linkin Park
     // Wrong: /sounds/Linkin Park to: /music/
+
+    FileLocker.add(from)
 
     const finalFrom = LowLevelApi.filesystem.path.join(
       LowLevelApi.filesystem.os.homedir() + "/usrfiles",
@@ -415,7 +440,10 @@ var mainFileManager = {
       throw new Error("Folder already exists in the path.");
     }
 
-    LowLevelApi.filesystem.fsExtra.copy(finalFrom, finalTo, callback);
+    LowLevelApi.filesystem.fsExtra.copy(finalFrom, finalTo, () => {
+      FileLocker.remove(from)
+      callback()
+    });
   },
 };
 function fileManagerOpen() {

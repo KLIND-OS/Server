@@ -102,6 +102,7 @@
   <script src="searchEngine.js"></script>
   <script src="autoClassConstruction.js"></script>
   <script src="unzip.js"></script>
+  <script src="filelocker.js"></script>
   <script>
     if (localStorage.getItem("installed") != "true") {
       window.location.replace("install.html");
@@ -362,6 +363,17 @@
           </button>
           <button class="submit-box-confirm submit-box-confirm-right" onclick="submitConfirm(false)">
             Ne
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="alert-element" style="display: none;">
+      <div class="alert-background"></div>
+      <div class="outer-box">
+        <div class="inner-box">
+          <p class="message-box-alert">Error</p>
+          <button class="submit-box-alert" onclick="this.parentElement.parentElement.parentElement.style.display = 'none';">
+            OK
           </button>
         </div>
       </div>
@@ -727,7 +739,7 @@
           <div class="headerclass">
             <span style="float: left;">Soubor</span>
             <div
-              onclick="mainFileManager.saveText(this.parentElement.parentElement.parentElement.getAttribute('filelocation'), this.parentElement.parentElement.parentElement.querySelector('#textareafileeditorimage').value)"
+              onclick="fileEditorSaveText(this.parentElement.parentElement.parentElement.getAttribute('filelocation'), this.parentElement.parentElement.parentElement.querySelector('#textareafileeditorimage').value, this.parentElement.parentElement.parentElement.getAttribute('bypass'))"
               class="menupoznamky filesavefileconfig">Uložit</div>
             <div
               onclick="mainFileManager.setWallpaper(this.parentElement.parentElement.parentElement.getAttribute('filelocation'))"

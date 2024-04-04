@@ -386,41 +386,6 @@
 					result: parent.mainFileManager.getContent(command.substring(6)) || "File was not found."
 				})
 			}
-      // TODO: Fix
-			else if (command.indexOf(":ls") == 0) {
-				const parameters = command.substring(6)
-				console.log(parameters)
-				var path = "/"
-				if (parameters != "") {
-					path = parameters
-				}
-				var ret = new Array()
-				var files = parent.mainFileManager.allFiles(path)
-				files.forEach(file => {
-					ret.push(file[0])
-				})
-				return this.model.addHistory({
-					command: command,
-					result: ret.join("\n")
-				})
-			}
-			else if (command.indexOf(":save") == 0) {
-				x = JSON.parse(command.substring(6))
-				file = x["path"]
-				content = x["content"]
-				ret = undefined;
-				if (parent.mainFileManager.getContent(file)==false) {
-					ret = "File "+path+" was not found!";
-				}
-				else {
-					parent.mainFileManager.save(file, content)
-					ret = "File was successfully saved!"
-				}
-				return this.model.addHistory({
-					command: command,
-					result: ret
-				})
-			}
 			else if ( command.indexOf(":load") ==0 ) {
 				return this.model.addHistory({
 					command : command,
