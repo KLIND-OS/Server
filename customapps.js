@@ -34,7 +34,7 @@ var CustomApp = {
         span.textContent = all[i][0];
 
         var removebtn = document.createElement("button");
-        removebtn.setAttribute("onclick", "CustomApp.remove('" + all[i][0] + "')");
+        removebtn.setAttribute("onclick", "CustomApp.remove('" + all[i][0].trim() + "')");
         removebtn.textContent = "Odstranit";
 
         element.appendChild(span);
@@ -50,7 +50,7 @@ var CustomApp = {
   remove: (element) => {
     var scripts = JSON.parse(localStorage.getItem("customapps"));
     for (var i = 0; i < scripts.length; i++) {
-      if (scripts[i][0] == element) {
+      if (scripts[i][0] == element.trim()) {
         function removebyindex(array, index) {
           var doacgajs = [];
           for (var i = 0; i < array.length; i++) {
@@ -114,14 +114,14 @@ var CustomApp = {
                                   if (!not) {
                                     if (installScript.trim().startsWith('"use async"')) {
                                       this.window.installFinished = () => {
-                                        all.push([name, script, image]);
+                                        all.push([name.trim(), script, image]);
                                         localStorage.setItem("customapps", JSON.stringify(all));
                                         window.location.reload();
                                       }
                                       eval(installScript)
                                     } else {
                                       eval(installScript);
-                                      all.push([name, script, image]);
+                                      all.push([name.trim(), script, image]);
                                       localStorage.setItem("customapps", JSON.stringify(all));
                                       window.location.reload();
                                     }
@@ -154,7 +154,7 @@ var CustomApp = {
 
       });
   },
-  async loadFromUri(path) {
+  async loadFromPath(path) {
     const binaryData = await mainFileManager.getContent(path);
     const uint8Array = Uint8Array.from(binaryData, char => char.charCodeAt(0));
 
