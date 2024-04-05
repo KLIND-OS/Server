@@ -516,6 +516,11 @@ var windows = {
         false,
       ],
       unzip: [(win, args) => UnZip.init(win, args.path), false, false],
+      procesy: [
+        (win) => Procesy.init(win),
+        (win) => Procesy.end(win),
+        false
+      ]
     },
     appIds: {},
   },

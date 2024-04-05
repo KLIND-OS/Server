@@ -1,49 +1,8 @@
-function listAllEventListeners() {
-  const allElements = Array.prototype.slice.call(document.querySelectorAll("*"));
-  allElements.push(document);
-  allElements.push(window);
-
-  const types = [];
-
-  for (let ev in window) {
-    if (/^on/.test(ev)) types[types.length] = ev;
-  }
-
-  let elements = [];
-  for (let i = 0; i < allElements.length; i++) {
-    const currentElement = allElements[i];
-    for (let j = 0; j < types.length; j++) {
-      if (typeof currentElement[types[j]] === "function") {
-        elements.push({
-          "node": currentElement,
-          "type": types[j],
-          "func": currentElement[types[j]],
-        });
-      }
-    }
-  }
-
-  return elements.sort(function (a, b) {
-    return a.type.localeCompare(b.type);
-  });
-}
-
 var Procesy = {
   intervals: [],
   iframes: [],
   events: [],
-  analyze: (win) => {
-    var el = document.body.appendChild(document.createElement("div"));
-    el.style.width = "100vw";
-    el.style.height = "100vh";
-    el.style.position = "absolute";
-    el.style.zIndex = "54616215615645";
-    el.style.backgroundColor = "black";
-    el.style.top = "0";
-    el.style.left = "0";
-
-    var con = win.querySelector(".procesyContent");
-    con.innerHTML = "";
+  analyze: (con) => {
     for (var i = 0; i < Procesy.intervals.length; i++) {
       var p = document.createElement("p");
       p.textContent = "Interval: " + Procesy.intervals[i][0] + " ";
@@ -87,10 +46,6 @@ var Procesy = {
       p.appendChild(open);
       con.appendChild(p);
     }
-
-    setTimeout(() => {
-      el.remove();
-    }, 2000);
   },
   openIn: (i) => {
     try { windows.open("viewtext", { text: Procesy.intervals[i][1].toString(), title: "Zobrazení procesu" }); } catch (e) { }
@@ -103,8 +58,93 @@ var Procesy = {
   end: (e) => {
     try { clearInterval(Procesy.intervals[e.getAttribute("ss")][0]); } catch (e) { }
     e.parentElement.remove();
-  }
+  },
+
+  load: async (el) => {
+    el.innerHTML = "";
+    const systemProcesses = await LowLevelApi.TaskManager.getSystemProcesses();
+
+    for (const {pid, name} of systemProcesses) {
+      var p = document.createElement("p");
+      p.textContent = "Systémový proces: " + name + " ID: " + pid + " ";
+
+      var kill = document.createElement("span");
+      kill.textContent = "Kill";
+      kill.style.color = "blue";
+      kill.onclick = () => {
+        LowLevelApi.TaskManager.killProcess(pid);
+      };
+
+      p.appendChild(kill)
+      el.appendChild(p)
+      
+    }
+
+    Procesy.analyze(el);
+  },
+
+  init: (win) => {
+    const update = async () => {
+      const processor = await LowLevelApi.TaskManager.getProcessorInfo();
+      win.querySelector(".processorname").textContent = processor.name;
+      win.querySelector(".processorusage").textContent = processor.usage + "%";
+
+      const memory = await LowLevelApi.TaskManager.getRamInfo();
+      win.querySelector(".memorytotal").textContent = humanFileSize(memory.total * 1000);
+      win.querySelector(".memoryused").textContent = humanFileSize(memory.used * 1000);
+      win.querySelector(".memoryfree").textContent = humanFileSize(memory.free * 1000);
+    }
+    const intervalId = setInterval(update, 500)
+
+    win.setAttribute("updateProcessId", intervalId);
+    update();
+  },
+  end: (win) => {
+    const updateProcessId = win.getAttribute("updateProcessId");
+    clearInterval(updateProcessId);
+  },
+
+  infoShow: (win) => {
+    win.querySelector(".infoProcesy").style.display = "block";
+    win.querySelector(".procesyProcesy").style.display = "none"
+  },
+  procesyShow: (win) => {
+    win.querySelector(".infoProcesy").style.display = "none";
+    win.querySelector(".procesyProcesy").style.display = "block";
+    Procesy.load(win.querySelector(".procesyProcesyContent"))
+  },
+
 };
+
+function listAllEventListeners() {
+  const allElements = Array.prototype.slice.call(document.querySelectorAll("*"));
+  allElements.push(document);
+  allElements.push(window);
+
+  const types = [];
+
+  for (let ev in window) {
+    if (/^on/.test(ev)) types[types.length] = ev;
+  }
+
+  let elements = [];
+  for (let i = 0; i < allElements.length; i++) {
+    const currentElement = allElements[i];
+    for (let j = 0; j < types.length; j++) {
+      if (typeof currentElement[types[j]] === "function") {
+        elements.push({
+          "node": currentElement,
+          "type": types[j],
+          "func": currentElement[types[j]],
+        });
+      }
+    }
+  }
+
+  return elements.sort(function (a, b) {
+    return a.type.localeCompare(b.type);
+  });
+}
 
 const originalSetInterval = window.setInterval;
 window.setInterval = function (callback, delay) {
