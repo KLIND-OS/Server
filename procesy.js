@@ -73,6 +73,7 @@ var Procesy = {
       kill.style.color = "blue";
       kill.onclick = () => {
         LowLevelApi.TaskManager.killProcess(pid);
+        p.remove();
       };
 
       p.appendChild(kill)
