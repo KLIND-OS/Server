@@ -1194,9 +1194,11 @@ body {
   min-width: 300px;
   z-index: 23;
 }
-.procesy .procesyContent {
-  overflow: auto;
+.procesy .procesyProcesy, .procesy .infoProcesy{
   height: calc(100% - 40px);
+}
+.procesy .procesyProcesy {
+  overflow: auto;
 }
 
 .viewtext {
