@@ -359,7 +359,7 @@ var windows = {
         (element, args) => {
           CustomApp.loadWindow(element);
           if (args?.path) {
-            CustomApp.loadFromUri(args.path);
+            CustomApp.loadFromPath(args.path);
           }
         },
         false,
