@@ -107,6 +107,19 @@ if (localStorage.getItem("username") != null) {
   const usernamecookie = localStorage.getItem("username");
   document.getElementById("username").innerHTML = usernamecookie;
 }
+function loginCorrect() {
+  pokusy = 5;
+  document.querySelector(".login").style.opacity = "0";
+  control.dowhenlogin.loged();
+  control.loged = true;
+  setTimeout(() => {
+    document.querySelector(".login").classList.add("displaynone");
+    document.querySelector("#password").value = "";
+    document.getElementById("pokusy").innerHTML = "";
+    document.querySelector(".dsaigsdiasd").style.display = "none";
+    document.querySelector("#hasdgashdjasj").src = "about:blank"
+  }, 500);
+}
 var pokusy = 5;
 function submitlogin() {
   var password = document.getElementById("password").value;
@@ -114,15 +127,7 @@ function submitlogin() {
   if (pokusy == 0) {
   } else if (password == "") {
   } else if (hashed == passwordcookie) {
-    pokusy = 5;
-    document.querySelector(".login").style.opacity = "0";
-    control.dowhenlogin.loged();
-    control.loged = true;
-    setTimeout(() => {
-      document.querySelector(".login").classList.add("displaynone");
-      document.querySelector("#password").value = "";
-      document.getElementById("pokusy").innerHTML = "";
-    }, 500);
+    loginCorrect();
   } else {
     if (pokusy == 1) {
       pokusy--;
@@ -154,22 +159,7 @@ function loadfaces() {
   document.getElementById("dsaigsdiasd").style.display = "block";
 }
 var url = window.location.href;
-function jadsandjbnasd() {
-  var sajjidhasjod =
-    document.getElementById("hasdgashdjasj").contentDocument.location.href;
-  let sajjidhasjods = sajjidhasjod
-    .replace(url + "face/#][%C4%91%C4%905655%C4%91%C4%90%C4%91%C4%90%C4%91", "")
-    .replace("%C4%90%C4%91%C4%90%C4%911%C4%905%C4%9155]5%C4%90", "");
-  if (document.getElementById("sagdasda").value == sajjidhasjods) {
-    pokusy = 5;
-    timelogin = 59;
-    document.querySelector(".login").classList.add("displaynone");
-    document.querySelector("#password").value = "";
-    document.getElementById("pokusy").innerHTML = "";
-    document.getElementById("hasdgashdjasj").src = "about:blank";
-    document.getElementById("dsaigsdiasd").style.display = "none";
-  }
-}
+
 if (facerecognition == "false") {
   document.getElementById("sdsdaasd").style.display = "none";
 }
