@@ -150,10 +150,22 @@ class App {
 
     var headerClass = document.createElement("div");
     headerClass.classList.add("headerclass");
-
     var spanName = document.createElement("span");
     spanName.textContent = name;
+    spanName.style.float = "left"
     headerClass.appendChild(spanName);
+
+
+    if (buttons.custom != undefined && buttons.custom.length > 0) {
+      for (const button of buttons.custom) {
+        const customButton = document.createElement("div")
+        customButton.classList.add("menu")
+        customButton.onclick = button[1];
+        customButton.textContent = button[0];
+        headerClass.appendChild(customButton)
+      }
+    }
+
     if (buttons.close != undefined) {
       var closeBtn = document.createElement("div");
       closeBtn.classList.add("close");

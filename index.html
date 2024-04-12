@@ -521,16 +521,16 @@
           <div class="widget-header">
             <div class="headerclass">
               <span style="float: left">Poznámky</span>
-              <div class="menupoznamky" onclick="savepoznamky(this)">
+              <div class="menu" onclick="savepoznamky(this)">
                 Uložit
               </div>
-              <div class="menupoznamky" onclick="smazatulozene()">
+              <div class="menu" onclick="smazatulozene()">
                 Smazat uložené
               </div>
-              <div class="menupoznamky" onclick="nastavenipoznamky()">
+              <div class="menu" onclick="nastavenipoznamky()">
                 Nastavení
               </div>
-              <div class="menupoznamky" onclick="bhdasv()">Nápověda</div>
+              <div class="menu" onclick="bhdasv()">Nápověda</div>
               <div
                 onclick="windows.close(this, 'poznamky')"
                 class="close"
@@ -1103,13 +1103,13 @@
               <span style="float: left">Soubor</span>
               <div
                 onclick="fileEditorSaveText(this.parentElement.parentElement.parentElement.getAttribute('filelocation'), this.parentElement.parentElement.parentElement.querySelector('#textareafileeditorimage').value, this.parentElement.parentElement.parentElement.getAttribute('bypass'))"
-                class="menupoznamky filesavefileconfig"
+                class="menu filesavefileconfig"
               >
                 Uložit
               </div>
               <div
                 onclick="mainFileManager.setWallpaper(this.parentElement.parentElement.parentElement.getAttribute('filelocation'))"
-                class="menupoznamky imgwallpaperfileconfig"
+                class="menu imgwallpaperfileconfig"
               >
                 Nastavit jako pozadí
               </div>
@@ -1454,7 +1454,7 @@
               <span style="float: left">Word editor</span>
               <div
                 onclick="WordEditor.save(this.parentElement.parentElement.parentElement)"
-                class="menupoznamky filesavefileconfig"
+                class="menu filesavefileconfig"
               >
                 Uložit
               </div>
@@ -1477,7 +1477,7 @@
           <div class="widget-header">
             <div class="headerclass">
               <span style="float: left">Sheets editor</span>
-              <div class="menupoznamky filesavefileconfig" id="save-button">
+              <div class="menu filesavefileconfig" id="save-button">
                 Uložit
               </div>
               <div
@@ -1817,13 +1817,13 @@
             <div class="headerclass">
               <span style="float: left">Správce tiskáren CUPS</span>
               <div
-                class="menupoznamky"
+                class="menu"
                 onclick="window.open('https://wiki.archlinux.org/title/CUPS/Printer-specific_problems')"
               >
                 Zobrazit list ovladačů pro tiskárny
               </div>
               <div
-                class="menupoznamky"
+                class="menu"
                 onclick="windows.open('packageinstaller', {type: 'printer'})"
               >
                 Manuálně nainstalovat ovladač podle názvu

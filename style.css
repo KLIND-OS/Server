@@ -1405,7 +1405,7 @@ body {
   display: block !important;
 }
 
-.menupoznamky {
+.menu{
   width: auto;
   float: left;
   margin-left: 15px;
@@ -1413,7 +1413,7 @@ body {
   height: 100%;
 }
 
-.menupoznamky:hover {
+.menu:hover {
   background-color: rgb(94, 94, 94);
 }
 
