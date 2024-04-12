@@ -8,18 +8,18 @@ window.addEventListener("DOMContentLoaded", () => {
     submit.textContent = "Odeslat";
     value1.onclick = () => {
       parent.control.fileManager.fileSelect({
-        success: (file) => {
-          value1.setAttribute("path", file[5] + file[0]);
-          value1.textContent = file[0];
+        success: (path) => {
+          value1.setAttribute("path", path);
+          value1.textContent = path;
         },
         closed: e => parent.spawnNotification("NRO", "Výběr souboru byl přerušen!")
       });
     };
     value2.onclick = () => {
       parent.control.fileManager.fileSelect({
-        success: (file) => {
-          value2.setAttribute("path", file[5] + file[0]);
-          value2.textContent = file[0];
+        success: (path) => {
+          value2.setAttribute("path", path);
+          value2.textContent = path;
         },
         closed: e => parent.spawnNotification("NRO", "Výběr souboru byl přerušen!")
       });
