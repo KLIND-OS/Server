@@ -521,15 +521,9 @@
           <div class="widget-header">
             <div class="headerclass">
               <span style="float: left">Poznámky</span>
-              <div class="menu" onclick="savepoznamky(this)">
-                Uložit
-              </div>
-              <div class="menu" onclick="smazatulozene()">
-                Smazat uložené
-              </div>
-              <div class="menu" onclick="nastavenipoznamky()">
-                Nastavení
-              </div>
+              <div class="menu" onclick="savepoznamky(this)">Uložit</div>
+              <div class="menu" onclick="smazatulozene()">Smazat uložené</div>
+              <div class="menu" onclick="nastavenipoznamky()">Nastavení</div>
               <div class="menu" onclick="bhdasv()">Nápověda</div>
               <div
                 onclick="windows.close(this, 'poznamky')"
@@ -1337,8 +1331,16 @@
             </div>
           </div>
           <header>
-            <button onclick="Procesy.infoShow(this.parentElement.parentElement)">Info počítače</button>
-            <button onclick="Procesy.procesyShow(this.parentElement.parentElement);">Aktuálně běžící procesy</button>
+            <button
+              onclick="Procesy.infoShow(this.parentElement.parentElement)"
+            >
+              Info počítače
+            </button>
+            <button
+              onclick="Procesy.procesyShow(this.parentElement.parentElement);"
+            >
+              Aktuálně běžící procesy
+            </button>
           </header>
           <div class="infoProcesy">
             <div class="processor">
@@ -1353,10 +1355,8 @@
               <p>Využití: <span class="memoryused">Načítání</span></p>
             </div>
           </div>
-          <div class="procesyProcesy" style="display: none;">
-            <div class="procesyProcesyContent">
-              
-            </div>
+          <div class="procesyProcesy" style="display: none">
+            <div class="procesyProcesyContent"></div>
           </div>
         </div>
         <div
@@ -1477,9 +1477,7 @@
           <div class="widget-header">
             <div class="headerclass">
               <span style="float: left">Sheets editor</span>
-              <div class="menu filesavefileconfig" id="save-button">
-                Uložit
-              </div>
+              <div class="menu filesavefileconfig" id="save-button">Uložit</div>
               <div
                 onclick="windows.close(this, 'sheetseditor')"
                 class="close"

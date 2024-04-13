@@ -92,6 +92,8 @@ document.body.onload = async () => {
         }
       }, 100);
     });
-    video.play();
+    setTimeout(() => {
+      video.play();
+    }, 1000);
   }
 };

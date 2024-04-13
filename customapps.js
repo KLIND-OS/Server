@@ -5,7 +5,7 @@ var CustomApp = {
     if (scripts !== null) {
       var all = JSON.parse(scripts);
       for (var i = 0; i < all.length; i++) {
-        CustomApp.icons.push([all[i][0], all[i][2]]);
+        CustomApp.icons.push([all[i][0].trim(), all[i][2]]);
         var element = document.createElement("script");
         element.innerHTML = all[i][1];
         document.body.appendChild(element);

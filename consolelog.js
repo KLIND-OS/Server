@@ -54,7 +54,7 @@ console.log = function () {
   }
   catch {
     console.error("Nepovedlo se uložit log do databáze.");
-    console.log(arguments);
+    mainConsole.log(...arguments);
   }
 };
 
