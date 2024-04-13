@@ -128,6 +128,49 @@ var windows = {
       ".nohuplogsikonadown",
       false,
     ],
+    focusedAction: [
+      (win) => win.querySelector("textarea").focus(),
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+    ],
+
     special: {
       poznamky: [
         (element) => {
@@ -543,6 +586,7 @@ var windows = {
       newelement.classList.add("openedwin");
       newelement.style.opacity = "0";
       newelement.style.scale = "0.9";
+      newelement.setAttribute("name", name)
       document.querySelector(".oknepatrizde").appendChild(newelement);
       reloaddraggable();
       if (

@@ -1,13 +1,18 @@
+var previouslySelected = document.querySelector(".koks");
 var openedwindowindex;
-var pejfd = document.querySelector(".koks");
-function changewindowmain(asdasdasdasdd) {
-  openedwindowindex = asdasdasdasdd;
-  trychange();
-}
-function trychange() {
-  pejfd.classList.remove("windowedmtjhjass");
-  openedwindowindex.classList.add("windowedmtjhjass");
-  setTimeout(() => {
-    pejfd = openedwindowindex;
-  }, 100);
+function changewindowmain(openedwindow) {
+  openedwindowindex = openedwindow;
+  previouslySelected.classList.remove("windowedmtjhjass");
+  openedwindow.classList.add("windowedmtjhjass");
+  previouslySelected = openedwindow;
+
+  const name = openedwindow.getAttribute("name");
+  const location = windows.list.names.indexOf(name);
+  const focusAction = windows.list.focusedAction[location];
+
+  if (!focusAction) {
+    return
+  }
+
+  focusAction(openedwindow);
 }
