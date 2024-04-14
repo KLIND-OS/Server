@@ -2210,13 +2210,12 @@ table tr td input {
 
 .prompt-element,
 .confirm-element,
-.alert-element
+.alert-element,
 .power-element {
   position: absolute;
   width: 100vw;
   height: 100vh;
   z-index: 5000000000000000;
-  z-index: 500;
 }
 
 .prompt-background,
