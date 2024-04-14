@@ -18,7 +18,7 @@ setInterval(() => {
   fetch("/status", {cache: "no-store"})
     .then(res=>res.text())
     .then(res=>{
-      if (res == "working") {
+      if (res.trim() == "working") {
         document.querySelector(".connection-lost-element").style.display = "none";
       }
       else {

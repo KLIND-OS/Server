@@ -372,6 +372,10 @@ iframe {
     ease 0.2s scale;
 }
 
+body:not(.disablewindowanimation) .window:hover:not(.windowedmtjhjass):not([isfullscreen="true"]) {
+  scale: 1.02!important;
+}
+
 .audioLevelEditor {
   background-color: white;
   position: absolute !important;

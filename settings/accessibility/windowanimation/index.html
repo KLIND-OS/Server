@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Motiv</title>
+    <style>
+      :root {
+        --pocet: 4;
+      }
+    </style>
+    <link rel="stylesheet" href="./../../style.css" />
+    <script src="./../../mouse.js" defer></script>
+    <script src="/isiframe.js"></script>
+  </head>
+  <body onmouseup="mouseUp()" onmousedown="mouseDown()">
+    <div id="firstcursor"></div>
+    <div id="secondcursor" class="secondcursor"></div>
+    <div class="button" onclick="window.location.replace('..')"><- Zpět</div>
+    <div class="button nohover">
+      <span>Zvětšit okno při najetí myší.</span>
+    </div>
+    <div class="button nohover">
+      <select cursor="pointer" class="searchselect">
+        <option value="false">Zakázané</option>
+        <option value="true">Povolené</option>
+      </select>
+    </div>
+    <div class="button" onclick="send()">Odeslat</div>
+    <script src="./../../main.js" defer></script>
+    <script>
+      const defaultvalue = localStorage.getItem("windowanimation");
+      Array.from(document.querySelector(".searchselect").children).forEach((option) => {
+        if (option.value == defaultvalue) {
+          option.selected = true;
+        }
+      });
+
+      function send() {
+        const value = document.querySelector(".searchselect").value;
+        localStorage.setItem("windowanimation", value);
+        parent.updateWindowAnimation();
+      }
+    </script>
+  </body>
+</html>
