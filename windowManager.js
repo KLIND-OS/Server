@@ -560,11 +560,7 @@ var windows = {
         false,
       ],
       unzip: [(win, args) => UnZip.init(win, args.path), false, false],
-      procesy: [
-        (win) => Procesy.init(win),
-        (win) => Procesy.end(win),
-        false
-      ]
+      procesy: [(win) => Procesy.init(win), (win) => Procesy.end(win), false],
     },
     appIds: {},
   },
@@ -587,7 +583,7 @@ var windows = {
       newelement.classList.add("openedwin");
       newelement.style.opacity = "0";
       newelement.style.scale = "0.9";
-      newelement.setAttribute("name", name)
+      newelement.setAttribute("name", name);
       document.querySelector(".oknepatrizde").appendChild(newelement);
       reloaddraggable();
       if (
@@ -614,7 +610,9 @@ var windows = {
       newelement.style.opacity = "1";
       newelement.style.scale = "1";
 
-      newelement.click();
+      setTimeout(() => {
+        newelement.click();
+      });
       if (special != undefined && special[0] !== false) {
         special[0](newelement, args);
       }
