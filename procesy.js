@@ -20,7 +20,7 @@ var Procesy = {
       end.style.color = "blue";
       end.setAttribute("ss", i);
       end.onclick = (e) => {
-        Procesy.end(e.target);
+        Procesy.endInterval(e.target);
       };
 
       p.appendChild(open);
@@ -55,7 +55,7 @@ var Procesy = {
       windows.open("viewtext", { text: Procesy.events[i].func.toString(), title: "Zobrazení eventu" });
     } catch (e) { }
   },
-  end: (e) => {
+  endInterval: (e) => {
     try { clearInterval(Procesy.intervals[e.getAttribute("ss")][0]); } catch (e) { }
     e.parentElement.remove();
   },
@@ -159,6 +159,8 @@ window.clearInterval = function (id) {
   for (var i = 0; i < Procesy.intervals.length; i++) {
     if (Procesy.intervals[i][0] != id) {
       ne.push(Procesy.intervals[i]);
+    } else {
+      ne.push(undefined);
     }
   }
   Procesy.intervals = ne;
