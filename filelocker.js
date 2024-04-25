@@ -77,7 +77,7 @@ class FileLocker {
   static fullTest(file) {
     if (this.test(file)) {
       this.lockedError();
-      throw new FileUsedError("This file is alredy used!");
+      throw new FileUsedError("This file is already used!");
     }
   }
 }
