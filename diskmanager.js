@@ -39,35 +39,4 @@ class DiskManager {
       element.appendChild(div);
     }
   }
-
-  static partitionToMain(partition) {
-    if (mainFileManager.folderExist("/" + partition)) {
-      spawnNotification(
-        "Správce disků",
-        "Složka s názvem " + partition + " již existuje v kořenovém adresáři.",
-      );
-    } else {
-      spawnNotification("Správce disků", "Kopírování bylo zahájeno");
-      var temp = JSON.parse(localStorage.getItem("folders-uploaded"));
-      if (temp) {
-        temp.push([partition, "/"]);
-      } else {
-        temp = [[partition, "/"]];
-      }
-      localStorage.setItem("folders-uploaded", JSON.stringify(temp));
-      window.LowLevelApi.readDiskFromStorage(partition, "/" + partition);
-      spawnNotification("Správce disků", "Kopírování bylo dokončeno");
-    }
-  }
-
-  static mainToPartition(partition) {
-    BPrompt.prompt("Zadejte cestu složky", (folder) => {
-      folder = folder.endsWith("/") ? folder : folder + "/";
-      if (mainFileManager.folderExist(folder)) {
-        window.LowLevelApi.writeDiskFromStorage(folder, partition);
-      } else {
-        spawnNotification("Správce disků", "Tato složka neexistuje!");
-      }
-    });
-  }
 }

@@ -42,6 +42,7 @@ var windows = {
       "inputdevices",
       "logs",
       "nohuplogs",
+      "unzip",
     ],
     classes: [
       ".poznamky",
@@ -83,6 +84,7 @@ var windows = {
       ".inputdevices",
       ".logs",
       ".nohuplogs",
+      ".unzip",
     ],
     ikonadown: [
       ".poznamkyikonadown",
@@ -124,7 +126,52 @@ var windows = {
       ".inputdevicesikonadown",
       ".logsikonadown",
       ".nohuplogsikonadown",
+      false,
     ],
+    focusedAction: [
+      (win) => win.querySelector("textarea").focus(),
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+    ],
+
     special: {
       poznamky: [
         (element) => {
@@ -182,6 +229,14 @@ var windows = {
             const parts = path.split(".");
             var type = parts[parts.length - 1];
           }
+          const bypass = FileLocker.add(path);
+          const intervalID = setInterval(() => {
+            FileLocker.continue(path);
+          }, 2000);
+
+          element.setAttribute("filelocation", path);
+          element.setAttribute("intervalID", intervalID);
+          element.setAttribute("bypass", bypass);
 
           if (type == "txt") {
             element.querySelector(".fileeditorimage").style.display = "none";
@@ -192,7 +247,6 @@ var windows = {
               "block";
             element.querySelector(".imgwallpaperfileconfig").style.display =
               "none";
-            element.setAttribute("filelocation", path);
 
             const { size } = await mainFileManager.stat(path);
             if (size / (1024 * 1024) > 1) {
@@ -204,6 +258,8 @@ var windows = {
                     element.querySelector("#textareafileeditorimage").value =
                       content;
                   } else {
+                    clearInterval(intervalID);
+                    FileLocker.remove(path, bypass);
                     element.querySelector(".headerclass .close").click();
                   }
                 },
@@ -220,7 +276,6 @@ var windows = {
             element.querySelector(".fileeditortext").style.display = "none";
             element.querySelector(".fileeditorvideo").style.display = "none";
             element.querySelector(".fileeditoraudio").style.display = "none";
-            element.setAttribute("filelocation", path);
             element.querySelector("#fileeditorimageimg").src =
               "http://localhost:9999" + path;
             element.querySelector(".filesavefileconfig").style.display = "none";
@@ -284,7 +339,26 @@ var windows = {
               "block";
             element.querySelector(".imgwallpaperfileconfig").style.display =
               "none";
-            element.setAttribute("filelocation", path);
+
+            const { size } = await mainFileManager.stat(path);
+            if (size / (1024 * 1024) > 1) {
+              BPrompt.confirm(
+                "Tento soubor je větší jak 1MB. Tento soubor otevíráte v text editoru. Počítač se může zaseknout. Opravdu chcete tento soubor otevřít?",
+                async (response) => {
+                  if (response) {
+                    const content = await mainFileManager.getTextContent(path);
+                    element.querySelector("#textareafileeditorimage").value =
+                      content;
+                  } else {
+                    clearInterval(intervalID);
+                    FileLocker.remove(path, bypass);
+                    element.querySelector(".headerclass .close").click();
+                  }
+                },
+              );
+              return;
+            }
+
             const content = await mainFileManager.getTextContent(path);
             element.querySelector("#textareafileeditorimage").value = content;
           }
@@ -297,6 +371,13 @@ var windows = {
           }
         },
         (win) => {
+          const intervalID = win.getAttribute("intervalID");
+          const path = win.getAttribute("filelocation");
+          const bypass = win.getAttribute("bypass");
+
+          clearInterval(intervalID);
+          FileLocker.remove(path, bypass);
+
           if (win.getAttribute("file-type") == "video") {
             const windowId = win.getAttribute("plyr-id");
             videofileids[windowId].destroy();
@@ -322,7 +403,7 @@ var windows = {
         (element, args) => {
           CustomApp.loadWindow(element);
           if (args?.path) {
-            CustomApp.loadFromUri(args.path);
+            CustomApp.loadFromPath(args.path);
           }
         },
         false,
@@ -478,6 +559,8 @@ var windows = {
         (win) => Logs.close(win),
         false,
       ],
+      unzip: [(win, args) => UnZip.init(win, args.path), false, false],
+      procesy: [(win) => Procesy.init(win), (win) => Procesy.end(win), false],
     },
     appIds: {},
   },
@@ -500,6 +583,7 @@ var windows = {
       newelement.classList.add("openedwin");
       newelement.style.opacity = "0";
       newelement.style.scale = "0.9";
+      newelement.setAttribute("name", name);
       document.querySelector(".oknepatrizde").appendChild(newelement);
       reloaddraggable();
       if (
@@ -526,7 +610,9 @@ var windows = {
       newelement.style.opacity = "1";
       newelement.style.scale = "1";
 
-      newelement.click();
+      setTimeout(() => {
+        newelement.click();
+      });
       if (special != undefined && special[0] !== false) {
         special[0](newelement, args);
       }

@@ -59,6 +59,9 @@ window.onkeydown = function (e) {
 
     windowSizing.defaultNonEvent(openedwindowindex, 15, 15);
   }
+  else if (keysDown.indexOf("Control") > -1 && keysDown.indexOf("Shift") > -1 && keysDown.indexOf("Escape") > -1) {
+    windows.open("procesy");
+  }
   else {
     function removeLastInstance(badtext, str) {
       var charpos = str.lastIndexOf(badtext);

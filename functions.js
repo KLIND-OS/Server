@@ -92,7 +92,6 @@ var control = {
     fileSelect: (callBack) => {
       windows.open("filemanager", { mode: "select", callBack: callBack });
     },
-    FileConstructor: File
   }, mainFileManager),
   message: BPrompt,
   printScreen: (callback) => {
@@ -138,7 +137,7 @@ class App {
       LocalStorage.customApps.push(name);
     }
   }
-  createWindow({ name, buttons, content, defaultWindow, onStart}) {
+  createWindow({ name, buttons, content, defaultWindow, onStart, onFocus = false}) {
     var idName = this.info.name + "-" + name;
     var okno = document.createElement("div");
     okno.classList.add("widgetList");
@@ -151,10 +150,22 @@ class App {
 
     var headerClass = document.createElement("div");
     headerClass.classList.add("headerclass");
-
     var spanName = document.createElement("span");
     spanName.textContent = name;
+    spanName.style.float = "left"
     headerClass.appendChild(spanName);
+
+
+    if (buttons.custom != undefined && buttons.custom.length > 0) {
+      for (const button of buttons.custom) {
+        const customButton = document.createElement("div")
+        customButton.classList.add("menu")
+        customButton.onclick = button[1];
+        customButton.textContent = button[0];
+        headerClass.appendChild(customButton)
+      }
+    }
+
     if (buttons.close != undefined) {
       var closeBtn = document.createElement("div");
       closeBtn.classList.add("close");
@@ -178,7 +189,7 @@ class App {
 
     windows.list.names.push(idName);
     windows.list.classes.push("." + idName.replaceAll(" ", ""));
-    windows.list.ikonadown.push(false);
+    windows.list.focusedAction.push(onFocus)
     windows.list.special[idName] = [onStart, closeaction, miniaction];
 
     widgetHeader.appendChild(headerClass);
@@ -190,7 +201,7 @@ class App {
     final.innerHTML += content;
 
     var element = document.createElement("img");
-    element.src = CustomApp.getIcon(name);
+    element.src = CustomApp.getIcon(this.info.name);
     element.alt = idName;
     element.setAttribute("onclick", "windows.miniOpen('" + idName + "',this)");
     element.classList.add("ikonadown");
@@ -199,7 +210,7 @@ class App {
     var finals = document.querySelector(".downiconsAppNone").appendChild(element);
 
     var location = windows.list.names.indexOf(idName);
-    windows.list.ikonadown[location] = "." + idName.replaceAll(" ", "") + "ikonadown";
+    windows.list.ikonadown.push("." + idName.replaceAll(" ", "") + "ikonadown")
 
     if (defaultWindow) Apps[this.info.name] = idName;
 

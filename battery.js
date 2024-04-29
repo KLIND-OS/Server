@@ -24,5 +24,7 @@ async function loadBattery() {
   }
 }
 
+document.querySelector("#batteryIcon").style.display = "block";
+document.querySelector("#batteryIconCharging").style.display = "none";
 setInterval(loadBattery, 5000);
 loadBattery();
