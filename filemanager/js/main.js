@@ -264,6 +264,7 @@ var FileManager = {
     }
   },
   remove: (filename) => {
+    parent.FileLocker.fullTest(infolder + filename);
     parent.BPrompt.confirm(
       "Opravdu chcete odstranit tento soubor?",
       async (res) => {
@@ -280,6 +281,7 @@ var FileManager = {
     );
   },
   removeFolder: (foldername) => {
+    parent.FileLocker.fullTest(infolder + foldername);
     parent.BPrompt.confirm(
       "Opravdu chcete odstranit tuto složku?",
       async (res) => {
@@ -365,6 +367,7 @@ var FileManager = {
     return await parent.LowLevelApi.filesystem.exists(path);
   },
   renameFolder: (foldername) => {
+    parent.FileLocker.fullTest(infolder + foldername);
     const path = parent.LowLevelApi.filesystem.path.join(
       parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
       foldername,
@@ -401,6 +404,7 @@ var FileManager = {
     );
   },
   rename: async (filename) => {
+    parent.FileLocker.fullTest(infolder + filename);
     const path = parent.LowLevelApi.filesystem.path.join(
       parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
       filename,
@@ -441,7 +445,11 @@ var FileManager = {
       parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
       filename,
     );
-    clipboard = [path, filename];
+    const klindospath = parent.LowLevelApi.filesystem.path.join(
+      infolder,
+      filename
+    )
+    clipboard = [path, filename,false, klindospath];
     parent.spawnNotification(
       "Správce Souborů",
       "Jděte do jakékoli složky a stiskněte CTRL + V pro vložení.",
@@ -452,7 +460,12 @@ var FileManager = {
       parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
       foldername,
     );
-    clipboard = [path, foldername, true];
+    const klindospath = parent.LowLevelApi.filesystem.path.join(
+      infolder,
+      foldername
+    )
+
+    clipboard = [path, foldername, true, klindospath];
     parent.spawnNotification(
       "Správce Souborů",
       "Jděte do jakékoli složky a stiskněte CTRL + V pro vložení.",
@@ -473,6 +486,7 @@ var FileManager = {
             clipboard[1],
           );
         } else {
+          const bypass = parent.FileLocker.add(clipboard[3]);
           const destinationPath = parent.LowLevelApi.filesystem.path.join(
             parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
             clipboard[1],
@@ -488,6 +502,7 @@ var FileManager = {
               }
               progressBar.finish();
               FileManager.readFiles();
+              parent.FileLocker.remove(clipboard[3], bypass);
             },
           );
         }
@@ -508,6 +523,7 @@ var FileManager = {
           newclipboard[1],
         );
       } else {
+        const bypass = parent.FileLocker.add(clipboard[3]);
         const destinationPath = parent.LowLevelApi.filesystem.path.join(
           parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles" + infolder,
           clipboard[1],
@@ -541,6 +557,7 @@ var FileManager = {
         destination.on("finish", () => {
           progressBar.finish();
           FileManager.readFiles();
+          parent.FileLocker.remove(clipboard[3], bypass);
         });
       }
     }
@@ -644,6 +661,28 @@ var FileManager = {
         }
       }
     });
+  },
+  zipFolder: async (folder) => {
+    parent.spawnNotification("Správce souborů", "Začínám zipovat soubor");
+    const exec = parent.LowLevelApi.filesystem.promisify(
+      parent.LowLevelApi.child_process.exec,
+    );
+    const execPath = parent.LowLevelApi.filesystem.path.join(
+      parent.LowLevelApi.filesystem.os.homedir(),
+      "usrfiles",
+      infolder,
+      folder,
+    );
+
+    const zipPath = `${folder}.zip`;
+
+    await exec(`zip -r '../${zipPath}' ./*`, {
+      cwd: execPath,
+    });
+
+    parent.spawnNotification("Správce souborů", "Zipování bylo dokončeno");
+
+    FileManager.readFiles();
   },
 };
 var selectmode = false;

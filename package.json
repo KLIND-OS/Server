@@ -2,7 +2,7 @@
   "name": "klind-os",
   "version": "1.0.0",
   "description": "KLIND OS GUI napsané v JavaScriptu.",
-  "main": "index.html",
+  "main": "server.js",
   "scripts": {
     "dev": "node server dev",
     "start": "node server",
@@ -12,15 +12,14 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "morgan": "^1.10.0"
+  },
   "devDependencies": {
     "connect-livereload": "^0.6.1",
-    "eslint": "^8.51.0",
+    "eslint": "^9.0.0",
     "livereload": "^0.9.3",
-    "nodemon": "^3.0.2"
-  },
-  "dependencies": {
-    "express": "^4.18.2",
-    "express-generator": "^4.14.1",
-    "morgan": "^1.10.0"
+    "nodemon": "^3.1.0"
   }
 }

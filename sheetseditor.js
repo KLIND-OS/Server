@@ -78,7 +78,10 @@ class SheetsEditor {
       const newHeaderCell = document.createElement("th");
       function getColumnName(colCount) {
         if (colCount > 702) {
-          spawnNotification("Sheets editor", "You're fucking dumbass. I HATE YOU");
+          spawnNotification(
+            "Sheets editor",
+            "You're fucking dumbass. I HATE YOU",
+          );
           return "dumbass";
         }
         let columnName = "";
@@ -171,8 +174,11 @@ class SheetsEditor {
         const reader = new FileReader();
         reader.onload = async function () {
           const binary = reader.result;
-          await mainFileManager.save(file_path, binary)
-          
+          try {
+            await mainFileManager.save(file_path, binary);
+          } catch {
+            FileLocker.lockedError();
+          }
         };
         reader.readAsBinaryString(blob);
       });
@@ -184,7 +190,7 @@ class SheetsEditor {
     var buffer = new ArrayBuffer(binaryData.length);
     var bufferView = new Uint8Array(buffer);
     for (var i = 0; i < binaryData.length; i++) {
-        bufferView[i] = binaryData.charCodeAt(i);
+      bufferView[i] = binaryData.charCodeAt(i);
     }
 
     var blob = new Blob([buffer], { type: "application/vnd.ms-excel" });

@@ -72,9 +72,7 @@ function loadpoznamky(element) {
     document.getElementById("barvapismapoznamky").value = saddas;
   }
   catch { }
-  setTimeout(() => {
-    element.querySelector("textarea").focus();
-  }, 500);
+    
 }
 function sadhos() {
   var velikostpismapoznamky = document.getElementById("velikostpismapoznamky").value;

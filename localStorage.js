@@ -34,15 +34,15 @@ class LocalStorage {
     "welcomePage",
     "searchEngine",
     "zoom",
-    "nodePackages"
+    "nodePackages",
+    "windowanimation",
   ];
-  static startsWith = [
-    "tinymce-",
-    "SandboxConsole",
-    "plyr",
-  ];
+  static startsWith = ["tinymce-", "SandboxConsole", "plyr"];
   static customApps = [];
   static getAllLocalStorages() {
-    return [LocalStorage.systemLocalStorage.concat(LocalStorage.customApps), LocalStorage.startsWith];
+    return [
+      LocalStorage.systemLocalStorage.concat(LocalStorage.customApps),
+      LocalStorage.startsWith,
+    ];
   }
 }

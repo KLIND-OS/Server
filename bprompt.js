@@ -18,7 +18,7 @@ var BPrompt = {
     document
       .querySelector(".prompt-element .input-box")
       .addEventListener("keydown", (e) => {
-        if ((e.key == "Escape")) {
+        if (e.key == "Escape") {
           document.querySelector(".prompt-element").style.display = "none";
           document.querySelector(".input-box").value = "";
         }
@@ -31,6 +31,11 @@ var BPrompt = {
     document
       .querySelector(".submit-box-confirm.submit-box-confirm-left")
       .focus();
+  },
+  alert: (message) => {
+    document.querySelector(".message-box-alert").innerHTML = message;
+    document.querySelector(".alert-element").style.display = "block";
+    document.querySelector(".submit-box-alert").focus();
   },
 };
 function submitMessage() {
