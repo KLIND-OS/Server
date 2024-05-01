@@ -1264,12 +1264,6 @@
               ></div>
             </div>
           </div>
-          <input
-            style="display: none"
-            type="file"
-            id="customappadd"
-            onchange="CustomApp.add(this)"
-          />
           <header
             style="
               height: 50px;
@@ -1280,7 +1274,7 @@
           >
             Vlastní aplikace<button
               style="height: 50px; right: 0; position: absolute; width: 50px"
-              onclick="document.querySelector('#customappadd').click();"
+              onclick="control.fileManager.fileSelect({success: path => CustomApp.loadFromPath(path), closed: () => {}})"
             >
               Nahrát
             </button>

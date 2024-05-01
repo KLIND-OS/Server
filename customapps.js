@@ -34,7 +34,10 @@ var CustomApp = {
         span.textContent = all[i][0];
 
         var removebtn = document.createElement("button");
-        removebtn.setAttribute("onclick", "CustomApp.remove('" + all[i][0].trim() + "')");
+        removebtn.setAttribute(
+          "onclick",
+          "CustomApp.remove('" + all[i][0].trim() + "')",
+        );
         removebtn.textContent = "Odstranit";
 
         element.appendChild(span);
@@ -42,12 +45,11 @@ var CustomApp = {
 
         div.appendChild(element);
       }
-    }
-    else {
+    } else {
       div.innerHTML = "Nemáte nainstalované žádné aplikace!";
     }
   },
-  remove: (element) => {
+  remove: async (element) => {
     var scripts = JSON.parse(localStorage.getItem("customapps"));
     for (var i = 0; i < scripts.length; i++) {
       if (scripts[i][0].trim() == element.trim()) {
@@ -66,99 +68,110 @@ var CustomApp = {
         break;
       }
     }
+
+    const appDataPath = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir(),
+      "appdata",
+      element,
+    );
+    await LowLevelApi.filesystem.fsExtra.rm(appDataPath, { recursive: true });
     window.location.reload();
   },
-  add: (e, x=false) => {
-    var d;
-    if (x) {
-      d = e;
-    }
-    else {
-      d = e.files[0];
-    }
-
-    var new_zip = new JSZip();
-    new_zip.loadAsync(d)
-      .then(function (zip) {
-        zip.file("script.js").async("text")
-          .then(function success(asdtarsd) {
-            var script = asdtarsd;
-            zip.file("image.png").async("base64")
-              .then(function success(adsdasdasd) {
-                var image = "data:image/png;base64," + adsdasdasd;
-                zip.file("name.txt").async("text")
-                  .then(function success(sdajdh) {
-                    if (zip.file("version.txt") == null) {
-                      spawnNotification("Instalátor aplikací", "Tato aplikace je na jinou verzi KLIND OS.");
-                    }
-                    else {
-                      zip.file("version.txt").async("text")
-                        .then(function success(versionasd) {
-                          zip.file("install.js").async("text")
-                            .then(function success(installScript) {
-                              if (versionasd.trim() === version.trim()) {
-                                var name = sdajdh;
-                                // name, script, image
-                                var scripts = localStorage.getItem("customapps");
-                                if (scripts !== null) {
-                                  var all = JSON.parse(scripts);
-                                  var not = false;
-                                  for (var i = 0; i < all.length; i++) {
-                                    if (all[i][0] === name) {
-                                      spawnNotification("Instalátor aplikací", "Aplikace se stejným jménem je již nainstalována!");
-                                      not = true;
-                                      break;
-                                    }
-                                  }
-                                  e.value = "";
-                                  if (!not) {
-                                    if (installScript.trim().startsWith('"use async"')) {
-                                      this.window.installFinished = () => {
-                                        all.push([name.trim(), script, image]);
-                                        localStorage.setItem("customapps", JSON.stringify(all));
-                                        window.location.reload();
-                                      }
-                                      eval(installScript)
-                                    } else {
-                                      eval(installScript);
-                                      all.push([name.trim(), script, image]);
-                                      localStorage.setItem("customapps", JSON.stringify(all));
-                                      window.location.reload();
-                                    }
-                                  }
-                                }
-                                else {
-                                  eval(installScript);
-                                  localStorage.setItem("customapps", JSON.stringify([[name, script, image]]));
-                                  if (!x) e.value = "";
-                                  window.location.reload();
-                                }
-                              }
-                              else {
-                                spawnNotification("Instalátor aplikací", "Tato aplikace je na jinou verzi KLIND OS.");
-                              }
-                            });
-                        }, function error(e) {
-                          console.error(e);
-                        });
-                    }
-                  }, function error(e) {
-                    console.error(e);
-                  });
-              }, function error(e) {
-                console.error(e);
-              });
-          }, function error(e) {
-            console.error(e);
-          });
-
-      });
-  },
   async loadFromPath(path) {
-    const binaryData = await mainFileManager.getContent(path);
-    const uint8Array = Uint8Array.from(binaryData, char => char.charCodeAt(0));
+    const exec = LowLevelApi.filesystem.promisify(
+      LowLevelApi.child_process.exec,
+    );
+    const zipPath = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir(),
+      "usrfiles",
+      path,
+    );
+    const outputPath = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir(),
+      "app_output",
+    );
 
-    var blob = new Blob([uint8Array], { type: "application/zip"});
-    CustomApp.add(blob, true);
-  }
+    await exec(`unzip '${zipPath}' -d '${outputPath}'`);
+
+    const appVersion = await LowLevelApi.filesystem.readFile(
+      LowLevelApi.filesystem.path.join(outputPath, "version.txt"),
+      "utf8",
+    );
+
+    if (!version && version.trim() != appVersion.trim()) {
+      spawnNotifiction(
+        "Instalátor aplikací",
+        "Tato aplikace je na jinou verzi KLIND OS",
+      );
+      return;
+    }
+
+    const iconBase64 = await LowLevelApi.filesystem.readFile(
+      LowLevelApi.filesystem.path.join(outputPath, "image.png"),
+      "base64",
+    );
+
+    const icon = `data:image/png;base64,${iconBase64}`;
+
+    const name = (
+      await LowLevelApi.filesystem.readFile(
+        LowLevelApi.filesystem.path.join(outputPath, "name.txt"),
+        "utf8",
+      )
+    ).trim();
+
+    const script = await LowLevelApi.filesystem.readFile(
+      LowLevelApi.filesystem.path.join(outputPath, "script.js"),
+      "utf8",
+    );
+
+    const install = await LowLevelApi.filesystem.readFile(
+      LowLevelApi.filesystem.path.join(outputPath, "install.js"),
+      "utf8",
+    );
+
+    if (localStorage.getItem("customapps") == null) {
+      localStorage.setItem("customapps", "[]");
+    }
+
+    const all = JSON.parse(localStorage.getItem("customapps"));
+
+    for (var i = 0; i < all.length; i++) {
+      if (all[i][0] === name) {
+        spawnNotification(
+          "Instalátor aplikací",
+          "Aplikace se stejným jménem je již nainstalována!",
+        );
+        return;
+      }
+    }
+
+    const appdatapath = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir(),
+      "appdata",
+      name,
+    );
+
+    await LowLevelApi.filesystem.mkdir(appdatapath);
+
+    await exec(
+      `mv '${LowLevelApi.filesystem.path.join(outputPath, "appdata")}'/* '${appdatapath}'`,
+    );
+
+    await LowLevelApi.filesystem.fsExtra.rm(outputPath, { recursive: true });
+
+    if (install.trim().startsWith('"use async"')) {
+      this.window.installFinished = () => {
+        all.push([name, script, icon]);
+        localStorage.setItem("customapps", JSON.stringify(all));
+        window.location.reload();
+      };
+      eval(install);
+    } else {
+      eval(install);
+      all.push([name, script, icon]);
+      localStorage.setItem("customapps", JSON.stringify(all));
+      window.location.reload();
+    }
+  },
 };
