@@ -282,7 +282,7 @@ var mainFileManager = {
       location,
     );
 
-    const data = LowLevelApi.filesystem.readFile(path, "binary");
+    const data = await LowLevelApi.filesystem.readFile(path, "binary");
     return data;
   },
   getTextContent: async (location) => {
