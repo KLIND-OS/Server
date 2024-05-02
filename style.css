@@ -372,6 +372,10 @@ iframe {
     ease 0.2s scale;
 }
 
+.window[isfullscreen="true"], .window[isfullscreen] .headerclass {
+  border-radius: 0;
+}
+
 body:not(.disablewindowanimation) .window:hover:not(.windowedmtjhjass):not([isfullscreen="true"]) {
   scale: 1.02!important;
 }
