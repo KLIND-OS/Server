@@ -170,7 +170,7 @@ function custompozadisubmit() {
 }
 function submitcss(value) {
   var path = new File(value).fullPath;
-  var contentoffile = mainFileManager.getTextContent(path);
+  var contentoffile = mainFileManager.getContent(path, "utf8");
   var element = document.getElementById("customcssstyleelement");
   element.innerHTML = contentoffile;
   localStorage.setItem("customcss", path);
@@ -274,7 +274,7 @@ window.close = () => {
 
 async function fileEditorSaveText(location, text, bypass) {
   try {
-    await mainFileManager.saveText(location, text, bypass);
+    await mainFileManager.save(location, text, bypass, "utf8");
   } catch (FileUsedError) {
     FileLocker.lockedError();
   }
