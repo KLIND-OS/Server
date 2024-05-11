@@ -7,7 +7,7 @@ function runKLINDOSScript(path) {
     });
   }
   else {
-    var content = parent.mainFileManager.getTextContent(path);
+    var content = parent.mainFileManager.getContent(path, "utf8");
     if (content == false) {
       return Sandbox.model.addHistory({
         command: command,

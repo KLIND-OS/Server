@@ -141,7 +141,7 @@ var mainFileManager = {
     const type = parts[parts.length - 1];
 
     if (type == "kapp") {
-      const content = await mainFileManager.getTextContent(infolder + file);
+      const content = await mainFileManager.getContent(infolder + file, "utf8");
       windows.open(content.split(":")[1]);
       return;
     } else if (type == "kapk") {
@@ -226,7 +226,37 @@ var mainFileManager = {
 
     await LowLevelApi.filesystem.unlink(path);
   },
+  save: async (location, content, bypass, encoding = "binary") => {
+    if (FileLocker.test(location, bypass)) {
+      throw new FileUsedError("This file is already used!");
+    }
+
+    const path = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir() + "/usrfiles",
+      location,
+    );
+    await LowLevelApi.filesystem.writeFile(path, content, {
+      encoding: encoding,
+    });
+
+    var windowasjdh = document.querySelectorAll(".window");
+    for (var i = 0; i < windowasjdh.length; i++) {
+      if (windowasjdh[i].querySelector("#filemanageriframe") != undefined) {
+        windowasjdh[i]
+          .querySelector("#filemanageriframe")
+          .contentWindow.FileManager.readFiles();
+      }
+    }
+  },
   saveText: async (location, file, bypass = "") => {
+    // Deprecated!
+    // Use control.fileManager.save("/file.txt", "text", undefined "utf8") instead
+    // Will be removed soon
+
+    console.warn(
+      "Using deprecated function getTextContent! Look up documentation to migrate to new API.",
+    );
+
     if (FileLocker.test(location, bypass)) {
       throw new FileUsedError("This file is already used!");
     }
@@ -246,34 +276,12 @@ var mainFileManager = {
       }
     }
   },
-  save: async (location, binary, bypass) => {
-    if (FileLocker.test(location, bypass)) {
-      throw new FileUsedError("This file is already used!");
-    }
-
-    const path = LowLevelApi.filesystem.path.join(
-      LowLevelApi.filesystem.os.homedir() + "/usrfiles",
-      location,
-    );
-    await LowLevelApi.filesystem.writeFile(path, binary, {
-      encoding: "binary",
-    });
-
-    var windowasjdh = document.querySelectorAll(".window");
-    for (var i = 0; i < windowasjdh.length; i++) {
-      if (windowasjdh[i].querySelector("#filemanageriframe") != undefined) {
-        windowasjdh[i]
-          .querySelector("#filemanageriframe")
-          .contentWindow.FileManager.readFiles();
-      }
-    }
-  },
   setWallpaper: (location) => {
     localStorage.setItem("background", location);
     document.getElementById("klindows").style.backgroundImage =
       "url(http://localhost:9999" + location + ")";
   },
-  getContent: async (location) => {
+  getContent: async (location, encoding = "binary") => {
     if (!(await mainFileManager.fileExists(location))) {
       return false;
     }
@@ -282,10 +290,18 @@ var mainFileManager = {
       location,
     );
 
-    const data = await LowLevelApi.filesystem.readFile(path, "binary");
+    const data = await LowLevelApi.filesystem.readFile(path, encoding);
     return data;
   },
   getTextContent: async (location) => {
+    // Deprecated!
+    // Use control.fileManager.getContent("/file.txt", "utf8") instead
+    // Will be removed soon
+
+    console.warn(
+      "Using deprecated function getTextContent! Look up documentation to migrate to new API.",
+    );
+
     if (!(await mainFileManager.fileExists(location))) {
       return false;
     }
@@ -335,7 +351,7 @@ var mainFileManager = {
     await mainFileManager.createFile({
       name: fileName + ".kapp",
     });
-    await mainFileManager.saveText("/" + fileName + ".kapp", "open:" + appName);
+    await mainFileManager.save("/" + fileName + ".kapp", "open:" + appName, undefined, "utf8");
   },
   createFile: async ({ name, parentFolder = "/" }) => {
     if (await mainFileManager.fileExists(parentFolder + name)) {
@@ -417,7 +433,7 @@ var mainFileManager = {
     source.pipe(destination);
 
     destination.on("finish", () => {
-      FileLocker.remove(from, bypass)
+      FileLocker.remove(from, bypass);
       callbackFinal();
     });
   },
@@ -426,7 +442,7 @@ var mainFileManager = {
     // Correct: from: /sounds/Linkin Park to: /music/Linkin Park
     // Wrong: /sounds/Linkin Park to: /music/
 
-    const bypass = FileLocker.add(from)
+    const bypass = FileLocker.add(from);
 
     const finalFrom = LowLevelApi.filesystem.path.join(
       LowLevelApi.filesystem.os.homedir() + "/usrfiles",
@@ -441,8 +457,8 @@ var mainFileManager = {
     }
 
     LowLevelApi.filesystem.fsExtra.copy(finalFrom, finalTo, () => {
-      FileLocker.remove(from, bypass)
-      callback()
+      FileLocker.remove(from, bypass);
+      callback();
     });
   },
 };

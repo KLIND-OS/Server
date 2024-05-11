@@ -86,7 +86,8 @@ iframe {
   width: 462px;
   background-color: white;
   overflow: auto;
-  border-radius: 15px;
+  border-start-start-radius: 15px;
+  border-start-end-radius: 15px;
   transition: ease 0.5s bottom;
   bottom: -750px;
   z-index: 100;

@@ -242,7 +242,7 @@
           if (localStorage.getItem("customcss") != null) {
             const customcssarcookie = localStorage.getItem("customcss");
             var contentofcustomcss =
-              mainFileManager.getTextContent(customcssarcookie);
+              mainFileManager.getContent(customcssarcookie, "utf8");
             var elementustomcss = document.getElementById(
               "customcssstyleelement",
             );
