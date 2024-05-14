@@ -294,11 +294,11 @@ class App {
     },
   };
   Shortcuts = {
-    addWindowShortcut: (windowName, shortcut) => {
+    createWindowShortcut: (windowName, shortcut) => {
       const parsedName = this.windowParser.parseName(windowName);
       Shortcuts.addWindowShortcut(parsedName, shortcut);
     },
-    addGlobalShortcut: Shortcuts.addGlobalShort,
+    createGlobalShortcut: Shortcuts.addGlobalShort,
   }
 }
 
