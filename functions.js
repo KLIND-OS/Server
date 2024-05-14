@@ -293,6 +293,13 @@ class App {
       return await LowLevelApi.filesystem.readFile(finalUrl, encoding);
     },
   };
+  Shortcuts = {
+    addWindowShortcut: (windowName, shortcut) => {
+      const parsedName = this.windowParser.parseName(windowName);
+      Shortcuts.addWindowShortcut(parsedName, shortcut);
+    },
+    addGlobalShortcut: Shortcuts.addGlobalShort,
+  }
 }
 
 window.control = control;
