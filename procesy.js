@@ -157,7 +157,10 @@ const originalClearInterval = window.clearInterval;
 window.clearInterval = function (id) {
   var ne = new Array();
   for (var i = 0; i < Procesy.intervals.length; i++) {
-    if (Procesy.intervals[i][0] != id) {
+    if (Procesy.intervals[i] == undefined) {
+
+    }
+    else if (Procesy.intervals[i][0] != id) {
       ne.push(Procesy.intervals[i]);
     } else {
       ne.push(undefined);

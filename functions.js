@@ -24,20 +24,18 @@ var control = {
           todos = [];
         }, 790);
       }
-    }
+    },
   },
   error: (type) => {
     if (type == "fatal") {
       return (info, appName) => {
         error("0x0000241", info, "Chyba vyvolána aplikací: " + appName);
       };
-    }
-    else if (type == "warn") {
+    } else if (type == "warn") {
       return (info, appName) => {
         spawnNotification(appName + " - Varování", info);
       };
-    }
-    else {
+    } else {
       return () => {
         throw new Error("Uknown type of error: " + type);
       };
@@ -54,20 +52,23 @@ var control = {
     },
     reboot: (app) => {
       var appName = app.info.name;
-      BPrompt.confirm("Chcete aplikaci " + appName + " povolit restartovat Váš počítač?", (x) => {
-        if (x) {
-          spawnNotification(appName, "Systém bude restartován za 5 sekund!");
-          setTimeout(() => {
-            window.location.reload();
-          }, 5000);
-        }
-      });
-    }
+      BPrompt.confirm(
+        "Chcete aplikaci " + appName + " povolit restartovat Váš počítač?",
+        (x) => {
+          if (x) {
+            spawnNotification(appName, "Systém bude restartován za 5 sekund!");
+            setTimeout(() => {
+              window.location.reload();
+            }, 5000);
+          }
+        },
+      );
+    },
   },
   playSound: (location) => {
     var x = new Howl({
       src: [location],
-      autoplay: true
+      autoplay: true,
     });
     x.on("end", function () {
       playingSounds = removebyindex(playingSounds, playingSounds.indexOf(x));
@@ -79,7 +80,7 @@ var control = {
     var x = new Howl({
       src: [location],
       autoplay: autoplay || true,
-      ...otherSettings
+      ...otherSettings,
     });
     x.on("end", function () {
       playingSongs = removebyindex(playingSongs, playingSongs.indexOf(x));
@@ -88,11 +89,15 @@ var control = {
     return x;
   },
   notify: spawnNotification,
-  fileManager: Object.assign({}, {
-    fileSelect: (callBack) => {
-      windows.open("filemanager", { mode: "select", callBack: callBack });
+  fileManager: Object.assign(
+    {},
+    {
+      fileSelect: (callBack) => {
+        windows.open("filemanager", { mode: "select", callBack: callBack });
+      },
     },
-  }, mainFileManager),
+    mainFileManager,
+  ),
   message: BPrompt,
   printScreen: (callback) => {
     html2canvas(document.querySelector("#klindows"), {
@@ -101,35 +106,37 @@ var control = {
     }).then(function (canvas) {
       callback(canvas.toDataURL());
     });
-  }
+  },
 };
 class App {
   windowParser = {
     parseName: (windowName) => {
-      return `${this.info.name}-${windowName}`
+      return `${this.info.name}-${windowName}`;
     },
     parseClass: (windowName) => {
       return this.windowParser.parseName(windowName).replaceAll(" ", "");
-    }
-  }
+    },
+  };
   windows = [];
   constructor({ name, hidden }) {
     if (Object.keys(Apps).includes(name)) {
-      throw new Error("App with this name already exists. Name must be a unique.");
-    }
-    else {
+      throw new Error(
+        "App with this name already exists. Name must be a unique.",
+      );
+    } else {
       if (hidden === false) {
         var element = document.createElement("li");
         var a = document.createElement("a");
         a.textContent = name;
-        a.onclick = () => { windows.open(Apps[name]); };
+        a.onclick = () => {
+          windows.open(Apps[name]);
+        };
         element.appendChild(a);
         document.querySelector("#liststartmenu").appendChild(element);
-      }
-      else {
+      } else {
         hidden = true;
       }
-      
+
       this.info = {
         name: name,
         inStartMenu: !hidden,
@@ -137,7 +144,14 @@ class App {
       LocalStorage.customApps.push(name);
     }
   }
-  createWindow({ name, buttons, content, defaultWindow, onStart, onFocus = false}) {
+  createWindow({
+    name,
+    buttons,
+    content,
+    defaultWindow,
+    onStart,
+    onFocus = false,
+  }) {
     var idName = this.info.name + "-" + name;
     var okno = document.createElement("div");
     okno.classList.add("widgetList");
@@ -152,17 +166,16 @@ class App {
     headerClass.classList.add("headerclass");
     var spanName = document.createElement("span");
     spanName.textContent = name;
-    spanName.style.float = "left"
+    spanName.style.float = "left";
     headerClass.appendChild(spanName);
-
 
     if (buttons.custom != undefined && buttons.custom.length > 0) {
       for (const button of buttons.custom) {
-        const customButton = document.createElement("div")
-        customButton.classList.add("menu")
+        const customButton = document.createElement("div");
+        customButton.classList.add("menu");
         customButton.onclick = button[1];
         customButton.textContent = button[0];
-        headerClass.appendChild(customButton)
+        headerClass.appendChild(customButton);
       }
     }
 
@@ -172,8 +185,7 @@ class App {
       closeBtn.setAttribute("onclick", "windows.close(this,'" + idName + "')");
       headerClass.appendChild(closeBtn);
       var closeaction = buttons.close;
-    }
-    else {
+    } else {
       var closeaction = false;
     }
     if (buttons.mini != undefined) {
@@ -182,14 +194,13 @@ class App {
       miniBtn.setAttribute("onclick", "windows.mini(this,'" + idName + "')");
       headerClass.appendChild(miniBtn);
       var miniaction = buttons.mini;
-    }
-    else {
+    } else {
       var miniaction = false;
     }
 
     windows.list.names.push(idName);
     windows.list.classes.push("." + idName.replaceAll(" ", ""));
-    windows.list.focusedAction.push(onFocus)
+    windows.list.focusedAction.push(onFocus);
     windows.list.special[idName] = [onStart, closeaction, miniaction];
 
     widgetHeader.appendChild(headerClass);
@@ -207,16 +218,25 @@ class App {
     element.classList.add("ikonadown");
     element.classList.add(idName.replaceAll(" ", "") + "ikonadown");
 
-    var finals = document.querySelector(".downiconsAppNone").appendChild(element);
+    var finals = document
+      .querySelector(".downiconsAppNone")
+      .appendChild(element);
 
-    var location = windows.list.names.indexOf(idName);
-    windows.list.ikonadown.push("." + idName.replaceAll(" ", "") + "ikonadown")
+    windows.list.ikonadown.push("." + idName.replaceAll(" ", "") + "ikonadown");
 
     if (defaultWindow) Apps[this.info.name] = idName;
 
-    this.windows.push({element: final, ikonaDown: finals, open: () => windows.open(idName) });
+    this.windows.push({
+      element: final,
+      ikonaDown: finals,
+      open: () => windows.open(idName),
+    });
 
-    return {element: final, ikonaDown: finals, open: () => windows.open(idName)};
+    return {
+      element: final,
+      ikonaDown: finals,
+      open: () => windows.open(idName),
+    };
   }
   storage = {
     set: (key, value) => {
@@ -235,9 +255,51 @@ class App {
     clear: () => {
       var name = this.info.name;
       localStorage.removeItem(name);
-    }
+    },
   };
+  appData = {
+    getUrl: (path) => {
+      const finalUrl = LowLevelApi.filesystem.path.join(
+        this.info.name,
+        path,
+      );
+      return new URL(finalUrl, "http://localhost:9998");
+    },
+    getBinary: async (path) => {
+      const finalUrl = LowLevelApi.filesystem.path.join(
+        LowLevelApi.filesystem.os.homedir(),
+        "appdata",
+        this.info.name,
+        path,
+      );
+      return await LowLevelApi.filesystem.readFile(finalUrl, "binary");
+    },
+    getText: async (path) => {
+      const finalUrl = LowLevelApi.filesystem.path.join(
+        LowLevelApi.filesystem.os.homedir(),
+        "appdata",
+        this.info.name,
+        path,
+      );
+      return await LowLevelApi.filesystem.readFile(finalUrl, "utf8");
+    },
+    get: async (path, encoding) => {
+      const finalUrl = LowLevelApi.filesystem.path.join(
+        LowLevelApi.filesystem.os.homedir(),
+        "appdata",
+        this.info.name,
+        path,
+      );
+      return await LowLevelApi.filesystem.readFile(finalUrl, encoding);
+    },
+  };
+  Shortcuts = {
+    createWindowShortcut: (windowName, shortcut) => {
+      const parsedName = this.windowParser.parseName(windowName);
+      Shortcuts.addWindowShortcut(parsedName, shortcut);
+    },
+    createGlobalShortcut: Shortcuts.addGlobalShort,
+  }
 }
-
 
 window.control = control;

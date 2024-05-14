@@ -402,7 +402,7 @@
 					})
 				}
 				else {
-					var content = await parent.mainFileManager.getTextContent(path);
+					var content = await parent.mainFileManager.getContent(path, "utf8");
 					if (content == false) {
 						return this.model.addHistory({
 							command : command,
