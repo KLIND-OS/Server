@@ -12,7 +12,7 @@ class WordEditor {
 
     if (end == "html") {
       try {
-        await mainFileManager.saveText(fileLocation, content);
+        await mainFileManager.save(fileLocation, content, undefined, "utf8");
       } catch {
         FileLocker.lockedError();
       }
@@ -25,7 +25,7 @@ class WordEditor {
               name: filename + ".html",
               parentFolder: directory,
             });
-            await mainFileManager.saveText(fileLocation + ".html", content);
+            await mainFileManager.save(fileLocation + ".html", content, undefined, "utf8");
           }
         },
       );

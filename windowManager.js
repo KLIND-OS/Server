@@ -254,7 +254,10 @@ var windows = {
                 "Tento soubor je větší jak 1MB. Tento soubor otevíráte v text editoru. Počítač se může zaseknout. Opravdu chcete tento soubor otevřít?",
                 async (response) => {
                   if (response) {
-                    const content = await mainFileManager.getTextContent(path);
+                    const content = await mainFileManager.getContent(
+                      path,
+                      "utf8",
+                    );
                     element.querySelector("#textareafileeditorimage").value =
                       content;
                   } else {
@@ -267,7 +270,7 @@ var windows = {
               return;
             }
 
-            const content = await mainFileManager.getTextContent(path);
+            const content = await mainFileManager.getContent(path, "utf8");
             element.querySelector("#textareafileeditorimage").value = content;
           } else if (
             ["jpg", "png", "gif", "svg", "webp", "ico"].includes(type)
@@ -346,7 +349,7 @@ var windows = {
                 "Tento soubor je větší jak 1MB. Tento soubor otevíráte v text editoru. Počítač se může zaseknout. Opravdu chcete tento soubor otevřít?",
                 async (response) => {
                   if (response) {
-                    const content = await mainFileManager.getTextContent(path);
+                    const content = await mainFileManager.getContent(path, "utf8");
                     element.querySelector("#textareafileeditorimage").value =
                       content;
                   } else {
@@ -359,7 +362,7 @@ var windows = {
               return;
             }
 
-            const content = await mainFileManager.getTextContent(path);
+            const content = await mainFileManager.getContent(path, "utf8");
             element.querySelector("#textareafileeditorimage").value = content;
           }
           if (localStorage.getItem("mode") == "dark") {
@@ -488,7 +491,7 @@ var windows = {
                 const parts = path.split(".");
                 const end = parts[parts.length - 1];
                 if (end == "html") {
-                  editor.setContent(await mainFileManager.getTextContent(path));
+                  editor.setContent(await mainFileManager.getContent(path, "utf8"));
                 } else {
                   editor.setContent(await convertDataUriToHtml(path));
                 }
