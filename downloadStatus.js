@@ -87,3 +87,4 @@ class DownloadStatus {
 }
 
 window.DownloadStatus = DownloadStatus;
+window.TrackingStatus = DownloadStatus;
