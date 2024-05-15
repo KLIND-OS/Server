@@ -14,12 +14,12 @@ async function loadBattery() {
   if (status.trim() === "Discharging" && previousBatteryState !== "notcharging") {
     document.querySelector("#batteryIcon").style.display = "block";
     document.querySelector("#batteryIconCharging").style.display = "none";
-    batteryOut();
+    Sounds.batteryOut();
     previousBatteryState = "notcharging";
   } else if (status.trim() === "Charging" && previousBatteryState !== "charging") {
     document.querySelector("#batteryIcon").style.display = "none";
     document.querySelector("#batteryIconCharging").style.display = "block";
-    batteryIn();
+    Sounds.batteryIn();
     previousBatteryState = "charging";
   }
 }
