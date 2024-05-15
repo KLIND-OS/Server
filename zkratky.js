@@ -3,7 +3,8 @@ window.onkeydown = (e) => {
   keysDown.add(e.key);
   Shortcuts._handleKeypress(keysDown);
 };
-window.onkeyup = () => {
+window.onkeyup = (e) => {
+  // keysDown.delete(e.key);
   keysDown.clear();
 };
 
@@ -59,7 +60,20 @@ class Shortcuts {
       windowSizing.defaultNonEvent(openedwindowindex, 15, 15);
     }),
   ];
-  static windowShortcutList = {};
+  static windowShortcutList = {
+    poznamky: [
+      new Shortcut(["Control", "s"], (win) => {
+        win.querySelector(".menu.savepoznamky").click();
+      }),
+    ],
+    fileeditor: [
+      new Shortcut(["Control", "s"], (win) => {
+        if (win.querySelector(".filesavefileconfig").style.display == "block") {
+          win.querySelector(".filesavefileconfig").click();
+        }
+      }),
+    ],
+  };
   static _eqSet(xs, ys) {
     return xs.size === ys.size && [...xs].every((x) => ys.has(x));
   }
@@ -83,7 +97,7 @@ class Shortcuts {
     for (const shortcut of windowShortcuts) {
       const needPress = new Set(shortcut.keys);
       if (this._eqSet(keysDown, needPress)) {
-        shortcut.exec();
+        shortcut.exec(openedwindowindex);
         return;
       }
     }
