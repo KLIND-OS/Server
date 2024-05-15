@@ -349,7 +349,10 @@ var windows = {
                 "Tento soubor je větší jak 1MB. Tento soubor otevíráte v text editoru. Počítač se může zaseknout. Opravdu chcete tento soubor otevřít?",
                 async (response) => {
                   if (response) {
-                    const content = await mainFileManager.getContent(path, "utf8");
+                    const content = await mainFileManager.getContent(
+                      path,
+                      "utf8",
+                    );
                     element.querySelector("#textareafileeditorimage").value =
                       content;
                   } else {
@@ -454,17 +457,20 @@ var windows = {
             throw new Error("File must be specified");
           }
           const { path } = args;
+          const bypass = FileLocker.add(path);
+          const intervalID = setInterval(() => {
+            FileLocker.continue(path);
+          }, 5000);
           win.setAttribute("filelocation", path);
+          win.setAttribute("bypass", bypass);
+          win.setAttribute("intervalID", intervalID);
 
           async function convertDataUriToHtml(path) {
             const binaryData = await mainFileManager.getContent(path);
-
             const arrayBuffer = Uint8Array.from(binaryData, (char) =>
               char.charCodeAt(0),
             );
-
             const html = await mammoth.convertToHtml({ arrayBuffer });
-
             return html.value;
           }
 
@@ -491,7 +497,9 @@ var windows = {
                 const parts = path.split(".");
                 const end = parts[parts.length - 1];
                 if (end == "html") {
-                  editor.setContent(await mainFileManager.getContent(path, "utf8"));
+                  editor.setContent(
+                    await mainFileManager.getContent(path, "utf8"),
+                  );
                 } else {
                   editor.setContent(await convertDataUriToHtml(path));
                 }
@@ -499,7 +507,14 @@ var windows = {
             },
           });
         },
-        false,
+        (win) => {
+          const bypass = win.getAttribute("bypass");
+          const intervalID = win.getAttribute("intervalID");
+          const path = win.getAttribute("filelocation");
+
+          FileLocker.remove(path, bypass);
+          clearInterval(intervalID);
+        },
         false,
       ],
       sheetseditor: [
@@ -510,7 +525,7 @@ var windows = {
             throw new Error("File must be specified");
           }
         },
-        false,
+        (win) => SheetsEditor.close(win),
         false,
       ],
       diskmanager: [(win) => DiskManager.init(win), false, false],
