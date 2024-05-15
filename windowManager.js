@@ -636,6 +636,7 @@ var windows = {
 
       setTimeout(() => {
         el.remove();
+        openedwindowindex = undefined;
       }, 200);
     }
   },
