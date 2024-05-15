@@ -2,10 +2,12 @@ class DiskManager {
   static disks = {};
   static add(disk, partitions) {
     DiskManager.disks[disk] = partitions.split(",");
+    Sounds.devicePlugIn();
     spawnNotification("Správce disků", `Disk ${disk} byl připojen!`);
   }
   static remove(disk) {
     delete DiskManager.disks[disk];
+    Sounds.devicePlugOut();
     spawnNotification("Správce disků", `Disk ${disk} byl odpojen!`);
   }
   static getAllDisks() {
@@ -15,7 +17,7 @@ class DiskManager {
     const response = await LowLevelApi.DiskManagement.unmount(disk);
     if (response) {
       parentel.remove();
-      spawnNotification("Správce disků", `Nyní můžete disk bezpečně odpojit.`)
+      spawnNotification("Správce disků", `Nyní můžete disk bezpečně odpojit.`);
     }
   }
   static init(win) {
@@ -28,8 +30,11 @@ class DiskManager {
       div.appendChild(h1);
       var button1 = document.createElement("button");
       button1.textContent = "Bezpečně odpojit disk";
-      button1.setAttribute("onclick", `DiskManager.unmount('${disk}', this.parentElement)`);
-      div.appendChild(button1)
+      button1.setAttribute(
+        "onclick",
+        `DiskManager.unmount('${disk}', this.parentElement)`,
+      );
+      div.appendChild(button1);
 
       DiskManager.disks[disk].forEach((partition) => {
         var p = document.createElement("p");

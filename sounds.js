@@ -1,25 +1,26 @@
-function internet_down() {
-  new Howl({
-    src: ["sounds/internet-down.mp3"],
-    autoplay: true,
-  });
-}
-function internet_up() {
-  new Howl({
-    src: ["sounds/internet-up.mp3"],
-    autoplay: true,
-  });
-}
-// Todo: Make new sounds
-function batteryIn() {
-  new Howl({
-    src: ["sounds/internet-up.mp3"],
-    autoplay: true,
-  });
-}
-function batteryOut() {
-  new Howl({
-    src: ["sounds/internet-down.mp3"],
-    autoplay: true,
-  });
+class Sounds {
+  static batteryIn() {
+    new Howl({
+      src: ["sounds/battery-plug-in.mp3"],
+      autoplay: true,
+    });
+  }
+  static batteryOut() {
+    new Howl({
+      src: ["sounds/battery-plug-out.mp3"],
+      autoplay: true,
+    });
+  }
+  static devicePlugIn() {
+    new Howl({
+      src: ["sounds/device-plug-in.mp3"],
+      autoplay: true,
+    });
+  }
+  static devicePlugOut() {
+    new Howl({
+      src: ["sounds/device-plug-out.mp3"],
+      autoplay: true,
+    });
+  }
 }
