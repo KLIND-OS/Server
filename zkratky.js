@@ -41,6 +41,13 @@ class Shortcuts {
         appsopened.open();
       }
     }),
+    new Shortcut(["Alt", ";"], () => {
+      if (appsopened.oppened) {
+        appsopened.close();
+      } else {
+        appsopened.open();
+      }
+    }),
     new Shortcut(["AltGraph", "f"], () => ColorFilters.deactivateAll()),
     new Shortcut(["AltGraph", "["], () => ColorFilters.deactivateAll()),
     new Shortcut(["Alt", "ArrowUp"], () => {

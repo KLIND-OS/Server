@@ -740,7 +740,7 @@ var windows = {
             });
           }
         });
-        el.addEventListener("mouseout", (e) => {
+        el.addEventListener("mouseout", () => {
           var appdiv = document.querySelector(".appdiv");
           appdiv.querySelector(".canvasSection").innerHTML = "";
           appdiv.style.display = "none";
