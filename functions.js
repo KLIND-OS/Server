@@ -99,14 +99,6 @@ var control = {
     mainFileManager,
   ),
   message: BPrompt,
-  printScreen: (callback) => {
-    html2canvas(document.querySelector("#klindows"), {
-      useCORS: true,
-      allowTaint: true,
-    }).then(function (canvas) {
-      callback(canvas.toDataURL());
-    });
-  },
 };
 class App {
   windowParser = {
