@@ -238,8 +238,10 @@
 
           if (localStorage.getItem("customcss") != null) {
             const customcssarcookie = localStorage.getItem("customcss");
-            var contentofcustomcss =
-              mainFileManager.getContent(customcssarcookie, "utf8");
+            var contentofcustomcss = mainFileManager.getContent(
+              customcssarcookie,
+              "utf8",
+            );
             var elementustomcss = document.getElementById(
               "customcssstyleelement",
             );
@@ -518,7 +520,9 @@
           <div class="widget-header">
             <div class="headerclass">
               <span style="float: left">Poznámky</span>
-              <div class="menu savepoznamky" onclick="savepoznamky(this)">Uložit</div>
+              <div class="menu savepoznamky" onclick="savepoznamky(this)">
+                Uložit
+              </div>
               <div class="menu" onclick="smazatulozene()">Smazat uložené</div>
               <div class="menu" onclick="nastavenipoznamky()">Nastavení</div>
               <div class="menu" onclick="bhdasv()">Nápověda</div>
