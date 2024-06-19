@@ -12,7 +12,7 @@ function druhyclock() {
   document.querySelector(".dvaclock").classList.remove("closedclock");
   localStorage.setItem("clocktype", "second");
 }
-function asduiashgdi() {
+function setupClock() {
   setInterval(() => {
     const time = document.querySelector("#time");
     let date = new Date();
