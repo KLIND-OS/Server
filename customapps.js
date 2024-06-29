@@ -163,7 +163,7 @@ var CustomApp = {
     await LowLevelApi.filesystem.fsExtra.rm(outputPath, { recursive: true });
 
     if (install.trim().startsWith('"use async"')) {
-      this.window.installFinished = () => {
+      window.installFinished = () => {
         all.push([name, script, icon]);
         localStorage.setItem("customapps", JSON.stringify(all));
         window.location.reload();
