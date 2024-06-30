@@ -8,7 +8,7 @@ function lengthInUtf8Bytes(str) {
 document.addEventListener(
   "contextmenu",
   function (e) {
-    if (!selectmode) {
+    if (!selectmode && !folderselect) {
       if (e.target.classList == "element") {
         rightclickad = document.querySelector(".rightclick");
         rightclickad.setAttribute("idel", e.target.getAttribute("idel"));
@@ -54,33 +54,6 @@ document.addEventListener(
   false,
 );
 
-var parseExcel = function (file) {
-  var reader = new FileReader();
-
-  reader.onload = function (e) {
-    var asdajksdhjasd = [];
-    var data = e.target.result;
-    var workbook = XLSX.read(data, {
-      type: "binary",
-    });
-
-    workbook.SheetNames.forEach(function (sheetName) {
-      var XL_row_object = XLSX.utils.sheet_to_row_object_array(
-        workbook.Sheets[sheetName],
-      );
-
-      asdajksdhjasd.push(XL_row_object);
-    });
-    FileManager.uploadToLocalStorage(file, JSON.stringify(asdajksdhjasd));
-    document.querySelector("#fileupload").value = "";
-    FileManager.readFiles();
-  };
-  reader.onerror = function (ex) {
-    console.log(ex);
-  };
-
-  reader.readAsBinaryString(file);
-};
 function removebyindex(array, index) {
   var doacgajs = [];
   for (var i = 0; i < array.length; i++) {
@@ -132,11 +105,16 @@ var FileManager = {
     if (selectmode) {
       document.querySelector(".main").innerHTML =
         "<header><p>Správce Souborů <span>" + infolder + "</span></p></header>";
+    } else if (folderselect) {
+      document.querySelector(".main").innerHTML =
+        "<header><p>Správce Souborů <span>" +
+        infolder +
+        '</span></p><div class="secondelement" onclick="FileManager.createFolder();"></div></header>';
     } else {
       document.querySelector(".main").innerHTML =
         "<header><p>Správce Souborů <span>" +
         infolder +
-        '</span></p><!--<div class="mainelement" onclick="FileManager.upload();"></div>--!><div class="secondelement" onclick="FileManager.createFolder();"></div><div class="thirdelement" onclick="FileManager.createFile();"></div><div class="fourthelement" onclick="FileManager.readFiles();"></div></header>';
+        '</span></p><div class="secondelement" onclick="FileManager.createFolder();"></div><div class="thirdelement" onclick="FileManager.createFile();"></div><div class="fourthelement" onclick="FileManager.readFiles();"></div></header>';
     }
     if (infolder != "/") {
       var element = document.createElement("div");
@@ -254,7 +232,7 @@ var FileManager = {
         return;
       }
       parent.mainFileManager.open(infolder, isdd);
-    } else {
+    } else if (!folderselect) {
       const path = infolder + isdd;
       var index = window.location.href.split("index=")[1];
       parent.openGetFile[index][1]["success"](path);
@@ -447,9 +425,9 @@ var FileManager = {
     );
     const klindospath = parent.LowLevelApi.filesystem.path.join(
       infolder,
-      filename
-    )
-    clipboard = [path, filename,false, klindospath];
+      filename,
+    );
+    clipboard = [path, filename, false, klindospath];
     parent.spawnNotification(
       "Správce Souborů",
       "Jděte do jakékoli složky a stiskněte CTRL + V pro vložení.",
@@ -462,8 +440,8 @@ var FileManager = {
     );
     const klindospath = parent.LowLevelApi.filesystem.path.join(
       infolder,
-      foldername
-    )
+      foldername,
+    );
 
     clipboard = [path, foldername, true, klindospath];
     parent.spawnNotification(
@@ -596,7 +574,7 @@ var FileManager = {
                 name,
               );
 
-              parent.LowLevelApi.filesystem.fs.open(path, "w", (err, file) => {
+              parent.LowLevelApi.filesystem.fs.open(path, "w", () => {
                 FileManager.readFiles();
               });
             }
@@ -611,6 +589,10 @@ var FileManager = {
   },
   selectMode: () => {
     selectmode = true;
+  },
+  folderSelect: () => {
+    folderselect = true;
+    document.querySelector(".folderselect").style.display = "flex";
   },
   addShortcut: (idel) => {
     var fun = `try{mainFileManager.open('${infolder}', '${idel}')}catch {spawnNotification("Správce souborů","Tento soubor nebyl nalezen!")}`;
@@ -684,8 +666,16 @@ var FileManager = {
 
     FileManager.readFiles();
   },
+  submitFolder: () => {
+    var index = window.location.href.split("index=")[1];
+    parent.openGetFile[index][1]["success"](infolder);
+    var element = parent.openGetFile[index][0].querySelector(".close");
+    parent.openGetFile = removebyindex(parent.openGetFile, index);
+    parent.windows.close(element, "filemanager");
+  },
 };
 var selectmode = false;
+var folderselect = false;
 var keysdown = [];
 document.addEventListener("keydown", function (e) {
   keysdown.push(e.key);
@@ -703,6 +693,9 @@ if (window.location.href.indexOf("dark") > -1) {
 } else {
   document.querySelector(".main").classList.add("light");
 }
-if (window.location.href.indexOf("select") > -1) {
+if (window.location.href.indexOf("fileselect") > -1) {
   FileManager.selectMode();
+}
+if (window.location.href.includes("folderselect")) {
+  FileManager.folderSelect();
 }

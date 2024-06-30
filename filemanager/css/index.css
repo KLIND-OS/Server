@@ -1,9 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&family=Noto+Sans:wght@500&family=Open+Sans:wght@700&display=swap");
-/*
-* {
-    outline: dotted 1px red;
-}
-*/
+
 * {
   margin: 0;
   padding: 0;
@@ -143,6 +139,21 @@ body {
   left: 15px;
 }
 
+.folderselect {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 40px;
+  width: 170px;
+  background-color: rgb(39, 39, 39);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  display: none;
+}
+
 .hidden {
   display: none !important;
 }
@@ -178,4 +189,4 @@ body {
 .rightclick .choice.last, .rightclicktwo .choice.last, .rightclickthree .choice.last {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-}/*# sourceMappingURL=index.css.map */
+}
