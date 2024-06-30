@@ -637,11 +637,11 @@ var windows = {
       return newelement;
     }
   },
-  close: (element, name) => {
+  close: async (element, name) => {
     var el = element.parentElement.parentElement.parentElement;
     var special = windows.list.special[name];
     if (special != undefined && special[1] !== false) {
-      var returnValue = special[1](el);
+      var returnValue = await special[1](el);
     } else {
       var returnValue = undefined;
     }
