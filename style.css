@@ -373,12 +373,18 @@ iframe {
     ease 0.2s scale;
 }
 
-.window[isfullscreen="true"], .window[isfullscreen="true"] .headerclass {
+.window > #root {
+  height: calc(100% - 20px);
+}
+
+.window[isfullscreen="true"],
+.window[isfullscreen="true"] .headerclass {
   border-radius: 0;
 }
 
-body:not(.disablewindowanimation) .window:hover:not(.windowedmtjhjass):not([isfullscreen="true"]) {
-  scale: 1.02!important;
+body:not(.disablewindowanimation)
+  .window:hover:not(.windowedmtjhjass):not([isfullscreen="true"]) {
+  scale: 1.02 !important;
 }
 
 .audioLevelEditor {
@@ -1203,7 +1209,8 @@ body {
   min-width: 300px;
   z-index: 23;
 }
-.procesy .procesyProcesy, .procesy .infoProcesy{
+.procesy .procesyProcesy,
+.procesy .infoProcesy {
   height: calc(100% - 40px);
 }
 .procesy .procesyProcesy {
@@ -1414,7 +1421,7 @@ body {
   display: block !important;
 }
 
-.menu{
+.menu {
   width: auto;
   float: left;
   margin-left: 15px;
@@ -2994,5 +3001,5 @@ table tr td input {
 }
 
 .download p {
-    height: 44px;
+  height: 44px;
 }
