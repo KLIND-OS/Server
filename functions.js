@@ -197,8 +197,8 @@ class App {
     windows.list.classes.push("." + idName.replaceAll(" ", ""));
     windows.list.focusedAction.push(onFocus);
     windows.list.special[idName] = [
-      async (win) => {
-        const props = await passProps(win);
+      async (win, args) => {
+        const props = await passProps(win, args);
         const root = win.querySelector("#root");
         const html = await this.appData.getText(content);
 
@@ -206,7 +206,7 @@ class App {
         const finalHtml = template(props);
         root.innerHTML = finalHtml;
 
-        await onStart(win);
+        await onStart(win, args);
       },
       closeaction,
       miniaction,
