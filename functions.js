@@ -95,6 +95,9 @@ var control = {
       fileSelect: (callBack) => {
         windows.open("filemanager", { mode: "select", callBack: callBack });
       },
+      folderSelect: (callBack) => {
+        windows.open("filemanager", { mode: "folderselect", callBack: callBack })
+      }
     },
     mainFileManager,
   ),

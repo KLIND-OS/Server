@@ -198,8 +198,8 @@ var windows = {
           if (localStorage.getItem("mode") == "dark") url += "?dark";
 
           if (args && args.mode == "select") {
-            if (url.indexOf("?") == -1) url += "?select";
-            else url += "&select";
+            if (url.indexOf("?") == -1) url += "?fileselect";
+            else url += "&fileselect";
             var index = openGetFile.length;
             openGetFile.push([element, args.callBack]);
             element
@@ -213,6 +213,26 @@ var windows = {
             element.querySelector(".mini").remove();
             element.querySelector(".headerclass span").textContent =
               "Vyberte soubor";
+            url += "&index=" + index;
+          }
+
+          if (args && args.mode == "folderselect") {
+            if (url.indexOf("?") == -1) url += "?folderselect";
+            else url += "&folderselect";
+
+            var index = openGetFile.length;
+            openGetFile.push([element, args.callBack]);
+            element
+              .querySelector(".close")
+              .setAttribute(
+                "onclick",
+                "openGetFile[" +
+                  index +
+                  "][1]['closed']();windows.close(this,'filemanager')",
+              );
+            element.querySelector(".mini").remove();
+            element.querySelector(".headerclass span").textContent =
+              "Vyberte složku";
             url += "&index=" + index;
           }
           element.querySelector("#filemanageriframe").src = url;
