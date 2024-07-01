@@ -96,8 +96,11 @@ var control = {
         windows.open("filemanager", { mode: "select", callBack: callBack });
       },
       folderSelect: (callBack) => {
-        windows.open("filemanager", { mode: "folderselect", callBack: callBack })
-      }
+        windows.open("filemanager", {
+          mode: "folderselect",
+          callBack: callBack,
+        });
+      },
     },
     mainFileManager,
   ),
@@ -149,6 +152,7 @@ class App {
     passProps = async () => {
       return {};
     },
+    _forcePlainHTML = false,
   }) {
     var idName = this.info.name + "-" + name;
     var okno = document.createElement("div");
@@ -186,6 +190,7 @@ class App {
     } else {
       var closeaction = false;
     }
+
     if (buttons.mini != undefined) {
       var miniBtn = document.createElement("div");
       miniBtn.classList.add("mini");
@@ -201,13 +206,17 @@ class App {
     windows.list.focusedAction.push(onFocus);
     windows.list.special[idName] = [
       async (win, args) => {
-        const props = await passProps(win, args);
-        const root = win.querySelector("#root");
-        const html = await this.appData.getText(content);
+        if (_forcePlainHTML) {
+          win.querySelector("#root").innerHTML = content;
+        } else {
+          const props = await passProps(win, args);
+          const root = win.querySelector("#root");
+          const html = await this.appData.getText(content);
 
-        const template = Handlebars.compile(html);
-        const finalHtml = template(props);
-        root.innerHTML = finalHtml;
+          const template = Handlebars.compile(html);
+          const finalHtml = template(props);
+          root.innerHTML = finalHtml;
+        }
 
         await onStart(win, args);
       },

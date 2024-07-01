@@ -1249,17 +1249,6 @@ body {
   background-color: white;
 }
 
-.prevodsys {
-  background-color: white;
-  position: absolute !important;
-  width: 300px;
-  min-height: 300px;
-  height: 300px;
-  overflow: hidden;
-  min-width: 300px;
-  z-index: 23;
-}
-
 .timer iframe {
   width: 96%;
   height: 94%;
@@ -2282,66 +2271,6 @@ table tr td input {
 
   100% {
     transform: translate(-50%, -300%) scale(0);
-  }
-}
-
-@keyframes gelatine {
-  from,
-  to {
-    transform: scale(1, 1);
-  }
-
-  25% {
-    transform: scale(0.9, 1.1);
-  }
-
-  50% {
-    transform: scale(1.1, 0.9);
-  }
-
-  75% {
-    transform: scale(0.95, 1.05);
-  }
-}
-
-@keyframes hithere {
-  30% {
-    transform: scale(1.2);
-  }
-
-  40%,
-  60% {
-    transform: rotate(-20deg) scale(1.2);
-  }
-
-  50% {
-    transform: rotate(20deg) scale(1.2);
-  }
-
-  70% {
-    transform: rotate(0deg) scale(1.2);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes bounsdce {
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
-    transform: translateY(0);
-  }
-
-  40% {
-    transform: translateY(-100px);
-  }
-
-  60% {
-    transform: translateY(-50px);
   }
 }
 

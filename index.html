@@ -28,7 +28,6 @@
     <script src="functions.js"></script>
     <script src="config.js"></script>
     <script src="downloadStatus.js"></script>
-    <script src="prevodsystemu.js"></script>
     <script src="sources/babel.min.js"></script>
     <script src="consolelog.js"></script>
     <script src="sources/polifill.min.js"></script>
@@ -65,7 +64,7 @@
     <script src="taskbar.js"></script>
     <script src="stopky.js"></script>
     <script src="libs/howler.js"></script>
-    <script src="loadingerror.js"></script>
+    <script src="loading.js"></script>
     <style id="customcssstyleelement"></style>
     <script src="dragingelements.js"></script>
     <script src="zkratky.js"></script>
@@ -73,10 +72,8 @@
     <link id="favicon" rel="shortcut icon" href="icons/loading.svg" />
     <script src="info.js"></script>
     <script src="sounds.js"></script>
-    <script src="vars.js"></script>
     <script src="customapps.js"></script>
     <script src="desktopIcons.js"></script>
-    <script src="bouncy.js"></script>
     <script src="calculator.js"></script>
     <script src="yaanidiot.js"></script>
     <script src="/power.js"></script>
@@ -195,41 +192,10 @@
         }
 
         DeveloperMode.load();
-
         Clock.load();
-
         Taskbar.load();
-
         Login.load();
-
-        setTimeout(() => {
-          document.querySelector(".loading").style.top = "-100vh";
-          setTimeout(() => {
-            document
-              .querySelector(".loading")
-              .classList.add("displaynoneimpor");
-            if (!Boot.safeBoot) control.dowhenlogin.loaded();
-            new Howl({
-              src: ["sounds/startup.mp3"],
-              autoplay: true,
-            });
-          }, 700);
-          function changefavicon(vari) {
-            try {
-              document.getElementById("favicon").setAttribute("href", vari);
-            } catch {}
-          }
-          changefavicon("logo.ico");
-          document.title = titleklindows + " " + version;
-        }, 790);
-        document.getElementById("password").focus();
-        document.getElementById("password").select();
-
-        if (localStorage.getItem("login-background")) {
-          document.querySelector(
-            ".background-login-blob",
-          ).style.backgroundColor = localStorage.getItem("login-background");
-        }
+        Loading.setup();
       }
     </script>
     <div class="login" oncontextmenu="return false;">
@@ -871,26 +837,6 @@
             </div>
           </div>
           <iframe class="innerIframe" src="budik" frameborder="0"></iframe>
-        </div>
-
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList prevodsys Resizabl"
-        >
-          <div class="widget-header">
-            <div class="headerclass">
-              <span>Převod systému</span>
-              <div onclick="windows.close(this, 'prevod')" class="close"></div>
-              <div onclick="windows.mini(this, 'prevod')" class="mini"></div>
-            </div>
-          </div>
-          <div id="abjasbdjkbasknfljkdhfasasd">
-            <p>Nikdy soubor neupravuj! Může dojít k poškození systému.</p>
-            <div onclick="prevedsystem();">Získat .klindos soubor</div>
-            <div onclick="submitnjahsbdjksabd(this.parentElement);">
-              Nahrát .klindos soubor
-            </div>
-          </div>
         </div>
 
         <div
@@ -1929,14 +1875,6 @@
             <li>
               <a
                 oncontextmenu="rightclickApp(this)"
-                onclick="windows.open('prevod');"
-                icon="icons/prevod.png"
-                >Převod systému</a
-              >
-            </li>
-            <li>
-              <a
-                oncontextmenu="rightclickApp(this)"
                 onclick="windows.open('record');"
                 icon="icons/record.svg"
                 >Nahrávání</a
@@ -2150,12 +2088,6 @@
               src="icons/budik.svg"
             />
             <img
-              onclick="windows.miniOpen('prevod',this)"
-              alt="Převod"
-              class="ikonadown prevodikonadown builtin"
-              src="icons/prevod.svg"
-            />
-            <img
               onclick="windows.miniOpen('update',this)"
               alt="Aktualizace"
               class="ikonadown updateikonadown builtin"
@@ -2360,9 +2292,9 @@
       </div>
     </div>
 
-    <script src="./mainfacerec.js"></script>
+    <script src="mainfacerec.js"></script>
     <script src="changingz-index.js"></script>
-    <script src="/audioEditor.js"></script>
+    <script src="audioEditor.js"></script>
     <script src="mouse.js"></script>
     <script src="connection-local.js"></script>
     <script>
