@@ -93,7 +93,7 @@ class Login {
 
     this.loadBackgroundLockScreen();
 
-    if (login == "false") {
+    if (localStorage.getItem("unsafe.login") == "false") {
       document.querySelector(".login").classList.add("displaynone");
     }
 

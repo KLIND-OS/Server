@@ -68,11 +68,6 @@ class Shortcuts {
     }),
   ];
   static windowShortcutList = {
-    poznamky: [
-      new Shortcut(["Control", "s"], (win) => {
-        win.querySelector(".menu.savepoznamky").click();
-      }),
-    ],
     fileeditor: [
       new Shortcut(["Control", "s"], (win) => {
         if (win.querySelector(".filesavefileconfig").style.display == "block") {
