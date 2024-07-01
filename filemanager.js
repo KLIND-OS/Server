@@ -267,9 +267,11 @@ var mainFileManager = {
     var windowasjdh = document.querySelectorAll(".window");
     for (var i = 0; i < windowasjdh.length; i++) {
       if (windowasjdh[i].querySelector("#filemanageriframe") != undefined) {
-        windowasjdh[i]
-          .querySelector("#filemanageriframe")
-          .contentWindow.FileManager.readFiles();
+        try {
+          windowasjdh[i]
+            .querySelector("#filemanageriframe")
+            .contentWindow.FileManager.readFiles();
+        } catch {}
       }
     }
   },
@@ -301,10 +303,8 @@ var mainFileManager = {
       }
     }
   },
-  setWallpaper: (location) => {
-    localStorage.setItem("background", location);
-    document.getElementById("klindows").style.backgroundImage =
-      "url(http://localhost:9999" + location + ")";
+  setWallpaper: (x) => {
+    Background.set(x);
   },
   getContent: async (location, encoding = "binary") => {
     if (!(await mainFileManager.fileExists(location))) {
