@@ -23,7 +23,7 @@ var Power = {
   lock: () => {
     Power.close();
     setTimeout(() => {
-      logout();
+      Login.logout();
     }, 600);
   },
   reload: () => {
