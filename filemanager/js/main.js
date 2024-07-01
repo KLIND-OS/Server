@@ -196,7 +196,7 @@ var FileManager = {
       }
     }
   },
-  openFile: async (isdd) => {
+  openFile: async (isdd, ignorepreference = false) => {
     if (!selectmode) {
       if (isdd.endsWith(".lnk")) {
         const systemPath = parent.LowLevelApi.filesystem.path.join(
@@ -231,7 +231,7 @@ var FileManager = {
         }
         return;
       }
-      parent.mainFileManager.open(infolder, isdd);
+      parent.mainFileManager.open(infolder, isdd, ignorepreference);
     } else if (!folderselect) {
       const path = infolder + isdd;
       var index = window.location.href.split("index=")[1];

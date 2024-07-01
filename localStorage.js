@@ -36,6 +36,7 @@ class LocalStorage {
     "zoom",
     "nodePackages",
     "windowanimation",
+    "fileopenPreferences",
   ];
   static startsWith = ["tinymce-", "SandboxConsole", "plyr"];
   static customApps = [];
