@@ -6,12 +6,6 @@ function changepass(element) {
   else if (login == "true") {
     localStorage.setItem("reg.login", newpass + "**.true");
   }
-  if (consolelog == "false") {
-    localStorage.setItem("reg.consolelog", newpass + "**.false");
-  }
-  else if (consolelog == "true") {
-    localStorage.setItem("reg.consolelog", newpass + "**.true");
-  }
   if (autolocklogin == "false") {
     localStorage.setItem("reg.autolocklogin", newpass + "**.false");
   }

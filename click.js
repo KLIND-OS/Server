@@ -10,7 +10,7 @@ document.addEventListener("mousemove", function (e) {
 // Global right click menu
 new ContextMenu(document.getElementById("klindowsrightclickmenu"), [
   new ContextMenuItem("Napájení", () => Power.open()),
-  new ContextMenuItem("Vypnout", () => turnoff()),
+  new ContextMenuItem("Vypnout", () => Power.turnoff()),
   new ContextMenuItem("Nastavení", () => windows.open("nas")),
 ]);
 

@@ -121,10 +121,6 @@ class Login {
       document.getElementById("username").innerHTML = usernamecookie;
     }
 
-    if (facerecognition == "false") {
-      document.getElementById("sdsdaasd").style.display = "none";
-    }
-
     document.querySelector(".loginpass").addEventListener("keypress", (e) => {
       if (e.key == "Enter") {
         Login.submitLogin();

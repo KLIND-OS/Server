@@ -56,7 +56,6 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Montserrat&amp;display=swap"
     />
-    <script src="autolock.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       rel="stylesheet"
@@ -123,6 +122,8 @@
     <script src="background.js"></script>
     <script src="developermode.js"></script>
     <script src="login.js"></script>
+    <script src="startmenu.js"></script>
+    <script src="theme.js"></script>
   </head>
 
   <body
@@ -141,9 +142,6 @@
         </p>
         <p>Pokouším se připojit znovu<span class="testingAnimation">.</span></p>
       </div>
-    </div>
-    <div class="betadiv" style="display: none">
-      <span>Beta</span>
     </div>
     <!-- Right click menu -->
     <div id="outclick" onclick="ContextMenuApi.closeAll();"></div>
@@ -181,10 +179,10 @@
     </div>
     <script>
       if (!Boot.safeBoot) {
-        loadreg();
         UserAgent.test();
       }
       Connection.monitor();
+      StartMenu.load();
     </script>
     <script type="text/javascript">
       async function onloadscripst() {
@@ -223,11 +221,7 @@
             } catch {}
           }
           changefavicon("logo.ico");
-          if (showversionontitle == "true") {
-            document.title = titleklindows + " " + version;
-          } else {
-            document.title = titleklindows;
-          }
+          document.title = titleklindows + " " + version;
         }, 790);
         document.getElementById("password").focus();
         document.getElementById("password").select();
@@ -863,25 +857,6 @@
             <li>ALT Gr + H Zobrazí nápovědu</li>
             <li>ALT + ; Otevře okno s právě otevřenýmy programy</li>
           </ul>
-        </div>
-
-        <div onclick="changewindowmain(this)" class="widgetList reg Resizabl">
-          <div class="widget-header">
-            <div class="headerclass">
-              <span>Editor registrů</span>
-              <div onclick="windows.close(this, 'reg')" class="close"></div>
-              <div onclick="windows.mini(this, 'reg')" class="mini"></div>
-            </div>
-          </div>
-          <div class="content">
-            <select id="changesss">
-              <option value="login">Login</option>
-              <option value="consolelog">ConsoleLog</option>
-              <option value="autolocklogin">AutoLock</option>
-            </select>
-            <input placeholder="Value" id="valuesss" type="text" />
-            <button onclick="submitreg(this.parentElement)">Odeslat</button>
-          </div>
         </div>
 
         <div
@@ -1916,7 +1891,6 @@
           <h1 id="hinotifi">Error</h1>
           <p id="pnotifi">Error</p>
           <script>
-            loadbetaicon();
             DesktopIcons.load();
             dragingikonaklindows();
           </script>
@@ -1925,7 +1899,7 @@
         <div id="backsix" style="display: none" class="startmenu">
           <div class="leftdiv">
             <img
-              onclick="openstartmenu();Power.open()"
+              onclick="StartMenu.open();Power.open()"
               class="userimgdownturnoff"
               cursor="pointer"
               src="icons/poweroffsysdark.svg"
@@ -1934,7 +1908,7 @@
           <input
             type="text"
             id="searchstartmenu"
-            onkeyup="searchstartmenu()"
+            onkeyup="StartMenu.Search.search()"
             placeholder="Hledat"
           />
           <ul id="liststartmenu">
@@ -2000,14 +1974,6 @@
                 onclick="windows.open('stop');"
                 icon="icons/stopky."
                 >Stopky</a
-              >
-            </li>
-            <li>
-              <a
-                oncontextmenu="rightclickApp(this)"
-                onclick="windows.open('reg');"
-                icon="icons/registry-editor.svg"
-                >Editor registů</a
               >
             </li>
             <li>
@@ -2195,25 +2161,16 @@
               >
             </li>
             <li class="searchHelpLi" style="display: none">
-              <a onclick="searchSearchedOnInternet()"
+              <a onclick="StartMenu.Search.searchSearchedOnInternet()"
                 >Vyhledat "<span id="searchHelpText"></span>" na internetu</a
               >
             </li>
           </ul>
         </div>
-        <div class="clockdate">
-          <div class="time">
-            <span id="timess">Error</span>
-          </div>
-          <div class="date">
-            <span id="dateclock">Error</span>
-          </div>
-          <script src="dateclock.js"></script>
-        </div>
         <div class="downloadList"></div>
         <div id="fakedownbar" class="fakedownbar"></div>
         <div id="downbar" class="downbar">
-          <div id="logo" class="logo" onclick="openstartmenu()">
+          <div id="logo" class="logo" onclick="StartMenu.open()">
             <div id="items-1" class="items-1"></div>
             <div id="items-2" class="items-3"></div>
             <div id="items-3" class="items-2"></div>
@@ -2249,12 +2206,6 @@
               alt="Terminal"
               onclick="windows.miniOpen('ter',this)"
               class="ikonadown terikonadown builtin"
-            />
-            <img
-              src="icons/registry-editor.svg"
-              alt="Editor registrů"
-              onclick="windows.miniOpen('reg',this)"
-              class="ikonadown regikonadown builtin"
             />
             <img
               onclick="windows.miniOpen('stop',this)"
@@ -2503,6 +2454,8 @@
       } else {
         ColorFilters.onLoadLoad();
       }
+
+      StartMenu.Search.load();
     </script>
     <script src="getstartedfunctions.js"></script>
     <script src="battery.js"></script>
