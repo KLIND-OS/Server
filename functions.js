@@ -47,7 +47,7 @@ var control = {
       var appName = app.info.name;
       spawnNotification(appName, "Budete odhlášen za 5 sekund.");
       setTimeout(() => {
-        logout();
+        Login.logout();
       }, 5000);
     },
     reboot: (app) => {
@@ -95,18 +95,16 @@ var control = {
       fileSelect: (callBack) => {
         windows.open("filemanager", { mode: "select", callBack: callBack });
       },
+      folderSelect: (callBack) => {
+        windows.open("filemanager", {
+          mode: "folderselect",
+          callBack: callBack,
+        });
+      },
     },
     mainFileManager,
   ),
   message: BPrompt,
-  printScreen: (callback) => {
-    html2canvas(document.querySelector("#klindows"), {
-      useCORS: true,
-      allowTaint: true,
-    }).then(function (canvas) {
-      callback(canvas.toDataURL());
-    });
-  },
 };
 class App {
   windowParser = {
@@ -149,8 +147,12 @@ class App {
     buttons,
     content,
     defaultWindow,
-    onStart,
+    onStart = async () => {},
     onFocus = false,
+    passProps = async () => {
+      return {};
+    },
+    _forcePlainHTML = false,
   }) {
     var idName = this.info.name + "-" + name;
     var okno = document.createElement("div");
@@ -188,6 +190,7 @@ class App {
     } else {
       var closeaction = false;
     }
+
     if (buttons.mini != undefined) {
       var miniBtn = document.createElement("div");
       miniBtn.classList.add("mini");
@@ -201,7 +204,25 @@ class App {
     windows.list.names.push(idName);
     windows.list.classes.push("." + idName.replaceAll(" ", ""));
     windows.list.focusedAction.push(onFocus);
-    windows.list.special[idName] = [onStart, closeaction, miniaction];
+    windows.list.special[idName] = [
+      async (win, args) => {
+        if (_forcePlainHTML) {
+          win.querySelector("#root").innerHTML = content;
+        } else {
+          const props = await passProps(win, args);
+          const root = win.querySelector("#root");
+          const html = await this.appData.getText(content);
+
+          const template = Handlebars.compile(html);
+          const finalHtml = template(props);
+          root.innerHTML = finalHtml;
+        }
+
+        await onStart(win, args);
+      },
+      closeaction,
+      miniaction,
+    ];
 
     widgetHeader.appendChild(headerClass);
 
@@ -209,7 +230,7 @@ class App {
     okno.classList.add("customAppResizable");
 
     var final = document.querySelector(".oknadisplaynone").appendChild(okno);
-    final.innerHTML += content;
+    final.innerHTML += `<div id="root"></div>`;
 
     var element = document.createElement("img");
     element.src = CustomApp.getIcon(this.info.name);
@@ -259,10 +280,7 @@ class App {
   };
   appData = {
     getUrl: (path) => {
-      const finalUrl = LowLevelApi.filesystem.path.join(
-        this.info.name,
-        path,
-      );
+      const finalUrl = LowLevelApi.filesystem.path.join(this.info.name, path);
       return new URL(finalUrl, "http://localhost:9998");
     },
     getBinary: async (path) => {
@@ -299,7 +317,7 @@ class App {
       Shortcuts.addWindowShortcut(parsedName, shortcut);
     },
     createGlobalShortcut: Shortcuts.addGlobalShort,
-  }
+  };
 }
 
 window.control = control;

@@ -1,6 +1,8 @@
 class WordEditor {
   static async save(element) {
     const fileLocation = element.getAttribute("filelocation");
+    const bypass = element.getAttribute("bypass");
+
     let lastSlashIndex = fileLocation.lastIndexOf("/");
     let directory = fileLocation.substring(0, lastSlashIndex + 1);
     let filename = fileLocation.substring(lastSlashIndex + 1);
@@ -12,7 +14,7 @@ class WordEditor {
 
     if (end == "html") {
       try {
-        await mainFileManager.save(fileLocation, content, undefined, "utf8");
+        await mainFileManager.save(fileLocation, content, bypass, "utf8");
       } catch {
         FileLocker.lockedError();
       }

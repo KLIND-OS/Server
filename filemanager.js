@@ -126,7 +126,7 @@ var mainFileManager = {
     zip: [["UnZip", (file) => windows.open("unzip", { path: file })]],
   },
   openingFile: undefined,
-  open: async (infolder, file) => {
+  open: async (infolder, file, ignorepreference = false) => {
     if (!file.includes(".")) {
       spawnNotification(
         "Správce souborů",
@@ -154,6 +154,8 @@ var mainFileManager = {
       possible = [...possible, ...mainFileManager.openWith[type]];
     }
 
+    const preference = FileopenPreferences.getApp(type);
+
     if (possible.length == 0) {
       spawnNotification(
         "Správce souborů",
@@ -162,11 +164,21 @@ var mainFileManager = {
       windows.open("fileeditor", {
         path: infolder + file,
       });
-    } else if (possible.length == 1) {
+    } else if (possible.length == 1 && !ignorepreference) {
       possible[0][1](infolder + file);
+    } else if (
+      preference &&
+      possible.some((e) => e[0].trim() == preference.trim()) &&
+      !ignorepreference
+    ) {
+      possible.filter((e) => e[0].trim() == preference.trim())[0][1](
+        infolder + file,
+      );
     } else {
       mainFileManager.openingFile = [possible, infolder + file];
       var element = document.querySelector(".selectApp .apps ");
+
+      const els = [];
 
       for (var i = 0; i < possible.length; i++) {
         var n = document.createElement("div");
@@ -175,7 +187,21 @@ var mainFileManager = {
         n.textContent = possible[i][0];
         n.setAttribute("onclick", `mainFileManager.openFileWithApp(${i})`);
         element.appendChild(n);
+        els.push(n);
       }
+
+      new ContextMenu(
+        els,
+        [
+          new ContextMenuItem("Nastavit jako výchozí", (e) => {
+            const app = e.textContent;
+            const preferences = JSON.parse(localStorage.getItem("fileopenPreferences") || "[]");
+            preferences[type] = app;
+            localStorage.setItem("fileopenPreferences", JSON.stringify(preferences));
+          }),
+        ],
+        true,
+      );
 
       element.parentElement.parentElement.style.display = "flex";
     }
@@ -242,9 +268,11 @@ var mainFileManager = {
     var windowasjdh = document.querySelectorAll(".window");
     for (var i = 0; i < windowasjdh.length; i++) {
       if (windowasjdh[i].querySelector("#filemanageriframe") != undefined) {
-        windowasjdh[i]
-          .querySelector("#filemanageriframe")
-          .contentWindow.FileManager.readFiles();
+        try {
+          windowasjdh[i]
+            .querySelector("#filemanageriframe")
+            .contentWindow.FileManager.readFiles();
+        } catch {}
       }
     }
   },
@@ -276,10 +304,8 @@ var mainFileManager = {
       }
     }
   },
-  setWallpaper: (location) => {
-    localStorage.setItem("background", location);
-    document.getElementById("klindows").style.backgroundImage =
-      "url(http://localhost:9999" + location + ")";
+  setWallpaper: (x) => {
+    Background.set(x);
   },
   getContent: async (location, encoding = "binary") => {
     if (!(await mainFileManager.fileExists(location))) {
@@ -351,7 +377,12 @@ var mainFileManager = {
     await mainFileManager.createFile({
       name: fileName + ".kapp",
     });
-    await mainFileManager.save("/" + fileName + ".kapp", "open:" + appName, undefined, "utf8");
+    await mainFileManager.save(
+      "/" + fileName + ".kapp",
+      "open:" + appName,
+      undefined,
+      "utf8",
+    );
   },
   createFile: async ({ name, parentFolder = "/" }) => {
     if (await mainFileManager.fileExists(parentFolder + name)) {

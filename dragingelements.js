@@ -1,7 +1,4 @@
-var noresizeClasslist = [
-  "terminal",
-  "audioLevelEditor"
-];
+var noresizeClasslist = ["terminal", "audioLevelEditor"];
 function reloaddraggable() {
   $(function () {
     var $widget = $(".window.widgetList");
@@ -14,6 +11,9 @@ function reloaddraggable() {
       containment: "window",
       iframeFix: true,
       stop: (e) => {
+        document
+          .querySelectorAll("webview")
+          .forEach((webview) => (webview.style.pointerEvents = ""));
         e.target.style.opacity = "1";
         if (!noresizeClasslist.includes(e.target.classList[1])) {
           var target = e.target;
@@ -21,37 +21,34 @@ function reloaddraggable() {
           var top = parseInt(target.style.top.replace("px", ""));
           var height = target.offsetHeight;
           var width = target.offsetWidth;
-          var centerOfElement = left + (width / 2);
-          var centerOfElementY = top + (height / 2);
+          var centerOfElement = left + width / 2;
+          var centerOfElementY = top + height / 2;
           var widthOfWindow = window.innerWidth;
           var heightOfWindow = window.innerHeight;
           var centerOfWindow = widthOfWindow / 2;
           var centerOfWindowY = heightOfWindow / 2;
-          
+
           var odchylka = 3;
           if (target.getAttribute("isFullscreen") == "true") {
             windowSizing.default(target, e.originalEvent.originalEvent);
-          }
-          else {
+          } else {
             target.setAttribute("isFullscreen", "false");
             if (
               top <= odchylka * 7 &&
-                centerOfElement < centerOfWindow + (centerOfWindow / odchylka) &&
-                centerOfElement > centerOfWindow - (centerOfWindow / odchylka)
+              centerOfElement < centerOfWindow + centerOfWindow / odchylka &&
+              centerOfElement > centerOfWindow - centerOfWindow / odchylka
             ) {
               windowSizing.full(target);
-            }
-            else if (
+            } else if (
               left <= odchylka * 7 &&
-                centerOfElementY < centerOfWindowY + (centerOfWindowY / odchylka) &&
-                centerOfElementY > centerOfWindowY - (centerOfWindowY / odchylka)
+              centerOfElementY < centerOfWindowY + centerOfWindowY / odchylka &&
+              centerOfElementY > centerOfWindowY - centerOfWindowY / odchylka
             ) {
               windowSizing.left(target);
-            }
-            else if (
+            } else if (
               widthOfWindow - (left + width) <= odchylka * 7 &&
-                centerOfElementY < centerOfWindowY + (centerOfWindowY / odchylka) &&
-                centerOfElementY > centerOfWindowY - (centerOfWindowY / odchylka)
+              centerOfElementY < centerOfWindowY + centerOfWindowY / odchylka &&
+              centerOfElementY > centerOfWindowY - centerOfWindowY / odchylka
             ) {
               windowSizing.right(target);
             }
@@ -60,7 +57,10 @@ function reloaddraggable() {
       },
       start: (e) => {
         e.target.style.opacity = "0.85";
-      }
+        document
+          .querySelectorAll("webview")
+          .forEach((webview) => (webview.style.pointerEvents = "none"));
+      },
     });
   });
   // Resizing is still in beta version UPDATE: now it's not
@@ -68,20 +68,34 @@ function reloaddraggable() {
   for (var i = 0; i < sddsaelements.length; i++) {
     $(sddsaelements[i]).resizable({
       handles: "all",
-      minWidth: window.getComputedStyle(sddsaelements[i]).getPropertyValue("min-width").replace("px", ""),
-      minHeight: parseInt(window.getComputedStyle(sddsaelements[i]).getPropertyValue("min-height").replace("px", "")),
+      minWidth: window
+        .getComputedStyle(sddsaelements[i])
+        .getPropertyValue("min-width")
+        .replace("px", ""),
+      minHeight: parseInt(
+        window
+          .getComputedStyle(sddsaelements[i])
+          .getPropertyValue("min-height")
+          .replace("px", ""),
+      ),
       start: (targets) => {
         var target = targets.target;
         target.setAttribute("isFullscreen", "false");
-        document.querySelectorAll("iframe").forEach(node => {
+        document.querySelectorAll("iframe").forEach((node) => {
           node.style.pointerEvents = "none";
         });
+        document
+          .querySelectorAll("webview")
+          .forEach((webview) => (webview.style.pointerEvents = "none"));
       },
       stop: (targets) => {
-        document.querySelectorAll("iframe").forEach(node => {
+        document.querySelectorAll("iframe").forEach((node) => {
           node.style.pointerEvents = "";
         });
-      }
+        document
+          .querySelectorAll("webview")
+          .forEach((webview) => (webview.style.pointerEvents = ""));
+      },
     });
   }
   for (var i = 0; i < noresizeClasslist.length; i++) {
@@ -154,7 +168,7 @@ const windowSizing = {
       target.setAttribute("isFullscreen", "false");
       target.style.width = minWidth + "px";
       target.style.height = minHeight + "px";
-      $(target).css("left", parseInt(mouseX - (minWidth / 2)));
+      $(target).css("left", parseInt(mouseX - minWidth / 2));
       $(target).css("top", mouseY - 10 + "px");
       setTimeout(() => {
         target.style.transition = "";
@@ -176,8 +190,7 @@ const windowSizing = {
         target.style.transition = "";
       }, 200);
     }, 10);
-
-  }
+  },
 };
 
 $(function () {
@@ -187,7 +200,7 @@ $(function () {
     },
     stop: function (event, ui) {
       $(this).removeClass("dragging");
-    }
+    },
   });
 });
 $(function () {
@@ -198,7 +211,7 @@ $(function () {
     },
     stop: function (event, ui) {
       $(this).removeClass("dragdrageble");
-    }
+    },
   });
 });
 function dragingikonaklindows() {

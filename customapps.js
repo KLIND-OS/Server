@@ -154,24 +154,19 @@ var CustomApp = {
 
     await LowLevelApi.filesystem.mkdir(appdatapath);
 
-    await exec(
-      `mv '${LowLevelApi.filesystem.path.join(outputPath, "appdata")}'/* '${appdatapath}'`,
-    );
+    try {
+      await exec(
+        `mv '${LowLevelApi.filesystem.path.join(outputPath, "appdata")}'/* '${appdatapath}'`,
+      );
+    } catch {}
 
     await LowLevelApi.filesystem.fsExtra.rm(outputPath, { recursive: true });
 
-    if (install.trim().startsWith('"use async"')) {
-      this.window.installFinished = () => {
-        all.push([name, script, icon]);
-        localStorage.setItem("customapps", JSON.stringify(all));
-        window.location.reload();
-      };
-      eval(install);
-    } else {
-      eval(install);
+    window.installFinished = () => {
       all.push([name, script, icon]);
       localStorage.setItem("customapps", JSON.stringify(all));
       window.location.reload();
-    }
+    };
+    eval(install);
   },
 };
