@@ -38,7 +38,7 @@ document.body.onload = async () => {
         "Váš prohlížeč zabránil požádat vás o kameru. Je to pravděpodobně proto, že vaše stránka nepoužívá https://, ale http:// nebo že nemáte žádnou kameru.";
       setTimeout(() => {
         window.location.replace("about:blank");
-        parent.document.querySelector("#dsaigsdiasd").style.display = "none";
+        parent.document.querySelector("#facerec").style.display = "none";
       }, 5000);
     }
 
@@ -86,7 +86,7 @@ document.body.onload = async () => {
 
         for (const result of results) {
           if (result._label == "nice") {
-            parent.loginCorrect();
+            parent.Login.login();
             return;
           }
         }

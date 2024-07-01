@@ -11,10 +11,8 @@ var windows = {
       "ter",
       "player",
       "info",
-      "reg",
       "kalen",
       "budik",
-      "prevod",
       "update",
       "nap",
       "faceset",
@@ -53,10 +51,8 @@ var windows = {
       ".terminal",
       ".player",
       ".informationklindows",
-      ".reg",
       ".kalendar",
       ".budik",
-      ".prevodsys",
       ".updateklind",
       ".napoveda",
       ".faceset",
@@ -95,10 +91,8 @@ var windows = {
       ".terikonadown",
       ".playerikonadown",
       ".infoikonadown",
-      ".regikonadown",
       ".kalenikonadown",
       ".budikikonadown",
-      ".prevodikonadown",
       ".updateikonadown",
       ".napikonadown",
       ".facesetikonadown",
@@ -174,13 +168,10 @@ var windows = {
 
     special: {
       poznamky: [
-        (element) => {
-          loadpoznamky(element);
+        (win) => {
+          Poznamky.load(win);
         },
-        () => {
-          closepoznamkymenu();
-          closepoznamkynas();
-        },
+        false,
         false,
       ],
       info: [infoApp.loadInfo, false, false],
@@ -198,8 +189,8 @@ var windows = {
           if (localStorage.getItem("mode") == "dark") url += "?dark";
 
           if (args && args.mode == "select") {
-            if (url.indexOf("?") == -1) url += "?select";
-            else url += "&select";
+            if (url.indexOf("?") == -1) url += "?fileselect";
+            else url += "&fileselect";
             var index = openGetFile.length;
             openGetFile.push([element, args.callBack]);
             element
@@ -213,6 +204,26 @@ var windows = {
             element.querySelector(".mini").remove();
             element.querySelector(".headerclass span").textContent =
               "Vyberte soubor";
+            url += "&index=" + index;
+          }
+
+          if (args && args.mode == "folderselect") {
+            if (url.indexOf("?") == -1) url += "?folderselect";
+            else url += "&folderselect";
+
+            var index = openGetFile.length;
+            openGetFile.push([element, args.callBack]);
+            element
+              .querySelector(".close")
+              .setAttribute(
+                "onclick",
+                "openGetFile[" +
+                  index +
+                  "][1]['closed']();windows.close(this,'filemanager')",
+              );
+            element.querySelector(".mini").remove();
+            element.querySelector(".headerclass span").textContent =
+              "Vyberte složku";
             url += "&index=" + index;
           }
           element.querySelector("#filemanageriframe").src = url;
@@ -349,7 +360,10 @@ var windows = {
                 "Tento soubor je větší jak 1MB. Tento soubor otevíráte v text editoru. Počítač se může zaseknout. Opravdu chcete tento soubor otevřít?",
                 async (response) => {
                   if (response) {
-                    const content = await mainFileManager.getContent(path, "utf8");
+                    const content = await mainFileManager.getContent(
+                      path,
+                      "utf8",
+                    );
                     element.querySelector("#textareafileeditorimage").value =
                       content;
                   } else {
@@ -454,17 +468,20 @@ var windows = {
             throw new Error("File must be specified");
           }
           const { path } = args;
+          const bypass = FileLocker.add(path);
+          const intervalID = setInterval(() => {
+            FileLocker.continue(path);
+          }, 5000);
           win.setAttribute("filelocation", path);
+          win.setAttribute("bypass", bypass);
+          win.setAttribute("intervalID", intervalID);
 
           async function convertDataUriToHtml(path) {
             const binaryData = await mainFileManager.getContent(path);
-
             const arrayBuffer = Uint8Array.from(binaryData, (char) =>
               char.charCodeAt(0),
             );
-
             const html = await mammoth.convertToHtml({ arrayBuffer });
-
             return html.value;
           }
 
@@ -491,7 +508,9 @@ var windows = {
                 const parts = path.split(".");
                 const end = parts[parts.length - 1];
                 if (end == "html") {
-                  editor.setContent(await mainFileManager.getContent(path, "utf8"));
+                  editor.setContent(
+                    await mainFileManager.getContent(path, "utf8"),
+                  );
                 } else {
                   editor.setContent(await convertDataUriToHtml(path));
                 }
@@ -499,7 +518,14 @@ var windows = {
             },
           });
         },
-        false,
+        (win) => {
+          const bypass = win.getAttribute("bypass");
+          const intervalID = win.getAttribute("intervalID");
+          const path = win.getAttribute("filelocation");
+
+          FileLocker.remove(path, bypass);
+          clearInterval(intervalID);
+        },
         false,
       ],
       sheetseditor: [
@@ -510,7 +536,7 @@ var windows = {
             throw new Error("File must be specified");
           }
         },
-        false,
+        (win) => SheetsEditor.close(win),
         false,
       ],
       diskmanager: [(win) => DiskManager.init(win), false, false],
@@ -553,7 +579,7 @@ var windows = {
             });
           };
         },
-        (win) => closeUpdates(win),
+        (win) => Updates.closeWindow(win),
         false,
       ],
       logs: [(win) => Logs.init(win), (win) => Logs.close(win), false],
@@ -622,11 +648,11 @@ var windows = {
       return newelement;
     }
   },
-  close: (element, name) => {
+  close: async (element, name) => {
     var el = element.parentElement.parentElement.parentElement;
     var special = windows.list.special[name];
     if (special != undefined && special[1] !== false) {
-      var returnValue = special[1](el);
+      var returnValue = await special[1](el);
     } else {
       var returnValue = undefined;
     }
@@ -636,6 +662,7 @@ var windows = {
 
       setTimeout(() => {
         el.remove();
+        openedwindowindex = undefined;
       }, 200);
     }
   },
@@ -724,7 +751,7 @@ var windows = {
             });
           }
         });
-        el.addEventListener("mouseout", (e) => {
+        el.addEventListener("mouseout", () => {
           var appdiv = document.querySelector(".appdiv");
           appdiv.querySelector(".canvasSection").innerHTML = "";
           appdiv.style.display = "none";

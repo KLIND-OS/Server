@@ -1,5 +1,22 @@
 class SheetsEditor {
+  static close(win) {
+    const path = win.getAttribute("path");
+    const bypass = win.getAttribute("bypass");
+    const intervalID = win.getAttribute("intervalID");
+
+    clearInterval(intervalID);
+    FileLocker.remove(path, bypass);
+  }
   static async init(win, file_path) {
+    const bypass = FileLocker.add(file_path);
+    const intervalID = setInterval(() => {
+      FileLocker.continue(file_path);
+    }, 5000)
+
+    win.setAttribute("path", file_path);
+    win.setAttribute("bypass", bypass);
+    win.setAttribute("intervalID", intervalID);
+
     // Initialize variables to keep track of the current number of rows and columns
     let rowCount = 10;
     let colCount = 10;
@@ -175,7 +192,7 @@ class SheetsEditor {
         reader.onload = async function () {
           const binary = reader.result;
           try {
-            await mainFileManager.save(file_path, binary);
+            await mainFileManager.save(file_path, binary, bypass);
           } catch {
             FileLocker.lockedError();
           }

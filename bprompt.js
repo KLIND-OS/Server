@@ -1,5 +1,6 @@
 var currentfunprompt;
 var currentfunconfirm;
+var currentfunlist;
 var BPrompt = {
   prompt: (message, functio, defaultValue = "") => {
     currentfunprompt = functio;
@@ -37,6 +38,22 @@ var BPrompt = {
     document.querySelector(".alert-element").style.display = "block";
     document.querySelector(".submit-box-alert").focus();
   },
+  list: (message, array, functio) => {
+    currentfunlist = functio;
+    document.querySelector(".message-box-list").innerHTML = message;
+    document.querySelector(".list-element").style.display = "block";
+
+    const select = document.querySelector(".list-input-box");
+    select.innerHTML = "";
+    for (const el of array) {
+      const option = document.createElement("option");
+      option.value = el;
+      option.textContent = el;
+      select.appendChild(option);
+    }
+
+    select.focus();
+  },
 };
 function submitMessage() {
   var value = document.querySelector(".input-box").value;
@@ -49,4 +66,9 @@ function submitMessage() {
 function submitConfirm(answer) {
   currentfunconfirm(answer);
   document.querySelector(".confirm-element").style.display = "none";
+}
+function submitList() {
+  const { value } = document.querySelector(".list-input-box");
+  currentfunlist(value);
+  document.querySelector(".list-element").style.display = "none";
 }

@@ -37,7 +37,7 @@ class GetStarted {
       setTimeout(() => {
         win.style.transition = "";
       }, 500);
-      openstartmenu();
+      StartMenu.open();
     }, 10);
   }
   static nextMenu(win) {

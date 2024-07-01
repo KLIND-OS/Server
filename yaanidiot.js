@@ -13,7 +13,8 @@ function idiot() {
     buttons: {},
     content: "<h1>You are an idiot!</h1>",
     defaultWindow: true,
-    onStart: () => {}
+    onStart: () => {},
+    _forcePlainHTML: true,
   });
   var x = 0;
   setInterval(() => {

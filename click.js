@@ -1,41 +1,61 @@
 // Right click menu
-
-const clickable = document.getElementById("klindowsrightclickmenu");
-const clickabledva = document.getElementById("klindowsrightclickmenu");
-const menu = document.getElementById("menu");
-const outClick = document.getElementById("outclick");
-
-clickable.addEventListener("contextmenu", e => {
-  e.preventDefault();
-
-  document.getElementById("menu").style.top = `${e.clientY}px`;
-  document.getElementById("menu").style.left = `${e.clientX}px`;
-  document.getElementById("menu").classList.add("show");
-
-  outClick.style.display = "block";
+var xs;
+var ys;
+document.addEventListener("mousemove", function (e) {
+  xs = e.clientX;
+  ys = e.clientY;
 });
-outClick.addEventListener("contextmenu", e => {
-  e.preventDefault();
 
-  document.getElementById("menu").style.top = `${e.clientY}px`;
-  document.getElementById("menu").style.left = `${e.clientX}px`;
-  document.getElementById("menu").classList.add("show");
+// Global right click menu
+new ContextMenu(document.getElementById("klindowsrightclickmenu"), [
+  new ContextMenuItem("Napájení", () => Power.open()),
+  new ContextMenuItem("Vypnout", () => Power.turnoff()),
+  new ContextMenuItem("Nastavení", () => windows.open("nas")),
+]);
 
-  outClick.style.display = "block";
-});
-outClick.addEventListener("click", () => {
-  document.getElementById("menu").classList.remove("show");
-  document.getElementById("rightclickmenudowapps").style.display = "none";
-  document.getElementById("rightclickmenuicons").style.display = "none";
-  document.getElementById("rightclickmenuiconsdone").style.display = "none";
-  outClick.style.display = "none";
-  document.getElementById("menu").style.display = "";
-});
-function closeRightClickMenuMain() {
-  document.getElementById("menu").classList.remove("show");
-  document.getElementById("rightclickmenudowapps").style.display = "none";
-  document.getElementById("rightclickmenuicons").style.display = "none";
-  document.getElementById("rightclickmenuiconsdone").style.display = "none";
-  outClick.style.display = "none";
-  document.getElementById("menu").style.display = "";
+const startmenu = new ContextMenu(undefined, [
+  new ContextMenuItem("Přidat aplikaci na plochu", (e) => {
+    var icon = e.getAttribute("icon");
+    var run = e.getAttribute("onclick");
+    DesktopIcons.add({
+      run: run,
+      icon: icon,
+    });
+  }),
+  new ContextMenuItem("Přidat zástupce do souborů", (e) => {
+    var name = e.textContent;
+    var app = e
+      .getAttribute("onclick")
+      .replace("windows.open(", "")
+      .replace(")", "")
+      .replaceAll("'", "")
+      .replaceAll('"', "")
+      .replaceAll(";", "");
+    mainFileManager.createAppShortCut(app, name);
+    windows.open("filemanager");
+  }),
+]);
+
+function rightclickApp(element) {
+  startmenu.manualTrigger(xs, ys, element);
+}
+
+const desktopiconsmenu = new ContextMenu(undefined, [
+  new ContextMenuItem("Odebrat", (e) => {
+    var storage = JSON.parse(localStorage.getItem("desktop-icons"));
+    var newstorage = [];
+    var id = e.getAttribute("id");
+    for (var i = 0; i < storage.length; i++) {
+      if (id != i) {
+        newstorage.push(storage[i]);
+      }
+    }
+    localStorage.setItem("desktop-icons", JSON.stringify(newstorage));
+    document.querySelector(".iconsKLINDOS").innerHTML = "";
+    DesktopIcons.load();
+  }),
+]);
+
+function rightClickIcon(element) {
+  desktopiconsmenu.manualTrigger(xs - 59, ys + 10, element);
 }

@@ -1,1 +1,0 @@
-var myklindowstajne = "kl i ndo s jen ejl epsi";

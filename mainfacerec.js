@@ -7,7 +7,8 @@ async function loadface() {
     )) == false ||
     (await parent.mainFileManager.fileExists(
       JSON.parse(localStorage.getItem("fa1c2e"))[1],
-    )) == false  ) {
+    )) == false
+  ) {
     document.querySelector("#sdsdaasd").style.display = "none";
   } else {
     document.querySelector("#sdsdaasd").style.display = "block";

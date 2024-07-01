@@ -29,18 +29,6 @@ iframe {
   border: 0;
 }
 
-.betadiv,
-.betadiv span {
-  font-family: "Dancing Script", cursive;
-  position: absolute;
-  right: 10px;
-  bottom: 15px;
-  font-size: 3em;
-  opacity: 0.75;
-  z-index: 24654654;
-  pointer-events: none;
-}
-
 .klindows {
   height: 100vh;
   width: 100vw;
@@ -223,24 +211,6 @@ iframe {
   position: absolute !important;
 }
 
-.poznamkymenu {
-  background-color: rgb(168, 168, 168);
-  width: 500px;
-  height: 600px;
-  position: absolute !important;
-  z-index: 25;
-  border-radius: 10px;
-}
-
-.poznamkynas {
-  background-color: rgb(168, 168, 168);
-  width: 500px;
-  height: 600px;
-  position: absolute !important;
-  z-index: 25;
-  border-radius: 10px;
-}
-
 .nastaveni {
   background-color: white;
   min-width: 300px;
@@ -373,12 +343,18 @@ iframe {
     ease 0.2s scale;
 }
 
-.window[isfullscreen="true"], .window[isfullscreen="true"] .headerclass {
+.window > #root {
+  height: calc(100% - 20px);
+}
+
+.window[isfullscreen="true"],
+.window[isfullscreen="true"] .headerclass {
   border-radius: 0;
 }
 
-body:not(.disablewindowanimation) .window:hover:not(.windowedmtjhjass):not([isfullscreen="true"]) {
-  scale: 1.02!important;
+body:not(.disablewindowanimation)
+  .window:hover:not(.windowedmtjhjass):not([isfullscreen="true"]) {
+  scale: 1.02 !important;
 }
 
 .audioLevelEditor {
@@ -414,8 +390,7 @@ body:not(.disablewindowanimation) .window:hover:not(.windowedmtjhjass):not([isfu
   transition: ease 0.2s opacity;
 }
 
-.window.openedwin,
-.betadiv.openedwin {
+.window.openedwin {
   display: block !important;
 }
 
@@ -872,17 +847,6 @@ body {
   z-index: 23;
 }
 
-.reg {
-  height: 300px;
-  background-color: white;
-  position: absolute !important;
-  width: 300px;
-  min-height: 300px;
-  overflow: hidden;
-  min-width: 300px;
-  z-index: 23;
-}
-
 .weather {
   height: 369px;
   background-color: white;
@@ -1203,7 +1167,8 @@ body {
   min-width: 300px;
   z-index: 23;
 }
-.procesy .procesyProcesy, .procesy .infoProcesy{
+.procesy .procesyProcesy,
+.procesy .infoProcesy {
   height: calc(100% - 40px);
 }
 .procesy .procesyProcesy {
@@ -1284,17 +1249,6 @@ body {
   background-color: white;
 }
 
-.prevodsys {
-  background-color: white;
-  position: absolute !important;
-  width: 300px;
-  min-height: 300px;
-  height: 300px;
-  overflow: hidden;
-  min-width: 300px;
-  z-index: 23;
-}
-
 .timer iframe {
   width: 96%;
   height: 94%;
@@ -1318,33 +1272,6 @@ body {
   position: relative;
 }
 
-.alertcookies {
-  position: absolute;
-  bottom: 0;
-  width: 100vw;
-  height: 120px;
-  background-color: white;
-  z-index: 9999999999999999999999999999999999999;
-}
-
-.alertcookies h1 {
-  top: 30%;
-  position: relative;
-}
-
-.alertcookies button {
-  position: absolute;
-  border: white 0px solid;
-  background-color: sandybrown;
-  transition: ease 0.2s background;
-  right: 20px;
-  width: 130px;
-  height: 35px;
-}
-
-.alertcookies button:hover {
-  background-color: saddlebrown;
-}
 .browser .browerr {
   padding: 10px;
   box-sizing: border-box;
@@ -1414,7 +1341,7 @@ body {
   display: block !important;
 }
 
-.menu{
+.menu {
   width: auto;
   float: left;
   margin-left: 15px;
@@ -1424,31 +1351,6 @@ body {
 
 .menu:hover {
   background-color: rgb(94, 94, 94);
-}
-
-.clockdate {
-  position: absolute;
-  right: 0;
-  bottom: -600px;
-  display: block;
-  background-color: white;
-  width: 350px;
-  height: 600px;
-  display: none;
-  border-start-start-radius: 15px;
-  transition: ease 0.5s bottom;
-}
-
-.clockdate .time {
-  width: 100%;
-  text-align: center;
-  font-size: 2em;
-}
-
-.clockdate .date {
-  width: 100%;
-  text-align: center;
-  font-size: 2em;
 }
 
 .displayblock {
@@ -1557,31 +1459,9 @@ table tr td input {
     0 32px 64px rgba(0, 0, 0, 0.07);
 }
 
-.tajne {
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  background-color: white;
-  z-index: 20000000;
-}
-
-.tajne iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-#startgame {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  height: 200px;
-  font-size: 3em;
-}
-
 .errors {
+  /* xdd
+  pure example production code here */
   z-index: 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999;
   width: 100vw;
   height: 100vh;
@@ -1833,28 +1713,6 @@ table tr td input {
   position: absolute;
 }
 
-#tajnedva {
-  opacity: 0;
-  transition: linear 500ms opacity;
-}
-
-#tajnedva iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: none;
-}
-
-#tajnedva button {
-  top: 0;
-  position: absolute;
-  right: 0;
-}
-
-#klindowsrightclickmenu {
-  transition: linear 2s opacity;
-}
-
 .items-2 {
   background-color: #7a45e5;
   position: absolute;
@@ -1968,7 +1826,7 @@ table tr td input {
   font-size: 2em;
 }
 
-.dsaigsdiasd {
+.facerec {
   width: 100vw;
   height: 100vh;
   position: absolute;
@@ -1977,7 +1835,7 @@ table tr td input {
   top: 0;
 }
 
-.dsaigsdiasd iframe {
+.facerec iframe {
   border: none;
   width: 100vw;
   height: 100vh;
@@ -2184,10 +2042,6 @@ table tr td input {
   top: -5px !important;
 }
 
-.reg .content {
-  height: calc(100% - 20px);
-}
-
 #changesss {
   height: calc(100% / 3);
   width: 100%;
@@ -2220,7 +2074,8 @@ table tr td input {
 .prompt-element,
 .confirm-element,
 .alert-element,
-.power-element {
+.power-element,
+.list-element {
   position: absolute;
   width: 100vw;
   height: 100vh;
@@ -2229,7 +2084,8 @@ table tr td input {
 
 .prompt-background,
 .alert-background,
-.confirm-background {
+.confirm-background,
+.list-background {
   position: absolute;
   background-color: black;
   opacity: 0.5;
@@ -2257,7 +2113,8 @@ table tr td input {
 
 .message-box,
 .message-box-confirm,
-.message-box-alert {
+.message-box-alert,
+.message-box-list {
   text-align: center;
   margin-top: 8px;
   margin-bottom: 8px;
@@ -2304,6 +2161,22 @@ table tr td input {
   float: left;
   border-end-start-radius: 15px;
   border-end-end-radius: 15px;
+}
+
+.submit-box-list {
+  height: 50px;
+  width: 100%;
+  position: relative;
+  margin-top: 20px;
+  float: left;
+  border-end-start-radius: 15px;
+  border-end-end-radius: 15px;
+}
+
+.list-input-box {
+  height: 50px;
+  width: 100%;
+  margin-top: 35px;
 }
 
 .loginfirst {
@@ -2398,66 +2271,6 @@ table tr td input {
 
   100% {
     transform: translate(-50%, -300%) scale(0);
-  }
-}
-
-@keyframes gelatine {
-  from,
-  to {
-    transform: scale(1, 1);
-  }
-
-  25% {
-    transform: scale(0.9, 1.1);
-  }
-
-  50% {
-    transform: scale(1.1, 0.9);
-  }
-
-  75% {
-    transform: scale(0.95, 1.05);
-  }
-}
-
-@keyframes hithere {
-  30% {
-    transform: scale(1.2);
-  }
-
-  40%,
-  60% {
-    transform: rotate(-20deg) scale(1.2);
-  }
-
-  50% {
-    transform: rotate(20deg) scale(1.2);
-  }
-
-  70% {
-    transform: rotate(0deg) scale(1.2);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes bounsdce {
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
-    transform: translateY(0);
-  }
-
-  40% {
-    transform: translateY(-100px);
-  }
-
-  60% {
-    transform: translateY(-50px);
   }
 }
 
@@ -2563,29 +2376,6 @@ table tr td input {
   height: 25px;
   border-radius: 50%;
   background: #04aa6d;
-}
-
-.welcomePage {
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  background-color: white;
-  z-index: 100000;
-}
-
-.welcomePage video {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.welcomePage .skipbtn {
-  position: absolute;
-  right: 0;
-  top: 0;
-  background: black;
-  color: white;
-  z-index: 1;
 }
 
 .customappdiv {
@@ -2994,5 +2784,5 @@ table tr td input {
 }
 
 .download p {
-    height: 44px;
+  height: 44px;
 }
