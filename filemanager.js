@@ -178,6 +178,8 @@ var mainFileManager = {
       mainFileManager.openingFile = [possible, infolder + file];
       var element = document.querySelector(".selectApp .apps ");
 
+      const els = [];
+
       for (var i = 0; i < possible.length; i++) {
         var n = document.createElement("div");
         n.className = "appsapp";
@@ -185,25 +187,24 @@ var mainFileManager = {
         n.textContent = possible[i][0];
         n.setAttribute("onclick", `mainFileManager.openFileWithApp(${i})`);
         element.appendChild(n);
+        els.push(n);
       }
+
+      new ContextMenu(
+        els,
+        [
+          new ContextMenuItem("Nastavit jako výchozí", (e) => {
+            const app = e.textContent;
+            const preferences = JSON.parse(localStorage.getItem("fileopenPreferences") || "[]");
+            preferences[type] = app;
+            localStorage.setItem("fileopenPreferences", JSON.stringify(preferences));
+          }),
+        ],
+        true,
+      );
 
       element.parentElement.parentElement.style.display = "flex";
     }
-  },
-  _showList: (possible, path) => {
-    mainFileManager.openingFile = [possible, infolder + file];
-    var element = document.querySelector(".selectApp .apps ");
-
-    for (var i = 0; i < possible.length; i++) {
-      var n = document.createElement("div");
-      n.className = "appsapp";
-      n.setAttribute("cursor", "pointer");
-      n.textContent = possible[i][0];
-      n.setAttribute("onclick", `mainFileManager.openFileWithApp(${i})`);
-      element.appendChild(n);
-    }
-
-    element.parentElement.parentElement.style.display = "flex";
   },
   openFileWithApp: (index) => {
     document.querySelector(".selectApp").style.display = "none";

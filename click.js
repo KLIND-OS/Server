@@ -1,5 +1,4 @@
 // Right click menu
-
 var xs;
 var ys;
 document.addEventListener("mousemove", function (e) {
