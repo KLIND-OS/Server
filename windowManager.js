@@ -171,13 +171,10 @@ var windows = {
 
     special: {
       poznamky: [
-        (element) => {
-          loadpoznamky(element);
+        (win) => {
+          Poznamky.load(win);
         },
-        () => {
-          closepoznamkymenu();
-          closepoznamkynas();
-        },
+        false,
         false,
       ],
       info: [infoApp.loadInfo, false, false],

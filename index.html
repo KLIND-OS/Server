@@ -74,7 +74,6 @@
     <script src="info.js"></script>
     <script src="sounds.js"></script>
     <script src="vars.js"></script>
-    <script src="reg.js"></script>
     <script src="customapps.js"></script>
     <script src="desktopIcons.js"></script>
     <script src="bouncy.js"></script>
@@ -269,10 +268,6 @@
         <iframe id="facerecif" src=""></iframe>
       </div>
     </div>
-    <div id="tajnedva" class="tajne" style="display: none">
-      <iframe src="regist/fi.html"></iframe
-      ><button onclick="closetajnedva()">X</button>
-    </div>
     <div id="klindowsrightclickmenu">
       <!--FullScreen Elements-->
       <div class="shortcut-media-popup">
@@ -427,12 +422,6 @@
           <div class="widget-header">
             <div class="headerclass">
               <span style="float: left">Poznámky</span>
-              <div class="menu savepoznamky" onclick="savepoznamky(this)">
-                Uložit
-              </div>
-              <div class="menu" onclick="smazatulozene()">Smazat uložené</div>
-              <div class="menu" onclick="nastavenipoznamky()">Nastavení</div>
-              <div class="menu" onclick="bhdasv()">Nápověda</div>
               <div
                 onclick="windows.close(this, 'poznamky')"
                 class="close"
@@ -440,7 +429,7 @@
               <div onclick="windows.mini(this, 'poznamky')" class="mini"></div>
             </div>
           </div>
-          <textarea id="asldslk" onkeyup="poznamkykeypress(this)"></textarea>
+          <textarea id="asldslk" onkeyup="Poznamky.keypress(this)"></textarea>
         </div>
 
         <div
@@ -1813,78 +1802,7 @@
           <span></span>
         </div>
         <div class="openopenedapps" style="display: none; z-index: 500"></div>
-        <div class="oknepatrizde">
-          <div
-            onclick="changewindowmain(this);"
-            class="poznamkymenu drageble displaynone drageblepoznamky"
-          >
-            <div class="headerclass">
-              <span style="float: left">Poznámky | Nápověda</span>
-              <div onclick="closepoznamkymenu()" class="close"></div>
-            </div>
-            <h1>Zkratky</h1>
-            <li>!date Vloží datum.</li>
-            <li>!ahoj Pozdraví.</li>
-            <li>(r) Vloží ®.</li>
-            <li>(e) Vloží €.</li>
-            <li>(c) Vloží ©.</li>
-            <li>\()/ Vloží ¯\_(ツ)_/¯.</li>
-            <li>:-) Vloží 😊.</li>
-            <li>:D Vloží 😁.</li>
-            <p>Pro to aby se zkratka projevila za zkratkou stiskněte mezeru.</p>
-            <br />
-            <h1>Příkaz var:</h1>
-            <p>
-              Tento příkaz funguje jako takové úložiště slova věty nebo čísla.
-            </p>
-            <br />
-            <p style="color: rgb(43, 43, 43); float: right">
-              Zde vložte větu slovo nebo číslo
-            </p>
-            <br />
-            <p style="color: rgb(43, 43, 43); left: 384px; position: relative">
-              ↓
-            </p>
-            <p style="font-weight: bold">
-              Pro vložení slova věty nebo čísla napíšete !setvar= !
-            </p>
-            <p style="color: rgb(43, 43, 43); left: 388px; position: relative">
-              ↑
-            </p>
-            <p style="color: rgb(43, 43, 43); float: right">
-              Tento vykřičník znamená konec věty slova nebo čísla
-            </p>
-            <br />
-            <br />
-            <p>
-              Pro vložení uloženého čísla slova nebo věty napište !writevar a
-              stiskněte mezeru.
-            </p>
-            <p>
-              Uložené slovo nebo věta bude zachována aji po vypnutí či
-              restartovaní systému.
-            </p>
-          </div>
-
-          <div
-            onclick="changewindowmain(this);"
-            class="poznamkynas drageble displaynone drageblepoznamky"
-          >
-            <div class="headerclass">
-              <span style="float: left">Poznámky | Nastavení</span>
-              <div onclick="closepoznamkynas()" class="close"></div>
-            </div>
-            <h1 style="text-align: center">Nastavení</h1>
-            <span>Velikost písma: </span
-            ><input onkeyup="sadhos()" id="velikostpismapoznamky" /><span
-              >px</span
-            ><br />
-            <span>Barva písma: </span
-            ><input onkeyup="sadhsaos()" id="barvapismapoznamky" /><span
-              >Vložte hex, rgb nebo anglické jméno.</span
-            >
-          </div>
-        </div>
+        <div class="oknepatrizde"></div>
         <div class="iconsKLINDOS"></div>
         <div class="notifidiv dnlol">
           <button onclick="closenotifi();">X</button>
