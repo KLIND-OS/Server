@@ -122,6 +122,7 @@
     <script src="customcss.js"></script>
     <script src="background.js"></script>
     <script src="developermode.js"></script>
+    <script src="login.js"></script>
   </head>
 
   <body
@@ -202,9 +203,7 @@
 
         Taskbar.load();
 
-        if (login == "false") {
-          document.querySelector(".login").classList.add("displaynone");
-        }
+        Login.load();
 
         setTimeout(() => {
           document.querySelector(".loading").style.top = "-100vh";
@@ -263,13 +262,17 @@
           id="password"
           placeholder="Heslo"
         />
-        <button onclick="submitlogin()">Přihlásit se</button>
-        <button id="sdsdaasd" class="facelolsad" onclick="loadfaces()">
+        <button
+          onclick="Login.submitLogin(this.parentElement.querySelector('input'))"
+        >
+          Přihlásit se
+        </button>
+        <button id="sdsdaasd" class="facelolsad" onclick="Login.loadFaces()">
           Rozpoznávání Obličeje
         </button>
       </div>
-      <div id="dsaigsdiasd" class="dsaigsdiasd">
-        <iframe id="hasdgashdjasj" src=""></iframe>
+      <div id="facerec" class="facerec">
+        <iframe id="facerecif" src=""></iframe>
       </div>
     </div>
     <div id="tajnedva" class="tajne" style="display: none">
@@ -316,6 +319,8 @@
           class="mute-icon-popup"
         />
       </div>
+
+      <!-- BPrompt -->
       <div class="prompt-element" style="display: none">
         <div class="prompt-background"></div>
         <div class="outer-box">
@@ -418,7 +423,6 @@
         </div>
       </div>
       <!--FullScreen Elements End-->
-      <script src="click.js"></script>
 
       <div hidden class="koks windowedmtjhjass" style="display: none"></div>
       <div class="oknadisplaynone" style="display: none; visibility: hidden">
@@ -1056,13 +1060,6 @@
           <p>
             Ikony: Většina ikon je z
             <a href="https://fonts.google.com/icons">Google Icons</a>
-          </p>
-          <p>
-            Zvukové efekty
-            <a
-              href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=14572"
-              >Pixabay</a
-            >
           </p>
           <p>
             Další ikony:
@@ -2497,7 +2494,6 @@
     <script src="./mainfacerec.js"></script>
     <script src="changingz-index.js"></script>
     <script src="/audioEditor.js"></script>
-    <script src="login.js"></script>
     <script src="mouse.js"></script>
     <script src="connection-local.js"></script>
     <script>
@@ -2511,5 +2507,6 @@
     <script src="getstartedfunctions.js"></script>
     <script src="battery.js"></script>
     <script src="windowanimation.js"></script>
+    <script src="click.js"></script>
   </body>
 </html>

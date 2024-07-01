@@ -47,7 +47,7 @@ var control = {
       var appName = app.info.name;
       spawnNotification(appName, "Budete odhlášen za 5 sekund.");
       setTimeout(() => {
-        logout();
+        Login.logout();
       }, 5000);
     },
     reboot: (app) => {

@@ -20,7 +20,7 @@ class Shortcut {
 class Shortcuts {
   static globalShortcutList = [
     new Shortcut(["Meta"], () => openstartmenu()),
-    new Shortcut(["Control", "l"], () => logout()),
+    new Shortcut(["Control", "l"], () => Login.logout()),
     new Shortcut(["AltGraph", "h"], () => windows.open("nap")),
     new Shortcut(["AltGraph", "`"], () => windows.open("nap")),
     new Shortcut(["Alt", "F4"], () => {
