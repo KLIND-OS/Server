@@ -27,8 +27,6 @@ class Clock {
         hours = "0" + hours;
       }
       time.innerHTML = hours + ":" + minutes + ":" + seconds + " " + day_night;
-      document.querySelector("#timess").innerHTML =
-        hours + ":" + minutes + ":" + seconds + " " + day_night;
     }, 1000);
 
     setInterval(() => {

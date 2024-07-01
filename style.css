@@ -29,18 +29,6 @@ iframe {
   border: 0;
 }
 
-.betadiv,
-.betadiv span {
-  font-family: "Dancing Script", cursive;
-  position: absolute;
-  right: 10px;
-  bottom: 15px;
-  font-size: 3em;
-  opacity: 0.75;
-  z-index: 24654654;
-  pointer-events: none;
-}
-
 .klindows {
   height: 100vh;
   width: 100vw;
@@ -420,8 +408,7 @@ body:not(.disablewindowanimation)
   transition: ease 0.2s opacity;
 }
 
-.window.openedwin,
-.betadiv.openedwin {
+.window.openedwin {
   display: block !important;
 }
 
@@ -868,17 +855,6 @@ body {
 }
 
 .editor {
-  height: 300px;
-  background-color: white;
-  position: absolute !important;
-  width: 300px;
-  min-height: 300px;
-  overflow: hidden;
-  min-width: 300px;
-  z-index: 23;
-}
-
-.reg {
   height: 300px;
   background-color: white;
   position: absolute !important;
@@ -1406,31 +1382,6 @@ body {
   background-color: rgb(94, 94, 94);
 }
 
-.clockdate {
-  position: absolute;
-  right: 0;
-  bottom: -600px;
-  display: block;
-  background-color: white;
-  width: 350px;
-  height: 600px;
-  display: none;
-  border-start-start-radius: 15px;
-  transition: ease 0.5s bottom;
-}
-
-.clockdate .time {
-  width: 100%;
-  text-align: center;
-  font-size: 2em;
-}
-
-.clockdate .date {
-  width: 100%;
-  text-align: center;
-  font-size: 2em;
-}
-
 .displayblock {
   display: block !important;
 }
@@ -1551,17 +1502,9 @@ table tr td input {
   border: none;
 }
 
-#startgame {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  height: 200px;
-  font-size: 3em;
-}
-
 .errors {
+  /* xdd
+  pure example production code here */
   z-index: 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999;
   width: 100vw;
   height: 100vh;
@@ -2162,10 +2105,6 @@ table tr td input {
 .ui-resizable-n {
   height: 10px !important;
   top: -5px !important;
-}
-
-.reg .content {
-  height: calc(100% - 20px);
 }
 
 #changesss {
