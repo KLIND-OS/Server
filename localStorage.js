@@ -19,7 +19,6 @@ class LocalStorage {
     "ajdhasgdhagsdhjgasdghjasdbbbvjihztterw",
     "filePreview",
     "budiky",
-    "login-background",
     "bootType",
     "getStartedClosed",
     "color-filters",
