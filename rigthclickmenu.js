@@ -19,7 +19,8 @@ function rightClickIcon(element) {
   asdgasd = element;
   document.getElementById("menu").style.display = "none";
   document.getElementById("rightclickmenuiconsdone").style.top = ys - 52 + "px";
-  document.getElementById("rightclickmenuiconsdone").style.left = xs - 67 + "px";
+  document.getElementById("rightclickmenuiconsdone").style.left =
+    xs - 67 + "px";
   document.getElementById("rightclickmenuiconsdone").style.display = "block";
   document.getElementById("outclick").style.display = "block";
 }
@@ -41,18 +42,26 @@ function addShortCutApp() {
   var run = ahdgsasd.getAttribute("onclick");
   DesktopIcons.add({
     run: run,
-    icon: icon
+    icon: icon,
   });
 }
 function addShortCutFiles() {
   var name = ahdgsasd.textContent;
-  var app = ahdgsasd.getAttribute("onclick").replace("windows.open(", "").replace(")", "").replaceAll("'", "").replaceAll("\"", "").replaceAll(";", "");
+  var app = ahdgsasd
+    .getAttribute("onclick")
+    .replace("windows.open(", "")
+    .replace(")", "")
+    .replaceAll("'", "")
+    .replaceAll('"', "")
+    .replaceAll(";", "");
   mainFileManager.createAppShortCut(app, name);
   windows.open("filemanager");
 }
 function closewindowdown() {
   document.querySelector("." + i).classList.remove("opened");
-  var minimized = document.querySelectorAll(".window." + i.replace("ikonadown", ""));
+  var minimized = document.querySelectorAll(
+    ".window." + i.replace("ikonadown", ""),
+  );
   minimized.forEach((e) => {
     if (!e.classList.contains("openedwin")) {
       e.remove();

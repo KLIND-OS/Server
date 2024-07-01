@@ -52,7 +52,11 @@
     <div class="main">
       <!-- Main content -->
     </div>
-    <div class="folderselect" cursor="pointer" onclick="FileManager.submitFolder()">
+    <div
+      class="folderselect"
+      cursor="pointer"
+      onclick="FileManager.submitFolder()"
+    >
       Vybrat složku
     </div>
     <div class="hidden">
@@ -68,6 +72,12 @@
         onclick='FileManager.copy(this.parentElement.getAttribute("idel"));document.querySelector(".rightclick").style.display = "none"'
       >
         <p>Kopírovat</p>
+      </div>
+      <div
+        class="choice first"
+        onclick='FileManager.openFile(this.parentElement.getAttribute("idel"), true);document.querySelector(".rightclick").style.display = "none"'
+      >
+        <p>Otevřít pomocí</p>
       </div>
       <div
         class="choice"

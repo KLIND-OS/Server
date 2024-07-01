@@ -126,7 +126,7 @@ var mainFileManager = {
     zip: [["UnZip", (file) => windows.open("unzip", { path: file })]],
   },
   openingFile: undefined,
-  open: async (infolder, file) => {
+  open: async (infolder, file, ignorepreference = false) => {
     if (!file.includes(".")) {
       spawnNotification(
         "Správce souborů",
@@ -154,6 +154,8 @@ var mainFileManager = {
       possible = [...possible, ...mainFileManager.openWith[type]];
     }
 
+    const preference = FileopenPreferences.getApp(type);
+
     if (possible.length == 0) {
       spawnNotification(
         "Správce souborů",
@@ -162,8 +164,16 @@ var mainFileManager = {
       windows.open("fileeditor", {
         path: infolder + file,
       });
-    } else if (possible.length == 1) {
+    } else if (possible.length == 1 && !ignorepreference) {
       possible[0][1](infolder + file);
+    } else if (
+      preference &&
+      possible.some((e) => e[0].trim() == preference.trim()) &&
+      !ignorepreference
+    ) {
+      possible.filter((e) => e[0].trim() == preference.trim())[0][1](
+        infolder + file,
+      );
     } else {
       mainFileManager.openingFile = [possible, infolder + file];
       var element = document.querySelector(".selectApp .apps ");
@@ -179,6 +189,21 @@ var mainFileManager = {
 
       element.parentElement.parentElement.style.display = "flex";
     }
+  },
+  _showList: (possible, path) => {
+    mainFileManager.openingFile = [possible, infolder + file];
+    var element = document.querySelector(".selectApp .apps ");
+
+    for (var i = 0; i < possible.length; i++) {
+      var n = document.createElement("div");
+      n.className = "appsapp";
+      n.setAttribute("cursor", "pointer");
+      n.textContent = possible[i][0];
+      n.setAttribute("onclick", `mainFileManager.openFileWithApp(${i})`);
+      element.appendChild(n);
+    }
+
+    element.parentElement.parentElement.style.display = "flex";
   },
   openFileWithApp: (index) => {
     document.querySelector(".selectApp").style.display = "none";
@@ -351,7 +376,12 @@ var mainFileManager = {
     await mainFileManager.createFile({
       name: fileName + ".kapp",
     });
-    await mainFileManager.save("/" + fileName + ".kapp", "open:" + appName, undefined, "utf8");
+    await mainFileManager.save(
+      "/" + fileName + ".kapp",
+      "open:" + appName,
+      undefined,
+      "utf8",
+    );
   },
   createFile: async ({ name, parentFolder = "/" }) => {
     if (await mainFileManager.fileExists(parentFolder + name)) {
