@@ -2227,7 +2227,8 @@ table tr td input {
 .prompt-element,
 .confirm-element,
 .alert-element,
-.power-element {
+.power-element,
+.list-element {
   position: absolute;
   width: 100vw;
   height: 100vh;
@@ -2236,7 +2237,8 @@ table tr td input {
 
 .prompt-background,
 .alert-background,
-.confirm-background {
+.confirm-background,
+.list-background {
   position: absolute;
   background-color: black;
   opacity: 0.5;
@@ -2264,7 +2266,8 @@ table tr td input {
 
 .message-box,
 .message-box-confirm,
-.message-box-alert {
+.message-box-alert,
+.message-box-list {
   text-align: center;
   margin-top: 8px;
   margin-bottom: 8px;
@@ -2311,6 +2314,22 @@ table tr td input {
   float: left;
   border-end-start-radius: 15px;
   border-end-end-radius: 15px;
+}
+
+.submit-box-list {
+  height: 50px;
+  width: 100%;
+  position: relative;
+  margin-top: 20px;
+  float: left;
+  border-end-start-radius: 15px;
+  border-end-end-radius: 15px;
+}
+
+.list-input-box {
+  height: 50px;
+  width: 100%;
+  margin-top: 35px;
 }
 
 .loginfirst {
