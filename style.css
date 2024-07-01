@@ -1325,33 +1325,6 @@ body {
   position: relative;
 }
 
-.alertcookies {
-  position: absolute;
-  bottom: 0;
-  width: 100vw;
-  height: 120px;
-  background-color: white;
-  z-index: 9999999999999999999999999999999999999;
-}
-
-.alertcookies h1 {
-  top: 30%;
-  position: relative;
-}
-
-.alertcookies button {
-  position: absolute;
-  border: white 0px solid;
-  background-color: sandybrown;
-  transition: ease 0.2s background;
-  right: 20px;
-  width: 130px;
-  height: 35px;
-}
-
-.alertcookies button:hover {
-  background-color: saddlebrown;
-}
 .browser .browerr {
   padding: 10px;
   box-sizing: border-box;
@@ -2589,29 +2562,6 @@ table tr td input {
   height: 25px;
   border-radius: 50%;
   background: #04aa6d;
-}
-
-.welcomePage {
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  background-color: white;
-  z-index: 100000;
-}
-
-.welcomePage video {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.welcomePage .skipbtn {
-  position: absolute;
-  right: 0;
-  top: 0;
-  background: black;
-  color: white;
-  z-index: 1;
 }
 
 .customappdiv {

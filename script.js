@@ -168,13 +168,6 @@ function custompozadisubmit() {
     document.getElementById("klindows").style.backgroundImage = defaltvzhled;
   }
 }
-function submitcss(value) {
-  var path = new File(value).fullPath;
-  var contentoffile = mainFileManager.getContent(path, "utf8");
-  var element = document.getElementById("customcssstyleelement");
-  element.innerHTML = contentoffile;
-  localStorage.setItem("customcss", path);
-}
 
 var mode = {
   light: () => {
@@ -217,10 +210,6 @@ function startgame() {
   document.getElementById("hratajna").style.display = "block";
   document.getElementById("startgame").style.display = "none";
   document.getElementById("hratajna").focus();
-}
-function closealertcookies() {
-  document.getElementById("alertcookies").style.display = "none";
-  localStorage.setItem("showedalertcookies", "true");
 }
 function getCssProperty(elmId, property) {
   var elem = document.getElementById(elmId);

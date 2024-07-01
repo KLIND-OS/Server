@@ -588,7 +588,7 @@ var windows = {
             });
           };
         },
-        (win) => closeUpdates(win),
+        (win) => Updates.closeWindow(win),
         false,
       ],
       logs: [(win) => Logs.init(win), (win) => Logs.close(win), false],

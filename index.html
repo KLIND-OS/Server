@@ -18,6 +18,7 @@
       if (window.location.pathname == "/index.html")
         window.location.replace("..");
     </script>
+    <script src="contextMenuApi.js"></script>
     <script src="JSstyles.js"></script>
     <script src="boot.js"></script>
     <script src="infoApp.js"></script>
@@ -75,14 +76,12 @@
     <script src="sounds.js"></script>
     <script src="vars.js"></script>
     <script src="reg.js"></script>
-    <script src="rigthclickmenu.js"></script>
     <script src="customapps.js"></script>
     <script src="desktopIcons.js"></script>
     <script src="bouncy.js"></script>
     <script src="calculator.js"></script>
     <script src="yaanidiot.js"></script>
     <script src="/power.js"></script>
-    <script src="welcomePage.js"></script>
     <script src="hash.js"></script>
     <link rel="stylesheet" href="libs/plyr.css" />
     <script src="libs/plyr.js"></script>
@@ -119,6 +118,10 @@
       }
     </script>
     <script src="fileopenPreferences.js"></script>
+    <script src="userAgent.js"></script>
+    <script src="customcss.js"></script>
+    <script src="background.js"></script>
+    <script src="developermode.js"></script>
   </head>
 
   <body
@@ -138,37 +141,16 @@
         <p>Pokouším se připojit znovu<span class="testingAnimation">.</span></p>
       </div>
     </div>
-    <div class="welcomePage" style="display: none">
-      <div class="skipbtn" onclick="skipwelcomeVideo()">Přeskočit</div>
-      <video webkit-playsinline="true" playsinline="true" muted="true">
-        <!-- <source src="/videos/klindos-ukazka.mp4" type="video/mp4"> -->
-      </video>
-    </div>
     <div class="betadiv" style="display: none">
       <span>Beta</span>
     </div>
-    <div id="outclick"></div>
     <!-- Right click menu -->
-    <ul id="menu" oncontextmenu="return false;">
-      <li onclick="closeRightClickMenuMain();Power.open();" class="menu-item">
-        Napájení
-      </li>
-      <li onclick="turnoff()" class="menu-item">Vypnout</li>
-      <li onclick="windows.open('nas')" class="menu-item">Nastavení</li>
-    </ul>
-    <div id="rightclickmenudowapps">
-      <p onclick="closewindowdown();">Zavřít</p>
-    </div>
-    <div id="rightclickmenuicons">
-      <p onclick="addShortCutApp();">Přidat aplikaci na plochu</p>
-      <p onclick="addShortCutFiles();">Přidat zástupce do souborů</p>
-    </div>
-    <div id="rightclickmenuiconsdone">
-      <p onclick="removeIconFromDesktop();">Odebrat</p>
-    </div>
-    <!-- Right click menu -->
+    <div id="outclick" onclick="ContextMenuApi.closeAll();"></div>
+    <div class="contextmenulist"></div>
+    <!-- Cursor -->
     <div id="firstcursor"></div>
     <div id="secondcursor" class="secondcursor"></div>
+    <!-- Loader -->
     <div class="loading" oncontextmenu="return false;">
       <div class="containersadsdsad">
         <div class="asdasdasd item-1"></div>
@@ -177,6 +159,7 @@
         <div class="asdasdasd item-4"></div>
       </div>
     </div>
+    <!-- Error page -->
     <div
       style="display: none"
       id="error"
@@ -196,118 +179,32 @@
       </div>
     </div>
     <script>
-      // Load
       if (!Boot.safeBoot) {
-        // Load registers
         loadreg();
-
-        // Detect browser
-        let userAgent = navigator.userAgent;
-        let browser;
-        if (developermode != "true") {
-          if (userAgent.match(/edg/i)) {
-            browser = "edge";
-          } else if (userAgent.match(/firefox|fxios/i)) {
-            browser = "firefox";
-          } else if (userAgent.match(/opr\//i)) {
-            browser = "opera";
-          } else if (userAgent.match(/chrome|chromium|crios/i)) {
-            browser = "chrome";
-          } else if (userAgent.match(/safari/i)) {
-            browser = "safari";
-          } else {
-            browser = "other";
-          }
-        }
-        if (browser != "chrome" && developermode != "true") {
-          error(
-            "0x0000005",
-            "Nepodporovaný prohlížeč. Zkuste chrome",
-            "KLIND OS | Load",
-          );
-        }
+        UserAgent.test();
       }
-
-      monitorConnection();
+      Connection.monitor();
     </script>
     <script type="text/javascript">
       async function onloadscripst() {
         if (!Boot.safeBoot) {
-          detectUpdates();
-
+          Updates.detect();
           CustomApp.load();
-
-          if (localStorage.getItem("customcss") != null) {
-            const customcssarcookie = localStorage.getItem("customcss");
-            var contentofcustomcss = mainFileManager.getContent(
-              customcssarcookie,
-              "utf8",
-            );
-            var elementustomcss = document.getElementById(
-              "customcssstyleelement",
-            );
-            elementustomcss.innerHTML = contentofcustomcss;
-          }
-
-          if (localStorage.getItem("background") != null) {
-            if (
-              await mainFileManager.fileExists(
-                localStorage.getItem("background"),
-              )
-            ) {
-              document.getElementById("klindows").style.backgroundImage =
-                "url(http://localhost:9999" +
-                localStorage.getItem("background") +
-                ")";
-            } else {
-              control.dowhenlogin.add(() => {
-                spawnNotification(
-                  "Pozadí",
-                  "Obrázek pro pozadí nebyl nalezen!",
-                );
-              });
-            }
-          } else {
-            if (localStorage.getItem("mode") == "dark") {
-              document.getElementById("klindows").style.backgroundImage =
-                "url(wallpapers/dark.jpg)";
-            } else {
-              document.getElementById("klindows").style.backgroundImage =
-                "url(wallpapers/light.jpg)";
-            }
-          }
+          CustomCSS.load();
+          Background.load();
         } else {
-          document.getElementById("klindows").style.backgroundImage =
-            "url('images/safeModeBackground.png')";
+          Background.loadSecureBoot();
         }
 
-        if (developermode == "true") {
-          try {
-            window.open("developer.html");
-          } catch {
-            alert(
-              "Vývojový mód je zapnutý. Toto nastavení vypne všechnu ochranu. V případě že najdete v této verzi chybu, nenahlašujte ji. Toto nastavení nedoporučujeme pokud nejste vývojář.",
-            );
-          }
-        }
+        DeveloperMode.load();
 
-        if (localStorage.getItem("clocktype") == "first") {
-          prvniclock();
-        } else if (localStorage.getItem("clocktype") == "second") {
-          druhyclock();
-        }
-        if (localStorage.getItem("autotaskschovat") == "true") {
-          autotaskshovat = true;
-          document.getElementById("downbar").style.bottom = "-50px";
-        }
-        if (localStorage.getItem("showedalertcookies") == "true") {
-          closealertcookies();
-        }
+        Clock.load();
+
+        Taskbar.load();
 
         if (login == "false") {
           document.querySelector(".login").classList.add("displaynone");
         }
-        setupClock();
 
         setTimeout(() => {
           document.querySelector(".loading").style.top = "-100vh";
@@ -320,7 +217,6 @@
               src: ["sounds/startup.mp3"],
               autoplay: true,
             });
-            welcomePageCheck();
           }, 700);
           function changefavicon(vari) {
             try {
@@ -523,7 +419,7 @@
       </div>
       <!--FullScreen Elements End-->
       <script src="click.js"></script>
-      <script src="downbar.js"></script>
+
       <div hidden class="koks windowedmtjhjass" style="display: none"></div>
       <div class="oknadisplaynone" style="display: none; visibility: hidden">
         <div
@@ -886,7 +782,7 @@
             Změny: <a href="https://klindos.jzitnik.dev/changelog">zde</a>
           </h2>
           <p class="updateStatus"></p>
-          <button onclick="updatereload(this)">Aktualizovat</button>
+          <button onclick="Updates.start(this)">Aktualizovat</button>
         </div>
 
         <div
@@ -900,8 +796,6 @@
               <div onclick="windows.mini(this, 'info')" class="mini"></div>
             </div>
           </div>
-          <span onclick="tajnettri();">Připojení k internetu: </span
-          ><span id="internetsss"></span><br />
           <span>Verze KLIND OS: </span><span id="versionwrite">unknown</span
           ><br />
           <span
@@ -1946,13 +1840,6 @@
         <div id="openedapps">
           <span></span>
         </div>
-        <div class="alertcookies" id="alertcookies">
-          <h1>
-            Tato stránka bude ukládat soubory cookies do vašeho počítače pro
-            ukládání informací a nastavení.
-          </h1>
-          <button onclick="closealertcookies()">Rozumím</button>
-        </div>
         <div class="openopenedapps" style="display: none; z-index: 500"></div>
         <div class="oknepatrizde">
           <div
@@ -2539,14 +2426,14 @@
           ></div>
 
           <div class="clock jednaclock" onclick="opendate()" cursor="pointer">
-            <span id="time">Error</span>
+            <span id="time">Načítání</span>
           </div>
           <div
             class="clock dvaclock closedclock"
             onclick="opendate()"
             cursor="pointer"
           >
-            <span id="timedva">Error</span>
+            <span id="timedva">Načítání</span>
           </div>
           <script src="clock.js"></script>
           <div class="batteryStatus">
@@ -2570,14 +2457,14 @@
             onclick="NotificationCenter.show(this)"
           />
           <img
-            id="internetno"
+            id="internetnoicon"
             src="icons/without-internet.svg"
-            style="float: right"
+            style="float: right; display: none"
             class="ikonadown builtin"
             onclick="windows.open('info')"
           />
           <img
-            id="intrnetyes"
+            id="intrnetyesicon"
             src="icons/internet.svg"
             style="float: right"
             class="ikonadown builtin"
