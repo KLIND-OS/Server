@@ -19,20 +19,24 @@ class StartMenu {
       } while (targetElement);
 
       if (StartMenu.opened) {
-        StartMenu.opened = false;
-        document.getElementById("items-1").style.top = "0px";
-        document.getElementById("items-4").style.left = "0px";
-        document.getElementById("items-2").style.top = "25px";
-        document.getElementById("items-3").style.left = "25px";
-
-        document.querySelector(".startmenu").classList.remove("opened");
-        StartMenu.opening = true;
-        setTimeout(() => {
-          document.querySelector(".startmenu").classList.remove("display");
-          StartMenu.opening = false;
-        }, 500);
+        StartMenu.close();
       }
     });
+  }
+
+  static close() {
+    StartMenu.opened = false;
+    document.getElementById("items-1").style.top = "0px";
+    document.getElementById("items-4").style.left = "0px";
+    document.getElementById("items-2").style.top = "25px";
+    document.getElementById("items-3").style.left = "25px";
+
+    document.querySelector(".startmenu").classList.remove("opened");
+    StartMenu.opening = true;
+    setTimeout(() => {
+      document.querySelector(".startmenu").classList.remove("display");
+      StartMenu.opening = false;
+    }, 500);
   }
 
   static open() {
