@@ -195,7 +195,7 @@ var mainFileManager = {
         [
           new ContextMenuItem("Nastavit jako výchozí", (e) => {
             const app = e.textContent;
-            const preferences = JSON.parse(localStorage.getItem("fileopenPreferences") || "[]");
+            const preferences = JSON.parse(localStorage.getItem("fileopenPreferences") || "{}");
             preferences[type] = app;
             localStorage.setItem("fileopenPreferences", JSON.stringify(preferences));
           }),
