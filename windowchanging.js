@@ -14,7 +14,7 @@ var appsopened = {
   selected: undefined,
   openwin: (value) => {
     var element = document.querySelectorAll(".window.openedwin")[value];
-    changewindowmain(element);
+    ZIndexer.focus(element);
     element.focus();
     appsopened.close();
   },
@@ -46,7 +46,7 @@ var appsopened = {
         }
       } else {
         for (var i = 0; i < appsopened.count; i++) {
-          if (appsopened.list[i][2] == openedwindowindex) {
+          if (appsopened.list[i][2] == ZIndexer.current) {
             innerHTMLvalue +=
               "<div class=\"selected buttonopenedapps " +
               appsopened.list[i][0] +

@@ -1,4 +1,3 @@
-
 class Battery {
   static previousState = "notcharging"
 

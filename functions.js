@@ -158,8 +158,7 @@ class App {
     var okno = document.createElement("div");
     okno.classList.add("widgetList");
     okno.classList.add(idName.replaceAll(" ", ""));
-    okno.classList.add("Resizabl");
-    okno.setAttribute("onclick", "changewindowmain(this);");
+    okno.setAttribute("onclick", "ZIndexer.focus(this);");
 
     var widgetHeader = document.createElement("div");
     widgetHeader.classList.add("widget-header");

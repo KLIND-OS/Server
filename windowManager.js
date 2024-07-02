@@ -199,7 +199,7 @@ var windows = {
                 "onclick",
                 "openGetFile[" +
                   index +
-                  "][1]['closed']();windows.close(this,'filemanager')",
+                  "][1]['closed']();windows.close(this,'filemanager', event)",
               );
             element.querySelector(".mini").remove();
             element.querySelector(".headerclass span").textContent =
@@ -219,7 +219,7 @@ var windows = {
                 "onclick",
                 "openGetFile[" +
                   index +
-                  "][1]['closed']();windows.close(this,'filemanager')",
+                  "][1]['closed']();windows.close(this,'filemanager', event)",
               );
             element.querySelector(".mini").remove();
             element.querySelector(".headerclass span").textContent =
@@ -613,7 +613,7 @@ var windows = {
       newelement.style.opacity = "0";
       newelement.style.scale = "0.9";
       newelement.setAttribute("name", name);
-      document.querySelector(".oknepatrizde").appendChild(newelement);
+      document.querySelector(".oknapatrizde").appendChild(newelement);
       reloaddraggable();
       if (
         newelement.querySelector(".headerclass") &&
@@ -640,7 +640,8 @@ var windows = {
       newelement.style.scale = "1";
 
       setTimeout(() => {
-        newelement.click();
+        ZIndexer.focus(newelement, true);
+        StartMenu.close();
       });
       if (special != undefined && special[0] !== false) {
         special[0](newelement, args);
@@ -648,7 +649,10 @@ var windows = {
       return newelement;
     }
   },
-  close: async (element, name) => {
+  close: async (element, name, event) => {
+    if (event) {
+      event.stopPropagation();
+    }
     var el = element.parentElement.parentElement.parentElement;
     var special = windows.list.special[name];
     if (special != undefined && special[1] !== false) {
@@ -662,11 +666,14 @@ var windows = {
 
       setTimeout(() => {
         el.remove();
-        openedwindowindex = undefined;
+        ZIndexer.current = undefined;
       }, 200);
     }
   },
-  mini: (element, name) => {
+  mini: (element, name, event) => {
+    if (event) {
+      event.stopPropagation();
+    }
     var location = windows.list.names.indexOf(name);
     var special = windows.list.special[name];
     var ikonadown = windows.list.ikonadown[location];
@@ -775,11 +782,12 @@ var windows = {
       setTimeout(() => {
         mainElement.style.opacity = "1";
         mainElement.style.scale = "1";
-        mainElement.click();
         thiselement.style.transform = "scale(0)";
         windows.list.appIds[id] = undefined;
         setTimeout(() => {
           thiselement.remove();
+
+          mainElement.click();
         }, 200);
       }, 10);
     }, 150);
