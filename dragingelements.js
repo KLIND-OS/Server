@@ -1,12 +1,13 @@
 var noresizeClasslist = ["terminal", "audioLevelEditor"];
+
 function reloaddraggable() {
   $(function () {
-    var $widget = $(".window.widgetList");
+    var $widget = $(".window.window");
     var $widgetResizable = $widget.find(".widgetResizable");
     $widgetResizable.css("height", "170px");
     $widget.draggable({
       cursor: "move",
-      handle: ".widget-header",
+      handle: ".window-header",
       scroll: false,
       containment: "window",
       iframeFix: true,
@@ -15,7 +16,7 @@ function reloaddraggable() {
           .querySelectorAll("webview")
           .forEach((webview) => (webview.style.pointerEvents = ""));
         e.target.style.opacity = "1";
-        if (!noresizeClasslist.includes(e.target.classList[1])) {
+        if (!noresizeClasslist.includes(e.target.classList[0])) {
           var target = e.target;
           var left = parseInt(target.style.left.replace("px", ""));
           var top = parseInt(target.style.top.replace("px", ""));

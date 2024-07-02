@@ -433,7 +433,7 @@ var windows = {
           }
           if (args.title) {
             element.querySelector(
-              ".widget-header .headerclass span",
+              ".window-header .headerclass span",
             ).textContent = args.title.toString();
           }
         },

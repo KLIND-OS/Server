@@ -89,7 +89,7 @@ class Shortcuts {
     }
 
     if (!ZIndexer.current) return;
-    const className = ZIndexer.current.classList[1];
+    const className = ZIndexer.current.classList[0];
     const location = windows.list.classes.indexOf(`.${className}`);
     const windowName = windows.list.names[location];
     const windowShortcuts = this.windowShortcutList[windowName];

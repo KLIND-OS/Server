@@ -156,12 +156,11 @@ class App {
   }) {
     var idName = this.info.name + "-" + name;
     var okno = document.createElement("div");
-    okno.classList.add("widgetList");
     okno.classList.add(idName.replaceAll(" ", ""));
     okno.setAttribute("onclick", "ZIndexer.focus(this);");
 
     var widgetHeader = document.createElement("div");
-    widgetHeader.classList.add("widget-header");
+    widgetHeader.classList.add("window-header");
 
     var headerClass = document.createElement("div");
     headerClass.classList.add("headerclass");

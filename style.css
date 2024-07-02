@@ -1267,7 +1267,7 @@ body {
   opacity: 0.5;
 }
 
-.widget-header {
+.window-header {
   z-index: 20;
   position: relative;
 }
