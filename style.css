@@ -165,7 +165,6 @@ iframe {
   height: 600px;
   overflow: hidden;
   min-width: 550px;
-  z-index: 23;
 }
 
 .getstarted {
@@ -176,7 +175,6 @@ iframe {
   height: 600px;
   overflow: hidden;
   min-width: 550px;
-  z-index: 23;
 }
 
 .getstarted .content {
@@ -365,7 +363,7 @@ body:not(.disablewindowanimation)
   bottom: 65px;
   right: 125px;
   left: auto;
-  z-index: 23;
+
   top: auto;
 }
 
@@ -714,7 +712,6 @@ body {
   height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 #calendar {
@@ -728,7 +725,6 @@ body {
   min-height: 580px;
   overflow: hidden;
   min-width: 1100px;
-  z-index: 23;
 }
 
 .budik {
@@ -738,7 +734,6 @@ body {
   height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 .maps {
@@ -748,7 +743,6 @@ body {
   min-height: 580px;
   overflow: hidden;
   min-width: 1100px;
-  z-index: 23;
 }
 
 .htmleditor {
@@ -757,7 +751,6 @@ body {
   height: 580px;
   overflow: hidden;
   width: 1100px;
-  z-index: 23;
 }
 
 .htmleditor iframe {
@@ -772,7 +765,6 @@ body {
   min-height: 360px;
   overflow: hidden;
   min-width: 326px;
-  z-index: 23;
 }
 
 .faceset iframe {
@@ -787,7 +779,6 @@ body {
   min-height: 591px;
   overflow: hidden;
   min-width: 467px;
-  z-index: 23;
 }
 
 .record iframe {
@@ -828,7 +819,6 @@ body {
   min-height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 .customapp iframe {
@@ -845,7 +835,6 @@ body {
   min-height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 .weather {
@@ -856,7 +845,6 @@ body {
   min-height: 639px;
   overflow: hidden;
   min-width: 677px;
-  z-index: 23;
 }
 
 .weather iframe {
@@ -873,7 +861,6 @@ body {
   min-height: 639px;
   overflow: hidden;
   min-width: 677px;
-  z-index: 23;
 }
 
 .shop iframe {
@@ -890,7 +877,6 @@ body {
   min-height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 .myklindows h1,
@@ -914,7 +900,6 @@ body {
   min-height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 .customapps button {
@@ -929,7 +914,7 @@ body {
   width: 300px;
   height: 300px;
   overflow: hidden;
-  z-index: 23;
+
   overflow: hidden;
   min-height: 300px;
   min-width: 300px;
@@ -998,7 +983,6 @@ body {
   height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 .unzip {
@@ -1009,7 +993,6 @@ body {
   height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 .logs,
@@ -1021,7 +1004,6 @@ body {
   height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 .logs .logsspan {
@@ -1038,7 +1020,6 @@ body {
   height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 .packageinstaller {
@@ -1049,7 +1030,6 @@ body {
   height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 .printermanager {
@@ -1060,7 +1040,6 @@ body {
   height: 400px;
   overflow: hidden;
   min-width: 850px;
-  z-index: 23;
 }
 
 .imageeditor {
@@ -1071,7 +1050,6 @@ body {
   height: 560px;
   overflow: hidden;
   min-width: 880px;
-  z-index: 23;
 }
 
 .screenfilter {
@@ -1082,7 +1060,6 @@ body {
   height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 .diskmanager {
@@ -1093,7 +1070,6 @@ body {
   height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 .wordeditor {
@@ -1104,7 +1080,6 @@ body {
   height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 .sheetseditor {
@@ -1115,7 +1090,6 @@ body {
   height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 .emergencymenu {
@@ -1126,7 +1100,6 @@ body {
   height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 .cleaner {
@@ -1137,7 +1110,6 @@ body {
   height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 .cleaner .keys {
@@ -1154,7 +1126,6 @@ body {
   height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 .procesy {
@@ -1165,7 +1136,6 @@ body {
   height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 .procesy .procesyProcesy,
 .procesy .infoProcesy {
@@ -1183,7 +1153,6 @@ body {
   height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 .musicplayer iframe {
@@ -1206,7 +1175,6 @@ body {
   height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 .zdroje {
@@ -1217,7 +1185,6 @@ body {
   height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 .about {
@@ -1228,7 +1195,6 @@ body {
   height: 420px;
   overflow: hidden;
   min-width: 853px;
-  z-index: 23;
 }
 
 .customAppResizable {
@@ -1239,13 +1205,12 @@ body {
   height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 .customAppNormal {
   position: absolute !important;
   overflow: hidden;
-  z-index: 23;
+
   background-color: white;
 }
 
@@ -1691,7 +1656,6 @@ table tr td input {
   min-height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 #gtx-trans {
@@ -1963,7 +1927,6 @@ table tr td input {
   min-height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 .fileeditor {
@@ -1973,7 +1936,6 @@ table tr td input {
   min-height: 300px;
   overflow: hidden;
   min-width: 300px;
-  z-index: 23;
 }
 
 .fileeditor .fileeditorimage,

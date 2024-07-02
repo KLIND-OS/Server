@@ -13,11 +13,9 @@
   </noscript>
   <head>
     <meta charset="UTF-8" />
-    <!--Change path-->
-    <script>
-      if (window.location.pathname == "/index.html")
-        window.location.replace("..");
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Načítání...</title>
+
     <script src="contextMenuApi.js"></script>
     <script src="JSstyles.js"></script>
     <script src="boot.js"></script>
@@ -32,44 +30,20 @@
     <script src="consolelog.js"></script>
     <script src="sources/polifill.min.js"></script>
     <script src="sources/uuid.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="sandbox.css" />
-    <title>Načítání...</title>
-    <link rel="stylesheet" href="style.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="script.js"></script>
     <script src="fixwindow.js"></script>
     <script src="windowManager.js"></script>
     <script src="windowchanging.js"></script>
     <script src="libs/jquery-3.6.0.js"></script>
     <script src="libs/jqueryui_1.11.4.js"></script>
-    <link rel="stylesheet" type="text/css" href="libs/jquery_ui_1.9.2.css" />
-    <link rel="stylesheet" href="rightclickmenu.css" />
-    <link rel="stylesheet" href="libs/font-awesome.css" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Montserrat&amp;display=swap"
-    />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap"
-    />
     <script src="myklindows_scripts.js"></script>
     <script src="taskbar.js"></script>
     <script src="stopky.js"></script>
     <script src="libs/howler.js"></script>
     <script src="loading.js"></script>
-    <style id="customcssstyleelement"></style>
     <script src="dragingelements.js"></script>
     <script src="zkratky.js"></script>
     <script src="update.js"></script>
-    <link id="favicon" rel="shortcut icon" href="icons/loading.svg" />
     <script src="info.js"></script>
     <script src="sounds.js"></script>
     <script src="customapps.js"></script>
@@ -78,7 +52,6 @@
     <script src="yaanidiot.js"></script>
     <script src="/power.js"></script>
     <script src="hash.js"></script>
-    <link rel="stylesheet" href="libs/plyr.css" />
     <script src="libs/plyr.js"></script>
     <script src="cleaner.js"></script>
     <script src="localStorage.js"></script>
@@ -121,13 +94,36 @@
     <script src="startmenu.js"></script>
     <script src="theme.js"></script>
     <script src="battery.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="sandbox.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="libs/jquery_ui_1.9.2.css" />
+    <link rel="stylesheet" href="rightclickmenu.css" />
+    <link rel="stylesheet" href="libs/font-awesome.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Montserrat&amp;display=swap"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap"
+    />
+    <link id="favicon" rel="shortcut icon" href="icons/loading.svg" />
+    <link rel="stylesheet" href="libs/plyr.css" />
+    <style id="customcssstyleelement"></style>
   </head>
 
   <body
     onmousedown="mouseDown()"
     onmouseup="mouseUp()"
-    onload="onloadscripst();"
-    id="body"
+    onload="onloadscript();"
   >
     <div class="filter"></div>
     <div class="connection-lost-element" style="display: none">
@@ -182,7 +178,7 @@
       StartMenu.load();
     </script>
     <script type="text/javascript">
-      async function onloadscripst() {
+      async function onloadscript() {
         if (!Boot.safeBoot) {
           Updates.detect();
           CustomApp.load();
@@ -382,10 +378,7 @@
 
       <div hidden class="koks winselected" style="display: none"></div>
       <div class="oknadisplaynone" style="display: none; visibility: hidden">
-        <div
-          onclick="ZIndexer.focus(this);"
-          class="poznamky"
-        >
+        <div onclick="ZIndexer.focus(this);" class="poznamky">
           <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Poznámky</span>
@@ -393,21 +386,30 @@
                 onclick="windows.close(this, 'poznamky', event)"
                 class="close"
               ></div>
-              <div onclick="windows.mini(this, 'poznamky', event)" class="mini"></div>
+              <div
+                onclick="windows.mini(this, 'poznamky', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
-          <textarea id="notesinput" onkeyup="Poznamky.keypress(this)"></textarea>
+          <textarea
+            id="notesinput"
+            onkeyup="Poznamky.keypress(this)"
+          ></textarea>
         </div>
 
-        <div
-          onclick="ZIndexer.focus(this);"
-          class="kalkulacka"
-        >
+        <div onclick="ZIndexer.focus(this);" class="kalkulacka">
           <div class="window-header">
             <div class="headerclass">
               <span>Kalkulačka</span>
-              <div onclick="windows.close(this, 'kalk', event)" class="close"></div>
-              <div onclick="windows.mini(this, 'kalk', event)" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'kalk', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'kalk', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <div class="conatainer" style="height: calc(100% - 20px)">
@@ -625,44 +627,52 @@
           </div>
         </div>
 
-        <div
-          onclick="ZIndexer.focus(this);"
-          class="stopky"
-        >
+        <div onclick="ZIndexer.focus(this);" class="stopky">
           <div class="window-header">
             <div class="headerclass">
               <span>Stopky</span>
-              <div onclick="windows.close(this, 'stop', event)" class="close"></div>
-              <div onclick="windows.mini(this, 'stop', event)" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'stop', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'stop', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <iframe src="/stopky/" frameborder="0"></iframe>
         </div>
 
-        <div
-          onclick="ZIndexer.focus(this);"
-          id="nas"
-          class="nastaveni"
-        >
+        <div onclick="ZIndexer.focus(this);" id="nas" class="nastaveni">
           <div class="window-header">
             <div class="headerclass">
               <span>Nastavení</span>
-              <div onclick="windows.close(this, 'nas', event)" class="close"></div>
-              <div onclick="windows.mini(this, 'nas', event)" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'nas', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'nas', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <iframe src="/settings/" frameborder="0"></iframe>
         </div>
 
-        <div
-          onclick="ZIndexer.focus(this);"
-          class="browser"
-        >
+        <div onclick="ZIndexer.focus(this);" class="browser">
           <div class="window-header">
             <div class="headerclass">
               <span>Prohlížeč</span>
-              <div onclick="windows.close(this, 'brow', event)" class="close"></div>
-              <div onclick="windows.mini(this, 'brow', event)" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'brow', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'brow', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <div class="controls">
@@ -705,15 +715,18 @@
           ></webview>
         </div>
 
-        <div
-          onclick="ZIndexer.focus(this);"
-          class="updateklind"
-        >
+        <div onclick="ZIndexer.focus(this);" class="updateklind">
           <div class="window-header">
             <div class="headerclass">
               <span>Aktualizace</span>
-              <div onclick="windows.close(this, 'update', event)" class="close"></div>
-              <div onclick="windows.mini(this, 'update', event)" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'update', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'update', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <h1>Branch</h1>
@@ -729,15 +742,18 @@
           <button onclick="Updates.start(this)">Aktualizovat</button>
         </div>
 
-        <div
-          onclick="ZIndexer.focus(this);"
-          class="informationklindows"
-        >
+        <div onclick="ZIndexer.focus(this);" class="informationklindows">
           <div class="window-header">
             <div class="headerclass">
               <span>Informace</span>
-              <div onclick="windows.close(this, 'info', event)" class="close"></div>
-              <div onclick="windows.mini(this, 'info', event)" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'info', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'info', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <span>Verze KLIND OS: </span><span id="versionwrite">unknown</span
@@ -770,15 +786,18 @@
           ><br />
         </div>
 
-        <div
-          onclick="ZIndexer.focus(this);"
-          class="terminal"
-        >
+        <div onclick="ZIndexer.focus(this);" class="terminal">
           <div class="window-header">
             <div class="headerclass">
               <span>Terminál</span>
-              <div onclick="windows.close(this, 'ter', event)" class="close"></div>
-              <div onclick="windows.mini(this, 'ter', event)" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'ter', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'ter', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <iframe src="ter"></iframe>
@@ -792,8 +811,14 @@
           <div class="window-header">
             <div class="headerclass">
               <span style="float: left">KLIND OS | Nápověda</span>
-              <div onclick="windows.close(this, 'nap', event)" class="close"></div>
-              <div onclick="windows.mini(this, 'nap', event)" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'nap', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'nap', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <h1>Zkratky:</h1>
@@ -805,15 +830,18 @@
           </ul>
         </div>
 
-        <div
-          onclick="ZIndexer.focus(this)"
-          class="kalendar"
-        >
+        <div onclick="ZIndexer.focus(this)" class="kalendar">
           <div class="window-header">
             <div class="headerclass">
               <span>Kalendář</span>
-              <div onclick="windows.close(this, 'kalen', event)" class="close"></div>
-              <div onclick="windows.mini(this, 'kalen', event)" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'kalen', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'kalen', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <iframe class="innerIframe" src="calendar" frameborder="0"></iframe>
@@ -823,45 +851,54 @@
           <div class="window-header">
             <div class="headerclass">
               <span>Budík</span>
-              <div onclick="windows.close(this, 'budik', event)" class="close"></div>
-              <div onclick="windows.mini(this, 'budik', event)" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'budik', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'budik', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <iframe class="innerIframe" src="budik" frameborder="0"></iframe>
         </div>
 
-        <div
-          onclick="ZIndexer.focus(this)"
-          class="record"
-        >
+        <div onclick="ZIndexer.focus(this)" class="record">
           <div class="window-header">
             <div class="headerclass">
               <span>Nahrávání</span>
-              <div onclick="windows.close(this, 'record', event)" class="close"></div>
-              <div onclick="windows.mini(this, 'record', event)" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'record', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'record', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <iframe src="/record/"></iframe>
         </div>
 
-        <div
-          onclick="ZIndexer.focus(this)"
-          class="faceset"
-        >
+        <div onclick="ZIndexer.focus(this)" class="faceset">
           <div class="window-header">
             <div class="headerclass">
               <span>Nastavení rozpoznávání obličeje</span>
-              <div onclick="windows.close(this, 'faceset', event)" class="close"></div>
-              <div onclick="windows.mini(this, 'faceset', event)" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'faceset', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'faceset', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
-          <iframe class="facesetiframe" src="faceinstall.html"></iframe>
+          <iframe class="facesetiframe" src="/faceinstall"></iframe>
         </div>
 
-        <div
-          onclick="ZIndexer.focus(this)"
-          class="filemanager"
-        >
+        <div onclick="ZIndexer.focus(this)" class="filemanager">
           <div class="window-header">
             <div class="headerclass">
               <span>Správce Souborů</span>
@@ -882,10 +919,7 @@
           ></iframe>
         </div>
 
-        <div
-          onclick="ZIndexer.focus(this)"
-          class="fileproperties"
-        >
+        <div onclick="ZIndexer.focus(this)" class="fileproperties">
           <div class="window-header">
             <div class="headerclass">
               <span>Vlastnosti souboru</span>
@@ -901,10 +935,7 @@
           <p>Umístění: <span id="filelocation">error</span></p>
         </div>
 
-        <div
-          onclick="ZIndexer.focus(this)"
-          class="fileeditor"
-        >
+        <div onclick="ZIndexer.focus(this)" class="fileeditor">
           <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Soubor</span>
@@ -946,15 +977,18 @@
           </div>
         </div>
 
-        <div
-          onclick="ZIndexer.focus(this)"
-          class="zdroje"
-        >
+        <div onclick="ZIndexer.focus(this)" class="zdroje">
           <div class="window-header">
             <div class="headerclass">
               <span>Zdroje</span>
-              <div onclick="windows.close(this, 'zdroje', event)" class="close"></div>
-              <div onclick="windows.mini(this, 'zdroje', event)" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'zdroje', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'zdroje', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <h1>Zdroje</h1>
@@ -984,8 +1018,14 @@
           <div class="window-header">
             <div class="headerclass">
               <span>O KLIND OS</span>
-              <div onclick="windows.close(this, 'about', event)" class="close"></div>
-              <div onclick="windows.mini(this, 'about', event)" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'about', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'about', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <h1>O KLIND OS</h1>
@@ -1053,10 +1093,7 @@
             Made with hate and suffering by Jakub Žitník in the Czech Republic.
           </p>
         </div>
-        <div
-          onclick="ZIndexer.focus(this)"
-          class="installapp"
-        >
+        <div onclick="ZIndexer.focus(this)" class="installapp">
           <div class="window-header">
             <div class="headerclass">
               <span>Instalátor aplikací</span>
@@ -1087,10 +1124,7 @@
           </header>
           <div class="allapps"></div>
         </div>
-        <div
-          class="audioLevelEditor"
-          onclick="ZIndexer.focus(this)"
-        >
+        <div class="audioLevelEditor" onclick="ZIndexer.focus(this)">
           <div>
             <div>
               <div></div>
@@ -1119,15 +1153,18 @@
             </div>
           </div>
         </div>
-        <div
-          onclick="ZIndexer.focus(this)"
-          class="procesy"
-        >
+        <div onclick="ZIndexer.focus(this)" class="procesy">
           <div class="window-header">
             <div class="headerclass">
               <span>Správce úloh</span>
-              <div onclick="windows.close(this, 'procesy', event)" class="close"></div>
-              <div onclick="windows.mini(this, 'procesy', event)" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'procesy', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'procesy', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <header>
@@ -1159,10 +1196,7 @@
             <div class="procesyProcesyContent"></div>
           </div>
         </div>
-        <div
-          onclick="ZIndexer.focus(this)"
-          class="viewtext"
-        >
+        <div onclick="ZIndexer.focus(this)" class="viewtext">
           <div class="window-header">
             <div class="headerclass">
               <span>TextView</span>
@@ -1174,10 +1208,7 @@
           </div>
           <textarea></textarea>
         </div>
-        <div
-          onclick="ZIndexer.focus(this)"
-          class="musicplayer"
-        >
+        <div onclick="ZIndexer.focus(this)" class="musicplayer">
           <div class="window-header">
             <div class="headerclass">
               <span>Přehrávač hudby</span>
@@ -1193,15 +1224,18 @@
           </div>
           <iframe></iframe>
         </div>
-        <div
-          onclick="ZIndexer.focus(this)"
-          class="cleaner"
-        >
+        <div onclick="ZIndexer.focus(this)" class="cleaner">
           <div class="window-header">
             <div class="headerclass">
               <span>Čistič systému</span>
-              <div onclick="windows.close(this, 'cleaner', event)" class="close"></div>
-              <div onclick="windows.mini(this, 'cleaner', event)" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'cleaner', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'cleaner', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <button onclick="Cleaner.clean(); Cleaner.load(this.parentElement)">
@@ -1210,10 +1244,7 @@
           <h1>Klíče pro vyčištění:</h1>
           <div class="keys">Prosím počkejte...</div>
         </div>
-        <div
-          onclick="ZIndexer.focus(this)"
-          class="emergencymenu"
-        >
+        <div onclick="ZIndexer.focus(this)" class="emergencymenu">
           <div class="window-header">
             <div class="headerclass">
               <span>Emergency Menu</span>
@@ -1245,10 +1276,7 @@
             Upravit klíč
           </button>
         </div>
-        <div
-          onclick="ZIndexer.focus(this)"
-          class="wordeditor"
-        >
+        <div onclick="ZIndexer.focus(this)" class="wordeditor">
           <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Word editor</span>
@@ -1270,10 +1298,7 @@
           </div>
           <div class="wordeditor-element"></div>
         </div>
-        <div
-          onclick="ZIndexer.focus(this)"
-          class="sheetseditor"
-        >
+        <div onclick="ZIndexer.focus(this)" class="sheetseditor">
           <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Sheets editor</span>
@@ -1296,10 +1321,7 @@
           </div>
           <div id="grid-container"></div>
         </div>
-        <div
-          onclick="ZIndexer.focus(this)"
-          class="diskmanager"
-        >
+        <div onclick="ZIndexer.focus(this)" class="diskmanager">
           <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Správce disků</span>
@@ -1319,10 +1341,7 @@
           </button>
           <div class="disks"></div>
         </div>
-        <div
-          onclick="ZIndexer.focus(this)"
-          class="getstarted"
-        >
+        <div onclick="ZIndexer.focus(this)" class="getstarted">
           <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Začínáme s KLIND OS</span>
@@ -1508,10 +1527,7 @@
             "
           />
         </div>
-        <div
-          onclick="ZIndexer.focus(this)"
-          class="screenfilter"
-        >
+        <div onclick="ZIndexer.focus(this)" class="screenfilter">
           <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Úprava obrazu</span>
@@ -1584,10 +1600,7 @@
             </button>
           </div>
         </div>
-        <div
-          onclick="ZIndexer.focus(this)"
-          class="imageeditor"
-        >
+        <div onclick="ZIndexer.focus(this)" class="imageeditor">
           <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Editor obrázku</span>
@@ -1607,10 +1620,7 @@
             frameborder="0"
           ></iframe>
         </div>
-        <div
-          onclick="ZIndexer.focus(this)"
-          class="printermanager"
-        >
+        <div onclick="ZIndexer.focus(this)" class="printermanager">
           <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Správce tiskáren CUPS</span>
@@ -1643,10 +1653,7 @@
             allowpopups
           ></webview>
         </div>
-        <div
-          onclick="ZIndexer.focus(this)"
-          class="packageinstaller"
-        >
+        <div onclick="ZIndexer.focus(this)" class="packageinstaller">
           <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Instalátor balíčků</span>
@@ -1677,10 +1684,7 @@
             Nainstalovat
           </button>
         </div>
-        <div
-          onclick="ZIndexer.focus(this)"
-          class="inputdevices"
-        >
+        <div onclick="ZIndexer.focus(this)" class="inputdevices">
           <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Vstupní zvuková zařízení</span>
@@ -1701,16 +1705,19 @@
           <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Logy</span>
-              <div onclick="windows.close(this, 'logs', event)" class="close"></div>
-              <div onclick="windows.mini(this, 'logs', event)" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'logs', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'logs', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <div class="logsspan"></div>
         </div>
-        <div
-          onclick="ZIndexer.focus(this)"
-          class="nohuplogs"
-        >
+        <div onclick="ZIndexer.focus(this)" class="nohuplogs">
           <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Nohup Logy</span>
@@ -1718,7 +1725,10 @@
                 onclick="windows.close(this, 'nohuplogs', event)"
                 class="close"
               ></div>
-              <div onclick="windows.mini(this, 'nohuplogs', event)" class="mini"></div>
+              <div
+                onclick="windows.mini(this, 'nohuplogs', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <div class="logsspan"></div>
@@ -1727,7 +1737,10 @@
           <div class="window-header">
             <div class="headerclass">
               <span style="float: left">UnZip</span>
-              <div onclick="windows.close(this, 'unzip', event)" class="close"></div>
+              <div
+                onclick="windows.close(this, 'unzip', event)"
+                class="close"
+              ></div>
             </div>
           </div>
           <h1>Probíhá otevírání ZIP souboru.</h1>
@@ -2283,7 +2296,6 @@
       </div>
     </div>
 
-    <script src="mainfacerec.js"></script>
     <script src="changingz-index.js"></script>
     <script src="audioEditor.js"></script>
     <script src="mouse.js"></script>
@@ -2298,6 +2310,10 @@
 
       StartMenu.Search.load();
       Battery.load();
+      Login.loadFaceButton();
+
+      if (window.location.pathname == "/index.html")
+        window.location.replace("..");
     </script>
     <script src="getstartedfunctions.js"></script>
     <script src="windowanimation.js"></script>
