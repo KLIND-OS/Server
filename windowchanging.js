@@ -91,7 +91,7 @@ setInterval(() => {
   for (var i = 0; i < elements.length; i++) {
     try {
       appsopened.list.push([
-        elements[i].classList[1],
+        elements[i].classList[0],
         elements[i].querySelector(".headerclass span").innerHTML,
         elements[i],
       ]);

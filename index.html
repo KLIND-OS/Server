@@ -384,9 +384,9 @@
       <div class="oknadisplaynone" style="display: none; visibility: hidden">
         <div
           onclick="ZIndexer.focus(this);"
-          class="widgetList poznamky Resizabl resizable"
+          class="poznamky"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Poznámky</span>
               <div
@@ -396,14 +396,14 @@
               <div onclick="windows.mini(this, 'poznamky', event)" class="mini"></div>
             </div>
           </div>
-          <textarea id="asldslk" onkeyup="Poznamky.keypress(this)"></textarea>
+          <textarea id="notesinput" onkeyup="Poznamky.keypress(this)"></textarea>
         </div>
 
         <div
           onclick="ZIndexer.focus(this);"
-          class="widgetList kalkulacka Resizabl"
+          class="kalkulacka"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span>Kalkulačka</span>
               <div onclick="windows.close(this, 'kalk', event)" class="close"></div>
@@ -627,9 +627,9 @@
 
         <div
           onclick="ZIndexer.focus(this);"
-          class="widgetList stopky Resizabl"
+          class="stopky"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span>Stopky</span>
               <div onclick="windows.close(this, 'stop', event)" class="close"></div>
@@ -642,9 +642,9 @@
         <div
           onclick="ZIndexer.focus(this);"
           id="nas"
-          class="widgetList nastaveni Resizabl"
+          class="nastaveni"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span>Nastavení</span>
               <div onclick="windows.close(this, 'nas', event)" class="close"></div>
@@ -656,9 +656,9 @@
 
         <div
           onclick="ZIndexer.focus(this);"
-          class="widgetList browser Resizabl"
+          class="browser"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span>Prohlížeč</span>
               <div onclick="windows.close(this, 'brow', event)" class="close"></div>
@@ -707,9 +707,9 @@
 
         <div
           onclick="ZIndexer.focus(this);"
-          class="widgetList updateklind Resizabl"
+          class="updateklind"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span>Aktualizace</span>
               <div onclick="windows.close(this, 'update', event)" class="close"></div>
@@ -731,9 +731,9 @@
 
         <div
           onclick="ZIndexer.focus(this);"
-          class="widgetList informationklindows Resizabl"
+          class="informationklindows"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span>Informace</span>
               <div onclick="windows.close(this, 'info', event)" class="close"></div>
@@ -772,9 +772,9 @@
 
         <div
           onclick="ZIndexer.focus(this);"
-          class="widgetList terminal Resizabl"
+          class="terminal"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span>Terminál</span>
               <div onclick="windows.close(this, 'ter', event)" class="close"></div>
@@ -786,10 +786,10 @@
 
         <div
           onclick="ZIndexer.focus(this);"
-          class="widgetList napoveda Resizabl"
+          class="napoveda"
           style="position: absolute"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">KLIND OS | Nápověda</span>
               <div onclick="windows.close(this, 'nap', event)" class="close"></div>
@@ -807,9 +807,9 @@
 
         <div
           onclick="ZIndexer.focus(this)"
-          class="widgetList kalendar Resizabl"
+          class="kalendar"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span>Kalendář</span>
               <div onclick="windows.close(this, 'kalen', event)" class="close"></div>
@@ -819,8 +819,8 @@
           <iframe class="innerIframe" src="calendar" frameborder="0"></iframe>
         </div>
 
-        <div onclick="ZIndexer.focus(this)" class="widgetList budik Resizabl">
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="budik">
+          <div class="window-header">
             <div class="headerclass">
               <span>Budík</span>
               <div onclick="windows.close(this, 'budik', event)" class="close"></div>
@@ -832,9 +832,9 @@
 
         <div
           onclick="ZIndexer.focus(this)"
-          class="widgetList record Resizabl"
+          class="record"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span>Nahrávání</span>
               <div onclick="windows.close(this, 'record', event)" class="close"></div>
@@ -846,9 +846,9 @@
 
         <div
           onclick="ZIndexer.focus(this)"
-          class="widgetList faceset Resizabl"
+          class="faceset"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span>Nastavení rozpoznávání obličeje</span>
               <div onclick="windows.close(this, 'faceset', event)" class="close"></div>
@@ -860,9 +860,9 @@
 
         <div
           onclick="ZIndexer.focus(this)"
-          class="widgetList filemanager Resizabl"
+          class="filemanager"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span>Správce Souborů</span>
               <div
@@ -884,9 +884,9 @@
 
         <div
           onclick="ZIndexer.focus(this)"
-          class="widgetList fileproperties Resizabl"
+          class="fileproperties"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span>Vlastnosti souboru</span>
               <div
@@ -903,9 +903,9 @@
 
         <div
           onclick="ZIndexer.focus(this)"
-          class="widgetList fileeditor Resizabl"
+          class="fileeditor"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Soubor</span>
               <div
@@ -948,9 +948,9 @@
 
         <div
           onclick="ZIndexer.focus(this)"
-          class="widgetList zdroje Resizabl"
+          class="zdroje"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span>Zdroje</span>
               <div onclick="windows.close(this, 'zdroje', event)" class="close"></div>
@@ -980,8 +980,8 @@
             >
           </p>
         </div>
-        <div onclick="ZIndexer.focus(this)" class="widgetList about Resizabl">
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="about">
+          <div class="window-header">
             <div class="headerclass">
               <span>O KLIND OS</span>
               <div onclick="windows.close(this, 'about', event)" class="close"></div>
@@ -1055,9 +1055,9 @@
         </div>
         <div
           onclick="ZIndexer.focus(this)"
-          class="widgetList installapp Resizabl"
+          class="installapp"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span>Instalátor aplikací</span>
               <div
@@ -1088,7 +1088,7 @@
           <div class="allapps"></div>
         </div>
         <div
-          class="widgetList audioLevelEditor"
+          class="audioLevelEditor"
           onclick="ZIndexer.focus(this)"
         >
           <div>
@@ -1121,9 +1121,9 @@
         </div>
         <div
           onclick="ZIndexer.focus(this)"
-          class="widgetList procesy Resizabl"
+          class="procesy"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span>Správce úloh</span>
               <div onclick="windows.close(this, 'procesy', event)" class="close"></div>
@@ -1161,9 +1161,9 @@
         </div>
         <div
           onclick="ZIndexer.focus(this)"
-          class="widgetList viewtext Resizabl"
+          class="viewtext"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span>TextView</span>
               <div
@@ -1176,9 +1176,9 @@
         </div>
         <div
           onclick="ZIndexer.focus(this)"
-          class="widgetList musicplayer Resizabl"
+          class="musicplayer"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span>Přehrávač hudby</span>
               <div
@@ -1195,9 +1195,9 @@
         </div>
         <div
           onclick="ZIndexer.focus(this)"
-          class="widgetList cleaner Resizabl"
+          class="cleaner"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span>Čistič systému</span>
               <div onclick="windows.close(this, 'cleaner', event)" class="close"></div>
@@ -1212,9 +1212,9 @@
         </div>
         <div
           onclick="ZIndexer.focus(this)"
-          class="widgetList emergencymenu Resizabl"
+          class="emergencymenu"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span>Emergency Menu</span>
             </div>
@@ -1247,9 +1247,9 @@
         </div>
         <div
           onclick="ZIndexer.focus(this)"
-          class="widgetList wordeditor Resizabl"
+          class="wordeditor"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Word editor</span>
               <div
@@ -1272,9 +1272,9 @@
         </div>
         <div
           onclick="ZIndexer.focus(this)"
-          class="widgetList sheetseditor Resizabl"
+          class="sheetseditor"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Sheets editor</span>
               <div class="menu filesavefileconfig" id="save-button">Uložit</div>
@@ -1298,9 +1298,9 @@
         </div>
         <div
           onclick="ZIndexer.focus(this)"
-          class="widgetList diskmanager Resizabl"
+          class="diskmanager"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Správce disků</span>
               <div
@@ -1321,9 +1321,9 @@
         </div>
         <div
           onclick="ZIndexer.focus(this)"
-          class="widgetList getstarted Resizabl"
+          class="getstarted"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Začínáme s KLIND OS</span>
               <div
@@ -1510,9 +1510,9 @@
         </div>
         <div
           onclick="ZIndexer.focus(this)"
-          class="widgetList screenfilter Resizabl"
+          class="screenfilter"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Úprava obrazu</span>
               <div
@@ -1586,9 +1586,9 @@
         </div>
         <div
           onclick="ZIndexer.focus(this)"
-          class="widgetList imageeditor Resizabl"
+          class="imageeditor"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Editor obrázku</span>
               <div
@@ -1609,9 +1609,9 @@
         </div>
         <div
           onclick="ZIndexer.focus(this)"
-          class="widgetList printermanager Resizabl"
+          class="printermanager"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Správce tiskáren CUPS</span>
               <div
@@ -1645,9 +1645,9 @@
         </div>
         <div
           onclick="ZIndexer.focus(this)"
-          class="widgetList packageinstaller Resizabl"
+          class="packageinstaller"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Instalátor balíčků</span>
               <div
@@ -1679,9 +1679,9 @@
         </div>
         <div
           onclick="ZIndexer.focus(this)"
-          class="widgetList inputdevices Resizabl"
+          class="inputdevices"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Vstupní zvuková zařízení</span>
               <div
@@ -1697,8 +1697,8 @@
           <h1>Výchozí vstupní zvukové zařízení</h1>
           <select class="select"></select>
         </div>
-        <div onclick="ZIndexer.focus(this)" class="widgetList logs Resizabl">
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="logs">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Logy</span>
               <div onclick="windows.close(this, 'logs', event)" class="close"></div>
@@ -1709,9 +1709,9 @@
         </div>
         <div
           onclick="ZIndexer.focus(this)"
-          class="widgetList nohuplogs Resizabl"
+          class="nohuplogs"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Nohup Logy</span>
               <div
@@ -1723,8 +1723,8 @@
           </div>
           <div class="logsspan"></div>
         </div>
-        <div onclick="ZIndexer.focus(this)" class="widgetList unzip Resizabl">
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="unzip">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">UnZip</span>
               <div onclick="windows.close(this, 'unzip', event)" class="close"></div>
