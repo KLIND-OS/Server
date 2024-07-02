@@ -649,12 +649,13 @@ body {
 
 .downbar .clock {
   float: right;
-  height: 70%;
+  height: 100%;
   background-color: #161616;
   position: relative;
   width: 100px;
   text-align: center;
   padding-top: 15px;
+  box-sizing: border-box;
 }
 
 .dialog {
