@@ -282,7 +282,7 @@
           <div class="inner-box">
             <p class="message-box">Error</p>
             <input type="text" class="input-box" placeholder="Odpověď" />
-            <button class="submit-box" onclick="submitMessage()">
+            <button class="submit-box" onclick="BPrompt.submitMessage()">
               Odeslat
             </button>
           </div>
@@ -295,13 +295,13 @@
             <p class="message-box-confirm">Error</p>
             <button
               class="submit-box-confirm submit-box-confirm-left"
-              onclick="submitConfirm(true)"
+              onclick="BPrompt.submitConfirm(true)"
             >
               Ano
             </button>
             <button
               class="submit-box-confirm submit-box-confirm-right"
-              onclick="submitConfirm(false)"
+              onclick="BPrompt.submitConfirm(false)"
             >
               Ne
             </button>
@@ -328,7 +328,7 @@
           <div class="inner-box">
             <p class="message-box-list">Error</p>
             <select class="list-input-box"></select>
-            <button class="submit-box-list" onclick="submitList(true)">
+            <button class="submit-box-list" onclick="BPrompt.submitList(true)">
               Ano
             </button>
           </div>
