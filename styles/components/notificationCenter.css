@@ -1,0 +1,41 @@
+.notification-center-element {
+  position: absolute;
+  height: calc(100vh - 50px - 20px - 20px);
+  top: 20px;
+  right: -350px;
+  transition: ease 0.5s right;
+  background-color: rgba(0, 0, 0, 0.65);
+  width: 350px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.notification-center-element .notification {
+  color: white;
+  padding: 20px;
+  position: relative;
+}
+
+.notification-center-element .notification .closebtn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.donotdisturbdiv {
+  display: flex;
+  height: 0px;
+  margin-top: 10px;
+  margin-bottom: 34px;
+}
+.donotdisturbdiv input {
+  position: relative;
+  top: -11px;
+  left: 10px;
+}
+.donotdisturbdiv span {
+  margin-left: 30px;
+  color: white;
+}
