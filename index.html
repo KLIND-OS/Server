@@ -12,6 +12,7 @@
     </p>
   </noscript>
   <head>
+    <link rel="stylesheet" href="styles/components/defaultwindow.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Načítání...</title>
@@ -95,6 +96,7 @@
     <script src="theme.js"></script>
     <script src="battery.js"></script>
 
+    <style id="customcssstyleelement"></style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -117,7 +119,29 @@
     />
     <link id="favicon" rel="shortcut icon" href="icons/loading.svg" />
     <link rel="stylesheet" href="libs/plyr.css" />
-    <style id="customcssstyleelement"></style>
+    <link rel="stylesheet" href="styles/general.css" />
+    <link rel="stylesheet" href="styles/apps/getstarted.css" />
+    <link rel="stylesheet" href="styles/apps/settings.css" />
+    <link rel="stylesheet" href="styles/apps/stopky.css" />
+    <link rel="stylesheet" href="styles/apps/poznamky.css" />
+    <link rel="stylesheet" href="styles/apps/audiolevel.css" />
+    <link rel="stylesheet" href="styles/components/windows.css" />
+    <link rel="stylesheet" href="styles/components/startmenu.css" />
+    <link rel="stylesheet" href="styles/components/downbar.css" />
+    <link rel="stylesheet" href="styles/components/mainview.css" />
+    <link rel="stylesheet" href="styles/apps/napoveda.css" />
+    <link rel="stylesheet" href="styles/apps/updates.css" />
+    <link rel="stylesheet" href="styles/apps/browser.css" />
+    <link rel="stylesheet" href="styles/components/login.css" />
+    <link rel="stylesheet" href="styles/components/desktop.css" />
+    <link rel="stylesheet" href="styles/components/notify.css" />
+    <link rel="stylesheet" href="styles/components/loader.css" />
+    <link rel="stylesheet" href="styles/components/openedapps.css" />
+    <link rel="stylesheet" href="styles/apps/filesystem.css" />
+    <link rel="stylesheet" href="styles/components/prompts.css" />
+    <link rel="stylesheet" href="styles/components/power.css" />
+    <link rel="stylesheet" href="styles/apps/installer.css" />
+    <link rel="stylesheet" href="styles/components/notificationCenter.css" />
   </head>
 
   <body
@@ -144,7 +168,7 @@
     <div id="secondcursor" class="secondcursor"></div>
     <!-- Loader -->
     <div class="loading" oncontextmenu="return false;">
-      <div class="containersadsdsad">
+      <div class="loadingcontain">
         <div class="asdasdasd item-1"></div>
         <div class="asdasdasd item-2"></div>
         <div class="asdasdasd item-3"></div>
@@ -1715,7 +1739,7 @@
               ></div>
             </div>
           </div>
-          <div class="logsspan"></div>
+          <div class="logsspan innerIframe"></div>
         </div>
         <div onclick="ZIndexer.focus(this)" class="nohuplogs">
           <div class="window-header">
@@ -1731,7 +1755,7 @@
               ></div>
             </div>
           </div>
-          <div class="logsspan"></div>
+          <div class="logsspan innerIframe"></div>
         </div>
         <div onclick="ZIndexer.focus(this)" class="unzip">
           <div class="window-header">

@@ -1,0 +1,14 @@
+.customappdiv {
+  width: calc(100% - 2px);
+  height: 50px;
+  border: 1px black solid;
+  display: flex;
+  align-items: center;
+}
+
+.customappdiv button {
+  position: absolute;
+  height: 50px;
+  right: 0;
+  width: 90px;
+}

@@ -1,0 +1,48 @@
+.inner-box-power {
+  width: 500px;
+  height: 500px;
+  backdrop-filter: blur(4px);
+  background: rgb(0 0 0 / 40%);
+  scale: 0;
+  transition: ease 0.35s scale;
+}
+
+.inner-box-power.openBackground {
+  scale: 1;
+}
+
+.power-background {
+  position: absolute;
+  background-color: black;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  transition: ease 0.2s opacity;
+}
+
+.power-background.openBackground {
+  opacity: 0.5;
+}
+
+.element-power-inner-box {
+  width: calc(100% / 2);
+  height: calc(100% / 2);
+  position: relative;
+  float: left;
+  background: rgb(0 0 0 / 0%);
+  transition: ease 0.5s background;
+  background-repeat: no-repeat;
+  background-size: 151px;
+  background-position: center;
+  color: white;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 30px;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.element-power-inner-box:hover {
+  background-color: rgb(0 0 0 / 50%);
+}

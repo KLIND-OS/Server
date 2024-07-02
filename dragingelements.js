@@ -204,27 +204,17 @@ $(function () {
     },
   });
 });
-$(function () {
-  $(".drageblepoznamky").draggable({
-    scroll: false,
-    start: function (event, ui) {
-      $(this).addClass("dragdrageble");
-    },
-    stop: function (event, ui) {
-      $(this).removeClass("dragdrageble");
-    },
-  });
-});
+
 function dragingikonaklindows() {
   $(function () {
     $(".ikonaklindows").draggable({
       scroll: false,
       grid: [64, 64],
       start: function (event, ui) {
-        $(this).addClass("dragdrageble");
+        event.target.style.opacity = "0.85";
       },
       stop: function (event, ui) {
-        $(this).removeClass("dragdrageble");
+        event.target.style.opacity = "1";
         DesktopIcons.stopMoving(this);
       },
     });

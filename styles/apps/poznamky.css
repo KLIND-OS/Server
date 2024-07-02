@@ -1,0 +1,17 @@
+.poznamky {
+  background-color: white;
+  position: absolute !important;
+  width: 600px;
+  min-height: 600px;
+  height: 600px;
+  overflow: hidden;
+  min-width: 550px;
+}
+
+.poznamky textarea {
+  width: 100%;
+  height: calc(100% - 20px);
+  resize: none;
+  background-color: transparent;
+  border: none !important;
+}

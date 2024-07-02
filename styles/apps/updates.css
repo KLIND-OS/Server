@@ -1,0 +1,17 @@
+
+.updateklind p {
+  text-align: center;
+  color: green;
+  font: bold;
+  top: 15px;
+  font-size: 1.5em;
+}
+
+.updateklind button {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  font-size: 2em;
+}
