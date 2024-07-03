@@ -120,9 +120,9 @@ class App {
     supported: new Set(),
     register: (supported, exec) => {
       var types =
-        typeof typesOfFilesShouldBeOpened == "object"
-          ? new Set(typesOfFilesShouldBeOpened)
-          : new Set([typesOfFilesShouldBeOpened]);
+        typeof supported == "object"
+          ? new Set(supported)
+          : new Set([supported]);
 
       this.fileOpen.supported = new Set([...this.fileOpen.supported, ...types]);
 
