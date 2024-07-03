@@ -106,6 +106,7 @@ var control = {
   ),
   message: BPrompt,
 };
+
 class App {
   windowParser = {
     parseName: (windowName) => {
@@ -113,6 +114,19 @@ class App {
     },
     parseClass: (windowName) => {
       return this.windowParser.parseName(windowName).replaceAll(" ", "");
+    },
+  };
+  fileOpen = {
+    supported: new Set(),
+    register: (supported, exec) => {
+      var types =
+        typeof typesOfFilesShouldBeOpened == "object"
+          ? new Set(typesOfFilesShouldBeOpened)
+          : new Set([typesOfFilesShouldBeOpened]);
+
+      this.fileOpen.supported = new Set([...this.fileOpen.supported, ...types]);
+
+      mainFileManager.addProgramToOpenApps(supported, exec, this.info.name);
     },
   };
   windows = [];
