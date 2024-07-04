@@ -31,27 +31,39 @@ class Localization {
     );
 
     allElements.forEach((element) => {
-      const textContent = element.innerHTML?.trim() || "";
+      const contents = [
+        [element.innerHTML, (data) => (element.innerHTML = data)],
+        [
+          element.placeholder,
+          (data) => element.placeholder = data,
+        ],
+      ];
 
-      if (!textContent.startsWith("$[") || !textContent.endsWith("];")) {
-        return;
+      for (const content of contents) {
+        if (!content[0]) continue;
+
+        const contentData = content[0]?.trim() || "";
+
+        if (!contentData.startsWith("$[") || !contentData.endsWith("];")) {
+          return;
+        }
+
+        const startIndex = contentData.indexOf("[") + 1;
+        const endIndex = contentData.indexOf("]");
+
+        if (!(startIndex > 0 && endIndex > startIndex)) {
+          return console.error("Invalid format:", textContent);
+        }
+        const parsed = contentData.substring(startIndex, endIndex);
+
+        const value = this.getString(parsed);
+
+        if (!value) {
+          return console.error("Invalid key:", parsed);
+        }
+
+        content[1](value);
       }
-
-      const startIndex = textContent.indexOf("[") + 1;
-      const endIndex = textContent.indexOf("]");
-
-      if (!(startIndex > 0 && endIndex > startIndex)) {
-        return console.error("Invalid format:", textContent);
-      }
-      const parsed = textContent.substring(startIndex, endIndex);
-
-      const value = this.getString(parsed);
-
-      if (!value) {
-        return console.error("Invalid key:", parsed);
-      }
-
-      element.textContent = value;
     });
   }
 }

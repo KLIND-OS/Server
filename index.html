@@ -156,12 +156,12 @@
     <div class="filter"></div>
     <div class="connection-lost-element" style="display: none">
       <div class="connection-lost">
-        <h1>Spojení bylo ztraceno</h1>
+        <h1>$[connection_lost];</h1>
+        <p>$[local_server_connection_lost];</p>
         <p>
-          Spojení s lokálním serverem bylo ztraceno. Může to být způsobeno
-          chybou lokálního serveru nebo probíhající aktualizací.
+          <span>$[trying_connect_again];</span
+          ><span class="testingAnimation">.</span>
         </p>
-        <p>Pokouším se připojit znovu<span class="testingAnimation">.</span></p>
       </div>
     </div>
     <!-- Right click menu -->
@@ -188,13 +188,13 @@
     >
       <div class="inner-error">
         <h1 id="codeerror">0x0000000</h1>
-        <p id="infoerror">Žádné informace</p>
-        <p id="createdapp">Neznámé</p>
+        <p id="infoerror">$[no_info];</p>
+        <p id="createdapp">$[unknown];</p>
         <button
           onclick="Boot.rebootAsSafeMode(true)"
           style="left: 50%; position: relative; transform: translateX(-50%)"
         >
-          Restartovat do save módu
+          $[restart_to_save_mode];
         </button>
       </div>
     </div>
@@ -225,13 +225,9 @@
     </script>
     <div class="login" oncontextmenu="return false;">
       <div class="loginfirst">
-        <div class="svatek">
-          <p>Dnes má svátek <span id="svatekname">Neznámý</span>.</p>
-          <script src="getNameDay.js"></script>
-        </div>
         <div class="dateloginfirst">
           <div class="timelogin">00:00</div>
-          <div class="datelogin">1. ledna 1970</div>
+          <div class="datelogin">1. january 1970</div>
         </div>
         <div class="touch swipe-up"></div>
       </div>
@@ -244,15 +240,15 @@
           class="loginpass"
           type="password"
           id="password"
-          placeholder="Heslo"
+          placeholder="$[password];"
         />
         <button
           onclick="Login.submitLogin(this.parentElement.querySelector('input'))"
         >
-          Přihlásit se
+          $[login];
         </button>
         <button id="sdsdaasd" class="facelolsad" onclick="Login.loadFaces()">
-          Rozpoznávání Obličeje
+          $[face_recognition];
         </button>
       </div>
       <div id="facerec" class="facerec">
@@ -306,9 +302,9 @@
         <div class="outer-box">
           <div class="inner-box">
             <p class="message-box">Error</p>
-            <input type="text" class="input-box" placeholder="Odpověď" />
+            <input type="text" class="input-box" placeholder="$[answer];" />
             <button class="submit-box" onclick="BPrompt.submitMessage()">
-              Odeslat
+              $[submit];
             </button>
           </div>
         </div>
@@ -322,13 +318,13 @@
               class="submit-box-confirm submit-box-confirm-left"
               onclick="BPrompt.submitConfirm(true)"
             >
-              Ano
+              $[yes];
             </button>
             <button
               class="submit-box-confirm submit-box-confirm-right"
               onclick="BPrompt.submitConfirm(false)"
             >
-              Ne
+              $[no];
             </button>
           </div>
         </div>
@@ -342,7 +338,7 @@
               class="submit-box-alert"
               onclick="this.parentElement.parentElement.parentElement.style.display = 'none';"
             >
-              OK
+              $[ok];
             </button>
           </div>
         </div>
@@ -354,7 +350,7 @@
             <p class="message-box-list">Error</p>
             <select class="list-input-box"></select>
             <button class="submit-box-list" onclick="BPrompt.submitList(true)">
-              Ano
+              $[submit];
             </button>
           </div>
         </div>
@@ -362,7 +358,7 @@
 
       <div class="selectApp" style="display: none">
         <div class="insideSelectApp">
-          <h1>Vyberte aplikaci pro otevření</h1>
+          <h1>$[select_app_for_open];</h1>
           <div class="apps"></div>
         </div>
       </div>
@@ -376,28 +372,28 @@
               style="background-image: url(&quot;/icons/locksys.svg&quot;)"
               onclick="Power.lock();"
             >
-              Zamknout
+              $[lock];
             </div>
             <div
               class="element-power-inner-box"
               style="background-image: url(&quot;/icons/closepower.svg&quot;)"
               onclick="Power.close();"
             >
-              Zavřít
+              $[close];
             </div>
             <div
               class="element-power-inner-box"
               style="background-image: url(&quot;/icons/reloadsys.svg&quot;)"
               onclick="Power.reload();"
             >
-              Restartovat
+              $[restart];
             </div>
             <div
               class="element-power-inner-box"
               style="background-image: url(&quot;/icons/poweroffsys.svg&quot;)"
               onclick="Power.turnoff();"
             >
-              Vypnout
+              $[power_off];
             </div>
           </div>
         </div>
@@ -409,7 +405,7 @@
         <div onclick="ZIndexer.focus(this);" class="poznamky">
           <div class="window-header">
             <div class="headerclass">
-              <span style="float: left">Poznámky</span>
+              <span style="float: left">$[notes];</span>
               <div
                 onclick="windows.close(this, 'poznamky', event)"
                 class="close"
@@ -429,7 +425,7 @@
         <div onclick="ZIndexer.focus(this);" class="kalkulacka">
           <div class="window-header">
             <div class="headerclass">
-              <span>Kalkulačka</span>
+              <span>$[calculator];</span>
               <div
                 onclick="windows.close(this, 'kalk', event)"
                 class="close"
@@ -658,7 +654,7 @@
         <div onclick="ZIndexer.focus(this);" class="stopky">
           <div class="window-header">
             <div class="headerclass">
-              <span>Stopky</span>
+              <span>$[stopwatch];</span>
               <div
                 onclick="windows.close(this, 'stop', event)"
                 class="close"
@@ -675,7 +671,7 @@
         <div onclick="ZIndexer.focus(this);" id="nas" class="nastaveni">
           <div class="window-header">
             <div class="headerclass">
-              <span>Nastavení</span>
+              <span>$[settings];</span>
               <div
                 onclick="windows.close(this, 'nas', event)"
                 class="close"
@@ -692,7 +688,7 @@
         <div onclick="ZIndexer.focus(this);" class="browser">
           <div class="window-header">
             <div class="headerclass">
-              <span>Prohlížeč</span>
+              <span>$[browser];</span>
               <div
                 onclick="windows.close(this, 'brow', event)"
                 class="close"
@@ -705,31 +701,31 @@
           </div>
           <div class="controls">
             <button onclick="Browser.goBack(this.parentElement.parentElement)">
-              Zpět
+              $[back];
             </button>
             <button
               onclick="Browser.goForward(this.parentElement.parentElement)"
             >
-              Dopředu
+              $[forward];
             </button>
             <input id="url" type="url" placeholder="Url adresa" />
             <button
               onclick="Browser.changeUrl(this.parentElement.parentElement, this.parentElement.parentElement.querySelector('#url').value)"
             >
-              Odeslat
+              $[submit];
             </button>
             <button
               onclick="Browser.download(this.parentElement.parentElement)"
             >
-              Stáhnout
+              $[download];
             </button>
             <button onclick="Browser.reload(this.parentElement.parentElement)">
-              Reload
+              $[reload];
             </button>
           </div>
           <div class="browerr">
             <h1>Error!</h1>
-            <p>Nastala chyba při načítání stránky.</p>
+            <p>$[website_load_error];</p>
             <p>Error code: <span id="errorcodebrow"></span></p>
             <p>Error name: <span id="errornamebrow"></span></p>
           </div>
@@ -746,7 +742,7 @@
         <div onclick="ZIndexer.focus(this);" class="updateklind">
           <div class="window-header">
             <div class="headerclass">
-              <span>Aktualizace</span>
+              <span>$[updates];</span>
               <div
                 onclick="windows.close(this, 'update', event)"
                 class="close"
@@ -757,23 +753,21 @@
               ></div>
             </div>
           </div>
-          <h1>Branch</h1>
-          <span
-            >Zde si můžete vybrat typ sestavení které chcete dostávat. Např
-            main/stable (doporučujeme) nebo test (pro testovací účely)</span
-          ><br />
+          <h1>$[branch];</h1>
+          <span>$[select_branch_text];</span><br />
           <select class="branchChoice"></select>
           <h2>
-            Změny: <a href="https://klindos.jzitnik.dev/changelog">zde</a>
+            <span>$[changes];</span>:
+            <a href="https://klindos.jzitnik.dev/changelog">$[here];</a>
           </h2>
           <p class="updateStatus"></p>
-          <button onclick="Updates.start(this)">Aktualizovat</button>
+          <button onclick="Updates.start(this)">$[start_update];</button>
         </div>
 
         <div onclick="ZIndexer.focus(this);" class="informationklindows">
           <div class="window-header">
             <div class="headerclass">
-              <span>Informace</span>
+              <span>$[info];</span>
               <div
                 onclick="windows.close(this, 'info', event)"
                 class="close"
@@ -784,40 +778,18 @@
               ></div>
             </div>
           </div>
-          <span>Verze KLIND OS: </span><span id="versionwrite">unknown</span
+          <span>$[klindos_version];</span>:
+          <span id="versionwrite">unknown</span><br />
+          <span>$[screen_size];</span>: <span id="screensizewrite">unknown</span
           ><br />
-          <span
-            >Velikost obrazovky: <span id="screensizewrite">unknown</span></span
-          ><br />
-          <span style="display: none"
-            >Velikost KLIND OS okna:
-            <span id="windowsizewrite">unknown</span></span
-          >
-          <span>Časové pásmo: <span id="timezonewrite">unknown</span></span
-          ><br />
-          <span>KLIND OS Client: <span id="browserwrite">unknown</span></span
-          ><br />
-          <span style="display: none"
-            >Jazyk: <span id="browserlanguage">unknown</span></span
-          >
-          <span style="display: none"
-            >Operačí systém počítače:
-            <span id="oparatingsystemwrite">unknown</span></span
-          >
-          <span style="display: none"
-            >Povolené cookies:
-            <span id="cookiesenabledwrite">unknown</span></span
-          >
-          <span>Berevná hloubka: <span id="colordepthwrite">unknown</span></span
-          ><br />
-          <span>Hloubka pixelů: <span id="pixeldepthwrite">unknown</span></span
+          <span>$[time_zone];</span>: <span id="timezonewrite">unknown</span
           ><br />
         </div>
 
         <div onclick="ZIndexer.focus(this);" class="terminal">
           <div class="window-header">
             <div class="headerclass">
-              <span>Terminál</span>
+              <span>$[terminal];</span>
               <div
                 onclick="windows.close(this, 'ter', event)"
                 class="close"
@@ -838,7 +810,7 @@
         >
           <div class="window-header">
             <div class="headerclass">
-              <span style="float: left">KLIND OS | Nápověda</span>
+              <span style="float: left">$[help];</span>
               <div
                 onclick="windows.close(this, 'nap', event)"
                 class="close"
@@ -849,19 +821,19 @@
               ></div>
             </div>
           </div>
-          <h1>Zkratky:</h1>
+          <h1><span>$[shortcuts];</span>:</h1>
           <ul style="position: relative; left: 20px">
-            <li>CTRL + L Zamkne systém</li>
-            <li>ALT Gr + R Zobrazí start</li>
-            <li>ALT Gr + H Zobrazí nápovědu</li>
-            <li>ALT + ; Otevře okno s právě otevřenýmy programy</li>
+            <li>CTRL + L <span>$[lock];</span></li>
+            <li>ALT Gr + R <span>$[open_start];</span></li>
+            <li>ALT Gr + H <span>$[show_help];</span></li>
+            <li>ALT + ; <span>$[show_current_open_apps];</span></li>
           </ul>
         </div>
 
         <div onclick="ZIndexer.focus(this)" class="kalendar">
           <div class="window-header">
             <div class="headerclass">
-              <span>Kalendář</span>
+              <span>$[calendar];</span>
               <div
                 onclick="windows.close(this, 'kalen', event)"
                 class="close"
@@ -878,7 +850,7 @@
         <div onclick="ZIndexer.focus(this)" class="budik">
           <div class="window-header">
             <div class="headerclass">
-              <span>Budík</span>
+              <span>$[alarm_clock];</span>
               <div
                 onclick="windows.close(this, 'budik', event)"
                 class="close"
@@ -895,7 +867,7 @@
         <div onclick="ZIndexer.focus(this)" class="record">
           <div class="window-header">
             <div class="headerclass">
-              <span>Nahrávání</span>
+              <span>$[video_recorder];</span>
               <div
                 onclick="windows.close(this, 'record', event)"
                 class="close"
@@ -912,7 +884,7 @@
         <div onclick="ZIndexer.focus(this)" class="faceset">
           <div class="window-header">
             <div class="headerclass">
-              <span>Nastavení rozpoznávání obličeje</span>
+              <span>$[face_recognition_settings];</span>
               <div
                 onclick="windows.close(this, 'faceset', event)"
                 class="close"
@@ -929,7 +901,7 @@
         <div onclick="ZIndexer.focus(this)" class="filemanager">
           <div class="window-header">
             <div class="headerclass">
-              <span>Správce Souborů</span>
+              <span>$[file_manager];</span>
               <div
                 onclick="windows.close(this, 'filemanager', event)"
                 class="close"
@@ -950,34 +922,37 @@
         <div onclick="ZIndexer.focus(this)" class="fileproperties">
           <div class="window-header">
             <div class="headerclass">
-              <span>Vlastnosti souboru</span>
+              <span>$[file_properties];</span>
               <div
                 onclick="windows.close(this, 'fileproperties', event)"
                 class="close"
               ></div>
             </div>
           </div>
-          <p>Název souboru: <span id="filename">error</span></p>
-          <p>Velikost souboru: <span id="filesize">error</span></p>
-          <p>Datum poslední změny: <span id="filechange">error</span></p>
-          <p>Umístění: <span id="filelocation">error</span></p>
+          <p><span>$[name];</span>: <span id="filename">error</span></p>
+          <p><span>$[size];</span>: <span id="filesize">error</span></p>
+          <p>
+            <span>$[last_modification];</span>:
+            <span id="filechange">error</span>
+          </p>
+          <p><span>$[location];</span>: <span id="filelocation">error</span></p>
         </div>
 
         <div onclick="ZIndexer.focus(this)" class="fileeditor">
           <div class="window-header">
             <div class="headerclass">
-              <span style="float: left">Soubor</span>
+              <span style="float: left">$[file];</span>
               <div
                 onclick="fileEditorSaveText(this.parentElement.parentElement.parentElement.getAttribute('filelocation'), this.parentElement.parentElement.parentElement.querySelector('#textareafileeditorimage').value, this.parentElement.parentElement.parentElement.getAttribute('bypass'))"
                 class="menu filesavefileconfig"
               >
-                Uložit
+                $[save];
               </div>
               <div
                 onclick="mainFileManager.setWallpaper(this.parentElement.parentElement.parentElement.getAttribute('filelocation'))"
                 class="menu imgwallpaperfileconfig"
               >
-                Nastavit jako pozadí
+                $[set_as_wallpaper];
               </div>
               <div
                 onclick="windows.close(this, 'fileeditor', event)"
@@ -1008,7 +983,7 @@
         <div onclick="ZIndexer.focus(this)" class="zdroje">
           <div class="window-header">
             <div class="headerclass">
-              <span>Zdroje</span>
+              <span>$[sources];</span>
               <div
                 onclick="windows.close(this, 'zdroje', event)"
                 class="close"
@@ -1019,23 +994,23 @@
               ></div>
             </div>
           </div>
-          <h1>Zdroje</h1>
+          <h1>$[sources];</h1>
           <p>
-            Ikony: Většina ikon je z
+            <span>$[most_of_the_icons];</span>&nbsp;
             <a href="https://fonts.google.com/icons">Google Icons</a>
           </p>
           <p>
-            Další ikony:
+            <span>$[rest_of_the_icons];</span>&nbsp;
             <a href="https://www.flaticon.com/free-icons/downloading"
               >Flaticon</a
             >
           </p>
           <p>
-            Světlé výchozí pozadí:
+            <span>$[default_light_wallpaper];</span>:&nbsp;
             <a href="https://wallpapercave.com/w/wp8561104">WallpaperCave</a>
           </p>
           <p>
-            Tmavé výchozí pozadí:
+            <span>$[default_dark_wallpaper];</span>:&nbsp;
             <a
               href="https://www.freepik.com/free-vector/colourful-spiral-lines-wavy-background_7388088.htm"
               >Freepik</a
@@ -1045,7 +1020,7 @@
         <div onclick="ZIndexer.focus(this)" class="about">
           <div class="window-header">
             <div class="headerclass">
-              <span>O KLIND OS</span>
+              <span>$[about_klindos];</span>
               <div
                 onclick="windows.close(this, 'about', event)"
                 class="close"
@@ -1056,66 +1031,46 @@
               ></div>
             </div>
           </div>
-          <h1>O KLIND OS</h1>
-          <h2>Hlavní informace</h2>
+          <h1>$[about_klindos];</h1>
+          <h2>$[main_info];</h2>
+          <p>$[about_klindos_info];</p>
+          <h2>$[source_code];</h2>
           <p>
-            KLIND OS je Arch Linux distribuce. Grafické rozhraní je napsané v
-            JavaScriptu, HTML a CSS.
-          </p>
-          <p>Všechny soubory se ukládají do localStorage.</p>
-          <h2>Pokročilé nastavení</h2>
-          <p>
-            Pokud chcete otevřít pokročilé nastavení zvuku nebo nastavení
-            internetu, stiskněte Win + Shift + S.
-          </p>
-          <h2>Zdrojové kódy</h2>
-          <p>
-            Client:
+            <span>$[client];</span>:
             <a href="https://github.com/KLIND-OS/Client"
               >https://github.com/KLIND-OS/Client</a
             >
           </p>
           <p>
-            GUI:
+            <span>$[gui];</span>:
             <a href="https://github.com/KLIND-OS/Server"
               >https://github.com/KLIND-OS/Server</a
             >
           </p>
           <p>
-            ISO instalátor:
+            <span>$[iso];</span>:
             <a href="https://github.com/KLIND-OS/ISO"
               >https://github.com/KLIND-OS/ISO</a
             >
           </p>
           <p>
-            Webová stránka:
+            <span>$[website];</span>:
             <a href="https://github.com/KLIND-OS/Website"
               >https://github.com/KLIND-OS/Website</a
             >
           </p>
           <p>
-            Dokumentace:
-            <a href="https://jzitnik.dev/link/klindos-docs"
-              >https://jzitnik.dev/link/klindos-docs</a
+            <span>$[documentation];</span>:
+            <a href="https://docs.klindos.jzitnik.dev/"
+              >https://docs.klindos.jzitnik.dev/</a
             >
           </p>
-          <h1>Upozornění!</h1>
-          <p>
-            Tento software přichází s absolutně nulovou zárukou. Nedoporučuji
-            používat tento software pro denní použití.
-          </p>
-          <p>
-            Je tu dost chyb co se týče nahrávání souborů na internet. Taky tu
-            není skoro žádná podpora pro tiskárny.
-          </p>
-          <p>Jako jeden člověk nejsem schopen implementovat úplně všechno.</p>
-          <p>
-            Pokud se rozhodnete nahlásit chybu, počítejte s tím že se nemusí
-            hned opravit. Nemám tým lidí kteří by se o to starali.
-          </p>
-          <p>
-            Ale i tak neváhejte přispět do tohoto projektu pomocí pull requestů.
-          </p>
+          <h1><span>$[notice];</span>!</h1>
+          <p>$[zero_warranty];</p>
+          <p>$[lot_of_errors];</p>
+          <p>$[not_able];</p>
+          <p>$[if_you_report_bug];</p>
+          <p>$[contribute];</p>
           <br />
           <p>
             Made with hate and suffering by Jakub Žitník in the Czech Republic.
@@ -1143,11 +1098,12 @@
               font-size: 25px;
             "
           >
-            Vlastní aplikace<button
+            <span>$[custom_apps];</span>
+            <button
               style="height: 50px; right: 0; position: absolute; width: 50px"
               onclick="control.fileManager.fileSelect({success: path => CustomApp.loadFromPath(path), closed: () => {}})"
             >
-              Nahrát
+              $[upload];
             </button>
           </header>
           <div class="allapps"></div>
@@ -1158,7 +1114,7 @@
               <div></div>
             </div>
           </div>
-          <h1 style="text-align: center">Zvuky</h1>
+          <h1 style="text-align: center">$[sounds];</h1>
           <select
             class="outputSelect"
             onchange="AudioEditor.inputOutput(this)"
@@ -1184,7 +1140,7 @@
         <div onclick="ZIndexer.focus(this)" class="procesy">
           <div class="window-header">
             <div class="headerclass">
-              <span>Správce úloh</span>
+              <span>$[task_manager];</span>
               <div
                 onclick="windows.close(this, 'procesy', event)"
                 class="close"
@@ -1199,12 +1155,12 @@
             <button
               onclick="Procesy.infoShow(this.parentElement.parentElement)"
             >
-              Info počítače
+              $[pc_info];
             </button>
             <button
               onclick="Procesy.procesyShow(this.parentElement.parentElement);"
             >
-              Aktuálně běžící procesy
+              $[running_processes];
             </button>
           </header>
           <div class="infoProcesy">
