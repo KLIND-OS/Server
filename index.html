@@ -708,7 +708,7 @@
             >
               $[forward];
             </button>
-            <input id="url" type="url" placeholder="Url adresa" />
+            <input id="url" type="url" placeholder="$[url_adress];" />
             <button
               onclick="Browser.changeUrl(this.parentElement.parentElement, this.parentElement.parentElement.querySelector('#url').value)"
             >
@@ -1285,7 +1285,9 @@
           <div class="window-header">
             <div class="headerclass">
               <span style="float: left">$[table_editor];</span>
-              <div class="menu filesavefileconfig" id="save-button">$[save];</div>
+              <div class="menu filesavefileconfig" id="save-button">
+                $[save];
+              </div>
               <div
                 onclick="windows.close(this, 'sheetseditor', event)"
                 class="close"
@@ -1297,17 +1299,17 @@
             </div>
           </div>
           <div class="buttons">
-            <button id="add-row-button">Přidat řádek</button>
-            <button id="remove-row-button">Odstranit řádek</button><br />
-            <button id="add-column-button">Přidat sloupec</button>
-            <button id="remove-column-button">Odstranit sloupec</button>
+            <button id="add-row-button">$[add_row];</button>
+            <button id="remove-row-button">$[remove_row];</button><br />
+            <button id="add-column-button">$[add_column];</button>
+            <button id="remove-column-button">$[remove_column];</button>
           </div>
           <div id="grid-container"></div>
         </div>
         <div onclick="ZIndexer.focus(this)" class="diskmanager">
           <div class="window-header">
             <div class="headerclass">
-              <span style="float: left">Správce disků</span>
+              <span style="float: left">$[disk_manager];</span>
               <div
                 onclick="windows.close(this, 'sheetseditor', event)"
                 class="close"
@@ -1318,16 +1320,16 @@
               ></div>
             </div>
           </div>
-          <h1>Správce disků</h1>
+          <h1>$[disk_manager];</h1>
           <button onclick="DiskManager.init(this.parentElement)">
-            Načíst znovu
+            $[reload];
           </button>
           <div class="disks"></div>
         </div>
         <div onclick="ZIndexer.focus(this)" class="getstarted">
           <div class="window-header">
             <div class="headerclass">
-              <span style="float: left">Začínáme s KLIND OS</span>
+              <span style="float: left">$[start_klindos];</span>
               <div
                 style="display: none"
                 onclick="windows.close(this, 'getstarted', event)"
@@ -1342,7 +1344,7 @@
                 alt="KLIND OS logo"
                 style="height: 100px; width: 100px"
               />
-              <h1>Vítejte v KLIND OS</h1>
+              <h1>$[welcome_in_klindos];</h1>
               <button
                 class="zaciname"
                 style="
@@ -1354,21 +1356,12 @@
                 "
                 onclick="GetStarted.zaciname(this.parentElement.parentElement.parentElement)"
               >
-                Začínáme
+                $[get_started];
               </button>
             </div>
             <div class="page page2">
-              <h1>Tlačítko start menu</h1>
-              <p>
-                Toto je tlačítko které otevře start menu. Myslel jsem si že to
-                nebudu muset vysvětlovat ale po několika zkušenostech jsem se
-                rozhodl to ukázat.
-              </p>
-              <p>
-                Když na to tlačítko stisknete levým tlačítkem na vaší myši,
-                nešahej na tu klávesnici. Myslel jsem myš, ne to kde jsou
-                písmenka ale to... prostě to druhé.
-              </p>
+              <h1>$[start_button];</h1>
+              <p>$[getstarted_startbutton];</p>
               <button
                 class="zaciname"
                 style="
@@ -1379,15 +1372,12 @@
                 "
                 onclick="GetStarted.nextStart(this.parentElement.parentElement.parentElement)"
               >
-                Chápu (ano opravdu to chápu)
+                $[next];
               </button>
             </div>
             <div class="page page3">
-              <h1>Start menu</h1>
-              <p>
-                V tomto menu si můžeš vybrat aplikaci kterou chceš spustit. (teď
-                žádnou nespouštěj)
-              </p>
+              <h1>$[start_menu];</h1>
+              <p></p>
               <button
                 class="zaciname"
                 style="
@@ -1398,16 +1388,12 @@
                 "
                 onclick="GetStarted.nextMenu(this.parentElement.parentElement.parentElement)"
               >
-                Pokračuj
+                $[next];
               </button>
             </div>
             <div class="page page4">
-              <h1>Aplikace</h1>
-              <p>
-                Takhle vypadají aplikace. V horní liště máš název aplikace a
-                popřípadě nějaká tlačítka. Vpravo nahoře máš tlačítko na zavření
-                a popřípadě na minimalizaci.
-              </p>
+              <h1>$[app];</h1>
+              <p>$[getstarted_app];</p>
               <button
                 class="zaciname"
                 style="
@@ -1418,16 +1404,12 @@
                 "
                 onclick="GetStarted.nextApp(this.parentElement.parentElement.parentElement)"
               >
-                Pokračuj
+                $[next];
               </button>
             </div>
             <div class="page page5">
-              <h1>Posouvání okna</h1>
-              <p>
-                S oknem můžeš posouvat kdekoliv na obrazovce potažením horní
-                lišty.
-              </p>
-              <p>Klidně si to vyzkoušej</p>
+              <h1>$[moving_window];</h1>
+              <p>$[getstarted_movingwindow];</p>
               <button
                 class="zaciname"
                 style="
@@ -1438,14 +1420,12 @@
                 "
                 onclick="GetStarted.nextDrag(this.parentElement.parentElement.parentElement)"
               >
-                Pokračuj
+                $[next];
               </button>
             </div>
             <div class="page page6">
-              <h1>Minimalizace okna</h1>
-              <p>
-                Při minimalizaci okna se ti ikona okna zobrazí na spodní liště.
-              </p>
+              <h1>$[window_minimizing];</h1>
+              <p>$[getstarted_windowminimizing];</p>
               <button
                 class="zaciname"
                 style="
@@ -1456,15 +1436,12 @@
                 "
                 onclick="GetStarted.nextMini(this.parentElement.parentElement.parentElement)"
               >
-                Pokračuj
+                $[next];
               </button>
             </div>
             <div class="page page7">
-              <h1>Otevření minimalizovaného okna</h1>
-              <p>
-                Pro otevření minimalizovaného okna stiskněte ikonu na spodní
-                liště.
-              </p>
+              <h1>$[window_minimized_open];</h1>
+              <p>$[getstarted_windowminimizedopen];</p>
               <button
                 class="zaciname"
                 style="
@@ -1475,13 +1452,12 @@
                 "
                 onclick="GetStarted.nextOpen(this.parentElement.parentElement.parentElement)"
               >
-                Pokračuj
+                $[next];
               </button>
             </div>
             <div class="page page8">
-              <h1>Konec</h1>
-              <p>A to je vše abyste mohli začít používat KLIND OS.</p>
-              <p>Je tu ale mnohem více věcí!</p>
+              <h1>$[end];</h1>
+              <p>$[getstarted_end];</p>
               <button
                 class="zaciname"
                 style="
@@ -1492,7 +1468,7 @@
                 "
                 onclick="GetStarted.closeApp(this.parentElement.parentElement.parentElement)"
               >
-                Zavřít
+                $[close];
               </button>
             </div>
           </div>
@@ -1513,7 +1489,7 @@
         <div onclick="ZIndexer.focus(this)" class="screenfilter">
           <div class="window-header">
             <div class="headerclass">
-              <span style="float: left">Úprava obrazu</span>
+              <span style="float: left">$[screen_filter];</span>
               <div
                 onclick="windows.close(this, 'screenfilter', event)"
                 class="close"
@@ -1524,69 +1500,59 @@
               ></div>
             </div>
           </div>
-          <h1>Filtry</h1>
-          <p>
-            Pro deaktivaci všech filtrů (např když si nastavíte filtr a nepůjde
-            nic přečíst) stiskněte AltGr + F
-          </p>
-          <h2>Aktivní filtry</h2>
+          <h1>$[filters];</h1>
+          <p>$[for_deactivation_filters];</p>
+          <h2>$[active_filters];</h2>
           <div class="activeFilters"></div>
-          <h2>Přidat filtr</h2>
+          <h2>$[add_filter];</h2>
           <div class="addFilter">
             <select
               class="filterSelect"
               onchange="ColorFilters.changeSelection(this)"
             >
-              <option value="brightness" default>Jas</option>
-              <option value="contrast">Kontrast</option>
-              <option value="hue-rotate">Otočit odstnín</option>
-              <option value="invert">Převrátit barvy</option>
-              <option value="saturate">Saturace</option>
-              <option value="sepia">Sépie</option>
-              <option value="grayscale">Černo-bílé</option>
+              <option value="brightness" default>$[brightness];</option>
+              <option value="contrast">$[contrast];</option>
+              <option value="hue-rotate">$[hue_rotate];</option>
+              <option value="invert">$[invert_colors];</option>
+              <option value="saturate">$[saturate];</option>
+              <option value="sepia">$[sepia];</option>
+              <option value="grayscale">$[grayscale];</option>
             </select>
             <div class="values-helptext">
-              <div class="brightness">
-                Hodnota jasu je v procentech. Od 0% do 1000%. 100% je výchozí
-                hodnota.
-              </div>
+              <div class="brightness">$[brightness_filter_help];</div>
               <div class="contrast" style="display: none">
-                Hodnota kontrastu je v procentech. Od 0% do 500%. 100% je
-                výchozí hodnota
+                $[contrast_filter_help];
               </div>
               <div class="hue-rotate" style="display: none">
-                Hodnota otočení odstínu je v 'deg' (stupně). Např 90deg (90
-                stupňů)
+                $[hue_filter_help];
               </div>
               <div class="invert" style="display: none">
-                Hodnota převrácení barvy je v procentech. Od 0% do 100%. Výchozí
-                hodnota je 0%.
+                $[invert_filter_help];
               </div>
               <div class="saturate" style="display: none">
-                Hodnota saturace je v procentech. Výchozí hodnota je 100%.
+                $[saturate_filter_help];
               </div>
               <div class="sepia" style="display: none">
-                Hodnota sépie je v procentech. Výchozí hodnota je 0%.
+                $[sepia_filter_help];
               </div>
               <div class="grayscale" style="display: none">
-                Hodnota černo-bílé je v procentech. Od 0% do 100%. Výchozí
-                hodnota je 0%.
+                $[grayscale_filter_help];
               </div>
             </div>
             <input
               type="text"
               class="valueFilter"
-              placeholder="Hodnota filtru"
+              placeholder="$[filter_value];"
             />
             <button onclick="ColorFilters.addFilter(this.parentElement);">
-              Přidat filtr
+              $[add_filter];
             </button>
           </div>
         </div>
         <div onclick="ZIndexer.focus(this)" class="imageeditor">
           <div class="window-header">
             <div class="headerclass">
-              <span style="float: left">Editor obrázku</span>
+              <span style="float: left">$[image_editor];</span>
               <div
                 onclick="windows.close(this, 'imageeditor', event)"
                 class="close"
@@ -1606,18 +1572,12 @@
         <div onclick="ZIndexer.focus(this)" class="printermanager">
           <div class="window-header">
             <div class="headerclass">
-              <span style="float: left">Správce tiskáren CUPS</span>
-              <div
-                class="menu"
-                onclick="window.open('https://wiki.archlinux.org/title/CUPS/Printer-specific_problems')"
-              >
-                Zobrazit list ovladačů pro tiskárny
-              </div>
+              <span style="float: left">$[printer_manager];</span>
               <div
                 class="menu"
                 onclick="windows.open('packageinstaller', {type: 'printer'})"
               >
-                Manuálně nainstalovat ovladač podle názvu
+                $[manually_install_drivers];
               </div>
               <div
                 onclick="windows.close(this, 'printermanager', event)"
@@ -1639,38 +1599,35 @@
         <div onclick="ZIndexer.focus(this)" class="packageinstaller">
           <div class="window-header">
             <div class="headerclass">
-              <span style="float: left">Instalátor balíčků</span>
+              <span style="float: left">$[package_installer];</span>
               <div
                 onclick="windows.close(this, 'packageinstaller', event)"
                 class="close"
               ></div>
             </div>
           </div>
-          <h1>Instalátor balíčků</h1>
-          <p class="printerdriverstext" style="display: none">
-            Zde si můžete nainstalovat ovladače pro vaši tiskárnu.
-          </p>
-          <span
-            >Repozitář:
+          <h1>$[package_installer];</h1>
+          <span>
+            <span>$[repository];</span>:
             <select class="repo">
               <option value="official" selected>
-                Arch Linux Oficiální Repozitář
+                Arch Linux Official Repository
               </option>
-              <option value="aur">
-                Arch Linux Uživatelský Repozitář (AUR)
-              </option>
+              <option value="aur">Arch Linux User Repository (AUR)</option>
             </select></span
           ><br />
           <p class="helptext"></p>
-          <span>Název: <input type="text" class="packagename" /></span>
+          <span
+            ><span>$[name];</span> <input type="text" class="packagename"
+          /></span>
           <button onclick="PackageInstaller.installPackage(this.parentElement)">
-            Nainstalovat
+            $[install];
           </button>
         </div>
         <div onclick="ZIndexer.focus(this)" class="inputdevices">
           <div class="window-header">
             <div class="headerclass">
-              <span style="float: left">Vstupní zvuková zařízení</span>
+              <span style="float: left">$[input_audio_devices];</span>
               <div
                 onclick="windows.close(this, 'inputdevices', event)"
                 class="close"
@@ -1681,13 +1638,13 @@
               ></div>
             </div>
           </div>
-          <h1>Výchozí vstupní zvukové zařízení</h1>
+          <h1>$[default_input_audio_devices];</h1>
           <select class="select"></select>
         </div>
         <div onclick="ZIndexer.focus(this)" class="logs">
           <div class="window-header">
             <div class="headerclass">
-              <span style="float: left">Logy</span>
+              <span style="float: left">$[logs];</span>
               <div
                 onclick="windows.close(this, 'logs', event)"
                 class="close"
@@ -1703,7 +1660,7 @@
         <div onclick="ZIndexer.focus(this)" class="nohuplogs">
           <div class="window-header">
             <div class="headerclass">
-              <span style="float: left">Nohup Logy</span>
+              <span style="float: left">$[system_logs];</span>
               <div
                 onclick="windows.close(this, 'nohuplogs', event)"
                 class="close"
@@ -1726,8 +1683,8 @@
               ></div>
             </div>
           </div>
-          <h1>Probíhá otevírání ZIP souboru.</h1>
-          <p>Prosím počkejte</p>
+          <h1>$[opening_zip_file];</h1>
+          <p>$[please_wait];</p>
         </div>
       </div>
       <div id="klindows" class="klindows">
@@ -1760,7 +1717,7 @@
             type="text"
             id="searchstartmenu"
             onkeyup="StartMenu.Search.search()"
-            placeholder="Hledat"
+            placeholder="$[search];"
           />
           <ul id="liststartmenu">
             <li>
