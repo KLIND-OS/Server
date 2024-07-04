@@ -71,7 +71,7 @@ var control = {
       autoplay: true,
     });
     x.on("end", function () {
-      playingSounds = removebyindex(playingSounds, playingSounds.indexOf(x));
+      playingSounds = mainFileManager.utils.removebyindex(playingSounds, playingSounds.indexOf(x));
     });
     playingSounds.push(x);
     return x;
@@ -83,7 +83,7 @@ var control = {
       ...otherSettings,
     });
     x.on("end", function () {
-      playingSongs = removebyindex(playingSongs, playingSongs.indexOf(x));
+      playingSongs = mainFileManager.utils.removebyindex(playingSongs, playingSongs.indexOf(x));
     });
     playingSongs.push(x);
     return x;
@@ -193,24 +193,26 @@ class App {
       }
     }
 
+    let closeaction;
     if (buttons.close != undefined) {
       var closeBtn = document.createElement("div");
       closeBtn.classList.add("close");
       closeBtn.setAttribute("onclick", "windows.close(this,'" + idName + "')");
       headerClass.appendChild(closeBtn);
-      var closeaction = buttons.close;
+      closeaction = buttons.close;
     } else {
-      var closeaction = false;
+      closeaction = false;
     }
 
+    let miniaction;
     if (buttons.mini != undefined) {
       var miniBtn = document.createElement("div");
       miniBtn.classList.add("mini");
       miniBtn.setAttribute("onclick", "windows.mini(this,'" + idName + "')");
       headerClass.appendChild(miniBtn);
-      var miniaction = buttons.mini;
+      miniaction = buttons.mini;
     } else {
-      var miniaction = false;
+      miniaction = false;
     }
 
     windows.list.names.push(idName);
@@ -242,7 +244,7 @@ class App {
     okno.classList.add("customAppResizable");
 
     var final = document.querySelector(".oknadisplaynone").appendChild(okno);
-    final.innerHTML += `<div id="root"></div>`;
+    final.innerHTML += "<div id=\"root\"></div>";
 
     var element = document.createElement("img");
     element.src = CustomApp.getIcon(this.info.name);

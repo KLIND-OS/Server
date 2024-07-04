@@ -2,6 +2,7 @@ class Login {
   static async loadBackgroundLockScreen() {
     var path = localStorage.getItem("background-lockScreen");
     if (path == "" || path == null) {
+      // idk
     } else if (await mainFileManager.fileExists(path)) {
       document.querySelector(".loginfirst").style.backgroundImage =
         "url(http://localhost:9999" + path + ")";
@@ -27,15 +28,17 @@ class Login {
   static load() {
     setInterval(() => {
       var d = new Date();
+      let hour;
+      let minutes;
       if (d.getHours() < 10) {
-        var hour = "0" + d.getHours();
+        hour = "0" + d.getHours();
       } else {
-        var hour = d.getHours();
+        hour = d.getHours();
       }
       if (d.getMinutes() < 10) {
-        var minutes = "0" + d.getMinutes();
+        minutes = "0" + d.getMinutes();
       } else {
-        var minutes = d.getMinutes();
+        minutes = d.getMinutes();
       }
       document.querySelector(".timelogin").innerHTML = hour + ":" + minutes;
       document.querySelector(".datelogin").innerHTML =

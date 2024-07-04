@@ -1,5 +1,5 @@
 class Battery {
-  static previousState = "notcharging"
+  static previousState = "notcharging";
 
   static load() {
     document.querySelector("#batteryIcon").style.display = "block";

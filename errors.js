@@ -9,7 +9,14 @@ function error(code, info, app) {
     document.querySelector("#infoerror").innerHTML = info;
     document.querySelector("#createdapp").innerHTML = app;
     document.querySelector("#error").style.display = "flex";
-    console.error("Error code: " + code + " Informations: " + info + " Created error by: " + app + " Chyba byla vytvořena chybou v kódu KLIND OS nebo externí aplikace!");
+    console.error(
+      "Error code: " +
+        code +
+        " Informations: " +
+        info +
+        " Created error by: " +
+        app +
+        " Chyba byla vytvořena chybou v kódu KLIND OS nebo externí aplikace!",
+    );
   }
 }
-

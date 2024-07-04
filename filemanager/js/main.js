@@ -87,16 +87,13 @@ function humanFileSize(bytes, si = false, dp = 1) {
   return bytes.toFixed(dp) + " " + units[u];
 }
 window.addEventListener("click", function (e) {
-  if (document.querySelector(".rightclick").contains(e.target)) {
-  } else {
+  if (!document.querySelector(".rightclick").contains(e.target)) {
     document.querySelector(".rightclick").style.display = "none";
   }
-  if (document.querySelector(".rightclicktwo").contains(e.target)) {
-  } else {
+  if (!document.querySelector(".rightclicktwo").contains(e.target)) {
     document.querySelector(".rightclicktwo").style.display = "none";
   }
-  if (document.querySelector(".rightclickthree").contains(e.target)) {
-  } else {
+  if (!document.querySelector(".rightclickthree").contains(e.target)) {
     document.querySelector(".rightclickthree").style.display = "none";
   }
 });
@@ -109,12 +106,12 @@ var FileManager = {
       document.querySelector(".main").innerHTML =
         "<header><p>Správce Souborů <span>" +
         infolder +
-        '</span></p><div class="secondelement" onclick="FileManager.createFolder();"></div></header>';
+        "</span></p><div class=\"secondelement\" onclick=\"FileManager.createFolder();\"></div></header>";
     } else {
       document.querySelector(".main").innerHTML =
         "<header><p>Správce Souborů <span>" +
         infolder +
-        '</span></p><div class="secondelement" onclick="FileManager.createFolder();"></div><div class="thirdelement" onclick="FileManager.createFile();"></div><div class="fourthelement" onclick="FileManager.readFiles();"></div></header>';
+        "</span></p><div class=\"secondelement\" onclick=\"FileManager.createFolder();\"></div><div class=\"thirdelement\" onclick=\"FileManager.createFile();\"></div><div class=\"fourthelement\" onclick=\"FileManager.readFiles();\"></div></header>";
     }
     if (infolder != "/") {
       var element = document.createElement("div");
@@ -139,7 +136,7 @@ var FileManager = {
         const folderStat = await parent.LowLevelApi.filesystem.stat(folderPath);
 
         if (!folderStat.isFile()) {
-          var element = document.createElement("div");
+          let element = document.createElement("div");
           element.classList.add("elmnt");
           element.setAttribute(
             "onclick",
@@ -165,7 +162,7 @@ var FileManager = {
         const fileStat = await parent.LowLevelApi.filesystem.stat(filePath);
 
         if (fileStat.isFile()) {
-          var element = document.createElement("div");
+          let element = document.createElement("div");
           element.classList.add("element");
           element.setAttribute(
             "onclick",
@@ -354,6 +351,7 @@ var FileManager = {
       "Zadejte nové jméno složky.",
       async (newname) => {
         if (newname == null || newname.length == 0 || newname == foldername) {
+          // Ignore
         } else if (newname.length > 100) {
           parent.spawnNotification(
             "Správce souborů",
@@ -391,6 +389,7 @@ var FileManager = {
       "Zadejte nové jméno souboru.",
       async (newname) => {
         if (newname == null || newname.length == 0 || newname == filename) {
+          // Ignore
         } else if (newname.length > 100) {
           parent.spawnNotification(
             "Správce Souborů",
@@ -547,8 +546,7 @@ var FileManager = {
   },
   createFile: () => {
     parent.BPrompt.prompt("Vložte název souboru.", async (name) => {
-      if (name == null || name.length == 0) {
-      } else {
+      if (!(name == null || name.length == 0)) {
         if (await FileManager.fileExist(name)) {
           parent.spawnNotification(
             "Správce Souborů",
@@ -600,8 +598,7 @@ var FileManager = {
   },
   createShortcut: () => {
     parent.BPrompt.prompt("Vložte název zástupce.", async (name) => {
-      if (name == null || name.length == 0) {
-      } else {
+      if (!(name == null || name.length == 0)) {
         if (await FileManager.fileExist(name + ".lnk")) {
           parent.spawnNotification(
             "Správce Souborů",

@@ -1,40 +1,38 @@
-function lengthInUtf8Bytes(str) {
-  var m = encodeURIComponent(str).match(/%[89ABab]/g);
-  return str.length + (m ? m.length : 0);
-}
-function removebyindex(array, index) {
-  var doacgajs = [];
-  for (var i = 0; i < array.length; i++) {
-    if (i != index) {
-      doacgajs.push(array[i]);
-    }
-  }
-  return doacgajs;
-}
-function humanFileSize(bytes, si = false, dp = 1) {
-  const thresh = si ? 1000 : 1024;
-
-  if (Math.abs(bytes) < thresh) {
-    return bytes + " B";
-  }
-
-  const units = si
-    ? ["KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
-    : ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"];
-  let u = -1;
-  const r = 10 ** dp;
-
-  do {
-    bytes /= thresh;
-    ++u;
-  } while (
-    Math.round(Math.abs(bytes) * r) / r >= thresh &&
-    u < units.length - 1
-  );
-
-  return bytes.toFixed(dp) + " " + units[u];
-}
 var mainFileManager = {
+  utils: {
+    removebyindex: (array, index) => {
+      var doacgajs = [];
+      for (var i = 0; i < array.length; i++) {
+        if (i != index) {
+          doacgajs.push(array[i]);
+        }
+      }
+      return doacgajs;
+    },
+    humanFileSize: (bytes, si = false, dp = 1) => {
+      const thresh = si ? 1000 : 1024;
+
+      if (Math.abs(bytes) < thresh) {
+        return bytes + " B";
+      }
+
+      const units = si
+        ? ["KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
+        : ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"];
+      let u = -1;
+      const r = 10 ** dp;
+
+      do {
+        bytes /= thresh;
+        ++u;
+      } while (
+        Math.round(Math.abs(bytes) * r) / r >= thresh &&
+        u < units.length - 1
+      );
+
+      return bytes.toFixed(dp) + " " + units[u];
+    },
+  },
   openWith: {
     txt: [
       ["Textový editor", (path) => windows.open("fileeditor", { path: path })],
@@ -195,9 +193,14 @@ var mainFileManager = {
         [
           new ContextMenuItem("Nastavit jako výchozí", (e) => {
             const app = e.textContent;
-            const preferences = JSON.parse(localStorage.getItem("fileopenPreferences") || "{}");
+            const preferences = JSON.parse(
+              localStorage.getItem("fileopenPreferences") || "{}",
+            );
             preferences[type] = app;
-            localStorage.setItem("fileopenPreferences", JSON.stringify(preferences));
+            localStorage.setItem(
+              "fileopenPreferences",
+              JSON.stringify(preferences),
+            );
           }),
         ],
         true,
@@ -232,10 +235,8 @@ var mainFileManager = {
     const parts = file.split("/");
     const name = parts[parts.length - 1];
     document.querySelector("#filename").innerHTML = name;
-    document.querySelector("#filesize").innerHTML = humanFileSize(
-      stats.size,
-      true,
-    );
+    document.querySelector("#filesize").innerHTML =
+      mainFileManager.utils.humanFileSize(stats.size, true);
     document.querySelector("#filechange").innerHTML = stats.mtime;
     document.querySelector("#filelocation").innerHTML = file;
     windows.open("fileproperties");
@@ -272,7 +273,9 @@ var mainFileManager = {
           windowasjdh[i]
             .querySelector("#filemanageriframe")
             .contentWindow.FileManager.readFiles();
-        } catch {}
+        } catch {
+          // Ignore error
+        }
       }
     }
   },
@@ -504,7 +507,7 @@ function fileManagerOpen() {
         "/filemanager/?dark";
     }
     for (
-      var i = 0;
+      let i = 0;
       i < document.querySelectorAll("#textareafileeditorimage").length;
       i++
     ) {
@@ -513,14 +516,14 @@ function fileManagerOpen() {
     }
   } else {
     for (
-      var i = 0;
+      let i = 0;
       i < document.querySelectorAll("#filemanageriframe").length;
       i++
     ) {
       document.querySelectorAll("#filemanageriframe")[i].src = "/filemanager/";
     }
     for (
-      var i = 0;
+      let i = 0;
       i < document.querySelectorAll("#textareafileeditorimage").length;
       i++
     ) {

@@ -1,6 +1,5 @@
 window.addEventListener("click", function (e) {
-  if (document.querySelector(".openopenedapps").contains(e.target)) {
-  } else {
+  if (!document.querySelector(".openopenedapps").contains(e.target)) {
     if (appsopened.oppened) {
       appsopened.close();
     }
@@ -45,7 +44,7 @@ var appsopened = {
           }
         }
       } else {
-        for (var i = 0; i < appsopened.count; i++) {
+        for (let i = 0; i < appsopened.count; i++) {
           if (appsopened.list[i][2] == ZIndexer.current) {
             innerHTMLvalue +=
               "<div class=\"selected buttonopenedapps " +
@@ -95,7 +94,9 @@ setInterval(() => {
         elements[i].querySelector(".headerclass span").innerHTML,
         elements[i],
       ]);
-    } catch {}
+    } catch {
+      // Ignore error
+    }
   }
   appsopened.count = appsopened.list.length;
 }, 500);

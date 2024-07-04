@@ -32,10 +32,10 @@ var Procesy = {
     var eventListeners = listAllEventListeners();
     for (const event of eventListeners) {
       Procesy.events.push(event);
-      var p = document.createElement("p");
+      let p = document.createElement("p");
       p.textContent = `Element: ${event.node.tagName} Type: ${event.type}`;
 
-      var open = document.createElement("span");
+      let open = document.createElement("span");
       open.textContent = "Open code ";
       open.style.color = "blue";
       open.setAttribute("ss", Procesy.events.length - 1);
@@ -48,15 +48,31 @@ var Procesy = {
     }
   },
   openIn: (i) => {
-    try { windows.open("viewtext", { text: Procesy.intervals[i][1].toString(), title: "Zobrazení procesu" }); } catch (e) { }
+    try {
+      windows.open("viewtext", {
+        text: Procesy.intervals[i][1].toString(),
+        title: "Zobrazení procesu",
+      });
+    } catch (e) {
+      // Ignore error
+    }
   },
   openEvent: (i) => {
     try {
-      windows.open("viewtext", { text: Procesy.events[i].func.toString(), title: "Zobrazení eventu" });
-    } catch (e) { }
+      windows.open("viewtext", {
+        text: Procesy.events[i].func.toString(),
+        title: "Zobrazení eventu",
+      });
+    } catch (e) {
+      // Ignore error
+    }
   },
   endInterval: (e) => {
-    try { clearInterval(Procesy.intervals[e.getAttribute("ss")][0]); } catch (e) { }
+    try {
+      clearInterval(Procesy.intervals[e.getAttribute("ss")][0]);
+    } catch (e) {
+      // Ignore error
+    }
     e.parentElement.remove();
   },
 
@@ -64,7 +80,7 @@ var Procesy = {
     el.innerHTML = "";
     const systemProcesses = await LowLevelApi.TaskManager.getSystemProcesses();
 
-    for (const {pid, name} of systemProcesses) {
+    for (const { pid, name } of systemProcesses) {
       var p = document.createElement("p");
       p.textContent = "Systémový proces: " + name + " ID: " + pid + " ";
 
@@ -76,9 +92,8 @@ var Procesy = {
         p.remove();
       };
 
-      p.appendChild(kill)
-      el.appendChild(p)
-      
+      p.appendChild(kill);
+      el.appendChild(p);
     }
 
     Procesy.analyze(el);
@@ -91,11 +106,17 @@ var Procesy = {
       win.querySelector(".processorusage").textContent = processor.usage + "%";
 
       const memory = await LowLevelApi.TaskManager.getRamInfo();
-      win.querySelector(".memorytotal").textContent = humanFileSize(memory.total * 1000);
-      win.querySelector(".memoryused").textContent = humanFileSize(memory.used * 1000);
-      win.querySelector(".memoryfree").textContent = humanFileSize(memory.free * 1000);
-    }
-    const intervalId = setInterval(update, 500)
+      win.querySelector(".memorytotal").textContent = humanFileSize(
+        memory.total * 1000,
+      );
+      win.querySelector(".memoryused").textContent = humanFileSize(
+        memory.used * 1000,
+      );
+      win.querySelector(".memoryfree").textContent = humanFileSize(
+        memory.free * 1000,
+      );
+    };
+    const intervalId = setInterval(update, 500);
 
     win.setAttribute("updateProcessId", intervalId);
     update();
@@ -107,18 +128,19 @@ var Procesy = {
 
   infoShow: (win) => {
     win.querySelector(".infoProcesy").style.display = "block";
-    win.querySelector(".procesyProcesy").style.display = "none"
+    win.querySelector(".procesyProcesy").style.display = "none";
   },
   procesyShow: (win) => {
     win.querySelector(".infoProcesy").style.display = "none";
     win.querySelector(".procesyProcesy").style.display = "block";
-    Procesy.load(win.querySelector(".procesyProcesyContent"))
+    Procesy.load(win.querySelector(".procesyProcesyContent"));
   },
-
 };
 
 function listAllEventListeners() {
-  const allElements = Array.prototype.slice.call(document.querySelectorAll("*"));
+  const allElements = Array.prototype.slice.call(
+    document.querySelectorAll("*"),
+  );
   allElements.push(document);
   allElements.push(window);
 
@@ -134,9 +156,9 @@ function listAllEventListeners() {
     for (let j = 0; j < types.length; j++) {
       if (typeof currentElement[types[j]] === "function") {
         elements.push({
-          "node": currentElement,
-          "type": types[j],
-          "func": currentElement[types[j]],
+          node: currentElement,
+          type: types[j],
+          func: currentElement[types[j]],
         });
       }
     }
@@ -158,9 +180,8 @@ window.clearInterval = function (id) {
   var ne = new Array();
   for (var i = 0; i < Procesy.intervals.length; i++) {
     if (Procesy.intervals[i] == undefined) {
-
-    }
-    else if (Procesy.intervals[i][0] != id) {
+      // Idk
+    } else if (Procesy.intervals[i][0] != id) {
       ne.push(Procesy.intervals[i]);
     } else {
       ne.push(undefined);
@@ -169,8 +190,6 @@ window.clearInterval = function (id) {
   Procesy.intervals = ne;
   originalClearInterval(id);
 };
-
-
 
 setInterval(() => {
   Procesy.iframes = new Array();

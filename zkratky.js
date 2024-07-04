@@ -3,7 +3,7 @@ window.onkeydown = (e) => {
   keysDown.add(e.key);
   Shortcuts._handleKeypress(keysDown);
 };
-window.onkeyup = (e) => {
+window.onkeyup = () => {
   // keysDown.delete(e.key);
   keysDown.clear();
 };
@@ -52,21 +52,22 @@ class Shortcuts {
     new Shortcut(["AltGraph", "["], () => ColorFilters.deactivateAll()),
     new Shortcut(["Alt", "ArrowUp"], () => {
       if (!ZIndexer.current) return;
-      windowSizing.full(ZIndexer.current);
+      DraggableElements.windowSizing.full(ZIndexer.current);
     }),
     new Shortcut(["Alt", "ArrowRight"], () => {
       if (!ZIndexer.current) return;
-      windowSizing.right(ZIndexer.current);
+      DraggableElements.windowSizing.right(ZIndexer.current);
     }),
     new Shortcut(["Alt", "ArrowLeft"], () => {
       if (!ZIndexer.current) return;
-      windowSizing.left(ZIndexer.current);
+      DraggableElements.windowSizing.left(ZIndexer.current);
     }),
     new Shortcut(["Alt", "ArrowDown"], () => {
       if (!ZIndexer.current) return;
-      windowSizing.defaultNonEvent(ZIndexer.current, 15, 15);
+      DraggableElements.windowSizing.defaultNonEvent(ZIndexer.current, 15, 15);
     }),
   ];
+
   static windowShortcutList = {
     fileeditor: [
       new Shortcut(["Control", "s"], (win) => {
