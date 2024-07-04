@@ -1,6 +1,5 @@
 window.addEventListener("click", function (e) {
-  if (document.querySelector(".openopenedapps").contains(e.target)) {
-  } else {
+  if (!document.querySelector(".openopenedapps").contains(e.target)) {
     if (appsopened.oppened) {
       appsopened.close();
     }
@@ -14,7 +13,7 @@ var appsopened = {
   selected: undefined,
   openwin: (value) => {
     var element = document.querySelectorAll(".window.openedwin")[value];
-    changewindowmain(element);
+    ZIndexer.focus(element);
     element.focus();
     appsopened.close();
   },
@@ -45,8 +44,8 @@ var appsopened = {
           }
         }
       } else {
-        for (var i = 0; i < appsopened.count; i++) {
-          if (appsopened.list[i][2] == openedwindowindex) {
+        for (let i = 0; i < appsopened.count; i++) {
+          if (appsopened.list[i][2] == ZIndexer.current) {
             innerHTMLvalue +=
               "<div class=\"selected buttonopenedapps " +
               appsopened.list[i][0] +
@@ -91,11 +90,13 @@ setInterval(() => {
   for (var i = 0; i < elements.length; i++) {
     try {
       appsopened.list.push([
-        elements[i].classList[1],
+        elements[i].classList[0],
         elements[i].querySelector(".headerclass span").innerHTML,
         elements[i],
       ]);
-    } catch {}
+    } catch {
+      // Ignore error
+    }
   }
   appsopened.count = appsopened.list.length;
 }, 500);

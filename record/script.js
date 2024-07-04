@@ -1,7 +1,5 @@
 "use strict";
 
-/* globals MediaRecorder */
-
 let mediaRecorder;
 let recordedBlobs;
 

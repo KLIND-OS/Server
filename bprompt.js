@@ -13,7 +13,7 @@ var BPrompt = {
       .querySelector(".prompt-element .input-box")
       .addEventListener("keypress", (e) => {
         if (e.key == "Enter") {
-          submitMessage();
+          BPrompt.submitMessage();
         }
       });
     document
@@ -54,21 +54,24 @@ var BPrompt = {
 
     select.focus();
   },
+
+  submitMessage() {
+    var value = document.querySelector(".input-box").value;
+    if (value != "") {
+      currentfunprompt(value);
+      document.querySelector(".prompt-element").style.display = "none";
+      document.querySelector(".input-box").value = "";
+    }
+  },
+
+  submitConfirm(answer) {
+    currentfunconfirm(answer);
+    document.querySelector(".confirm-element").style.display = "none";
+  },
+
+  submitList() {
+    const { value } = document.querySelector(".list-input-box");
+    currentfunlist(value);
+    document.querySelector(".list-element").style.display = "none";
+  },
 };
-function submitMessage() {
-  var value = document.querySelector(".input-box").value;
-  if (value != "") {
-    currentfunprompt(value);
-    document.querySelector(".prompt-element").style.display = "none";
-    document.querySelector(".input-box").value = "";
-  }
-}
-function submitConfirm(answer) {
-  currentfunconfirm(answer);
-  document.querySelector(".confirm-element").style.display = "none";
-}
-function submitList() {
-  const { value } = document.querySelector(".list-input-box");
-  currentfunlist(value);
-  document.querySelector(".list-element").style.display = "none";
-}

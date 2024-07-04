@@ -1,0 +1,104 @@
+.startmenu {
+  position: absolute;
+  height: 700px;
+  width: 462px;
+  background-color: white;
+  overflow: auto;
+  border-start-start-radius: 15px;
+  border-start-end-radius: 15px;
+  transition: ease 0.5s bottom;
+  bottom: -750px;
+  z-index: 100;
+}
+
+.startmenu.opened {
+  bottom: 50px;
+}
+
+.startmenu.display {
+  display: block !important;
+}
+
+#searchstartmenu {
+  position: fixed;
+  left: 45px;
+  background-image: url("/icons/searchicon.png");
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 355px;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+  float: right;
+  z-index: 1;
+  border-start-end-radius: 15px;
+}
+
+#liststartmenu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 417px;
+  height: 656px;
+  margin-top: 44px;
+  margin-left: 45px;
+  overflow: auto;
+}
+
+.startmenu .leftdiv {
+  width: 45px;
+  background-color: #424141;
+  position: fixed;
+  height: 700px;
+  border-start-start-radius: 15px;
+}
+
+#liststartmenu li {
+  margin: 0;
+}
+
+#liststartmenu li a {
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block;
+  transition: ease 0.2s;
+  width: calc(100% - 24px);
+  float: left;
+  left: 0;
+  position: relative;
+}
+
+#liststartmenu li a:hover {
+  background-color: #d3d3d3;
+}
+
+#searchstartmenu:focus {
+  outline: none;
+}
+
+.startmenu .userimgdownturnoff {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  transition: ease 0.2s scale;
+  scale: 1;
+}
+
+.startmenu .userimgdownturnoff:hover {
+  scale: 0.8;
+}
+
+.startmenu .userimgdown:hover {
+  background-color: aqua;
+}
+
+.startmenu .userimgdown {
+  position: absolute;
+  bottom: 45px;
+  width: 100%;
+  transition: ease 0.2s background;
+}
+

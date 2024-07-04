@@ -1,0 +1,14 @@
+.nastaveni {
+  background-color: white;
+  min-width: 300px;
+  min-height: 435px;
+  height: 435px;
+  width: 300px;
+  position: absolute !important;
+  overflow: hidden;
+}
+
+.nastaveni iframe {
+  width: 100%;
+  height: calc(100% - 20px);
+}

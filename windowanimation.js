@@ -11,4 +11,4 @@ function updateWindowAnimation() {
     }
   }
 }
-updateWindowAnimation()
+updateWindowAnimation();

@@ -32,7 +32,7 @@ class JSSStyles {
   }
 }
 
-// Simple compiler that i wrote
+// Simple compiler that I wrote. I know it is shit.
 class JSSCompiler {
   static compile(jssElement) {
     if (jssElement.selector.length == 0) {

@@ -11,7 +11,7 @@ class SheetsEditor {
     const bypass = FileLocker.add(file_path);
     const intervalID = setInterval(() => {
       FileLocker.continue(file_path);
-    }, 5000)
+    }, 5000);
 
     win.setAttribute("path", file_path);
     win.setAttribute("bypass", bypass);

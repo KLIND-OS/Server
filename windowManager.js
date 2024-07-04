@@ -199,7 +199,7 @@ var windows = {
                 "onclick",
                 "openGetFile[" +
                   index +
-                  "][1]['closed']();windows.close(this,'filemanager')",
+                  "][1]['closed']();windows.close(this,'filemanager', event)",
               );
             element.querySelector(".mini").remove();
             element.querySelector(".headerclass span").textContent =
@@ -211,7 +211,7 @@ var windows = {
             if (url.indexOf("?") == -1) url += "?folderselect";
             else url += "&folderselect";
 
-            var index = openGetFile.length;
+            let index = openGetFile.length;
             openGetFile.push([element, args.callBack]);
             element
               .querySelector(".close")
@@ -219,7 +219,7 @@ var windows = {
                 "onclick",
                 "openGetFile[" +
                   index +
-                  "][1]['closed']();windows.close(this,'filemanager')",
+                  "][1]['closed']();windows.close(this,'filemanager', event)",
               );
             element.querySelector(".mini").remove();
             element.querySelector(".headerclass span").textContent =
@@ -234,11 +234,12 @@ var windows = {
       fileeditor: [
         async (element, args) => {
           var { path } = args;
+          let type;
           if (!path.includes(".")) {
-            var type = "txt";
+            type = "txt";
           } else {
             const parts = path.split(".");
-            var type = parts[parts.length - 1];
+            type = parts[parts.length - 1];
           }
           const bypass = FileLocker.add(path);
           const intervalID = setInterval(() => {
@@ -433,7 +434,7 @@ var windows = {
           }
           if (args.title) {
             element.querySelector(
-              ".widget-header .headerclass span",
+              ".window-header .headerclass span",
             ).textContent = args.title.toString();
           }
         },
@@ -485,15 +486,16 @@ var windows = {
             return html.value;
           }
 
+          let skin;
+
           if (localStorage.getItem("mode") == "dark") {
-            var skin = "oxide-dark";
+            skin = "oxide-dark";
           } else {
-            var skin = "oxide";
+            skin = "oxide";
           }
 
           tinymce.init({
             selector: ".window.wordeditor .wordeditor-element",
-            height: "400px",
             menubar: "edit insert format",
             plugins: "advlist autolink lists link image charmap anchor",
             toolbar:
@@ -613,8 +615,8 @@ var windows = {
       newelement.style.opacity = "0";
       newelement.style.scale = "0.9";
       newelement.setAttribute("name", name);
-      document.querySelector(".oknepatrizde").appendChild(newelement);
-      reloaddraggable();
+      document.querySelector(".oknapatrizde").appendChild(newelement);
+      DraggableElements.reload();
       if (
         newelement.querySelector(".headerclass") &&
         newelement.getAttribute("notresizable") !== "true"
@@ -623,9 +625,9 @@ var windows = {
           .querySelector(".headerclass")
           .addEventListener("dblclick", (e) => {
             if (newelement.getAttribute("isFullscreen") == "true") {
-              windowSizing.default(newelement, e);
+              DraggableElements.windowSizing.default(newelement, e);
             } else {
-              windowSizing.full(newelement);
+              DraggableElements.windowSizing.full(newelement);
             }
           });
       }
@@ -640,7 +642,8 @@ var windows = {
       newelement.style.scale = "1";
 
       setTimeout(() => {
-        newelement.click();
+        ZIndexer.focus(newelement, true);
+        StartMenu.close();
       });
       if (special != undefined && special[0] !== false) {
         special[0](newelement, args);
@@ -648,13 +651,17 @@ var windows = {
       return newelement;
     }
   },
-  close: async (element, name) => {
+  close: async (element, name, event) => {
+    if (event) {
+      event.stopPropagation();
+    }
     var el = element.parentElement.parentElement.parentElement;
     var special = windows.list.special[name];
+    let returnValue;
     if (special != undefined && special[1] !== false) {
-      var returnValue = await special[1](el);
+      returnValue = await special[1](el);
     } else {
-      var returnValue = undefined;
+      returnValue = undefined;
     }
     if (returnValue !== true) {
       el.style.scale = "0.9";
@@ -662,11 +669,14 @@ var windows = {
 
       setTimeout(() => {
         el.remove();
-        openedwindowindex = undefined;
+        ZIndexer.current = undefined;
       }, 200);
     }
   },
-  mini: (element, name) => {
+  mini: (element, name, event) => {
+    if (event) {
+      event.stopPropagation();
+    }
     var location = windows.list.names.indexOf(name);
     var special = windows.list.special[name];
     var ikonadown = windows.list.ikonadown[location];
@@ -708,7 +718,7 @@ var windows = {
             var element = windows.list.appIds[id];
             var appdiv = document.querySelector(".appdiv");
             appdiv.querySelector(".canvasSection").innerHTML =
-              '<div class="loading">Loading&#8230;</div>';
+              "<div class=\"loading\">Loading&#8230;</div>";
             appdiv.querySelector("h1").textContent =
               element.querySelector(".headerclass span").textContent;
             var left = e.clientX - 150;
@@ -775,11 +785,12 @@ var windows = {
       setTimeout(() => {
         mainElement.style.opacity = "1";
         mainElement.style.scale = "1";
-        mainElement.click();
         thiselement.style.transform = "scale(0)";
         windows.list.appIds[id] = undefined;
         setTimeout(() => {
           thiselement.remove();
+
+          mainElement.click();
         }, 200);
       }, 10);
     }, 150);

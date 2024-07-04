@@ -59,13 +59,17 @@ class Poznamky {
   static load(win) {
     try {
       const velikost = localStorage.getItem("velikostpismapoznamky");
-      win.querySelector("#asldslk").style.fontSize = velikost + "px";
+      win.querySelector("#notesinput").style.fontSize = velikost + "px";
       document.getElementById("velikostpismapoznamky").value = velikost;
-    } catch {}
+    } catch {
+      // Ignore error
+    }
     try {
       const color = localStorage.getItem("barvapismapoznamky");
-      win.querySelector("#asldslk").style.color = color;
+      win.querySelector("#notesinput").style.color = color;
       document.getElementById("barvapismapoznamky").value = color;
-    } catch {}
+    } catch {
+      // Ignore error
+    }
   }
 }

@@ -17,7 +17,7 @@ class DiskManager {
     const response = await LowLevelApi.DiskManagement.unmount(disk);
     if (response) {
       parentel.remove();
-      spawnNotification("Správce disků", `Nyní můžete disk bezpečně odpojit.`);
+      spawnNotification("Správce disků", "Nyní můžete disk bezpečně odpojit.");
     }
   }
   static init(win) {

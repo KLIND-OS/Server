@@ -12,11 +12,10 @@ let displayHours = 0;
 let interval = null;
 
 //Define var to hold stopwatch status
-let status = "stopped";
+let statusStop = "stopped";
 
 //Stopwatch function (logic to determine when to increment next value, etc.)
 function stopWatch() {
-
   seconds++;
 
   //Logic to determine when to increment next value
@@ -28,66 +27,51 @@ function stopWatch() {
       minutes = 0;
       hours++;
     }
-
   }
 
   //If seconds/minutes/hours are only one digit, add a leading 0 to the value
   if (seconds < 10) {
     displaySeconds = "0" + seconds.toString();
-  }
-  else {
+  } else {
     displaySeconds = seconds;
   }
 
   if (minutes < 10) {
     displayMinutes = "0" + minutes.toString();
-  }
-  else {
+  } else {
     displayMinutes = minutes;
   }
 
   if (hours < 10) {
     displayHours = "0" + hours.toString();
-  }
-  else {
+  } else {
     displayHours = hours;
   }
 
   //Display updated time values to user
-  document.getElementById("display").innerHTML = displayHours + ":" + displayMinutes + ":" + displaySeconds;
-
+  document.getElementById("display").innerHTML =
+    displayHours + ":" + displayMinutes + ":" + displaySeconds;
 }
 
-
-
 function startStopstopky() {
-
   if (status === "stopped") {
-
     //Start the stopwatch (by calling the setInterval() function)
     interval = window.setInterval(stopWatch, 1000);
     document.getElementById("startStop").innerHTML = "Stop";
-    status = "started";
-
-  }
-  else {
-
+    statusStop = "started";
+  } else {
     window.clearInterval(interval);
     document.getElementById("startStop").innerHTML = "Start";
-    status = "stopped";
-
+    statusStop = "stopped";
   }
-
 }
 
 //Function to reset the stopwatch
 function resetstopky() {
-
   window.clearInterval(interval);
   seconds = 0;
   minutes = 0;
   hours = 0;
   document.getElementById("display").innerHTML = "00:00:00";
   document.getElementById("startStop").innerHTML = "Start";
-
 }

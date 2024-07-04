@@ -158,7 +158,9 @@ var CustomApp = {
       await exec(
         `mv '${LowLevelApi.filesystem.path.join(outputPath, "appdata")}'/* '${appdatapath}'`,
       );
-    } catch {}
+    } catch {
+      // Try catch is here because it will fail when user doesnt have any appdata.
+    }
 
     await LowLevelApi.filesystem.fsExtra.rm(outputPath, { recursive: true });
 
