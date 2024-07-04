@@ -6,21 +6,19 @@ class FileLocker {
 
   static test(file, bypass) {
     if (this._bypass[file] == bypass && bypass != undefined) {
-      return false
+      return false;
     }
 
     if (this._lockedFiles.has(file)) {
-      return true
+      return true;
     }
 
-    return (
-      [...this._lockedFiles].some((item) => item.startsWith(file))
-    );
+    return [...this._lockedFiles].some((item) => item.startsWith(file));
   }
 
   static remove(file, bypass) {
     if (this._bypass[file] !== bypass) {
-      return
+      return;
     }
 
     this._lockedFiles.delete(file);
@@ -48,7 +46,7 @@ class FileLocker {
     this._lockedStatus[file] = new Date().getTime();
     this._intervals[file] = id;
     this._bypass[file] = bypass;
-    
+
     return bypass;
   }
 
@@ -71,7 +69,7 @@ class FileLocker {
     this._lockedStatus[file] = time;
   }
   static lockedError() {
-    BPrompt.alert(`Tento soubor je používán jiným programem!`);
+    BPrompt.alert("Tento soubor je používán jiným programem!");
   }
 
   static fullTest(file) {

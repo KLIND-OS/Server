@@ -1,0 +1,241 @@
+.downbar {
+  bottom: 0;
+  position: absolute;
+  width: 100vw;
+  height: 50px;
+  background-color: #292929;
+  z-index: 9999999;
+  transition: ease 0.5s bottom;
+}
+
+.downbar .clock {
+  float: right;
+  height: 100%;
+  background-color: #161616;
+  position: relative;
+  width: 100px;
+  text-align: center;
+  padding-top: 15px;
+  box-sizing: border-box;
+}
+
+#fakedownbar {
+  bottom: 0;
+  position: absolute;
+  width: 100vw;
+  height: 50px;
+}
+
+.logo {
+  width: auto;
+  height: 100%;
+  transition: ease 0.2s;
+  float: left;
+}
+
+.logo:hover {
+  background-color: aqua;
+}
+
+.ikonadown {
+  width: auto;
+  height: 100%;
+  float: left;
+  transition: ease 0.2s transform;
+  bottom: 0;
+  transform: scale(0.8);
+}
+.ikonadown.builtin {
+  filter: invert(1);
+}
+
+.ikonadown.opened {
+  left: 50px;
+  position: relative;
+}
+
+.ikonadown:hover {
+  transform: scale(1);
+}
+
+.ikonadown:active {
+  transform: scale(0.7) !important;
+}
+
+.closedclock {
+  display: none;
+}
+
+.openedclock {
+  display: block;
+}
+
+.clock span {
+  color: white;
+}
+
+.icon {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 0;
+  transition: ease 0.2s background;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 1 !important;
+  margin: 5px;
+}
+
+.icon:hover {
+  background-color: rgb(168, 168, 168, 0.7);
+}
+
+.downbar .items-1 {
+  background-color: #fa5667;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  height: 25px;
+  width: 25px;
+  transition: all 0.25s linear;
+  position: absolute;
+}
+
+.downbar .items-2 {
+  background-color: #7a45e5;
+  position: absolute;
+  top: 0;
+  left: 25px;
+  z-index: 1;
+  height: 25px;
+  width: 25px;
+  transition: all 0.25s linear;
+}
+
+.downbar .items-3 {
+  background-color: #1b91f7;
+  top: 25px;
+  height: 25px;
+  width: 25px;
+  left: 25px;
+  transition: all 0.25s linear;
+  position: absolute;
+}
+
+.downbar .items-4 {
+  background-color: #fac24c;
+  bottom: 0;
+  height: 25px;
+  width: 25px;
+  left: 0px;
+  transition: all 0.25s linear;
+  position: absolute;
+}
+
+.downbar .appdiv {
+  width: 300px;
+  height: 217px;
+  position: absolute;
+  bottom: 60px;
+  background-color: #292929;
+  border-radius: 10px;
+  display: none;
+  color: white;
+}
+
+.canvasSection {
+  width: 100%;
+  height: calc(100% - 43px);
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+/* Absolute Center Spinner */
+.canvasSection .loading {
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: visible;
+  position: relative;
+}
+
+/* Transparent Overlay */
+.canvasSection .loading:before {
+  content: "";
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* :not(:required) hides these rules from IE9 and below */
+.canvasSection .loading:not(:required) {
+  /* hide "loading..." text */
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.canvasSection .loading:not(:required):after {
+  content: "";
+  display: block;
+  font-size: 10px;
+  width: 1em;
+  height: 1em;
+  margin-top: -0.5em;
+  animation: downbarspinner 1500ms infinite linear;
+  border-radius: 0.5em;
+  box-shadow:
+    rgba(0, 0, 0, 0.75) 1.5em 0 0 0,
+    rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0,
+    rgba(0, 0, 0, 0.75) 0 1.5em 0 0,
+    rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0,
+    rgba(0, 0, 0, 0.75) -1.5em 0 0 0,
+    rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0,
+    rgba(0, 0, 0, 0.75) 0 -1.5em 0 0,
+    rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+}
+
+/* Animation */
+@keyframes downbarspinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.bftteryStatus {
+  height: 50px;
+  float: right;
+  display: flex;
+  justify-content: end;
+  padding: 5px;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 50px;
+  align-items: center;
+}
+
+.batteryStatus img {
+  height: 70%;
+  width: 33px;
+}
+
+.batteryStatus span {
+  font-size: 15px;
+}

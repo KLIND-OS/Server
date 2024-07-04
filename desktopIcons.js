@@ -19,9 +19,11 @@ var DesktopIcons = {
         elmnt.style.backgroundImage = "url(" + storage[i][1] + ")";
         try {
           element.style.inset = storage[i][2][1] + "px auto auto " + storage[i][2][0] + "px";
-        } catch { }
+        } catch {
+          // Ignore error
+        }
       }
-      dragingikonaklindows();
+      DraggableElements.reloadDesktopIcons();
     }
   },
   stopMoving: (element) => {

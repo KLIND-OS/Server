@@ -4,8 +4,11 @@ var cursortype = "normal";
 
 setInterval(() => {
   const allIframes = document.querySelectorAll("iframe");
-  allIframes.forEach(iframe => {
-    if (iframe.getAttribute("iframeEdited") !== "ano" && iframe.className !== "tox-edit-area__iframe") {
+  allIframes.forEach((iframe) => {
+    if (
+      iframe.getAttribute("iframeEdited") !== "ano" &&
+      iframe.className !== "tox-edit-area__iframe"
+    ) {
       iframe.setAttribute("iframeEdited", "ano");
       const div = document.createElement("div");
       div.className = "iframeWrapper";
@@ -15,41 +18,34 @@ setInterval(() => {
   });
 }, 1000);
 
-document.addEventListener("mousemove", e => {
+document.addEventListener("mousemove", (e) => {
   const tgt = e.target;
   const classofelement = tgt.classList.value;
   // TODO: Be able to catch mousemove event when on iframe.
   if (tgt.tagName === "WEBVIEW" || tgt.classList.contains("iframeWrapper")) {
     printMouseout();
-  }
-  else if (
+  } else if (
     classofelement.indexOf("items-1") > -1 ||
-        classofelement.indexOf("items-2") > -1 ||
-        classofelement.indexOf("items-3") > -1 ||
-        classofelement.indexOf("items-4") > -1 ||
-        classofelement.indexOf("element-power-inner-box") > -1 ||
-        tgt.getAttribute("cursor") == "pointer" ||
-        tgt.classList.contains("close") ||
-        tgt.classList.contains("mini") ||
-        tgt.classList.contains("ikonadown") ||
-        tgt.tagName == "BUTTON" ||
-        tgt.tagName == "A"
-
-
-        && cursortype != "down"
-        && cursortype != "downpointer"
-        && tgt.getAttribute("cursor") !== "default"
+    classofelement.indexOf("items-2") > -1 ||
+    classofelement.indexOf("items-3") > -1 ||
+    classofelement.indexOf("items-4") > -1 ||
+    classofelement.indexOf("element-power-inner-box") > -1 ||
+    tgt.getAttribute("cursor") == "pointer" ||
+    tgt.classList.contains("close") ||
+    tgt.classList.contains("mini") ||
+    tgt.classList.contains("ikonadown") ||
+    tgt.tagName == "BUTTON" ||
+    (tgt.tagName == "A" &&
+      cursortype != "down" &&
+      cursortype != "downpointer" &&
+      tgt.getAttribute("cursor") !== "default")
   ) {
     cursortype = "pointer";
     document.getElementById("firstcursor").style.width = "3em";
     document.getElementById("firstcursor").style.height = "3em";
     document.getElementById("firstcursor").style.marginLeft = "-0.5em";
     document.getElementById("firstcursor").style.marginTop = "-0.5em";
-  }
-  else if (cursortype == "down" || cursortype == "downpointer") {
-
-  }
-  else {
+  } else if (!(cursortype == "down" || cursortype == "downpointer")) {
     cursortype = "normal";
     document.getElementById("secondcursor").style.backgroundColor = "black";
     document.getElementById("firstcursor").style.width = "2em";
@@ -69,8 +65,7 @@ function printMousePos(event) {
       document.getElementById("firstcursor").style.top = y - 17 + "px";
       document.getElementById("firstcursor").style.left = x - 17 + "px";
     }
-  }
-  catch {
+  } catch {
     document.getElementById("firstcursor").style.top = y - 17 + "px";
     document.getElementById("firstcursor").style.left = x - 17 + "px";
   }
@@ -81,8 +76,7 @@ function printMouseover() {
     if (!Boot.safeBoot) {
       document.getElementById("firstcursor").style.display = "block";
     }
-  }
-  catch {
+  } catch {
     document.getElementById("firstcursor").style.display = "block";
   }
 }
@@ -96,8 +90,7 @@ document.addEventListener("mouseout", printMouseout);
 function mouseDown() {
   if (cursortype == "pointer") {
     cursortype = "downpointer";
-  }
-  else {
+  } else {
     cursortype = "down";
   }
   document.getElementById("firstcursor").style.width = "1em";
@@ -112,8 +105,7 @@ function mouseUp() {
     document.getElementById("firstcursor").style.marginLeft = "-0.5em";
     document.getElementById("firstcursor").style.marginTop = "-0.5em";
     cursortype = "normal";
-  }
-  else {
+  } else {
     cursortype = "normal";
     document.getElementById("secondcursor").style.backgroundColor = "black";
     document.getElementById("firstcursor").style.width = "2em";
@@ -121,11 +113,11 @@ function mouseUp() {
     document.getElementById("firstcursor").style.marginLeft = "0em";
     document.getElementById("firstcursor").style.marginTop = "0em";
   }
-
 }
 try {
   if (Boot.safeBoot) {
     document.getElementById("firstcursor").style.display = "none";
   }
+} catch {
+  // Ignore error
 }
-catch {}

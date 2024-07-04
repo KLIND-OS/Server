@@ -135,7 +135,7 @@ var sliderElement, playlistPlayer, playing;
 
   var playlistFull = changeArray(startIndex, allFiltered);
   var finalPlayList = new Array();
-  for (var i = 0; i < playlistFull.length; i++) {
+  for (let i = 0; i < playlistFull.length; i++) {
     finalPlayList.push(
       "http://localhost:9999" + fileFolder + "/" + playlistFull[i],
     );

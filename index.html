@@ -12,12 +12,11 @@
     </p>
   </noscript>
   <head>
+    <link rel="stylesheet" href="styles/components/defaultwindow.css" />
     <meta charset="UTF-8" />
-    <!--Change path-->
-    <script>
-      if (window.location.pathname == "/index.html")
-        window.location.replace("..");
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Načítání...</title>
+
     <script src="contextMenuApi.js"></script>
     <script src="JSstyles.js"></script>
     <script src="boot.js"></script>
@@ -32,44 +31,19 @@
     <script src="consolelog.js"></script>
     <script src="sources/polifill.min.js"></script>
     <script src="sources/uuid.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="sandbox.css" />
-    <title>Načítání...</title>
-    <link rel="stylesheet" href="style.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="script.js"></script>
     <script src="fixwindow.js"></script>
     <script src="windowManager.js"></script>
     <script src="windowchanging.js"></script>
     <script src="libs/jquery-3.6.0.js"></script>
     <script src="libs/jqueryui_1.11.4.js"></script>
-    <link rel="stylesheet" type="text/css" href="libs/jquery_ui_1.9.2.css" />
-    <link rel="stylesheet" href="rightclickmenu.css" />
-    <link rel="stylesheet" href="libs/font-awesome.css" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Montserrat&amp;display=swap"
-    />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap"
-    />
     <script src="myklindows_scripts.js"></script>
     <script src="taskbar.js"></script>
-    <script src="stopky.js"></script>
     <script src="libs/howler.js"></script>
     <script src="loading.js"></script>
-    <style id="customcssstyleelement"></style>
-    <script src="dragingelements.js"></script>
+    <script src="draggableelements.js"></script>
     <script src="zkratky.js"></script>
     <script src="update.js"></script>
-    <link id="favicon" rel="shortcut icon" href="icons/loading.svg" />
     <script src="info.js"></script>
     <script src="sounds.js"></script>
     <script src="customapps.js"></script>
@@ -78,7 +52,6 @@
     <script src="yaanidiot.js"></script>
     <script src="/power.js"></script>
     <script src="hash.js"></script>
-    <link rel="stylesheet" href="libs/plyr.css" />
     <script src="libs/plyr.js"></script>
     <script src="cleaner.js"></script>
     <script src="localStorage.js"></script>
@@ -120,13 +93,60 @@
     <script src="login.js"></script>
     <script src="startmenu.js"></script>
     <script src="theme.js"></script>
+    <script src="battery.js"></script>
+
+    <style id="customcssstyleelement"></style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="sandbox.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="libs/jquery_ui_1.9.2.css" />
+    <link rel="stylesheet" href="rightclickmenu.css" />
+    <link rel="stylesheet" href="libs/font-awesome.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Montserrat&amp;display=swap"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap"
+    />
+    <link id="favicon" rel="shortcut icon" href="icons/loading.svg" />
+    <link rel="stylesheet" href="libs/plyr.css" />
+    <link rel="stylesheet" href="styles/general.css" />
+    <link rel="stylesheet" href="styles/apps/getstarted.css" />
+    <link rel="stylesheet" href="styles/apps/settings.css" />
+    <link rel="stylesheet" href="styles/apps/stopky.css" />
+    <link rel="stylesheet" href="styles/apps/poznamky.css" />
+    <link rel="stylesheet" href="styles/apps/audiolevel.css" />
+    <link rel="stylesheet" href="styles/components/windows.css" />
+    <link rel="stylesheet" href="styles/components/startmenu.css" />
+    <link rel="stylesheet" href="styles/components/downbar.css" />
+    <link rel="stylesheet" href="styles/components/mainview.css" />
+    <link rel="stylesheet" href="styles/apps/napoveda.css" />
+    <link rel="stylesheet" href="styles/apps/updates.css" />
+    <link rel="stylesheet" href="styles/apps/browser.css" />
+    <link rel="stylesheet" href="styles/components/login.css" />
+    <link rel="stylesheet" href="styles/components/desktop.css" />
+    <link rel="stylesheet" href="styles/components/notify.css" />
+    <link rel="stylesheet" href="styles/components/loader.css" />
+    <link rel="stylesheet" href="styles/components/openedapps.css" />
+    <link rel="stylesheet" href="styles/apps/filesystem.css" />
+    <link rel="stylesheet" href="styles/components/prompts.css" />
+    <link rel="stylesheet" href="styles/components/power.css" />
+    <link rel="stylesheet" href="styles/apps/installer.css" />
+    <link rel="stylesheet" href="styles/components/notificationCenter.css" />
   </head>
 
   <body
     onmousedown="mouseDown()"
     onmouseup="mouseUp()"
-    onload="onloadscripst();"
-    id="body"
+    onload="onloadscript();"
   >
     <div class="filter"></div>
     <div class="connection-lost-element" style="display: none">
@@ -147,7 +167,7 @@
     <div id="secondcursor" class="secondcursor"></div>
     <!-- Loader -->
     <div class="loading" oncontextmenu="return false;">
-      <div class="containersadsdsad">
+      <div class="loadingcontain">
         <div class="asdasdasd item-1"></div>
         <div class="asdasdasd item-2"></div>
         <div class="asdasdasd item-3"></div>
@@ -181,7 +201,7 @@
       StartMenu.load();
     </script>
     <script type="text/javascript">
-      async function onloadscripst() {
+      async function onloadscript() {
         if (!Boot.safeBoot) {
           Updates.detect();
           CustomApp.load();
@@ -282,7 +302,7 @@
           <div class="inner-box">
             <p class="message-box">Error</p>
             <input type="text" class="input-box" placeholder="Odpověď" />
-            <button class="submit-box" onclick="submitMessage()">
+            <button class="submit-box" onclick="BPrompt.submitMessage()">
               Odeslat
             </button>
           </div>
@@ -295,13 +315,13 @@
             <p class="message-box-confirm">Error</p>
             <button
               class="submit-box-confirm submit-box-confirm-left"
-              onclick="submitConfirm(true)"
+              onclick="BPrompt.submitConfirm(true)"
             >
               Ano
             </button>
             <button
               class="submit-box-confirm submit-box-confirm-right"
-              onclick="submitConfirm(false)"
+              onclick="BPrompt.submitConfirm(false)"
             >
               Ne
             </button>
@@ -328,7 +348,7 @@
           <div class="inner-box">
             <p class="message-box-list">Error</p>
             <select class="list-input-box"></select>
-            <button class="submit-box-list" onclick="submitList(true)">
+            <button class="submit-box-list" onclick="BPrompt.submitList(true)">
               Ano
             </button>
           </div>
@@ -379,34 +399,40 @@
       </div>
       <!--FullScreen Elements End-->
 
-      <div hidden class="koks windowedmtjhjass" style="display: none"></div>
+      <div hidden class="koks winselected" style="display: none"></div>
       <div class="oknadisplaynone" style="display: none; visibility: hidden">
-        <div
-          onclick="changewindowmain(this);"
-          class="widgetList poznamky Resizabl resizable"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this);" class="poznamky">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Poznámky</span>
               <div
-                onclick="windows.close(this, 'poznamky')"
+                onclick="windows.close(this, 'poznamky', event)"
                 class="close"
               ></div>
-              <div onclick="windows.mini(this, 'poznamky')" class="mini"></div>
+              <div
+                onclick="windows.mini(this, 'poznamky', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
-          <textarea id="asldslk" onkeyup="Poznamky.keypress(this)"></textarea>
+          <textarea
+            id="notesinput"
+            onkeyup="Poznamky.keypress(this)"
+          ></textarea>
         </div>
 
-        <div
-          onclick="changewindowmain(this);"
-          class="widgetList kalkulacka Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this);" class="kalkulacka">
+          <div class="window-header">
             <div class="headerclass">
               <span>Kalkulačka</span>
-              <div onclick="windows.close(this, 'kalk')" class="close"></div>
-              <div onclick="windows.mini(this, 'kalk')" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'kalk', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'kalk', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <div class="conatainer" style="height: calc(100% - 20px)">
@@ -415,8 +441,7 @@
                 style="width: calc(100% - 7px); height: 100%"
                 type="text"
                 name="text"
-                id="screen"
-                class="jgahsdkga"
+                class="calcinput"
                 readonly
               />
             </form>
@@ -426,28 +451,28 @@
             >
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value=Math.sin(this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value)"
+                onclick="Calculator.sin(this)"
                 class="buttonkalkulacka"
               >
                 Sin
               </button>
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value=Math.cos(this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value)"
+                onclick="Calculator.cos(this)"
                 class="buttonkalkulacka"
               >
                 Cos
               </button>
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value=Math.tan(this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value)"
+                onclick="Calculator.tan(this)"
                 class="buttonkalkulacka"
               >
                 Tan
               </button>
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value=Math.log(this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value)"
+                onclick="Calculator.log(this)"
                 class="buttonkalkulacka"
               >
                 log
@@ -455,21 +480,21 @@
               <br />
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value=Math.pow(this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value,2)"
+                onclick="Calculator.pow(this, 2)"
                 class="buttonkalkulacka"
               >
                 x<sup>2</sup>
               </button>
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value=Math.pow(this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value,3)"
+                onclick="Calculator.pow(this, 3)"
                 class="buttonkalkulacka"
               >
                 x<sup>3</sup>
               </button>
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value=Math.sqrt(this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value,1/2)"
+                onclick="Calculator.sqrt(this)"
                 class="buttonkalkulacka"
                 style="height: 22px; top: -2px; position: relative"
               >
@@ -477,7 +502,7 @@
               </button>
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value=Math.sqrt(this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value,1/3)"
+                onclick="Calculator.cbrt(this)"
                 class="buttonkalkulacka"
                 style="height: 22px; top: -2px; position: relative"
               >
@@ -486,28 +511,28 @@
               <br />
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='1'"
+                onclick="Calculator.push(this)"
                 class="buttonkalkulacka"
               >
                 1
               </button>
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='2'"
+                onclick="Calculator.push(this)"
                 class="buttonkalkulacka"
               >
                 2
               </button>
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='3'"
+                onclick="Calculator.push(this)"
                 class="buttonkalkulacka"
               >
                 3
               </button>
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='*'"
+                onclick="Calculator.push(this)"
                 class="buttonkalkulacka"
               >
                 *
@@ -515,28 +540,28 @@
               <br />
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='4'"
+                onclick="Calculator.push(this)"
                 class="buttonkalkulacka"
               >
                 4
               </button>
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='5'"
+                onclick="Calculator.push(this)"
                 class="buttonkalkulacka"
               >
                 5
               </button>
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='6'"
+                onclick="Calculator.push(this)"
                 class="buttonkalkulacka"
               >
                 6
               </button>
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='-'"
+                onclick="Calculator.push(this)"
                 class="buttonkalkulacka"
               >
                 -
@@ -544,28 +569,28 @@
               <br />
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='7'"
+                onclick="Calculator.push(this)"
                 class="buttonkalkulacka"
               >
                 7
               </button>
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='8'"
+                onclick="Calculator.push(this)"
                 class="buttonkalkulacka"
               >
                 8
               </button>
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='9'"
+                onclick="Calculator.push(this)"
                 class="buttonkalkulacka"
               >
                 9
               </button>
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='.'"
+                onclick="Calculator.push(this)"
                 class="buttonkalkulacka"
               >
                 .
@@ -573,28 +598,28 @@
               <br />
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='+'"
+                onclick="Calculator.push(this)"
                 class="buttonkalkulacka"
               >
                 +
               </button>
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='0'"
+                onclick="Calculator.push(this)"
                 class="buttonkalkulacka"
               >
                 0
               </button>
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='/'"
+                onclick="Calculator.push(this)"
                 class="buttonkalkulacka"
               >
                 /
               </button>
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value+='%'"
+                onclick="Calculator.push(this)"
                 class="buttonkalkulacka"
               >
                 %
@@ -602,76 +627,75 @@
               <br />
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="this.parentElement.parentElement.querySelector('.cacl').querySelector('.jgahsdkga').value=''"
+                onclick="Calculator.clear(this)"
                 class="reset clear buttonkalkulacka"
               >
                 C
               </button>
               <button
                 style="width: calc(100% / 4 - 4px); height: calc(100% / 7)"
-                onclick="del(this.parentElement.parentElement)"
+                onclick="Calculator.del(this.parentElement.parentElement)"
                 class="reset del buttonkalkulacka"
               >
                 DEL
               </button>
               <button
                 style="width: calc(100% / 2 - 4px); height: calc(100% / 7)"
-                onclick="equal(this.parentElement.parentElement)"
+                onclick="Calculator.equal(this.parentElement.parentElement)"
                 class="reset equal buttonkalkulackaeq"
               >
                 =
               </button>
             </div>
           </div>
-          <script>
-            function del(aseutzdgsdfsdf) {
-              var x = aseutzdgsdfsdf.querySelector(".jgahsdkga").value;
-              aseutzdgsdfsdf.querySelector(".jgahsdkga").value = x.substr(
-                0,
-                x.length - 1,
-              );
-            }
-          </script>
         </div>
 
-        <div
-          onclick="changewindowmain(this);"
-          class="widgetList stopky Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this);" class="stopky">
+          <div class="window-header">
             <div class="headerclass">
               <span>Stopky</span>
-              <div onclick="windows.close(this, 'stop')" class="close"></div>
-              <div onclick="windows.mini(this, 'stop')" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'stop', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'stop', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <iframe src="/stopky/" frameborder="0"></iframe>
         </div>
 
-        <div
-          onclick="changewindowmain(this);"
-          id="nas"
-          class="widgetList nastaveni Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this);" id="nas" class="nastaveni">
+          <div class="window-header">
             <div class="headerclass">
               <span>Nastavení</span>
-              <div onclick="windows.close(this, 'nas')" class="close"></div>
-              <div onclick="windows.mini(this, 'nas')" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'nas', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'nas', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <iframe src="/settings/" frameborder="0"></iframe>
         </div>
 
-        <div
-          onclick="changewindowmain(this);"
-          class="widgetList browser Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this);" class="browser">
+          <div class="window-header">
             <div class="headerclass">
               <span>Prohlížeč</span>
-              <div onclick="windows.close(this, 'brow')" class="close"></div>
-              <div onclick="windows.mini(this, 'brow')" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'brow', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'brow', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <div class="controls">
@@ -714,15 +738,18 @@
           ></webview>
         </div>
 
-        <div
-          onclick="changewindowmain(this);"
-          class="widgetList updateklind Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this);" class="updateklind">
+          <div class="window-header">
             <div class="headerclass">
               <span>Aktualizace</span>
-              <div onclick="windows.close(this, 'update')" class="close"></div>
-              <div onclick="windows.mini(this, 'update')" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'update', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'update', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <h1>Branch</h1>
@@ -738,15 +765,18 @@
           <button onclick="Updates.start(this)">Aktualizovat</button>
         </div>
 
-        <div
-          onclick="changewindowmain(this);"
-          class="widgetList informationklindows Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this);" class="informationklindows">
+          <div class="window-header">
             <div class="headerclass">
               <span>Informace</span>
-              <div onclick="windows.close(this, 'info')" class="close"></div>
-              <div onclick="windows.mini(this, 'info')" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'info', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'info', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <span>Verze KLIND OS: </span><span id="versionwrite">unknown</span
@@ -779,30 +809,39 @@
           ><br />
         </div>
 
-        <div
-          onclick="changewindowmain(this);"
-          class="widgetList terminal Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this);" class="terminal">
+          <div class="window-header">
             <div class="headerclass">
               <span>Terminál</span>
-              <div onclick="windows.close(this, 'ter')" class="close"></div>
-              <div onclick="windows.mini(this, 'ter')" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'ter', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'ter', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <iframe src="ter"></iframe>
         </div>
 
         <div
-          onclick="changewindowmain(this);"
-          class="widgetList napoveda Resizabl"
+          onclick="ZIndexer.focus(this);"
+          class="napoveda"
           style="position: absolute"
         >
-          <div class="widget-header">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">KLIND OS | Nápověda</span>
-              <div onclick="windows.close(this, 'nap')" class="close"></div>
-              <div onclick="windows.mini(this, 'nap')" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'nap', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'nap', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <h1>Zkratky:</h1>
@@ -814,72 +853,84 @@
           </ul>
         </div>
 
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList kalendar Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="kalendar">
+          <div class="window-header">
             <div class="headerclass">
               <span>Kalendář</span>
-              <div onclick="windows.close(this, 'kalen')" class="close"></div>
-              <div onclick="windows.mini(this, 'kalen')" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'kalen', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'kalen', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <iframe class="innerIframe" src="calendar" frameborder="0"></iframe>
         </div>
 
-        <div onclick="changewindowmain(this)" class="widgetList budik Resizabl">
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="budik">
+          <div class="window-header">
             <div class="headerclass">
               <span>Budík</span>
-              <div onclick="windows.close(this, 'budik')" class="close"></div>
-              <div onclick="windows.mini(this, 'budik')" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'budik', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'budik', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <iframe class="innerIframe" src="budik" frameborder="0"></iframe>
         </div>
 
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList record Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="record">
+          <div class="window-header">
             <div class="headerclass">
               <span>Nahrávání</span>
-              <div onclick="windows.close(this, 'record')" class="close"></div>
-              <div onclick="windows.mini(this, 'record')" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'record', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'record', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <iframe src="/record/"></iframe>
         </div>
 
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList faceset Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="faceset">
+          <div class="window-header">
             <div class="headerclass">
               <span>Nastavení rozpoznávání obličeje</span>
-              <div onclick="windows.close(this, 'faceset')" class="close"></div>
-              <div onclick="windows.mini(this, 'faceset')" class="mini"></div>
-            </div>
-          </div>
-          <iframe class="facesetiframe" src="faceinstall.html"></iframe>
-        </div>
-
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList filemanager Resizabl"
-        >
-          <div class="widget-header">
-            <div class="headerclass">
-              <span>Správce Souborů</span>
               <div
-                onclick="windows.close(this, 'filemanager')"
+                onclick="windows.close(this, 'faceset', event)"
                 class="close"
               ></div>
               <div
-                onclick="windows.mini(this, 'filemanager')"
+                onclick="windows.mini(this, 'faceset', event)"
+                class="mini"
+              ></div>
+            </div>
+          </div>
+          <iframe class="facesetiframe" src="/faceinstall"></iframe>
+        </div>
+
+        <div onclick="ZIndexer.focus(this)" class="filemanager">
+          <div class="window-header">
+            <div class="headerclass">
+              <span>Správce Souborů</span>
+              <div
+                onclick="windows.close(this, 'filemanager', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'filemanager', event)"
                 class="mini"
               ></div>
             </div>
@@ -891,15 +942,12 @@
           ></iframe>
         </div>
 
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList fileproperties Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="fileproperties">
+          <div class="window-header">
             <div class="headerclass">
               <span>Vlastnosti souboru</span>
               <div
-                onclick="windows.close(this, 'fileproperties')"
+                onclick="windows.close(this, 'fileproperties', event)"
                 class="close"
               ></div>
             </div>
@@ -910,11 +958,8 @@
           <p>Umístění: <span id="filelocation">error</span></p>
         </div>
 
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList fileeditor Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="fileeditor">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Soubor</span>
               <div
@@ -930,11 +975,11 @@
                 Nastavit jako pozadí
               </div>
               <div
-                onclick="windows.close(this, 'fileeditor')"
+                onclick="windows.close(this, 'fileeditor', event)"
                 class="close"
               ></div>
               <div
-                onclick="windows.mini(this, 'fileeditor')"
+                onclick="windows.mini(this, 'fileeditor', event)"
                 class="mini"
               ></div>
             </div>
@@ -955,15 +1000,18 @@
           </div>
         </div>
 
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList zdroje Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="zdroje">
+          <div class="window-header">
             <div class="headerclass">
               <span>Zdroje</span>
-              <div onclick="windows.close(this, 'zdroje')" class="close"></div>
-              <div onclick="windows.mini(this, 'zdroje')" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'zdroje', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'zdroje', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <h1>Zdroje</h1>
@@ -989,12 +1037,18 @@
             >
           </p>
         </div>
-        <div onclick="changewindowmain(this)" class="widgetList about Resizabl">
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="about">
+          <div class="window-header">
             <div class="headerclass">
               <span>O KLIND OS</span>
-              <div onclick="windows.close(this, 'about')" class="close"></div>
-              <div onclick="windows.mini(this, 'about')" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'about', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'about', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <h1>O KLIND OS</h1>
@@ -1062,19 +1116,16 @@
             Made with hate and suffering by Jakub Žitník in the Czech Republic.
           </p>
         </div>
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList installapp Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="installapp">
+          <div class="window-header">
             <div class="headerclass">
               <span>Instalátor aplikací</span>
               <div
-                onclick="windows.close(this, 'installapp')"
+                onclick="windows.close(this, 'installapp', event)"
                 class="close"
               ></div>
               <div
-                onclick="windows.mini(this, 'installapp')"
+                onclick="windows.mini(this, 'installapp', event)"
                 class="mini"
               ></div>
             </div>
@@ -1096,10 +1147,7 @@
           </header>
           <div class="allapps"></div>
         </div>
-        <div
-          class="widgetList audioLevelEditor"
-          onclick="changewindowmain(this)"
-        >
+        <div class="audioLevelEditor" onclick="ZIndexer.focus(this)">
           <div>
             <div>
               <div></div>
@@ -1128,15 +1176,18 @@
             </div>
           </div>
         </div>
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList procesy Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="procesy">
+          <div class="window-header">
             <div class="headerclass">
               <span>Správce úloh</span>
-              <div onclick="windows.close(this, 'procesy')" class="close"></div>
-              <div onclick="windows.mini(this, 'procesy')" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'procesy', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'procesy', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <header>
@@ -1168,49 +1219,46 @@
             <div class="procesyProcesyContent"></div>
           </div>
         </div>
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList viewtext Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="viewtext">
+          <div class="window-header">
             <div class="headerclass">
               <span>TextView</span>
               <div
-                onclick="windows.close(this, 'viewtext')"
+                onclick="windows.close(this, 'viewtext', event)"
                 class="close"
               ></div>
             </div>
           </div>
           <textarea></textarea>
         </div>
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList musicplayer Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="musicplayer">
+          <div class="window-header">
             <div class="headerclass">
               <span>Přehrávač hudby</span>
               <div
-                onclick="windows.close(this, 'viewtext')"
+                onclick="windows.close(this, 'viewtext', event)"
                 class="close"
               ></div>
               <div
-                onclick="windows.mini(this, 'musicplayer')"
+                onclick="windows.mini(this, 'musicplayer', event)"
                 class="mini"
               ></div>
             </div>
           </div>
           <iframe></iframe>
         </div>
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList cleaner Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="cleaner">
+          <div class="window-header">
             <div class="headerclass">
               <span>Čistič systému</span>
-              <div onclick="windows.close(this, 'cleaner')" class="close"></div>
-              <div onclick="windows.mini(this, 'cleaner')" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'cleaner', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'cleaner', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
           <button onclick="Cleaner.clean(); Cleaner.load(this.parentElement)">
@@ -1219,11 +1267,8 @@
           <h1>Klíče pro vyčištění:</h1>
           <div class="keys">Prosím počkejte...</div>
         </div>
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList emergencymenu Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="emergencymenu">
+          <div class="window-header">
             <div class="headerclass">
               <span>Emergency Menu</span>
             </div>
@@ -1254,11 +1299,8 @@
             Upravit klíč
           </button>
         </div>
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList wordeditor Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="wordeditor">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Word editor</span>
               <div
@@ -1268,31 +1310,28 @@
                 Uložit
               </div>
               <div
-                onclick="windows.close(this, 'wordeditor')"
+                onclick="windows.close(this, 'wordeditor', event)"
                 class="close"
               ></div>
               <div
-                onclick="windows.mini(this, 'wordeditor')"
+                onclick="windows.mini(this, 'wordeditor', event)"
                 class="mini"
               ></div>
             </div>
           </div>
           <div class="wordeditor-element"></div>
         </div>
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList sheetseditor Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="sheetseditor">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Sheets editor</span>
               <div class="menu filesavefileconfig" id="save-button">Uložit</div>
               <div
-                onclick="windows.close(this, 'sheetseditor')"
+                onclick="windows.close(this, 'sheetseditor', event)"
                 class="close"
               ></div>
               <div
-                onclick="windows.mini(this, 'sheetseditor')"
+                onclick="windows.mini(this, 'sheetseditor', event)"
                 class="mini"
               ></div>
             </div>
@@ -1305,19 +1344,16 @@
           </div>
           <div id="grid-container"></div>
         </div>
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList diskmanager Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="diskmanager">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Správce disků</span>
               <div
-                onclick="windows.close(this, 'sheetseditor')"
+                onclick="windows.close(this, 'sheetseditor', event)"
                 class="close"
               ></div>
               <div
-                onclick="windows.mini(this, 'sheetseditor')"
+                onclick="windows.mini(this, 'sheetseditor', event)"
                 class="mini"
               ></div>
             </div>
@@ -1328,16 +1364,13 @@
           </button>
           <div class="disks"></div>
         </div>
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList getstarted Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="getstarted">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Začínáme s KLIND OS</span>
               <div
                 style="display: none"
-                onclick="windows.close(this, 'getstarted')"
+                onclick="windows.close(this, 'getstarted', event)"
                 class="close"
               ></div>
             </div>
@@ -1517,19 +1550,16 @@
             "
           />
         </div>
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList screenfilter Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="screenfilter">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Úprava obrazu</span>
               <div
-                onclick="windows.close(this, 'screenfilter')"
+                onclick="windows.close(this, 'screenfilter', event)"
                 class="close"
               ></div>
               <div
-                onclick="windows.mini(this, 'screenfilter')"
+                onclick="windows.mini(this, 'screenfilter', event)"
                 class="mini"
               ></div>
             </div>
@@ -1593,19 +1623,16 @@
             </button>
           </div>
         </div>
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList imageeditor Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="imageeditor">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Editor obrázku</span>
               <div
-                onclick="windows.close(this, 'imageeditor')"
+                onclick="windows.close(this, 'imageeditor', event)"
                 class="close"
               ></div>
               <div
-                onclick="windows.mini(this, 'imageeditor')"
+                onclick="windows.mini(this, 'imageeditor', event)"
                 class="mini"
               ></div>
             </div>
@@ -1616,11 +1643,8 @@
             frameborder="0"
           ></iframe>
         </div>
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList printermanager Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="printermanager">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Správce tiskáren CUPS</span>
               <div
@@ -1636,11 +1660,11 @@
                 Manuálně nainstalovat ovladač podle názvu
               </div>
               <div
-                onclick="windows.close(this, 'printermanager')"
+                onclick="windows.close(this, 'printermanager', event)"
                 class="close"
               ></div>
               <div
-                onclick="windows.mini(this, 'printermanager')"
+                onclick="windows.mini(this, 'printermanager', event)"
                 class="mini"
               ></div>
             </div>
@@ -1652,15 +1676,12 @@
             allowpopups
           ></webview>
         </div>
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList packageinstaller Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="packageinstaller">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Instalátor balíčků</span>
               <div
-                onclick="windows.close(this, 'packageinstaller')"
+                onclick="windows.close(this, 'packageinstaller', event)"
                 class="close"
               ></div>
             </div>
@@ -1686,19 +1707,16 @@
             Nainstalovat
           </button>
         </div>
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList inputdevices Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="inputdevices">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Vstupní zvuková zařízení</span>
               <div
-                onclick="windows.close(this, 'inputdevices')"
+                onclick="windows.close(this, 'inputdevices', event)"
                 class="close"
               ></div>
               <div
-                onclick="windows.mini(this, 'inputdevices')"
+                onclick="windows.mini(this, 'inputdevices', event)"
                 class="mini"
               ></div>
             </div>
@@ -1706,37 +1724,46 @@
           <h1>Výchozí vstupní zvukové zařízení</h1>
           <select class="select"></select>
         </div>
-        <div onclick="changewindowmain(this)" class="widgetList logs Resizabl">
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="logs">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Logy</span>
-              <div onclick="windows.close(this, 'logs')" class="close"></div>
-              <div onclick="windows.mini(this, 'logs')" class="mini"></div>
+              <div
+                onclick="windows.close(this, 'logs', event)"
+                class="close"
+              ></div>
+              <div
+                onclick="windows.mini(this, 'logs', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
-          <div class="logsspan"></div>
+          <div class="logsspan innerIframe"></div>
         </div>
-        <div
-          onclick="changewindowmain(this)"
-          class="widgetList nohuplogs Resizabl"
-        >
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="nohuplogs">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">Nohup Logy</span>
               <div
-                onclick="windows.close(this, 'nohuplogs')"
+                onclick="windows.close(this, 'nohuplogs', event)"
                 class="close"
               ></div>
-              <div onclick="windows.mini(this, 'nohuplogs')" class="mini"></div>
+              <div
+                onclick="windows.mini(this, 'nohuplogs', event)"
+                class="mini"
+              ></div>
             </div>
           </div>
-          <div class="logsspan"></div>
+          <div class="logsspan innerIframe"></div>
         </div>
-        <div onclick="changewindowmain(this)" class="widgetList unzip Resizabl">
-          <div class="widget-header">
+        <div onclick="ZIndexer.focus(this)" class="unzip">
+          <div class="window-header">
             <div class="headerclass">
               <span style="float: left">UnZip</span>
-              <div onclick="windows.close(this, 'unzip')" class="close"></div>
+              <div
+                onclick="windows.close(this, 'unzip', event)"
+                class="close"
+              ></div>
             </div>
           </div>
           <h1>Probíhá otevírání ZIP souboru.</h1>
@@ -1748,7 +1775,7 @@
           <span></span>
         </div>
         <div class="openopenedapps" style="display: none; z-index: 500"></div>
-        <div class="oknepatrizde"></div>
+        <div class="oknapatrizde"></div>
         <div class="iconsKLINDOS"></div>
         <div class="notifidiv dnlol">
           <button onclick="closenotifi();">X</button>
@@ -1756,7 +1783,7 @@
           <p id="pnotifi">Error</p>
           <script>
             DesktopIcons.load();
-            dragingikonaklindows();
+            DraggableElements.reloadDesktopIcons();
           </script>
           <script src="getos.js" defer></script>
         </div>
@@ -2292,7 +2319,6 @@
       </div>
     </div>
 
-    <script src="mainfacerec.js"></script>
     <script src="changingz-index.js"></script>
     <script src="audioEditor.js"></script>
     <script src="mouse.js"></script>
@@ -2306,9 +2332,13 @@
       }
 
       StartMenu.Search.load();
+      Battery.load();
+      Login.loadFaceButton();
+
+      if (window.location.pathname == "/index.html")
+        window.location.replace("..");
     </script>
     <script src="getstartedfunctions.js"></script>
-    <script src="battery.js"></script>
     <script src="windowanimation.js"></script>
     <script src="click.js"></script>
   </body>

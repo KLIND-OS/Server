@@ -3,7 +3,7 @@ window.onkeydown = (e) => {
   keysDown.add(e.key);
   Shortcuts._handleKeypress(keysDown);
 };
-window.onkeyup = (e) => {
+window.onkeyup = () => {
   // keysDown.delete(e.key);
   keysDown.clear();
 };
@@ -24,9 +24,9 @@ class Shortcuts {
     new Shortcut(["AltGraph", "h"], () => windows.open("nap")),
     new Shortcut(["AltGraph", "`"], () => windows.open("nap")),
     new Shortcut(["Alt", "F4"], () => {
-      if (!openedwindowindex) return;
+      if (!ZIndexer.current) return;
 
-      const closeButton = openedwindowindex.querySelector(
+      const closeButton = ZIndexer.current.querySelector(
         ".headerclass .close",
       );
       if (!closeButton) return;
@@ -51,22 +51,23 @@ class Shortcuts {
     new Shortcut(["AltGraph", "f"], () => ColorFilters.deactivateAll()),
     new Shortcut(["AltGraph", "["], () => ColorFilters.deactivateAll()),
     new Shortcut(["Alt", "ArrowUp"], () => {
-      if (!openedwindowindex) return;
-      windowSizing.full(openedwindowindex);
+      if (!ZIndexer.current) return;
+      DraggableElements.windowSizing.full(ZIndexer.current);
     }),
     new Shortcut(["Alt", "ArrowRight"], () => {
-      if (!openedwindowindex) return;
-      windowSizing.right(openedwindowindex);
+      if (!ZIndexer.current) return;
+      DraggableElements.windowSizing.right(ZIndexer.current);
     }),
     new Shortcut(["Alt", "ArrowLeft"], () => {
-      if (!openedwindowindex) return;
-      windowSizing.left(openedwindowindex);
+      if (!ZIndexer.current) return;
+      DraggableElements.windowSizing.left(ZIndexer.current);
     }),
     new Shortcut(["Alt", "ArrowDown"], () => {
-      if (!openedwindowindex) return;
-      windowSizing.defaultNonEvent(openedwindowindex, 15, 15);
+      if (!ZIndexer.current) return;
+      DraggableElements.windowSizing.defaultNonEvent(ZIndexer.current, 15, 15);
     }),
   ];
+
   static windowShortcutList = {
     fileeditor: [
       new Shortcut(["Control", "s"], (win) => {
@@ -88,8 +89,8 @@ class Shortcuts {
       }
     }
 
-    if (!openedwindowindex) return;
-    const className = openedwindowindex.classList[1];
+    if (!ZIndexer.current) return;
+    const className = ZIndexer.current.classList[0];
     const location = windows.list.classes.indexOf(`.${className}`);
     const windowName = windows.list.names[location];
     const windowShortcuts = this.windowShortcutList[windowName];
@@ -99,7 +100,7 @@ class Shortcuts {
     for (const shortcut of windowShortcuts) {
       const needPress = new Set(shortcut.keys);
       if (this._eqSet(keysDown, needPress)) {
-        shortcut.exec(openedwindowindex);
+        shortcut.exec(ZIndexer.current);
         return;
       }
     }

@@ -1,0 +1,13 @@
+.stopky {
+  background-color: white;
+  min-width: 324px;
+  min-height: 140px;
+  height: 140px;
+  position: absolute !important;
+  overflow: hidden;
+}
+
+.stopky iframe {
+  width: 100%;
+  height: calc(100% - 20px);
+}
