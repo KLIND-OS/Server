@@ -1,36 +1,35 @@
 function fixWindow() {
   var x = document.querySelectorAll(".window");
   for (i = 0; i < x.length; i++) {
-    var rect = x[i].getBoundingClientRect();
+    let rect = x[i].getBoundingClientRect();
+    let sirka;
+    let vyska;
+
     if (x[i].style.left == "") {
-      var sirka = rect.left + x[i].offsetWidth;
-    }
-    else {
-      var sirka = parseInt(x[i].style.left.replace("px", "")) + x[i].offsetWidth;
+      sirka = rect.left + x[i].offsetWidth;
+    } else {
+      sirka = parseInt(x[i].style.left.replace("px", "")) + x[i].offsetWidth;
     }
     if (x[i].style.top == "") {
-      var vyska = rect.top + x[i].offsetHeight;
+      vyska = rect.top + x[i].offsetHeight;
+    } else {
+      vyska = parseInt(x[i].style.top.replace("px", "")) + x[i].offsetHeight;
     }
-    else {
-      var vyska = parseInt(x[i].style.top.replace("px", "")) + x[i].offsetHeight;
-    }
+
     if (sirka > window.innerWidth) {
       if (window.innerWidth - x[i].offsetWidth > -1) {
         x[i].style.left = window.innerWidth - x[i].offsetWidth + "px";
-      }
-      else {
+      } else {
         x[i].style.left = "0px";
       }
     }
     if (vyska > window.innerHeight) {
       if (window.innerHeight - x[i].offsetHeight > -1) {
         x[i].style.top = window.innerHeight - x[i].offsetHeight + "px";
-      }
-      else {
+      } else {
         x[i].style.top = "0px";
       }
-    }
-    else {
+    } else {
       if (rect.left < 0) {
         x[i].style.left = "0px";
       }
@@ -41,18 +40,18 @@ function fixWindow() {
   }
   x = document.querySelectorAll(".ikonaklindows");
   for (i = 0; i < x.length; i++) {
-    var rect = x[i].getBoundingClientRect();
+    let rect = x[i].getBoundingClientRect();
+    let sirka;
     if (x[i].style.left == "") {
-      var sirka = rect.left + x[i].offsetWidth;
+      sirka = rect.left + x[i].offsetWidth;
+    } else {
+      sirka = parseInt(x[i].style.left.replace("px", "")) + x[i].offsetWidth;
     }
-    else {
-      var sirka = parseInt(x[i].style.left.replace("px", "")) + x[i].offsetWidth;
-    }
+    let vyska;
     if (x[i].style.top == "") {
-      var vyska = rect.top + x[i].offsetHeight;
-    }
-    else {
-      var vyska = parseInt(x[i].style.top.replace("px", "")) + x[i].offsetHeight;
+      vyska = rect.top + x[i].offsetHeight;
+    } else {
+      vyska = parseInt(x[i].style.top.replace("px", "")) + x[i].offsetHeight;
     }
     if (sirka > window.innerWidth) {
       x[i].style.left = "0px";
@@ -61,8 +60,7 @@ function fixWindow() {
     if (vyska > window.innerHeight) {
       x[i].style.left = "0px";
       x[i].style.top = "0px";
-    }
-    else {
+    } else {
       if (rect.left < 0) {
         x[i].style.left = "0px";
         x[i].style.top = "0px";
@@ -80,9 +78,5 @@ function fixWindow() {
     localStorage.setItem("desktop-icons", JSON.stringify(array));
   }
 }
-window.addEventListener("resize", function () {
-  fixWindow();
-});
-setInterval(() => {
-  fixWindow();
-}, 3000);
+window.addEventListener("resize", fixWindow);
+setInterval(fixWindow, 3000);

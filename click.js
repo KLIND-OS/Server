@@ -29,7 +29,7 @@ const startmenu = new ContextMenu(undefined, [
       .replace("windows.open(", "")
       .replace(")", "")
       .replaceAll("'", "")
-      .replaceAll('"', "")
+      .replaceAll("\"", "")
       .replaceAll(";", "");
     mainFileManager.createAppShortCut(app, name);
     windows.open("filemanager");

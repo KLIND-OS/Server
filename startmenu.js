@@ -108,11 +108,12 @@ class StartMenu {
         }
       }
       if (!isShowed) {
+        let showInputValue;
         if (input.value.length > 20) {
-          var showInputValue =
+          showInputValue =
             input.value.split("", 20).join("").trim() + "...";
         } else {
-          var showInputValue = input.value;
+          showInputValue = input.value;
         }
         ul.querySelector(".searchHelpLi #searchHelpText").textContent =
           showInputValue;

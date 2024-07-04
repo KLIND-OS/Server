@@ -10,7 +10,9 @@ class Connection {
             try {
               document.getElementById("internetnoicon").style.display = "none";
               document.getElementById("intrnetyesicon").style.display = "block";
-            } catch {}
+            } catch {
+              // Catch error
+            }
             Connection.connected = true;
           } else {
             offline();
@@ -26,11 +28,15 @@ class Connection {
         try {
           document.getElementById("internetnoicon").style.display = "block";
           document.getElementById("intrnetyesicon").style.display = "none";
-        } catch {}
+        } catch {
+          // Catch error
+        }
       }
       setInterval(() => {
         ajax();
       }, 10000);
-    } catch {}
+    } catch {
+      // Catch error
+    }
   }
 }
