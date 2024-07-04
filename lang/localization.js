@@ -18,7 +18,11 @@ class Localization {
   }
 
   static getString(x) {
-    return this._strings[x];
+    const value = this._strings[x];
+    if (!value) {
+      console.error("Invalid key:", x);
+    }
+    return value;
   }
   static loadDOM() {
     // I know, I know, this is shit. But like I don't want to have any localization tool for this.
@@ -33,10 +37,7 @@ class Localization {
     allElements.forEach((element) => {
       const contents = [
         [element.innerHTML, (data) => (element.innerHTML = data)],
-        [
-          element.placeholder,
-          (data) => element.placeholder = data,
-        ],
+        [element.placeholder, (data) => (element.placeholder = data)],
       ];
 
       for (const content of contents) {
@@ -59,7 +60,7 @@ class Localization {
         const value = this.getString(parsed);
 
         if (!value) {
-          return console.error("Invalid key:", parsed);
+          return;
         }
 
         content[1](value);

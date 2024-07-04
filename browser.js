@@ -12,7 +12,7 @@ class Browser {
     ) {
       const browerr = win.querySelector(".browerr");
       browerr.querySelector("#errorcodebrow").textContent = 0;
-      browerr.querySelector("#errornamebrow").textContent = "This website is blocked!";
+      browerr.querySelector("#errornamebrow").textContent = Localization.getString("this_website_blocked");
       browerr.style.display = "block";
       return;
     }
