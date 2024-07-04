@@ -1165,15 +1165,30 @@
           </header>
           <div class="infoProcesy">
             <div class="processor">
-              <h1>Procesor</h1>
-              <p>Jméno: <span class="processorname">Načítání...</span></p>
-              <p>Využití: <span class="processorusage">Načítání...</span></p>
+              <h1>$[processor];</h1>
+              <p>
+                <span>$[name];</span>:
+                <span class="processorname">$[loading];</span>
+              </p>
+              <p>
+                <span>$[usage];</span>:
+                <span class="processorusage">$[loading];</span>
+              </p>
             </div>
             <div class="memory">
-              <h1>RAM</h1>
-              <p>Celkem: <span class="memorytotal">Načítáni...</span></p>
-              <p>Volná: <span class="memoryfree">Načítání...</span></p>
-              <p>Využití: <span class="memoryused">Načítání</span></p>
+              <h1>$[ram];</h1>
+              <p>
+                <span>$[total];</span>:
+                <span class="memorytotal">$[loading];</span>
+              </p>
+              <p>
+                <span>$[free];</span>:
+                <span class="memoryfree">$[loading];</span>
+              </p>
+              <p>
+                <span>$[usage];</span>:
+                <span class="memoryused">$[loading];</span>
+              </p>
             </div>
           </div>
           <div class="procesyProcesy" style="display: none">
@@ -1195,7 +1210,7 @@
         <div onclick="ZIndexer.focus(this)" class="musicplayer">
           <div class="window-header">
             <div class="headerclass">
-              <span>Přehrávač hudby</span>
+              <span>$[music_player];</span>
               <div
                 onclick="windows.close(this, 'viewtext', event)"
                 class="close"
@@ -1211,7 +1226,7 @@
         <div onclick="ZIndexer.focus(this)" class="cleaner">
           <div class="window-header">
             <div class="headerclass">
-              <span>Čistič systému</span>
+              <span>$[system_cleaner];</span>
               <div
                 onclick="windows.close(this, 'cleaner', event)"
                 class="close"
@@ -1223,9 +1238,9 @@
             </div>
           </div>
           <button onclick="Cleaner.clean(); Cleaner.load(this.parentElement)">
-            Vyčistit
+            $[clean];
           </button>
-          <h1>Klíče pro vyčištění:</h1>
+          <h1><span>$[keys_to_clean];</span>:</h1>
           <div class="keys">Prosím počkejte...</div>
         </div>
         <div onclick="ZIndexer.focus(this)" class="emergencymenu">
@@ -1234,41 +1249,25 @@
               <span>Emergency Menu</span>
             </div>
           </div>
-          <h1>Nouzové menu</h1>
-          <p>Váš systém byl spuštěn v nouzovém módu!</p>
-          <p style="color: red">
-            Tento mód nepoužívejte pokud nechcete opravit systém.
-          </p>
-          <h2>Užitečné funkce</h2>
-          <h3>Hlavní</h3>
+          <h1>$[emergency_menu];</h1>
+          <p>$[system_in_emergency_mode];</p>
+          <h2>$[usefull_tools];</h2>
+          <h3>$[main];</h3>
           <button
             onclick="document.querySelector('.downbar').style.display = 'block'"
           >
-            Zobrazit spodní lištu
-          </button>
-          <button onclick="window.location.reload()">Restartovat systém</button>
-          <button onclick="resetklindows()">
-            Resetovat systém do továrního nastavení (smaže všechny data)
-          </button>
-          <h3>Data</h3>
-          <button onclick="alert(Object.keys(localStorage).join('\n'))">
-            Zobrazit všechny klíče
-          </button>
-          <button
-            onclick="localStorage.setItem(prompt('Klíč který chcete upravit'),prompt('Zadejte novou hodnotu'))"
-          >
-            Upravit klíč
+            $[show_downbar];
           </button>
         </div>
         <div onclick="ZIndexer.focus(this)" class="wordeditor">
           <div class="window-header">
             <div class="headerclass">
-              <span style="float: left">Word editor</span>
+              <span style="float: left">$[text_editor];</span>
               <div
                 onclick="WordEditor.save(this.parentElement.parentElement.parentElement)"
                 class="menu filesavefileconfig"
               >
-                Uložit
+                $[save];
               </div>
               <div
                 onclick="windows.close(this, 'wordeditor', event)"
@@ -1285,8 +1284,8 @@
         <div onclick="ZIndexer.focus(this)" class="sheetseditor">
           <div class="window-header">
             <div class="headerclass">
-              <span style="float: left">Sheets editor</span>
-              <div class="menu filesavefileconfig" id="save-button">Uložit</div>
+              <span style="float: left">$[table_editor];</span>
+              <div class="menu filesavefileconfig" id="save-button">$[save];</div>
               <div
                 onclick="windows.close(this, 'sheetseditor', event)"
                 class="close"
