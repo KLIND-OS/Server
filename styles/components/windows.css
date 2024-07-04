@@ -79,6 +79,10 @@
   border-radius: 0;
 }
 
+.window[isfullscreen="true"] .headerclass .close {
+  border-top-right-radius: 0;
+}
+
 body:not(.disablewindowanimation)
   .window:hover:not(.winselected):not([isfullscreen="true"]) {
   scale: 1.02 !important;
