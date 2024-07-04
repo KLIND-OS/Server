@@ -1,12 +1,13 @@
 .audioLevelEditor {
-  background-color: white;
-  position: absolute !important;
-  width: 300px;
-  height: 110px;
-  bottom: 65px;
-  right: 125px;
-  left: auto;
-  top: auto;
+  /* !important hell right here */
+  width: 300px!important;
+  height: 110px!important;
+  bottom: 65px!important;
+  right: 125px!important;
+  top: unset!important;
+  left: unset!important;
+  min-height: unset!important;
+  min-width: unset!important;
 }
 
 .audioLevelEditor .slidecontainer {
