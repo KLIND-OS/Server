@@ -5,8 +5,15 @@ class ZIndexer {
   static focus(win, nomove = false) {
     if (ZIndexer.current && ZIndexer.current.isEqualNode(win)) return;
 
+    if (!nomove) {
+      const shadow = windows.shadowDom;
 
-    if (!nomove) document.querySelector(".oknapatrizde").appendChild(win);
+      const oldFocusedSlot = shadow.lastChild;
+      const thisWindowSlot = win.assignedSlot;
+
+      oldFocusedSlot.assignedNodes()[0].slot = thisWindowSlot.name;
+      win.slot = oldFocusedSlot.name;
+    }
 
     setTimeout(() => {
       ZIndexer.current = win;
