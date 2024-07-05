@@ -270,4 +270,13 @@
   window_preview_message: "Tato funkce je zatím ve vývoji. Pokud chcete aby když najedete myší na ikonku minimalizovaného okna, ukázal se náhled?",
   automatically_hide: "Automaticky schovat",
   dont_hide: "Neschovávát",
+  name_change: "Změna jména",
+  password_change: "Změna hesla",
+  profile_picture_change: "Změna profilovky",
+  name_change_message: "Změňte si uživatelské jméno do KLIND OS. Po změně bude systém restartován.",
+  new_username: "Nové uživatelské jméno",
+  password_change_message: "Změňte si heslo do KLIND OS. Po změně bude systém restartován.",
+  new_password: "Nové heslo",
+  profile_picture_change_message: "Změňte si profilovku do KLIND OS. Po změně bude systém restartován. Vyberte cestu obrázk, který máte v správci souborů. Ponechte prázdné pro výchozí ikonku.",
+  new_profile_picture_path: "Cesta nové profilovky",
 }

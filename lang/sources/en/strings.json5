@@ -270,4 +270,13 @@
   window_preview_message: "This feature is still under development. If you want a preview to appear when you move the mouse over the minimized window icon?",
   automatically_hide: "Automatically hide",
   dont_hide: "Don't hide",
+  name_change: "Name change",
+  password_change: "Password change",
+  profile_picture_change: "Profile picture change",
+  name_change_message: "Change your username to KLIND OS. After the change, the system will be restarted.",
+  new_username: "New username",
+  password_change_message: "Change your password to KLIND OS. After the change, the system will be restarted.",
+  new_password: "New password",
+  profile_picture_change_message: "Change your profile to KLIND OS. After the change, the system will be restarted. Select the path of the image you have in the file manager. Leave blank for default icon.",
+  new_profile_picture_path: "New profile picture path",
 }
