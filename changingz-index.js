@@ -6,13 +6,13 @@ class ZIndexer {
     if (ZIndexer.current && ZIndexer.current.isEqualNode(win)) return;
 
     if (!nomove) {
-      const shadow = windows.shadowDom;
-
-      const oldFocusedSlot = shadow.lastChild;
       const thisWindowSlot = win.assignedSlot;
 
-      oldFocusedSlot.assignedNodes()[0].slot = thisWindowSlot.name;
-      win.slot = oldFocusedSlot.name;
+      const newSlotName = windows._createSlot();
+
+      win.slot = newSlotName;
+
+      thisWindowSlot.remove();
     }
 
     setTimeout(() => {

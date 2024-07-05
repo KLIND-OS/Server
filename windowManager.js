@@ -604,7 +604,14 @@ var windows = {
       .attachShadow({ mode: "open" });
     windows.shadowDom = shadowDom;
   },
+  _createSlot: () => {
+    const slot = document.createElement("slot");
+    const name = "winslotid-" + ++windows.lastSlotId;
+    slot.name = name;
+    windows.shadowDom.appendChild(slot);
 
+    return name;
+  },
   open: (name, args) => {
     var location = windows.list.names.indexOf(name);
     var classofelement = windows.list.classes[location];
@@ -626,11 +633,7 @@ var windows = {
       newelement.style.scale = "0.9";
       newelement.setAttribute("name", name);
 
-      const slot = document.createElement("slot");
-      slot.name = "" + ++windows.lastSlotId;
-      windows.shadowDom.appendChild(slot);
-
-      newelement.slot = "" + windows.lastSlotId;
+      newelement.slot = windows._createSlot();
 
       document.querySelector(".oknapatrizde").appendChild(newelement);
       DraggableElements.reload();
