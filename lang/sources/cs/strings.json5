@@ -132,7 +132,7 @@
   app: "Aplikace",
   getstarted_app: "Takhle vypadají aplikace. V horní liště máš název aplikace a popřípadě nějaká tlačítka. Vpravo nahoře máš tlačítko na zavření a popřípadě na minimalizaci.",
   moving_window: "Posouvání okna",
-  getstarted_movingwindow: "S oknem můžeš posouvat kdekoliv na obrazovce potažením lišty."
+  getstarted_movingwindow: "S oknem můžeš posouvat kdekoliv na obrazovce potažením lišty.",
   window_minimizing: "Minimalizace okna",
   getstarted_windowminimizing: "Při minimalizaci okna se ti ikona okna zobrazí na spodní liště.",
   window_minimized_open: "Otevření minimalizovaného okna",
@@ -148,7 +148,7 @@
   hue_rotate: "Otočit odstín",
   invert_colors: "Převrátit barvy",
   saturate: "Saturace",
-  sepia: "Sépie"
+  sepia: "Sépie",
   grayscale: "Černo-bílé",
   brightness_filter_help: "Hodnota jasu je v procentech. Od 0% do 1000%. 100% je výchozí hodnota.",
   contrast_filter_help: "Hodnota kontrastu je v procentech. Od 0% do 500%. 100% je výchozí hodnota.",
