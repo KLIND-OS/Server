@@ -72,7 +72,7 @@ var appsopened = {
       }
       element.innerHTML = innerHTMLvalue;
     } else {
-      element.innerHTML = "Nejsou otevřené žádné okna";
+      element.innerHTML = Localization.getString("no_opened_windows");
     }
     appsopened.oppened = true;
     element.style.display = "block";

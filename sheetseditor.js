@@ -96,7 +96,7 @@ class SheetsEditor {
       function getColumnName(colCount) {
         if (colCount > 702) {
           spawnNotification(
-            "Sheets editor",
+            Localization.getString("table_editor"),
             "You're fucking dumbass. I HATE YOU",
           );
           return "dumbass";

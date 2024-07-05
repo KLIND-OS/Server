@@ -20,14 +20,19 @@ class WordEditor {
       }
     } else {
       BPrompt.confirm(
-        "Soubor musí být převeden do formátu HTML aby se mohl uložit. Chcete pokračovat?",
+        Localization.getString("convert_to_html"),
         async (reponse) => {
           if (reponse) {
             await mainFileManager.createFile({
               name: filename + ".html",
               parentFolder: directory,
             });
-            await mainFileManager.save(fileLocation + ".html", content, undefined, "utf8");
+            await mainFileManager.save(
+              fileLocation + ".html",
+              content,
+              undefined,
+              "utf8",
+            );
           }
         },
       );

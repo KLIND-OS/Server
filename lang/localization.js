@@ -68,3 +68,5 @@ class Localization {
     });
   }
 }
+
+window.Localization = Localization;

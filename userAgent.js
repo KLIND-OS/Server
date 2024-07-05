@@ -21,7 +21,7 @@ class UserAgent {
     if (browser != "chrome" && developermode != "true") {
       error(
         "0x0000005",
-        "Nepodporovaný prohlížeč. Zkuste chrome",
+        "Unsupported browser",
         "KLIND OS | Load",
       );
     }
