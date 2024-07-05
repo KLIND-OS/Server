@@ -1,32 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Motiv</title>
     <style>
-        :root {
-            --pocet: 3;
-            --spanvalue: 1;
-        }
+      :root {
+        --pocet: 3;
+        --spanvalue: 1;
+      }
     </style>
-    <link rel="stylesheet" href="./../style.css">
+    <link rel="stylesheet" href="./../style.css" />
     <script src="./../mouse.js" defer></script>
     <script src="/isiframe.js"></script>
     <script>
-        function submit() {
-          parent.LowLevelApi.Debugging.getRootAccess();
-          parent.spawnNotification("Root Access", "Přístup byl udělen!");
-        }
+      function submit() {
+        parent.LowLevelApi.Debugging.getRootAccess();
+        parent.spawnNotification(
+          "Root Access",
+          parent.Localization.getString("root_granted"),
+        );
+      }
     </script>
-</head>
-<body onmouseup="mouseUp()" onmousedown="mouseDown()" >
+  </head>
+  <body onmouseup="mouseUp()" onmousedown="mouseDown()">
     <div id="firstcursor"></div>
     <div id="secondcursor" class="secondcursor"></div>
-    <div class="button" onclick="window.location.replace('..')"><- Zpět</div>
-    <div class="button nohover"><span>Tato funkce Vám umožní získat přístup do root složky systému.</span></div>
-    <div class="button" onclick="submit()">Spustit</div>
+    <div class="button" onclick="window.location.replace('..')">
+      $[settings_back];
+    </div>
+    <div class="button nohover"><span>$[for_developers_message];</span></div>
+    <div class="button" onclick="submit()">$[run];</div>
     <script src="./../main.js" defer></script>
-</body>
+  </body>
 </html>

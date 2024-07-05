@@ -24,12 +24,12 @@ class Localization {
     }
     return value;
   }
-  static loadDOM() {
+  static loadDOM(x) {
     // I know, I know, this is shit. But like I don't want to have any localization tool for this.
     // I want to have full control over it and also, I didn't find any localization tool for web that whould do exactly this.
     // Probably because this is not the way you do it. But it is OS, not a website.
 
-    const el = document.body;
+    const el = x || document.body;
     const allElements = Array.prototype.slice.call(
       el.getElementsByTagName("*"),
     );
