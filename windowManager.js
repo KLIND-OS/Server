@@ -1,6 +1,8 @@
 var videofileids = [];
 
 var windows = {
+  shadowDom: undefined,
+  lastSlotId: 0,
   list: {
     names: [
       "poznamky",
@@ -595,6 +597,14 @@ var windows = {
     },
     appIds: {},
   },
+
+  load: () => {
+    const shadowDom = document
+      .querySelector(".oknapatrizde")
+      .attachShadow({ mode: "open" });
+    windows.shadowDom = shadowDom;
+  },
+
   open: (name, args) => {
     var location = windows.list.names.indexOf(name);
     var classofelement = windows.list.classes[location];
@@ -615,6 +625,13 @@ var windows = {
       newelement.style.opacity = "0";
       newelement.style.scale = "0.9";
       newelement.setAttribute("name", name);
+
+      const slot = document.createElement("slot");
+      slot.name = "" + ++windows.lastSlotId;
+      windows.shadowDom.appendChild(slot);
+
+      newelement.slot = "" + windows.lastSlotId;
+
       document.querySelector(".oknapatrizde").appendChild(newelement);
       DraggableElements.reload();
       if (
@@ -668,6 +685,7 @@ var windows = {
       el.style.opacity = "0";
 
       setTimeout(() => {
+        el.assignedSlot.remove();
         el.remove();
         ZIndexer.current = undefined;
       }, 200);
