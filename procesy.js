@@ -106,13 +106,13 @@ var Procesy = {
       win.querySelector(".processorusage").textContent = processor.usage + "%";
 
       const memory = await LowLevelApi.TaskManager.getRamInfo();
-      win.querySelector(".memorytotal").textContent = humanFileSize(
+      win.querySelector(".memorytotal").textContent = mainFileManager.utils.humanFileSize(
         memory.total * 1000,
       );
-      win.querySelector(".memoryused").textContent = humanFileSize(
+      win.querySelector(".memoryused").textContent = mainFileManager.utils.humanFileSize(
         memory.used * 1000,
       );
-      win.querySelector(".memoryfree").textContent = humanFileSize(
+      win.querySelector(".memoryfree").textContent = mainFileManager.utils.humanFileSize(
         memory.free * 1000,
       );
     };
