@@ -94,7 +94,6 @@
     <script src="userAgent.js"></script>
     <script src="customcss.js"></script>
     <script src="background.js"></script>
-    <script src="developermode.js"></script>
     <script src="login.js"></script>
     <script src="startmenu.js"></script>
     <script src="theme.js"></script>
@@ -216,7 +215,6 @@
           Background.loadSecureBoot();
         }
 
-        DeveloperMode.load();
         Clock.load();
         Taskbar.load();
         Login.load();
@@ -1262,7 +1260,7 @@
         <div onclick="ZIndexer.focus(this)" class="wordeditor">
           <div class="window-header">
             <div class="headerclass">
-              <span style="float: left">$[text_editor];</span>
+              <span style="float: left">$[document_editor];</span>
               <div
                 onclick="WordEditor.save(this.parentElement.parentElement.parentElement)"
                 class="menu filesavefileconfig"

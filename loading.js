@@ -13,7 +13,7 @@ setTimeout(
       setTimeout(() => {
         error(
           "0x0000572",
-          "KLIND OS cannot load | KLIND OS se nemohl spustit",
+          Localization.getString("error_loading"),
           "KLIND OS | Load",
         );
       }, 500);
@@ -29,7 +29,7 @@ class Loading {
       setTimeout(async () => {
         document.querySelector(".loading").classList.add("displaynoneimpor");
         if (!Boot.safeBoot) control.dowhenlogin.loaded();
-        if (!await LowLevelApi.SuperLowLevel.isDev()) {
+        if (!(await LowLevelApi.SuperLowLevel.isDev())) {
           new Howl({
             src: ["sounds/startup.mp3"],
             autoplay: true,

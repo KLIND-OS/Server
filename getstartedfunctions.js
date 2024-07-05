@@ -6,8 +6,8 @@ class GetStarted {
     var ww = window.innerWidth;
     var wh = window.innerHeight;
 
-    const finalw = (ww / 2) - (width / 2);
-    const finalh = (wh / 2) - (height / 2);
+    const finalw = ww / 2 - width / 2;
+    const finalh = wh / 2 - height / 2;
 
     win.style.inset = finalh + "px auto auto " + finalw + "px";
   }
@@ -21,7 +21,8 @@ class GetStarted {
       win.style.minHeight = "500px";
       win.style.width = "300px";
       win.style.minWidth = "300px";
-      win.style.inset = (window.innerHeight - 500 - 50 - 10) + "px auto auto " + "10px";
+      win.style.inset =
+        window.innerHeight - 500 - 50 - 10 + "px auto auto " + "10px";
       setTimeout(() => {
         win.style.transition = "";
       }, 500);
@@ -33,7 +34,8 @@ class GetStarted {
     win.querySelector(".arrowdownhelp").style.rotate = "90deg";
     win.style.transition = "ease 0.5s all";
     setTimeout(() => {
-      win.style.inset = (window.innerHeight - 500 - 50 - 100) + "px auto auto " + "480px";
+      win.style.inset =
+        window.innerHeight - 500 - 50 - 100 + "px auto auto " + "480px";
       setTimeout(() => {
         win.style.transition = "";
       }, 500);
@@ -64,14 +66,16 @@ class GetStarted {
       }, 500);
       setTimeout(() => {
         GetStarted.globalWindow.style.transition = "ease 0.6s all";
-        var ww = window.innerWidth;
         var wh = window.innerHeight;
-        GetStarted.globalWindow.style.inset = parseInt(wh / 3) + "px auto auto " + parseInt(wh / 1.4) + "px";
+        GetStarted.globalWindow.style.inset =
+          parseInt(wh / 3) + "px auto auto " + parseInt(wh / 1.4) + "px";
         setTimeout(() => {
-          GetStarted.globalWindow.style.inset = parseInt(wh / 2.5) + "px auto auto " + parseInt(wh / 1.8) + "px";
+          GetStarted.globalWindow.style.inset =
+            parseInt(wh / 2.5) + "px auto auto " + parseInt(wh / 1.8) + "px";
         }, 800);
         setTimeout(() => {
-          GetStarted.globalWindow.style.inset = parseInt(wh / 4) + "px auto auto " + parseInt(wh / 2) + "px";
+          GetStarted.globalWindow.style.inset =
+            parseInt(wh / 4) + "px auto auto " + parseInt(wh / 2) + "px";
           setTimeout(() => {
             GetStarted.globalWindow.style.transition = "";
           }, 650);
@@ -87,12 +91,16 @@ class GetStarted {
     win.querySelector(".arrowdownhelp").style.rotate = "0deg";
     win.querySelector(".arrowdownhelp").style.display = "block";
     setTimeout(() => {
-      win.style.inset = (window.innerHeight - 500 - 50 - 10) + "px auto auto " + "50px";
+      win.style.inset =
+        window.innerHeight - 500 - 50 - 10 + "px auto auto " + "50px";
       setTimeout(() => {
         win.style.transition = "";
       }, 500);
       setTimeout(() => {
-        windows.mini(GetStarted.globalWindow.querySelector(".mini"), "poznamky");
+        windows.mini(
+          GetStarted.globalWindow.querySelector(".mini"),
+          "poznamky",
+        );
       }, 200);
     }, 10);
   }
@@ -108,7 +116,9 @@ class GetStarted {
         win.style.transition = "";
       }, 500);
       setTimeout(() => {
-        document.querySelector(".downiconsApps .ikonadown.poznamkyikonadown").click();
+        document
+          .querySelector(".downiconsApps .ikonadown.poznamkyikonadown")
+          .click();
       }, 200);
     }, 10);
   }
@@ -121,8 +131,8 @@ class GetStarted {
     setTimeout(() => {
       var ww = window.innerWidth;
       var wh = window.innerHeight;
-      const finalw = (ww / 2) - (600 / 2);
-      const finalh = (wh / 2) - (600 / 2);
+      const finalw = ww / 2 - 600 / 2;
+      const finalh = wh / 2 - 600 / 2;
 
       win.style.height = "600px";
       win.style.minHeight = "600px";
@@ -133,7 +143,10 @@ class GetStarted {
         win.style.transition = "";
       }, 500);
       setTimeout(() => {
-        windows.close(GetStarted.globalWindow.querySelector(".close"), "poznamky");
+        windows.close(
+          GetStarted.globalWindow.querySelector(".close"),
+          "poznamky",
+        );
         GetStarted.globalWindow = undefined;
       }, 200);
     }, 10);

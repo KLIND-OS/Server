@@ -7,8 +7,7 @@ class Browser {
 
     if (
       urlObject.hostname == window.location.hostname &&
-      urlObject.port == window.location.port &&
-      urlObject.pathname != "/developer.html"
+      urlObject.port == window.location.port
     ) {
       const browerr = win.querySelector(".browerr");
       browerr.querySelector("#errorcodebrow").textContent = 0;
