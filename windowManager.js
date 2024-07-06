@@ -497,7 +497,7 @@ var windows = {
             skin: skin,
             resize: false,
             height: "calc(100% - 20px)",
-            language: "cs",
+            language: localStorage.getItem("lang") || "cs",
             setup: function (editor) {
               editor.on("init", async function () {
                 const parts = path.split(".");
