@@ -338,4 +338,5 @@
   stop_recording: "Zastavit nahrávání",
   file_was_saved: "Soubor byl uložen",
   reset: "Resetovat",
+  language: "Jazyk",
 }

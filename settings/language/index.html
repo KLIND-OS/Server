@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      :root {
+        --pocet: 3;
+        --spanvalue: 1;
+      }
+    </style>
+    <link rel="stylesheet" href="./../style.css" />
+    <script src="./../mouse.js" defer></script>
+    <script src="/isiframe.js"></script>
+    <script>
+      function submit() {
+        const { value } = document.querySelector(".searchselect");
+        localStorage.setItem("lang", value);
+        parent.location.reload();
+      }
+    </script>
+  </head>
+  <body onmouseup="mouseUp()" onmousedown="mouseDown()">
+    <div id="firstcursor"></div>
+    <div id="secondcursor" class="secondcursor"></div>
+    <div class="button" onclick="window.location.replace('..')">
+      $[settings_back];
+    </div>
+    <div class="button nohover">
+      <select cursor="pointer" class="searchselect">
+        <option value="en">English</option>
+        <option value="cs">Čeština</option>
+      </select>
+      <script>
+        document.querySelector(".searchselect").childNodes.forEach((e) => {
+          if (e.value == localStorage.lang) {
+            e.selected = true;
+          }
+        });
+      </script>
+    </div>
+    <div class="button" onclick="submit()">$[submit];</div>
+    <script src="./../main.js" defer></script>
+  </body>
+</html>
