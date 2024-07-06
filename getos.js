@@ -6,7 +6,7 @@ else OSName = "Other";
 
 if (developermode == "false") {
   if (OSName == "MacOS") {
-    error("0x0000297", "Nepodporovaný operační systém klienta. Zkuste KLIND OS.", "KLIND OS | Load");
+    error("0x0000297", "Not supported OS!", "KLIND OS | Load");
   }
   else if (OSName === "Windows") {
     // OK
@@ -15,6 +15,6 @@ if (developermode == "false") {
     // OK
   }
   else {
-    error("0x0000297", "Nepodporovaný operační systém klienta. Zkuste KLIND OS.", "KLIND OS | Load");
+    error("0x0000297", "Not supported OS!", "KLIND OS | Load");
   }
 }

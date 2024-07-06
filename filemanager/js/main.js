@@ -101,15 +101,23 @@ var FileManager = {
   readFiles: async () => {
     if (selectmode) {
       document.querySelector(".main").innerHTML =
-        "<header><p>Správce Souborů <span>" + infolder + "</span></p></header>";
+        "<header><p>" +
+        parent.Localization.getString("file_manager") +
+        " <span>" +
+        infolder +
+        "</span></p></header>";
     } else if (folderselect) {
       document.querySelector(".main").innerHTML =
-        "<header><p>Správce Souborů <span>" +
+        "<header><p>" +
+        parent.Localization.getString("file_manager") +
+        " <span>" +
         infolder +
         "</span></p><div class=\"secondelement\" onclick=\"FileManager.createFolder();\"></div></header>";
     } else {
       document.querySelector(".main").innerHTML =
-        "<header><p>Správce Souborů <span>" +
+        "<header><p>" +
+        parent.Localization.getString("file_manager") +
+        " <span>" +
         infolder +
         "</span></p><div class=\"secondelement\" onclick=\"FileManager.createFolder();\"></div><div class=\"thirdelement\" onclick=\"FileManager.createFile();\"></div><div class=\"fourthelement\" onclick=\"FileManager.readFiles();\"></div></header>";
     }
@@ -221,8 +229,8 @@ var FileManager = {
             }
           } else {
             parent.spawnNotification(
-              "Správce souborů",
-              "Soubor nebo složka neexistuje!",
+              parent.Localization.getString("file_manager"),
+              parent.Localization.getString("file_or_folder_not_exist"),
             );
           }
         }
@@ -241,7 +249,7 @@ var FileManager = {
   remove: (filename) => {
     parent.FileLocker.fullTest(infolder + filename);
     parent.BPrompt.confirm(
-      "Opravdu chcete odstranit tento soubor?",
+      parent.Localization.getString("do_you_really_file_remove"),
       async (res) => {
         if (!res) return;
         const path = parent.LowLevelApi.filesystem.path.join(
@@ -258,7 +266,7 @@ var FileManager = {
   removeFolder: (foldername) => {
     parent.FileLocker.fullTest(infolder + foldername);
     parent.BPrompt.confirm(
-      "Opravdu chcete odstranit tuto složku?",
+      parent.Localization.getString("do_you_really_folder_remove"),
       async (res) => {
         if (!res) return;
         const path = parent.LowLevelApi.filesystem.path.join(
@@ -285,45 +293,51 @@ var FileManager = {
       FileManager.readFiles();
     }
     document.querySelector("header p").innerHTML =
-      "Správce Souborů <span>" + infolder + "</span>";
+      parent.Localization.getString("file_manager") +
+      " <span>" +
+      infolder +
+      "</span>";
   },
   createFolder: () => {
-    parent.BPrompt.prompt("Zadejte název složky:", async (name) => {
-      if (name == null || name.length == 0) {
-        // Nothing
-      } else {
-        if (name.indexOf("/") > -1 || name.indexOf(".") > -1) {
-          parent.spawnNotification(
-            "Správce Souborů",
-            "'/' a '.' jsou zakázané znaky!",
-          );
+    parent.BPrompt.prompt(
+      parent.Localization.getString("enter_folder_name"),
+      async (name) => {
+        if (name == null || name.length == 0) {
+          // Nothing
         } else {
-          if (name.length > 100) {
+          if (name.indexOf("/") > -1 || name.indexOf(".") > -1) {
             parent.spawnNotification(
-              "Správce Souborů",
-              "Název složky nesmí být delší jak 100 znaků.",
-            );
-            return;
-          }
-          if (await FileManager.folderExists(name)) {
-            parent.spawnNotification(
-              "Správce Souborů",
-              "Složka se stejným názvem již v této složce existuje.",
+              parent.Localization.getString("file_manager"),
+              parent.Localization.getString("invalid_characters"),
             );
           } else {
-            const path = parent.LowLevelApi.filesystem.path.join(
-              parent.LowLevelApi.filesystem.os.homedir() +
-                "/usrfiles" +
-                infolder,
-              name,
-            );
-            await parent.LowLevelApi.filesystem.mkdir(path);
+            if (name.length > 100) {
+              parent.spawnNotification(
+                parent.Localization.getString("file_manager"),
+                parent.Localization.getString("folder_name_longer"),
+              );
+              return;
+            }
+            if (await FileManager.folderExists(name)) {
+              parent.spawnNotification(
+                parent.Localization.getString("file_manager"),
+                parent.Localization.getString("folder_with_same_name"),
+              );
+            } else {
+              const path = parent.LowLevelApi.filesystem.path.join(
+                parent.LowLevelApi.filesystem.os.homedir() +
+                  "/usrfiles" +
+                  infolder,
+                name,
+              );
+              await parent.LowLevelApi.filesystem.mkdir(path);
 
-            FileManager.readFiles();
+              FileManager.readFiles();
+            }
           }
         }
-      }
-    });
+      },
+    );
   },
   folderExists: async (name) => {
     const path = parent.LowLevelApi.filesystem.path.join(
@@ -348,24 +362,24 @@ var FileManager = {
       foldername,
     );
     parent.BPrompt.prompt(
-      "Zadejte nové jméno složky.",
+      parent.Localization.getString("enter_new_folder_name"),
       async (newname) => {
         if (newname == null || newname.length == 0 || newname == foldername) {
           // Ignore
         } else if (newname.length > 100) {
           parent.spawnNotification(
-            "Správce souborů",
-            "Název složky nesmí být delší jak 100 znaků.",
+            parent.Localization.getString("file_manager"),
+            parent.Localization.getString("folder_name_longer"),
           );
         } else if (newname.includes("/") || newname.includes("\\")) {
           parent.spawnNotification(
-            "Správce Souborů",
-            "'/' a '\\' jsou zakázané znaky.",
+            parent.Localization.getString("file_manager"),
+            parent.Localization.getString("invalid_characters"),
           );
         } else if (await FileManager.folderExists(newname)) {
           parent.spawnNotification(
-            "Správce Souborů",
-            "Tento název souboru je již v této složce použit!",
+            parent.Localization.getString("file_manager"),
+            parent.Localization.getString("folder_with_same_name"),
           );
         } else {
           const newpath = parent.LowLevelApi.filesystem.path.join(
@@ -386,24 +400,24 @@ var FileManager = {
       filename,
     );
     parent.BPrompt.prompt(
-      "Zadejte nové jméno souboru.",
+      parent.Localization.getString("enter_new_file_name"),
       async (newname) => {
         if (newname == null || newname.length == 0 || newname == filename) {
           // Ignore
         } else if (newname.length > 100) {
           parent.spawnNotification(
-            "Správce Souborů",
-            "Název souborů nesmí být delší jak 100 znaků.",
+            parent.Localization.getString("file_manager"),
+            parent.Localization.getString("file_name_longer"),
           );
         } else if (newname.indexOf("/") > -1 || newname.indexOf("\\") > -1) {
           parent.spawnNotification(
-            "Správce Souborů",
-            "'/' a '\\' jsou zakázané znaky.",
+            parent.Localization.getString("file_manager"),
+            parent.Localization.getString("invalid_characters_file"),
           );
         } else if (await FileManager.fileExist(newname)) {
           parent.spawnNotification(
-            "Správce Souborů",
-            "Tento název souboru je již v této složce použit!",
+            parent.Localization.getString("file_manager"),
+            parent.Localization.getString("file_with_same_name"),
           );
         } else {
           const newpath = parent.LowLevelApi.filesystem.path.join(
@@ -428,8 +442,8 @@ var FileManager = {
     );
     clipboard = [path, filename, false, klindospath];
     parent.spawnNotification(
-      "Správce Souborů",
-      "Jděte do jakékoli složky a stiskněte CTRL + V pro vložení.",
+      parent.Localization.getString("file_manager"),
+      parent.Localization.getString("copy_message"),
     );
   },
   copyFolder: (foldername) => {
@@ -444,8 +458,8 @@ var FileManager = {
 
     clipboard = [path, foldername, true, klindospath];
     parent.spawnNotification(
-      "Správce Souborů",
-      "Jděte do jakékoli složky a stiskněte CTRL + V pro vložení.",
+      parent.Localization.getString("file_manager"),
+      parent.Localization.getString("copy_message"),
     );
   },
   paste: async () => {
@@ -453,7 +467,7 @@ var FileManager = {
       if (clipboard[2]) {
         if (await FileManager.folderExists(clipboard[1])) {
           parent.BPrompt.prompt(
-            "Složka se stejným názvem již v této složce existuje. Zadejte nový název složky.",
+            parent.Localization.getString("folder_exists_new_name"),
             async (newname) => {
               if (newname != "" && newname != null) {
                 clipboard[1] = newname;
@@ -469,13 +483,13 @@ var FileManager = {
             clipboard[1],
           );
           const progressBar = new parent.window.DownloadStatus(clipboard[1]);
-          progressBar.customMessage("Kopírování...");
+          progressBar.customMessage(parent.Localization.getString("copying"));
           parent.LowLevelApi.filesystem.fsExtra.copy(
             clipboard[0],
             destinationPath,
             (err) => {
               if (err) {
-                throw new Error("Nastala chyba!");
+                throw new Error("Error occured!");
               }
               progressBar.finish();
               FileManager.readFiles();
@@ -490,7 +504,7 @@ var FileManager = {
       var newclipboard = clipboard;
       if (await FileManager.fileExist(newclipboard[1])) {
         parent.BPrompt.prompt(
-          "Soubor se stejným názvem již v této složce existuje. Zadejte nový název souboru.",
+          parent.Localization.getString("file_exists_new_name"),
           async (newname) => {
             if (newname != "" && newname != null) {
               clipboard[1] = newname;
@@ -545,45 +559,51 @@ var FileManager = {
     parent.mainFileManager.properties(path);
   },
   createFile: () => {
-    parent.BPrompt.prompt("Vložte název souboru.", async (name) => {
-      if (!(name == null || name.length == 0)) {
-        if (await FileManager.fileExist(name)) {
-          parent.spawnNotification(
-            "Správce Souborů",
-            "Soubor se stejným názvem už existuje.",
-          );
-        } else {
-          if (name.length > 100) {
+    parent.BPrompt.prompt(
+      parent.Localization.getString("enter_file_name"),
+      async (name) => {
+        if (!(name == null || name.length == 0)) {
+          if (await FileManager.fileExist(name)) {
             parent.spawnNotification(
-              "Správce Souborů",
-              "Název souborů nesmí být delší jak 100 znaků.",
+              parent.Localization.getString("file_manager"),
+              parent.Localization.getString("file_with_same_name"),
             );
           } else {
-            if (name.indexOf("/") > -1 || name.indexOf("\\") > -1) {
+            if (name.length > 100) {
               parent.spawnNotification(
-                "Správce Souborů",
-                "'/' a '\\' jsou zakázané znaky.",
+                parent.Localization.getString("file_manager"),
+                parent.Localization.getString("file_name_longer"),
               );
             } else {
-              const path = parent.LowLevelApi.filesystem.path.join(
-                parent.LowLevelApi.filesystem.os.homedir() +
-                  "/usrfiles" +
-                  infolder,
-                name,
-              );
+              if (name.indexOf("/") > -1 || name.indexOf("\\") > -1) {
+                parent.spawnNotification(
+                  parent.Localization.getString("file_manager"),
+                  parent.Localization.getString("invalid_characters_file"),
+                );
+              } else {
+                const path = parent.LowLevelApi.filesystem.path.join(
+                  parent.LowLevelApi.filesystem.os.homedir() +
+                    "/usrfiles" +
+                    infolder,
+                  name,
+                );
 
-              parent.LowLevelApi.filesystem.fs.open(path, "w", () => {
-                FileManager.readFiles();
-              });
+                parent.LowLevelApi.filesystem.fs.open(path, "w", () => {
+                  FileManager.readFiles();
+                });
+              }
             }
           }
         }
-      }
-    });
+      },
+    );
   },
   copyPath: (name) => {
     var path = infolder + name;
-    parent.spawnNotification("Správce Souborů", "Cesta: " + path);
+    parent.spawnNotification(
+      parent.Localization.getString("file_manager"),
+      parent.Localization.getString("path") + ": " + path,
+    );
   },
   selectMode: () => {
     selectmode = true;
@@ -593,56 +613,63 @@ var FileManager = {
     document.querySelector(".folderselect").style.display = "flex";
   },
   addShortcut: (idel) => {
-    var fun = `try{mainFileManager.open('${infolder}', '${idel}')}catch {spawnNotification("Správce souborů","Tento soubor nebyl nalezen!")}`;
+    var fun = `try{mainFileManager.open('${infolder}', '${idel}')}catch {spawnNotification(Localization.getString("file_manager"),Localization.getString("file_not_found"))}`;
     parent.DesktopIcons.add({ run: fun, icon: "filemanager/images/file.png" });
   },
   createShortcut: () => {
-    parent.BPrompt.prompt("Vložte název zástupce.", async (name) => {
-      if (!(name == null || name.length == 0)) {
-        if (await FileManager.fileExist(name + ".lnk")) {
-          parent.spawnNotification(
-            "Správce Souborů",
-            "Soubor se stejným názvem už existuje.",
-          );
-        } else {
-          if (name.length > 100) {
+    parent.BPrompt.prompt(
+      parent.Localization.getString("enter_shortcut_name"),
+      async (name) => {
+        if (!(name == null || name.length == 0)) {
+          if (await FileManager.fileExist(name + ".lnk")) {
             parent.spawnNotification(
-              "Správce Souborů",
-              "Název souborů nesmí být delší jak 100 znaků.",
+              parent.Localization.getString("file_manager"),
+              parent.Localization.getString("file_with_same_name"),
             );
           } else {
-            if (name.indexOf("/") > -1 || name.indexOf("\\") > -1) {
+            if (name.length > 100) {
               parent.spawnNotification(
-                "Správce Souborů",
-                "'/' a '\\' jsou zakázané znaky.",
+                parent.Localization.getString("file_manager"),
+                parent.Localization.getString("file_name_longer"),
               );
             } else {
-              setTimeout(() => {
-                parent.BPrompt.prompt(
-                  "Vložte cestu k souboru ke kterému chcete přidat zástupce.",
-                  async (filepath) => {
-                    const path = parent.LowLevelApi.filesystem.path.join(
-                      parent.LowLevelApi.filesystem.os.homedir() + "/usrfiles",
-                      infolder + name + ".lnk",
-                    );
-                    await parent.LowLevelApi.filesystem.writeFile(
-                      path,
-                      "open:" + filepath,
-                      { encoding: "utf8" },
-                    );
-
-                    FileManager.readFiles();
-                  },
+              if (name.indexOf("/") > -1 || name.indexOf("\\") > -1) {
+                parent.spawnNotification(
+                  parent.Localization.getString("file_manager"),
+                  parent.Localization.getString("invalid_characters_file"),
                 );
-              }, 50);
+              } else {
+                setTimeout(() => {
+                  parent.BPrompt.prompt(
+                    parent.Localization.getString("create_shortcut_path"),
+                    async (filepath) => {
+                      const path = parent.LowLevelApi.filesystem.path.join(
+                        parent.LowLevelApi.filesystem.os.homedir() +
+                          "/usrfiles",
+                        infolder + name + ".lnk",
+                      );
+                      await parent.LowLevelApi.filesystem.writeFile(
+                        path,
+                        "open:" + filepath,
+                        { encoding: "utf8" },
+                      );
+
+                      FileManager.readFiles();
+                    },
+                  );
+                }, 50);
+              }
             }
           }
         }
-      }
-    });
+      },
+    );
   },
   zipFolder: async (folder) => {
-    parent.spawnNotification("Správce souborů", "Začínám zipovat soubor");
+    parent.spawnNotification(
+      parent.Localization.getString("file_manager"),
+      parent.Localization.getString("started_zipping"),
+    );
     const exec = parent.LowLevelApi.filesystem.promisify(
       parent.LowLevelApi.child_process.exec,
     );
@@ -659,7 +686,10 @@ var FileManager = {
       cwd: execPath,
     });
 
-    parent.spawnNotification("Správce souborů", "Zipování bylo dokončeno");
+    parent.spawnNotification(
+      parent.Localization.getString("file_manager"),
+      parent.Localization.getString("zipping_done"),
+    );
 
     FileManager.readFiles();
   },

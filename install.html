@@ -2,10 +2,15 @@
 <html>
   <head>
     <link rel="stylesheet" href="styleinstall.css" />
-    <title>Instalace</title>
+    <title>Install</title>
     <meta charset="UTF-8" />
     <script src="info.js"></script>
     <script src="hash.js"></script>
+    <script src="/libs/json5.min.js"></script>
+    <script src="/lang/localization.js"></script>
+    <script>
+      Localization.loadStrings();
+    </script>
   </head>
 
   <body>
@@ -17,13 +22,12 @@
 
       function install() {
         if (document.getElementById("username").value == "") {
-          alert("Zadejte prosím jméno");
+          alert(Localization.getString("invalid_username"));
         } else if (document.getElementById("password").value == "") {
-          alert("Zadejte prosím heslo");
+          alert(Localization.getString("invalid_password"));
         } else {
           document.getElementById("cistainstall").style.display = "none";
           document.getElementById("installing").style.display = "block";
-          document.title = "Instalace...";
           setTimeout(() => {
             localStorage.setItem("installed", "true");
             localStorage.setItem(
@@ -35,50 +39,56 @@
               hashCode(document.getElementById("password").value),
             );
             localStorage.setItem("updatesklindows", version);
-            alert("Instalace byla dokončena!");
             window.location.replace("/");
           }, 1800);
         }
       }
 
-      function druhy() {
-        document.getElementById("prvni").style.display = "none";
-        document.getElementById("druhy").style.display = "block";
-        document.title = "Vyberte";
-      }
       function cistainstall() {
-        document.getElementById("druhy").style.display = "none";
+        document.getElementById("prvni").style.display = "none";
         document.getElementById("cistainstall").style.display = "block";
       }
     </script>
     <div class="installdiv">
       <div id="prvni">
+        <label style="position: absolute; left: 20px; top: 10px">
+          <span>Language</span>
+          <select
+            onchange="localStorage.setItem('lang', this.value); window.location.reload();"
+            id="langselect"
+          >
+            <option value="en">English</option>
+            <option value="cs">Čeština</option>
+          </select>
+          <script>
+            document.querySelector("#langselect").childNodes.forEach(e => {
+              if (e.value == localStorage.lang) {
+                e.selected = true;
+              }
+            })
+          </script>
+        </label>
+
         <img src="/logo.png" alt="" class="icon" />
         <h1 class="title">KLIND OS <span id="versionSpan"></span></h1>
         <script>
           document.querySelector("#versionSpan").textContent = version;
         </script>
 
-        <div class="buttonnext" onclick="druhy()">Spustit instalaci</div>
-      </div>
-      <div id="druhy" style="display: none">
-        <h1 class="title">Vyberte typ instalace</h1>
-        <div class="left" onclick="cistainstall();">Čistá instalace</div>
+        <div class="buttonnext" onclick="cistainstall()">$[start_install];</div>
       </div>
       <div id="cistainstall" style="display: none">
-        <h1 class="title">Čistá instalace</h1>
-        <p style="text-align: center">
-          Pro čistou instalaci bude potřeba vaše uživatelské jméno a heslo,<br />přes
-          které se budete do systému přihlašovat.
-        </p>
-        <input id="username" placeholder="Uživatelské jméno" /><br />
-        <input id="password" type="password" placeholder="Heslo" />
-
-        <div class="buttonnext" onclick="install()">Zahájit instalaci</div>
+        <h1 class="title">$[installation];</h1>
+        <input id="username" placeholder="$[username];" /><br />
+        <input id="password" type="password" placeholder="$[password];" />
+        <div class="buttonnext" onclick="install()">$[start_install];</div>
       </div>
       <div id="installing" style="display: none">
-        <h1 class="title">Instaluji...</h1>
+        <h1 class="title">$[installing];</h1>
       </div>
     </div>
+    <script>
+      Localization.loadDOM();
+    </script>
   </body>
 </html>

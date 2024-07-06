@@ -27,10 +27,13 @@
     </style>
 </head>
 <body>
-    <span id="messagespan">Prosím počkejte. Kamera se načítá</span>
+    <span id="messagespan">$[camera_loading];</span>
     <video id="videoInput" width="720" height="550" >
         <script src="./js/module.js"></script>
         <script defer async src="./js/script.js" defer></script>
     </video>
+    <script>
+      parent.Localization.loadDOM(document.body);
+    </script>
 </body>
 </html>

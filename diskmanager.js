@@ -3,12 +3,18 @@ class DiskManager {
   static add(disk, partitions) {
     DiskManager.disks[disk] = partitions.split(",");
     Sounds.devicePlugIn();
-    spawnNotification("Správce disků", `Disk ${disk} byl připojen!`);
+    spawnNotification(
+      Localization.getString("disk_manager"),
+      Localization.getString("drive_was_connected").replace("{}", disk),
+    );
   }
   static remove(disk) {
     delete DiskManager.disks[disk];
     Sounds.devicePlugOut();
-    spawnNotification("Správce disků", `Disk ${disk} byl odpojen!`);
+    spawnNotification(
+      Localization.getString("disk_manager"),
+      Localization.getString("drive_was_disconnected").replace("{}", disk),
+    );
   }
   static getAllDisks() {
     return DiskManager.disks;
@@ -17,7 +23,10 @@ class DiskManager {
     const response = await LowLevelApi.DiskManagement.unmount(disk);
     if (response) {
       parentel.remove();
-      spawnNotification("Správce disků", "Nyní můžete disk bezpečně odpojit.");
+      spawnNotification(
+        Localization.getString("disk_manager"),
+        Localization.getString("now_can_disconnect"),
+      );
     }
   }
   static init(win) {
@@ -26,10 +35,10 @@ class DiskManager {
     for (const disk in DiskManager.disks) {
       var div = document.createElement("div");
       var h1 = document.createElement("h1");
-      h1.textContent = "Disk: " + disk;
+      h1.textContent = Localization.getString("drive") + ": " + disk;
       div.appendChild(h1);
       var button1 = document.createElement("button");
-      button1.textContent = "Bezpečně odpojit disk";
+      button1.textContent = Localization.getString("safely_disconnect_drive");
       button1.setAttribute(
         "onclick",
         `DiskManager.unmount('${disk}', this.parentElement)`,
@@ -38,7 +47,7 @@ class DiskManager {
 
       DiskManager.disks[disk].forEach((partition) => {
         var p = document.createElement("p");
-        p.textContent = "Oddíl: " + partition;
+        p.textContent = Localization.getString("partition") + ": " + partition;
         div.appendChild(p);
       });
       element.appendChild(div);

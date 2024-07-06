@@ -29,11 +29,18 @@ var control = {
   error: (type) => {
     if (type == "fatal") {
       return (info, appName) => {
-        error("0x0000241", info, "Chyba vyvolána aplikací: " + appName);
+        error(
+          "0x0000241",
+          info,
+          Localization.getString("app_erro") + ": " + appName,
+        );
       };
     } else if (type == "warn") {
       return (info, appName) => {
-        spawnNotification(appName + " - Varování", info);
+        spawnNotification(
+          appName + " - " + Localization.getString("warning"),
+          info,
+        );
       };
     } else {
       return () => {
@@ -45,7 +52,7 @@ var control = {
   functions: {
     logout: (app) => {
       var appName = app.info.name;
-      spawnNotification(appName, "Budete odhlášen za 5 sekund.");
+      spawnNotification(appName, Localization.getString("logout_warning"));
       setTimeout(() => {
         Login.logout();
       }, 5000);
@@ -53,10 +60,13 @@ var control = {
     reboot: (app) => {
       var appName = app.info.name;
       BPrompt.confirm(
-        "Chcete aplikaci " + appName + " povolit restartovat Váš počítač?",
+        Localization.getString("do_you_want_restart").replace("{}", appName),
         (x) => {
           if (x) {
-            spawnNotification(appName, "Systém bude restartován za 5 sekund!");
+            spawnNotification(
+              appName,
+              Localization.getString("restart_warning"),
+            );
             setTimeout(() => {
               window.location.reload();
             }, 5000);
@@ -71,7 +81,10 @@ var control = {
       autoplay: true,
     });
     x.on("end", function () {
-      playingSounds = mainFileManager.utils.removebyindex(playingSounds, playingSounds.indexOf(x));
+      playingSounds = mainFileManager.utils.removebyindex(
+        playingSounds,
+        playingSounds.indexOf(x),
+      );
     });
     playingSounds.push(x);
     return x;
@@ -83,7 +96,10 @@ var control = {
       ...otherSettings,
     });
     x.on("end", function () {
-      playingSongs = mainFileManager.utils.removebyindex(playingSongs, playingSongs.indexOf(x));
+      playingSongs = mainFileManager.utils.removebyindex(
+        playingSongs,
+        playingSongs.indexOf(x),
+      );
     });
     playingSongs.push(x);
     return x;

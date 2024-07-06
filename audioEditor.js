@@ -3,7 +3,7 @@ var AudioEditor = {
   change: (value) => {
     LowLevelApi.Volume.change(value);
   },
-  toggle: (e) => {
+  toggle: () => {
     if (AudioEditor.opened) {
       windows.close(document.querySelector(".window.audioLevelEditor div div div"), "audioLevelEditor");
     }

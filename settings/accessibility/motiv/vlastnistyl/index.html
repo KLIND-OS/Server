@@ -33,14 +33,13 @@
   <body onmouseup="mouseUp()" onmousedown="mouseDown()">
     <div id="firstcursor"></div>
     <div id="secondcursor" class="secondcursor"></div>
-    <div class="button" onclick="window.location.replace('..')"><- Zpět</div>
-    <div class="button nohover">
-      <span
-        >KLIND OS si můžete upravit pomocí programovacího jazyka CSS3. CSS
-        soubor nahrajte do správce souborů a klikněte níže.</span
-      >
+    <div class="button" onclick="window.location.replace('..')">
+      $[settings_back];
     </div>
-    <div class="button" onclick="send()">Vybrat soubor</div>
+    <div class="button nohover">
+      <span>$[custom_css_message];</span>
+    </div>
+    <div class="button" onclick="send()">$[select_file];</div>
     <script src="./../../../main.js" defer></script>
   </body>
 </html>

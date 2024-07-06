@@ -24,7 +24,7 @@ class UnZip {
         LowLevelApi.filesystem.path.join(currentFolder, folderName),
       )
     ) {
-      spawnNotification("UnZip", "Složka se stejným názvem již existuje!");
+      spawnNotification("UnZip", Localization.getString("folder_with_same_name_exists"));
       win.querySelector(".headerclass .close").click();
       return;
     }
@@ -32,7 +32,7 @@ class UnZip {
     await exec(`mkdir ${relativePathFolder}`);
     await exec(`unzip ${relativePath} -d ${relativePathFolder}`);
 
-    win.querySelector("h1").textContent = "Otevírání bylo dokončeno!";
+    win.querySelector("h1").textContent = Localization.getString("opening_done");
 
     setTimeout(() => {
       win.querySelector(".headerclass .close").click();

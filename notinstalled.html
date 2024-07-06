@@ -11,13 +11,21 @@
             text-align: center;
         }
     </style>
+    <script src="/libs/json5.min.js"></script>
+    <script src="/lang/localization.js"></script>
+    <script>
+      Localization.loadStrings();
+    </script>
 </head>
 
 <body>
-    <h1>Rozpoznávání obličeje není nastaveno.</h1>
+    <h1>$[face_recognition_not_set];</h1>
     <button onclick='
     parent.document.getElementById("facerecif").src = "about:blank";
-    parent.document.getElementById("facerec").style.display = "none";'>Zavřít</button>
+    parent.document.getElementById("facerec").style.display = "none";'>$[close];</button>
+    <script>
+      Localization.loadDOM();
+    </script>
 </body>
 
 </html>

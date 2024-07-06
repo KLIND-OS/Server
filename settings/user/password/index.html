@@ -18,10 +18,10 @@
 <body onmouseup="mouseUp()" onmousedown="mouseDown()" >
     <div id="firstcursor"></div>
     <div id="secondcursor" class="secondcursor"></div>
-    <div class="button" onclick="window.location.replace('..')"><- Zpět</div>
-    <div class="button nohover"><span>Změňte si heslo do KLIND OS. Po změně bude systém restartován.</span></div>
-    <input type="password" class="button nohover input" id="changepassinputvalue" placeholder="Nové heslo">
-    <div class="button" onclick="parent.MyKLINDOS.changepass(this.parentElement)">Odeslat</div>
+    <div class="button" onclick="window.location.replace('..')">$[settings_back];</div>
+    <div class="button nohover"><span>$[password_change_message];</span></div>
+    <input type="password" class="button nohover input" id="changepassinputvalue" placeholder="$[new_password];">
+    <div class="button" onclick="parent.MyKLINDOS.changepass(this.parentElement)">$[submit];</div>
     <script src="./../../main.js" defer></script>
 </body>
 </html>

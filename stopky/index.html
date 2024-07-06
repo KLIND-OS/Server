@@ -73,9 +73,12 @@
       <div id="display">00:00:00</div>
 
       <div class="buttons">
-        <button id="startStop" onclick="startStopstopky(this)">Start</button>
-        <button id="reset" onclick="resetstopky(this)">Reset</button>
+        <button id="startStop" onclick="startStopstopky(this)">$[start];</button>
+        <button id="reset" onclick="resetstopky(this)">$[reset];</button>
       </div>
     </div>
+    <script>
+      parent.Localization.loadDOM(document.body);
+    </script>
   </body>
 </html>
