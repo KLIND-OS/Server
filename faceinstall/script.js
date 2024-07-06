@@ -12,17 +12,16 @@ window.addEventListener("DOMContentLoaded", () => {
     var value1 = document.createElement("button");
     var value2 = document.createElement("button");
     var submit = document.createElement("button");
-    value1.textContent = "Vyberte první obrázek";
-    value2.textContent = "Vyberte druhý obrázek";
-    submit.textContent = "Odeslat";
+    value1.textContent = parent.Localization.getString("select_first_image");
+    value2.textContent = parent.Localization.getString("select_second_image");
+    submit.textContent = parent.Localization.getString("submit");
     value1.onclick = () => {
       parent.control.fileManager.fileSelect({
         success: (path) => {
           value1.setAttribute("path", path);
           value1.textContent = path;
         },
-        closed: (e) =>
-          parent.spawnNotification("NRO", "Výběr souboru byl přerušen!"),
+        closed: () => {},
       });
     };
     value2.onclick = () => {
@@ -31,8 +30,7 @@ window.addEventListener("DOMContentLoaded", () => {
           value2.setAttribute("path", path);
           value2.textContent = path;
         },
-        closed: (e) =>
-          parent.spawnNotification("NRO", "Výběr souboru byl přerušen!"),
+        closed: () => {},
       });
     };
     submit.onclick = () => {
@@ -52,8 +50,8 @@ window.addEventListener("DOMContentLoaded", () => {
         window.location.reload();
       } else {
         parent.spawnNotification(
-          "NRO",
-          "První nebo druhý soubor se nenáhází na uvedené cestě.",
+          parent.Localization.getString("face_recognition_settings"),
+          parent.Localization.getString("image_not_found"),
         );
       }
     };
@@ -63,7 +61,7 @@ window.addEventListener("DOMContentLoaded", () => {
   } else {
     // Installed
     var removebtn = document.createElement("button");
-    removebtn.textContent = "Vymazat uložené obrázky";
+    removebtn.textContent = parent.Localization.getString("remove");
     removebtn.onclick = () => {
       localStorage.removeItem("fa1c2e"), parent.Login.loadFaceButton();
       window.location.reload();

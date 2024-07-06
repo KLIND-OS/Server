@@ -41,7 +41,7 @@ class DownloadStatus {
   }
   finish() {
     const element = _DownloadStatus.content[this.id];
-    element.querySelector("#percentage").textContent = "Hotovo!";
+    element.querySelector("#percentage").textContent = Localization.getString("finished");
     element.querySelector(".progressDownload").style.width = "100%";
     this.id = null;
 

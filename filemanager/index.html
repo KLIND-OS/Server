@@ -71,43 +71,43 @@
         class="choice first"
         onclick='FileManager.copy(this.parentElement.getAttribute("idel"));document.querySelector(".rightclick").style.display = "none"'
       >
-        <p>Kopírovat</p>
+        <p>$[copy];</p>
       </div>
       <div
         class="choice first"
         onclick='FileManager.openFile(this.parentElement.getAttribute("idel"), true);document.querySelector(".rightclick").style.display = "none"'
       >
-        <p>Otevřít pomocí</p>
+        <p>$[open_with];</p>
       </div>
       <div
         class="choice"
         onclick='FileManager.copyPath(this.parentElement.getAttribute("idel"));document.querySelector(".rightclick").style.display = "none"'
       >
-        <p>Zkopírovat cestu</p>
+        <p>$[copy_path];</p>
       </div>
       <div
         class="choice"
         onclick='FileManager.addShortcut(this.parentElement.getAttribute("idel"));document.querySelector(".rightclick").style.display = "none"'
       >
-        <p>Přidat zástupce na plochu</p>
+        <p>$[add_shortcut_to_desktop];</p>
       </div>
       <div
         class="choice"
         onclick='FileManager.rename(this.parentElement.getAttribute("idel"));document.querySelector(".rightclick").style.display = "none"'
       >
-        <p>Přejmenovat</p>
+        <p>$[rename];</p>
       </div>
       <div
         class="choice"
         onclick='FileManager.remove(this.parentElement.getAttribute("idel"));document.querySelector(".rightclick").style.display = "none"'
       >
-        <p>Smazat</p>
+        <p>$[delete];</p>
       </div>
       <div
         class="choice last"
         onclick='FileManager.properties(this.parentElement.getAttribute("idel"));document.querySelector(".rightclick").style.display = "none"'
       >
-        <p>Vlastnosti</p>
+        <p>$[properties];</p>
       </div>
     </div>
     <div class="rightclicktwo" style="display: none">
@@ -115,25 +115,25 @@
         class="choice first"
         onclick='FileManager.copyFolder(this.parentElement.getAttribute("idel"));document.querySelector(".rightclicktwo").style.display = "none"'
       >
-        <p>Kopírovat</p>
+        <p>$[copy];</p>
       </div>
       <div
         class="choice first"
         onclick='FileManager.removeFolder(this.parentElement.getAttribute("idel"));document.querySelector(".rightclicktwo").style.display = "none"'
       >
-        <p>Smazat</p>
+        <p>$[delete];</p>
       </div>
       <div
         class="choice"
         onclick='FileManager.renameFolder(this.parentElement.getAttribute("idel"));document.querySelector(".rightclicktwo").style.display = "none"'
       >
-        <p>Přejmenovat</p>
+        <p>$[rename];</p>
       </div>
       <div
         class="choice"
         onclick='FileManager.zipFolder(this.parentElement.getAttribute("idel"));document.querySelector(".rightclicktwo").style.display = "none"'
       >
-        <p>Přidat do ZIP</p>
+        <p>$[add_to_zip];</p>
       </div>
     </div>
     <div class="rightclickthree" style="display: none">
@@ -141,8 +141,11 @@
         class="choice first last"
         onclick='FileManager.createShortcut();document.querySelector(".rightclicktwo").style.display = "none"'
       >
-        <p>Vytvořit zástupce</p>
+        <p>$[create_shortcut];</p>
       </div>
     </div>
+    <script>
+      parent.Localization.loadDOM(document.body);
+    </script>
   </body>
 </html>
