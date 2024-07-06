@@ -7,7 +7,7 @@
     <title>KLINDOS | Settings</title>
     <style>
         :root {
-            --pocet: 8;
+            --pocet: 9;
         }
     </style>
     <link rel="stylesheet" href="style.css">
@@ -16,14 +16,15 @@
 <body onmouseup="mouseUp()" onmousedown="mouseDown()" >
     <div id="firstcursor"></div>
     <div id="secondcursor" class="secondcursor"></div>
-    <div class="button" onclick="window.location.replace('./accessibility')">Přizpůsobení</div>
-    <div class="button" onclick="window.location.replace('./user')">Uživatel</div>
-    <div class="button" onclick="window.location.replace('./hodiny')">Hodiny</div>
-    <div class="button" onclick="window.location.replace('./taskbar')">Taskbar</div>
-    <div class="button" onclick="window.location.replace('./lockscreen')">Zamykací obrazovka</div>
-    <div class="button" onclick="window.location.replace('./mouseover')">Náhled okna</div>
-    <div class="button" onclick="window.location.replace('./default')">Výhozí aplikace</div>
-    <div class="button" onclick="window.location.replace('./developers')">Pro vývojáře</div>
+    <div class="button" onclick="window.location.replace('./accessibility')">$[customization];</div>
+    <div class="button" onclick="window.location.replace('./user')">$[user];</div>
+    <div class="button" onclick="window.location.replace('./hodiny')">$[clock];</div>
+    <div class="button" onclick="window.location.replace('./taskbar')">$[taskbar];</div>
+    <div class="button" onclick="window.location.replace('./lockscreen')">$[lock_screen];</div>
+    <div class="button" onclick="window.location.replace('./mouseover')">$[window_preview];</div>
+    <div class="button" onclick="window.location.replace('./default')">$[default_apps];</div>
+    <div class="button" onclick="window.location.replace('./language')">$[language];</div>
+    <div class="button" onclick="window.location.replace('./developers')">$[for_developers];</div>
     <script src="./main.js" defer></script>
     <script src="./mouse.js" defer></script>
 </body>

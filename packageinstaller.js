@@ -8,15 +8,15 @@ class PackageInstaller {
     var repository = win.querySelector(".repo").value;
     var packageName = win.querySelector(".packagename").value;
     win.querySelector(".helptext").style.color = "white";
-    win.querySelector(".helptext").textContent = "Prosím počkejte...";
+    win.querySelector(".helptext").textContent = Localization.getString("please_wait") + "...";
     LowLevelApi.Packages.install(repository, packageName, (response) => {
       if (response == "error") {
         win.querySelector(".helptext").style.color = "red";
         win.querySelector(".helptext").textContent =
-          "Aj, nastala chyba při instalaci balíčku. Zkontrolujte že máte správně vybraný repozitář a že máte správný název balíčku.";
+          Localization.getString("package_install_error");
       } else if (response == "success") {
         win.querySelector(".helptext").textContent =
-          "Balíček byl úspěšně nainstalován!";
+          Localization.getString("package_installed");
         win.querySelector(".helptext").style.color = "green";
       }
     });

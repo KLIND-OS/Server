@@ -69,7 +69,7 @@ class FileLocker {
     this._lockedStatus[file] = time;
   }
   static lockedError() {
-    BPrompt.alert("Tento soubor je používán jiným programem!");
+    BPrompt.alert(Localization.getString("this_file_is_used"));
   }
 
   static fullTest(file) {

@@ -169,13 +169,6 @@ var windows = {
     ],
 
     special: {
-      poznamky: [
-        (win) => {
-          Poznamky.load(win);
-        },
-        false,
-        false,
-      ],
       info: [infoApp.loadInfo, false, false],
       my: [
         (element) => {
@@ -205,7 +198,7 @@ var windows = {
               );
             element.querySelector(".mini").remove();
             element.querySelector(".headerclass span").textContent =
-              "Vyberte soubor";
+              Localization.getString("select_file");
             url += "&index=" + index;
           }
 
@@ -225,7 +218,7 @@ var windows = {
               );
             element.querySelector(".mini").remove();
             element.querySelector(".headerclass span").textContent =
-              "Vyberte složku";
+              Localization.getString("select_folder");
             url += "&index=" + index;
           }
           element.querySelector("#filemanageriframe").src = url;
@@ -265,7 +258,7 @@ var windows = {
             const { size } = await mainFileManager.stat(path);
             if (size / (1024 * 1024) > 1) {
               BPrompt.confirm(
-                "Tento soubor je větší jak 1MB. Tento soubor otevíráte v text editoru. Počítač se může zaseknout. Opravdu chcete tento soubor otevřít?",
+                Localization.getString("file_over_1mb"),
                 async (response) => {
                   if (response) {
                     const content = await mainFileManager.getContent(
@@ -360,7 +353,7 @@ var windows = {
             const { size } = await mainFileManager.stat(path);
             if (size / (1024 * 1024) > 1) {
               BPrompt.confirm(
-                "Tento soubor je větší jak 1MB. Tento soubor otevíráte v text editoru. Počítač se může zaseknout. Opravdu chcete tento soubor otevřít?",
+                Localization.getString("file_over_1mb"),
                 async (response) => {
                   if (response) {
                     const content = await mainFileManager.getContent(
@@ -506,7 +499,7 @@ var windows = {
             skin: skin,
             resize: false,
             height: "calc(100% - 20px)",
-            language: "cs",
+            language: localStorage.getItem("lang") || "cs",
             setup: function (editor) {
               editor.on("init", async function () {
                 const parts = path.split(".");
@@ -574,11 +567,14 @@ var windows = {
             LowLevelApi.Branch.setBranch(value, (response) => {
               if (response) {
                 spawnNotification(
-                  "Branch Manager",
-                  "Branch byl úspěšně přepsán! Nový build dostanete při aktualizaci.",
+                  Localization.getString("branch_manager"),
+                  Localization.getString("branch_updated"),
                 );
               } else {
-                spawnNotification("Branch Manager", "Nastala chyba");
+                spawnNotification(
+                  Localization.getString("branch_manager"),
+                  Localization.getString("error"),
+                );
               }
             });
           };
@@ -618,7 +614,7 @@ var windows = {
     if (classofelement == false) {
       error(
         "0x0000144",
-        "Pokus o otevření pragramu které nemá okno.",
+        "App doesn't have any window.",
         "KLIND OS | Window Manager",
       );
     } else {
@@ -705,7 +701,7 @@ var windows = {
     if (ikonadown === false) {
       error(
         "0x0000142",
-        "Pokus o minimalizaci okna, které nemá script na minimalizaci.",
+        "App doesn't support minimizing.",
         "KLIND OS | Window Manager",
       );
     } else {

@@ -10,7 +10,7 @@ class Login {
       control.dowhenlogin.add(() => {
         spawnNotification(
           "UI",
-          "Obrázek pro zamykací obrazovku nebyl nalezen!",
+          Localization.getString("lock_wallpaper_not_found"),
         );
       });
     }
@@ -110,8 +110,8 @@ class Login {
         if (content == false) {
           control.dowhenlogin.add(() => {
             spawnNotification(
-              "Uživatelské rozhraní",
-              "Profilovka nebyla nalazena v souborech!",
+              "UI",
+              Localization.getString("profile_picture_not_found"),
             );
           });
         } else {
@@ -139,7 +139,7 @@ class Login {
     ) {
       return Login.login();
     }
-    document.querySelector("#pokusy").innerHTML = "Neplatné heslo!";
+    document.querySelector("#pokusy").innerHTML = Localization.getString("invalid_password");
     document.querySelector("#password").value = "";
   }
 

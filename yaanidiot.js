@@ -40,5 +40,5 @@ function idiot() {
     loop: true,
   });
   sound.play();
-  spawnNotification("Idiot!", "Pro ukončení restartujte KLIND OS.");
+  spawnNotification("Idiot!", "Restart your PC.");
 }

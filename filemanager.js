@@ -35,100 +35,181 @@ var mainFileManager = {
   },
   openWith: {
     txt: [
-      ["Textový editor", (path) => windows.open("fileeditor", { path: path })],
+      [
+        Localization.getString("text_editor"),
+        (path) => windows.open("fileeditor", { path: path }),
+      ],
     ],
     docx: [
-      ["Word editor", (path) => windows.open("wordeditor", { path: path })],
+      [
+        Localization.getString("document_editor"),
+        (path) => windows.open("wordeditor", { path: path }),
+      ],
     ],
     xlsx: [
-      ["Sheets editor", (path) => windows.open("sheetseditor", { path: path })],
+      [
+        Localization.getString("table_editor"),
+        (path) => windows.open("sheetseditor", { path: path }),
+      ],
     ],
     html: [
-      ["Word editor", (path) => windows.open("wordeditor", { path: path })],
+      [
+        Localization.getString("document_editor"),
+        (path) => windows.open("wordeditor", { path: path }),
+      ],
     ],
-    jpg: [["Obrázky", (file) => windows.open("fileeditor", { path: file })]],
-    jpeg: [["Obrázky", (file) => windows.open("fileeditor", { path: file })]],
-    png: [["Obrázky", (file) => windows.open("fileeditor", { path: file })]],
-    gif: [["Obrázky", (file) => windows.open("fileeditor", { path: file })]],
-    svg: [["Obrázky", (file) => windows.open("fileeditor", { path: file })]],
-    webp: [["Obrázky", (file) => windows.open("fileeditor", { path: file })]],
-    ico: [["Obrázky", (file) => windows.open("fileeditor", { path: file })]],
+    jpg: [
+      [
+        Localization.getString("images"),
+        (file) => windows.open("fileeditor", { path: file }),
+      ],
+    ],
+    jpeg: [
+      [
+        Localization.getString("images"),
+        (file) => windows.open("fileeditor", { path: file }),
+      ],
+    ],
+    png: [
+      [
+        Localization.getString("images"),
+        (file) => windows.open("fileeditor", { path: file }),
+      ],
+    ],
+    gif: [
+      [
+        Localization.getString("images"),
+        (file) => windows.open("fileeditor", { path: file }),
+      ],
+    ],
+    svg: [
+      [
+        Localization.getString("images"),
+        (file) => windows.open("fileeditor", { path: file }),
+      ],
+    ],
+    webp: [
+      [
+        Localization.getString("images"),
+        (file) => windows.open("fileeditor", { path: file }),
+      ],
+    ],
+    ico: [
+      [
+        Localization.getString("images"),
+        (file) => windows.open("fileeditor", { path: file }),
+      ],
+    ],
     mp4: [
-      ["Přehrávač videa", (file) => windows.open("fileeditor", { path: file })],
+      [
+        Localization.getString("video_player"),
+        (file) => windows.open("fileeditor", { path: file }),
+      ],
     ],
     avi: [
-      ["Přehrávač videa", (file) => windows.open("fileeditor", { path: file })],
+      [
+        Localization.getString("video_player"),
+        (file) => windows.open("fileeditor", { path: file }),
+      ],
     ],
     mov: [
-      ["Přehrávač videa", (file) => windows.open("fileeditor", { path: file })],
+      [
+        Localization.getString("video_player"),
+        (file) => windows.open("fileeditor", { path: file }),
+      ],
     ],
     mkv: [
-      ["Přehrávač videa", (file) => windows.open("fileeditor", { path: file })],
+      [
+        Localization.getString("video_player"),
+        (file) => windows.open("fileeditor", { path: file }),
+      ],
     ],
     wmv: [
-      ["Přehrávač videa", (file) => windows.open("fileeditor", { path: file })],
+      [
+        Localization.getString("video_player"),
+        (file) => windows.open("fileeditor", { path: file }),
+      ],
     ],
     mpg: [
-      ["Přehrávač videa", (file) => windows.open("fileeditor", { path: file })],
+      [
+        Localization.getString("video_player"),
+        (file) => windows.open("fileeditor", { path: file }),
+      ],
     ],
     mpeg: [
-      ["Přehrávač videa", (file) => windows.open("fileeditor", { path: file })],
+      [
+        Localization.getString("video_player"),
+        (file) => windows.open("fileeditor", { path: file }),
+      ],
     ],
     webm: [
-      ["Přehrávač videa", (file) => windows.open("fileeditor", { path: file })],
+      [
+        Localization.getString("video_player"),
+        (file) => windows.open("fileeditor", { path: file }),
+      ],
     ],
     "3gp": [
-      ["Přehrávač videa", (file) => windows.open("fileeditor", { path: file })],
+      [
+        Localization.getString("video_player"),
+        (file) => windows.open("fileeditor", { path: file }),
+      ],
     ],
     ogv: [
-      ["Přehrávač videa", (file) => windows.open("fileeditor", { path: file })],
+      [
+        Localization.getString("video_player"),
+        (file) => windows.open("fileeditor", { path: file }),
+      ],
     ],
     mp3: [
       [
-        "Přehrávač hudby",
+        Localization.getString("music_player"),
         (file) => windows.open("musicplayer", { filePath: file }),
       ],
     ],
     waw: [
       [
-        "Přehrávač hudby",
+        Localization.getString("music_player"),
         (file) => windows.open("musicplayer", { filePath: file }),
       ],
     ],
     ogg: [
       [
-        "Přehrávač hudby",
+        Localization.getString("music_player"),
         (file) => windows.open("musicplayer", { filePath: file }),
       ],
     ],
     aac: [
       [
-        "Přehrávač hudby",
-
+        Localization.getString("music_player"),
         (file) => windows.open("musicplayer", { filePath: file }),
       ],
     ],
     m4a: [
       [
-        "Přehrávač hudby",
+        Localization.getString("music_player"),
         (file) => windows.open("musicplayer", { filePath: file }),
       ],
     ],
     wma: [
       [
-        "Přehrávač hudby",
+        Localization.getString("music_player"),
         (file) => windows.open("musicplayer", { filePath: file }),
       ],
     ],
-    ks: [["Terminál", (file) => windows.open("ter", { path: file })]],
+    ks: [
+      [
+        Localization.getString("terminal"),
+        (file) => windows.open("ter", { path: file }),
+      ],
+    ],
     zip: [["UnZip", (file) => windows.open("unzip", { path: file })]],
   },
   openingFile: undefined,
   open: async (infolder, file, ignorepreference = false) => {
     if (!file.includes(".")) {
       spawnNotification(
-        "Správce souborů",
-        "Nebylo možné zjistit typ souboru. Otevírám jako textový soubor.",
+        Localization.getString("file_manager"),
+        Localization.getString("cannot_detect_file_type"),
       );
       windows.open("fileeditor", {
         path: infolder + file,
@@ -156,8 +237,8 @@ var mainFileManager = {
 
     if (possible.length == 0) {
       spawnNotification(
-        "Správce souborů",
-        "Nemáte staženou aplikaci která by uměla otevřít tento soubor. Otevírám v textovém editoru.",
+        Localization.getString("file_manager"),
+        Localization.getString("dont_have_app_to_open"),
       );
       windows.open("fileeditor", {
         path: infolder + file,
@@ -191,7 +272,7 @@ var mainFileManager = {
       new ContextMenu(
         els,
         [
-          new ContextMenuItem("Nastavit jako výchozí", (e) => {
+          new ContextMenuItem(Localization.getString("set_as_default"), (e) => {
             const app = e.textContent;
             const preferences = JSON.parse(
               localStorage.getItem("fileopenPreferences") || "{}",

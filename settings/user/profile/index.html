@@ -1,27 +1,41 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Motiv</title>
     <style>
-        :root {
-            --pocet: 4;
-            --spanvalue: 1.5;
-        }
+      :root {
+        --pocet: 4;
+        --spanvalue: 1.5;
+      }
     </style>
-    <link rel="stylesheet" href="./../../style.css">
+    <link rel="stylesheet" href="./../../style.css" />
     <script src="./../../mouse.js" defer></script>
     <script src="/isiframe.js"></script>
-</head>
-<body onmouseup="mouseUp()" onmousedown="mouseDown()" >
+  </head>
+  <body onmouseup="mouseUp()" onmousedown="mouseDown()">
     <div id="firstcursor"></div>
     <div id="secondcursor" class="secondcursor"></div>
-    <div class="button" onclick="window.location.replace('..')"><- Zpět</div>
-    <div class="button nohover"><span>Změňte si profilovku do KLIND OS. Po změně bude systém restartován. Vyberte cestu obrázk, který máte v správci souborů. Ponechte prázdné pro výchozí ikonku</span></div>
-    <input type="text" class="button nohover input" id="changeusericoninputvalueas" placeholder="Cesta nové profilovky">
-    <div class="button" onclick="parent.MyKLINDOS.newiconuserset(this.parentElement)">Odeslat</div>
+    <div class="button" onclick="window.location.replace('..')">
+      $[settings_back];
+    </div>
+    <div class="button nohover">
+      <span>$[profile_picture_change_message];</span>
+    </div>
+    <input
+      type="text"
+      class="button nohover input"
+      id="changeusericoninputvalueas"
+      placeholder="$[new_profile_picture_path];"
+    />
+    <div
+      class="button"
+      onclick="parent.MyKLINDOS.newiconuserset(this.parentElement)"
+    >
+      $[submit];
+    </div>
     <script src="./../../main.js" defer></script>
-</body>
+  </body>
 </html>

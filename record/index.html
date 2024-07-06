@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -12,10 +11,10 @@
       <video id="recorded" playsinline loop></video>
  
       <div>
-        <button id="start">Spustit</button>
-        <button id="record" disabled>Nahrát</button>
-        <button id="play" disabled>Start</button>
-        <button id="download" disabled>Stáhnout</button>
+        <button id="start">$[start];</button>
+        <button id="record" disabled>$[record];</button>
+        <button id="play" disabled>$[play];</button>
+        <button id="download" disabled>$[download];</button>
       </div>
  
       <div>
@@ -31,4 +30,7 @@
     </div>
   </body>
   <script src="script.js"></script>
+  <script>
+    parent.Localization.loadDOM(document.body);
+  </script>
 </html>

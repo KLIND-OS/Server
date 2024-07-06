@@ -8,18 +8,22 @@ class ColorFilters {
   static init(win) {
     win.querySelector(".activeFilters").innerHTML = "";
     if (ColorFilters.filters.length == 0) {
-      win.querySelector(".activeFilters").textContent = "Žádné aktivované filtry.";
+      win.querySelector(".activeFilters").textContent =
+        "Žádné aktivované filtry.";
       return;
     }
     for (var i = 0; i < ColorFilters.filters.length; i++) {
       var filter = ColorFilters.filters[i];
       var div = document.createElement("div");
       var span = document.createElement("span");
-      span.textContent = `Filtr: ${filter[0]}, Hodnota: ${filter[1]}`;
+      span.textContent = `${Localization.getString("filter")}: ${filter[0]}, ${Localization.getString("value")}: ${filter[1]}`;
       div.appendChild(span);
       var button = document.createElement("button");
-      button.setAttribute("onclick", `ColorFilters.removeFilter(this.parentElement,${i})`);
-      button.textContent = "Odstranit filtr";
+      button.setAttribute(
+        "onclick",
+        `ColorFilters.removeFilter(this.parentElement,${i})`,
+      );
+      button.textContent = Localization.getString("remove");
       div.appendChild(button);
       win.querySelector(".activeFilters").appendChild(div);
     }
@@ -38,21 +42,21 @@ class ColorFilters {
     document.querySelector(".filter").style.backdropFilter = str;
   }
   static changeSelection(select) {
-    const {value, parentElement} = select;
+    const { value, parentElement } = select;
     const helpTexts = parentElement.querySelectorAll(".values-helptext div");
     for (const div of helpTexts) {
       div.style.display = "none";
     }
     try {
-      parentElement.querySelector(".values-helptext ."+value).style.display = "block";
-    }
-    catch {
-      console.log("INFO: Helper text neexistuje");
+      parentElement.querySelector(".values-helptext ." + value).style.display =
+        "block";
+    } catch {
+      console.log("INFO: Helper doesn't exist");
     }
   }
   static addFilter(parent) {
     const filter = parent.querySelector(".filterSelect").value;
-    const {value} = parent.querySelector(".valueFilter");
+    const { value } = parent.querySelector(".valueFilter");
     ColorFilters.filters.push([filter, value]);
     ColorFilters.loadFilters();
     ColorFilters.init(parent.parentElement);

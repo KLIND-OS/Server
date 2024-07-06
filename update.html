@@ -1,45 +1,26 @@
 <!doctype html>
 <html>
   <head>
-    <title>KLIND OS | Aktualizace</title>
     <meta charset="UTF-8" />
     <script src="info.js"></script>
     <script src="hash.js"></script>
+    <script src="/libs/json5.min.js"></script>
+    <script src="/lang/localization.js"></script>
+    <script>
+      Localization.loadStrings();
+    </script>
   </head>
 
   <body style="text-align: center; margin: 0; padding: 0">
-    <h1>KLIND OS | Aktualizace</h1>
-    <p>
-      Toto je upozornění že tento server byl aktualizován na novou verzi KLIND
-      OS.!
-    </p>
-    <p>
-      Pokud chcete pokračovat do KLIND OS, musíte si KLIND OS aktualizovat i na
-      svém zařízení.
-    </p>
-    <p>Pokud aktualizujete, nebudete moct se vrátit na starší verzi.</p>
+    <h1>KLIND OS | <span>$[update];</span></h1>
+    <p>$[klindos_was_updated];</p>
     <div class="actions">
-      <h2>Akce které se budou muset provést při aktualizaci:</h2>
+      <h2>$[actions_after_install];</h2>
       <div class="act">
-        <p>Změna dat o vaší verzi</p>
+        <p>$[version_update];</p>
       </div>
     </div>
-    <button
-      onclick="this.innerHTML = 'Probíhá aktualizace';
-            setTimeout(() => {
-                this.innerHTML = 'Skoro hotovo...';
-                setTimeout(() => {
-                    this.style.display='none';
-                    document.getElementById('hotovo').style.display='';
-                }, 3488);
-            }, 5712);
-            "
-    >
-      Aktualizovat
-    </button>
-    <button id="hotovo" onclick="finish()" style="display: none">
-      Hotovo (klikněte pro potvrzení)
-    </button>
+    <button id="hotovo" onclick="finish()">$[finish];</button>
     <script>
       async function finish() {
         for (var i = 0; i < todo.length; i++) {
@@ -52,6 +33,7 @@
   </body>
 </html>
 <script>
+  // Not bothered to translate these
   var messages = [
     [
       6.1,
@@ -134,4 +116,6 @@
     }
     document.querySelector(".act").innerHTML += info[1] ? info[1] : "";
   }
+
+  Localization.loadDOM();
 </script>

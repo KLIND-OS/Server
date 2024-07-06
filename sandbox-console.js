@@ -165,7 +165,7 @@ var Sandbox = {
 			// Set up the View Options
 			this.resultPrefix = opts.resultPrefix || "  => ";
 			this.tabCharacter = opts.tabCharacter || "\t";
-			this.placeholder = opts.placeholder || "// vložte javascript příkaz";
+			this.placeholder = opts.placeholder || "// " + parent.Localization.getString("insert_command");
 			this.helpText = opts.helpText || "type javascript commands into the console, hit enter to evaluate. \n[up/down] to scroll through history, ':clear' to reset it. \n[alt + return/up/down] for returns and multi-line editing.";
 
 			// Bind to the model's change event to update the View
@@ -370,13 +370,7 @@ var Sandbox = {
 				this.model.destroy();
 				return true;
 			}
-			if ( command === ":help" ) {
-				return this.model.addHistory({
-					command : ':help',
-					result : this.helpText
-				});
-			}
-			// `:load <script src>`
+						// `:load <script src>`
 			if ( command.indexOf(":load") > -1 ) {
 				return this.model.addHistory({
 					command : command,

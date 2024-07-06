@@ -14,7 +14,10 @@ class Updates {
 
   static closeWindow(win) {
     if (win.getAttribute("updating") == "true") {
-      spawnNotification("Aktualizace", "Při aktualizaci nezavírejte okno.");
+      spawnNotification(
+        Localization.getString("updates"),
+        Localization.getString("dont_close_update"),
+      );
       // Block closing window
       return true;
     }
@@ -22,7 +25,10 @@ class Updates {
 
   static start(el) {
     if (Updates.updating)
-      return spawnNotification("Aktualizace", "Aktualizace již probíhá");
+      return spawnNotification(
+        Localization.getString("updates"),
+        Localization.getString("update_already_running"),
+      );
 
     const text = el.parentElement.querySelector(".updateStatus");
     Updates.updating = true;
@@ -31,7 +37,7 @@ class Updates {
       if (percentage === true) {
         el.parentElement.setAttribute("updating", false);
         Updates.updating = false;
-        text.textContent = "Aktualizace dokončena! Systém bude restartován.";
+        text.textContent = Localization.getString("update_finished");
         setTimeout(() => {
           LowLevelApi.Power.reboot();
         }, 2000);
