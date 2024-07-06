@@ -16,9 +16,9 @@
   <body>
     <script>
       // onload
-      // if (localStorage.getItem("installed") == "true") {
-      //   window.location.replace("index.html");
-      // }
+      if (localStorage.getItem("installed") == "true") {
+        window.location.replace("index.html");
+      }
 
       function install() {
         if (document.getElementById("username").value == "") {
