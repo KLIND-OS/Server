@@ -54,7 +54,7 @@ function stopWatch() {
 }
 
 function startStopstopky() {
-  if (status === "stopped") {
+  if (statusStop === "stopped") {
     //Start the stopwatch (by calling the setInterval() function)
     interval = window.setInterval(stopWatch, 1000);
     document.getElementById("startStop").innerHTML = "Stop";
