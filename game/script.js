@@ -12,7 +12,7 @@ function start(btn)  {
   var block = document.getElementById("block");
   block.classList.add("moving");
   var counter=0;
-  var checkDead = setInterval(function() {
+  setInterval(function() {
     let characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top"));
     let blockLeft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
     if(blockLeft<20 && blockLeft>-20 && characterTop>=130){
