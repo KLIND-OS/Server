@@ -1,3 +1,5 @@
+const downloadStatusStorage = [];
+
 class _DownloadStatus {
   static content = {};
   static add({ name }) {
