@@ -17,10 +17,10 @@
 <body onmouseup="mouseUp()" onmousedown="mouseDown()" >
     <div id="firstcursor"></div>
     <div id="secondcursor" class="secondcursor"></div>
-    <div class="button" onclick="window.location.replace('..')"><- Zpět</div>
-    <div class="button nohover"><span>Zde si můžete nastavit výchozí vyhledávač.</span></div>
+    <div class="button" onclick="window.location.replace('..')">$[settings_back];</div>
+    <div class="button nohover"><span>$[search_engine];</span></div>
     <div class="button nohover"><select cursor="pointer" class="searchselect"></select></div> 
-    <div class="button" onclick="send()">Odeslat</div>
+    <div class="button" onclick="send()">$[submit];</div>
     <script src="./../../main.js" defer></script>
     <script>
       const supportedEngines = parent.SearchEngine.supportedEngines

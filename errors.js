@@ -14,9 +14,8 @@ function error(code, info, app) {
         code +
         " Informations: " +
         info +
-        " Created error by: " +
-        app +
-        " Chyba byla vytvořena chybou v kódu KLIND OS nebo externí aplikace!",
+        " Error created by: " +
+        app,
     );
   }
 }

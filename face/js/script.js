@@ -30,12 +30,12 @@ document.body.onload = async () => {
         (stream) => (video.srcObject = stream),
         (err) =>
           (document.getElementById("messagespan").innerHTML =
-            "Při načítání fotoaparátu došlo k chybě. Zkuste to znovu a povolte fotoaparát. Chcete-li znovu načíst, klikněte pravým tlačítkem a klikněte na znovu načíst. Error:" +
+            "Error:" +
             err),
       );
     } catch (e) {
       document.getElementById("messagespan").innerHTML =
-        "Váš prohlížeč zabránil požádat vás o kameru. Je to pravděpodobně proto, že vaše stránka nepoužívá https://, ale http:// nebo že nemáte žádnou kameru.";
+        "Error";
       setTimeout(() => {
         window.location.replace("about:blank");
         parent.document.querySelector("#facerec").style.display = "none";

@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Motiv</title>
     <style>
       :root {
         --pocet: 3;
@@ -16,11 +15,9 @@
     <script src="/isiframe.js"></script>
     <script>
       function submit() {
-        parent.LowLevelApi.Debugging.getRootAccess();
-        parent.spawnNotification(
-          "Root Access",
-          parent.Localization.getString("root_granted"),
-        );
+        const { value } = document.querySelector(".searchselect");
+        localStorage.setItem("lang", value);
+        parent.location.reload();
       }
     </script>
   </head>
@@ -30,8 +27,20 @@
     <div class="button" onclick="window.location.replace('..')">
       $[settings_back];
     </div>
-    <div class="button nohover"><span>$[for_developers_message];</span></div>
-    <div class="button" onclick="submit()">$[run];</div>
+    <div class="button nohover">
+      <select cursor="pointer" class="searchselect">
+        <option value="en">English</option>
+        <option value="cs">Čeština</option>
+      </select>
+      <script>
+        document.querySelector(".searchselect").childNodes.forEach((e) => {
+          if (e.value == localStorage.lang) {
+            e.selected = true;
+          }
+        });
+      </script>
+    </div>
+    <div class="button" onclick="submit()">$[submit];</div>
     <script src="./../main.js" defer></script>
   </body>
 </html>

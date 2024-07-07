@@ -38,7 +38,7 @@ var CustomApp = {
           "onclick",
           "CustomApp.remove('" + all[i][0].trim() + "')",
         );
-        removebtn.textContent = "Odstranit";
+        removebtn.textContent = Localization.getString("remove");
 
         element.appendChild(span);
         element.appendChild(removebtn);
@@ -46,7 +46,7 @@ var CustomApp = {
         div.appendChild(element);
       }
     } else {
-      div.innerHTML = "Nemáte nainstalované žádné aplikace!";
+      div.innerHTML = Localization.getString("you_dont_have_any_app");
     }
   },
   remove: async (element) => {
@@ -100,8 +100,8 @@ var CustomApp = {
 
     if (!version && version.trim() != appVersion.trim()) {
       spawnNotifiction(
-        "Instalátor aplikací",
-        "Tato aplikace je na jinou verzi KLIND OS",
+        Localization.getString("app_installer"),
+        Localization.getString("this_app_is_for_version"),
       );
       return;
     }
@@ -139,8 +139,8 @@ var CustomApp = {
     for (var i = 0; i < all.length; i++) {
       if (all[i][0] === name) {
         spawnNotification(
-          "Instalátor aplikací",
-          "Aplikace se stejným jménem je již nainstalována!",
+          Localization.getString("app_installer"),
+          Localization.getString("app_with_same_name"),
         );
         return;
       }

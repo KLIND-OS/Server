@@ -1,45 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pozor!</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            background-color: red;
-            padding: 50px;
-        }
-        h1 {
-            font-size: 60px;
-        }
-        p {
-            font-size: 30px;
-            text-align: center;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background-color: red;
+        padding: 50px;
+      }
+      h1 {
+        font-size: 60px;
+      }
+      p {
+        font-size: 30px;
+        text-align: center;
+      }
     </style>
+    <script src="/libs/json5.min.js"></script>
+    <script src="/lang/localization.js"></script>
     <script>
-        function reset() {
-            localStorage.clear()
-            window.location.replace("http://localhost:10000")
-        }
+      Localization.loadStrings();
     </script>
-</head>
-<body>
-    <h1>Pozor!</h1>
-    <p>Byly jste přesměrování na stránku která není od KLIND OS. Toto není normální chování! Váš systém byl pravděpodobně napaden! Kvůli vaší bezpečnosti budeme muset váš systém resetovat do továrního nastavení.</p>
-    <h2>Stává se Vám to často?</h2>
-    <p>Pokud se tato chyba Vám stává často, je někde chyba v KLIND OS. Prosím nahlašte na klindos.jzitnik.dev/report</p>
-    <button onclick="reset()">Resetovat do továrního nastavení</button>
-    <button onclick="window.location.replace('http://localhost:10000')">Pokračovat do KLIND OS (na vlastní nebezpečí)</button>
-</body>
+  </head>
+  <body>
+    <h1>$[warning];</h1>
+    <p>$[security_redirect_error];</p>
+    <button onclick="window.location.replace('http://localhost:10000')">
+      $[continue_to_klindos];
+    </button>
+    <script>
+      Localization.loadDOM();
+    </script>
+  </body>
 </html>

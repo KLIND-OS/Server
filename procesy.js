@@ -5,10 +5,14 @@ var Procesy = {
   analyze: (con) => {
     for (var i = 0; i < Procesy.intervals.length; i++) {
       var p = document.createElement("p");
-      p.textContent = "Interval: " + Procesy.intervals[i][0] + " ";
+      p.textContent =
+        Localization.getString("interval") +
+        ": " +
+        Procesy.intervals[i][0] +
+        " ";
 
       var open = document.createElement("span");
-      open.textContent = "Open code ";
+      open.textContent = Localization.getString("open_code") + " ";
       open.style.color = "blue";
       open.setAttribute("ss", i);
       open.onclick = (e) => {
@@ -16,7 +20,7 @@ var Procesy = {
       };
 
       var end = document.createElement("span");
-      end.textContent = "End process";
+      end.textContent = Localization.getString("end_process");
       end.style.color = "blue";
       end.setAttribute("ss", i);
       end.onclick = (e) => {
@@ -33,10 +37,10 @@ var Procesy = {
     for (const event of eventListeners) {
       Procesy.events.push(event);
       let p = document.createElement("p");
-      p.textContent = `Element: ${event.node.tagName} Type: ${event.type}`;
+      p.textContent = `${Localization.getString("element")}: ${event.node.tagName} ${Localization.getString("type")}: ${event.type} `;
 
       let open = document.createElement("span");
-      open.textContent = "Open code ";
+      open.textContent = Localization.getString("open_code") + " ";
       open.style.color = "blue";
       open.setAttribute("ss", Procesy.events.length - 1);
       open.onclick = (e) => {
@@ -51,7 +55,7 @@ var Procesy = {
     try {
       windows.open("viewtext", {
         text: Procesy.intervals[i][1].toString(),
-        title: "Zobrazení procesu",
+        title: Localization.getString("process_view"),
       });
     } catch (e) {
       // Ignore error
@@ -61,7 +65,7 @@ var Procesy = {
     try {
       windows.open("viewtext", {
         text: Procesy.events[i].func.toString(),
-        title: "Zobrazení eventu",
+        title: Localization.getString("event_view"),
       });
     } catch (e) {
       // Ignore error
@@ -82,10 +86,16 @@ var Procesy = {
 
     for (const { pid, name } of systemProcesses) {
       var p = document.createElement("p");
-      p.textContent = "Systémový proces: " + name + " ID: " + pid + " ";
+      p.textContent =
+        Localization.getString("system_process") +
+        ": " +
+        name +
+        " ID: " +
+        pid +
+        " ";
 
       var kill = document.createElement("span");
-      kill.textContent = "Kill";
+      kill.textContent = Localization.getString("kill");
       kill.style.color = "blue";
       kill.onclick = () => {
         LowLevelApi.TaskManager.killProcess(pid);

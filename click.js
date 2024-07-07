@@ -8,13 +8,13 @@ document.addEventListener("mousemove", function (e) {
 
 // Global right click menu
 new ContextMenu(document.getElementById("klindowsrightclickmenu"), [
-  new ContextMenuItem("Napájení", () => Power.open()),
-  new ContextMenuItem("Vypnout", () => Power.turnoff()),
-  new ContextMenuItem("Nastavení", () => windows.open("nas")),
+  new ContextMenuItem(Localization.getString("power_menu"), () => Power.open()),
+  new ContextMenuItem(Localization.getString("power_off"), () => Power.turnoff()),
+  new ContextMenuItem(Localization.getString("settings"), () => windows.open("nas")),
 ]);
 
 const startmenu = new ContextMenu(undefined, [
-  new ContextMenuItem("Přidat aplikaci na plochu", (e) => {
+  new ContextMenuItem(Localization.getString("add_app_to_desktop"), (e) => {
     var icon = e.getAttribute("icon");
     var run = e.getAttribute("onclick");
     DesktopIcons.add({
@@ -22,7 +22,7 @@ const startmenu = new ContextMenu(undefined, [
       icon: icon,
     });
   }),
-  new ContextMenuItem("Přidat zástupce do souborů", (e) => {
+  new ContextMenuItem(Localization.getString("add_shortcut_to_files"), (e) => {
     var name = e.textContent;
     var app = e
       .getAttribute("onclick")
@@ -41,7 +41,7 @@ function rightclickApp(element) {
 }
 
 const desktopiconsmenu = new ContextMenu(undefined, [
-  new ContextMenuItem("Odebrat", (e) => {
+  new ContextMenuItem(Localization.getString("remove"), (e) => {
     var storage = JSON.parse(localStorage.getItem("desktop-icons"));
     var newstorage = [];
     var id = e.getAttribute("id");

@@ -5,8 +5,15 @@ class ZIndexer {
   static focus(win, nomove = false) {
     if (ZIndexer.current && ZIndexer.current.isEqualNode(win)) return;
 
+    if (!nomove) {
+      const thisWindowSlot = win.assignedSlot;
 
-    if (!nomove) document.querySelector(".oknapatrizde").appendChild(win);
+      const newSlotName = windows._createSlot();
+
+      win.slot = newSlotName;
+
+      thisWindowSlot.remove();
+    }
 
     setTimeout(() => {
       ZIndexer.current = win;

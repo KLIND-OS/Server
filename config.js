@@ -1,1 +1,1 @@
-developermode = "false"; // Pouze pro programátory
+developermode = "false"; // Only for programmers

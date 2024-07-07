@@ -53,9 +53,9 @@ console.log = function () {
     mainConsole.log(...arguments);
   }
   catch {
-    console.error("Nepovedlo se uložit log do databáze.");
+    console.error("Error while saving log.");
     mainConsole.log(...arguments);
   }
 };
 
-console.log("Spouštím log daemon...");
+console.log("Starting log daemon...");

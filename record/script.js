@@ -10,11 +10,11 @@ const playButton = document.querySelector("button#play");
 const downloadButton = document.querySelector("button#download");
 
 recordButton.addEventListener("click", () => {
-  if (recordButton.textContent === "Nahrát") {
+  if (recordButton.textContent === parent.Localization.getString("record")) {
     startRecording();
   } else {
     stopRecording();
-    recordButton.textContent = "Nahrát";
+    recordButton.textContent = parent.Localization.getString("record");
     playButton.disabled = false;
     downloadButton.disabled = false;
   }
@@ -39,8 +39,8 @@ downloadButton.addEventListener("click", async () => {
     const binary = reader.result;
     await parent.mainFileManager.save("/record.mp4", binary);
     parent.spawnNotification(
-      "Nahrávání",
-      "Soubor byl uložen do kořenové složky.",
+      parent.Localization.getString("video_recorder"),
+      parent.Localization.getString("file_was_saved"),
     );
     parent.windows.open("filemanager");
   };
@@ -66,7 +66,7 @@ function startRecording() {
   }
 
   console.log("Created MediaRecorder", mediaRecorder, "with options", options);
-  recordButton.textContent = "Stop Recording";
+  recordButton.textContent = parent.Localization.getString("stop_recording");
   playButton.disabled = true;
   downloadButton.disabled = true;
   mediaRecorder.onstop = (event) => {

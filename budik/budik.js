@@ -35,16 +35,24 @@ function addbudik() {
       budikarraymax++;
       budikasndjbasjdbhajksbdkjasdjk++;
       document.getElementById("budiky").innerHTML =
-        "Aktivní budíky: " +
+        parent.Localization.getString("active_alarm_clocks") +
+        ": " +
         budikarray.join() +
         "<br>" +
-        "Počet aktivních budíků: " +
+        parent.Localization.getString("number_active_alarms") +
+        ": " +
         budikasndjbasjdbhajksbdkjasdjk;
       localstoragebudiky = budikarray.join("-");
       localStorage.setItem("budiky", localstoragebudiky);
-      parent.spawnNotification("Alarm clock", "Budík byl vytvořen!");
+      parent.spawnNotification(
+        parent.Localization.getString("alarm_clock"),
+        parent.Localization.getString("alarm_created"),
+      );
     } else {
-      parent.spawnNotification("Alarm clock", "Budík se nepovedlo vytvořit!");
+      parent.spawnNotification(
+        parent.Localization.getString("alarm_clock"),
+        parent.Localization.getString("failed_create_alarm"),
+      );
     }
   }
 }
@@ -61,16 +69,18 @@ setInterval(() => {
     soundssadsadasdsa.play();
     budikasndjbasjdbhajksbdkjasdjk--;
     document.getElementById("budiky").innerHTML =
-      "Aktivní budíky: " +
+      parent.Localization.getString("active_alarm_clocks") +
+      ": " +
       budikarray.join() +
       "<br>" +
-      "Počet aktivních budíků: " +
+      parent.Localization.getString("number_active_alarms") +
+      ": " +
       budikasndjbasjdbhajksbdkjasdjk;
     localstoragebudiky = budikarray.join("-");
     localStorage.setItem("budiky", localstoragebudiky);
     parent.spawnNotification(
-      "Alarm clock",
-      "Budík zvoní. Přestane za několik sekund.",
+      parent.Localization.getString("alarm_clock"),
+      parent.Localization.getString("alarm_ringing"),
     );
   }
 }, 1);
@@ -87,10 +97,12 @@ function loadbudiky() {
       budikarraymax = budikarray.length;
       budikasndjbasjdbhajksbdkjasdjk = budikarray.length;
       document.getElementById("budiky").innerHTML =
-        "Aktivní budíky: " +
+        parent.Localization.getString("active_alarm_clocks") +
+        ": " +
         budikarray.join() +
         "<br>" +
-        "Počet aktivních budíků: " +
+        parent.Localization.getString("number_active_alarms") +
+        ": " +
         budikasndjbasjdbhajksbdkjasdjk;
     }
   } catch {
@@ -102,11 +114,16 @@ function deleteallbudiky() {
   budikarraymax = 0;
   budikasndjbasjdbhajksbdkjasdjk = 0;
   document.getElementById("budiky").innerHTML =
-    "Aktivní budíky: " +
+    parent.Localization.getString("active_alarm_clocks") +
+    ": " +
     budikarray.join() +
     "<br>" +
-    "Počet aktivních budíků: " +
+    parent.Localization.getString("number_active_alarms") +
+    ": " +
     budikasndjbasjdbhajksbdkjasdjk;
   localStorage.removeItem("budiky");
-  parent.spawnNotification("Budík", "Všechny budíky byly smazány!");
+  parent.spawnNotification(
+    parent.Localization.getString("alarm_clock"),
+    parent.Localization.getString("alarm_clocks_removed"),
+  );
 }

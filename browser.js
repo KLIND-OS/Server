@@ -7,12 +7,11 @@ class Browser {
 
     if (
       urlObject.hostname == window.location.hostname &&
-      urlObject.port == window.location.port &&
-      urlObject.pathname != "/developer.html"
+      urlObject.port == window.location.port
     ) {
       const browerr = win.querySelector(".browerr");
       browerr.querySelector("#errorcodebrow").textContent = 0;
-      browerr.querySelector("#errornamebrow").textContent = "This website is blocked!";
+      browerr.querySelector("#errornamebrow").textContent = Localization.getString("this_website_blocked");
       browerr.style.display = "block";
       return;
     }

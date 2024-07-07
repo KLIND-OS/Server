@@ -18,10 +18,10 @@
 <body onmouseup="mouseUp()" onmousedown="mouseDown()" >
     <div id="firstcursor"></div>
     <div id="secondcursor" class="secondcursor"></div>
-    <div class="button" onclick="window.location.replace('..')"><- Zpět</div>
-    <div class="button nohover"><span>Změňte si uživatelské jméno do KLIND OS. Po změně bude systém restartován.</span></div>
-    <input type="text" class="button nohover input" id="changenameinputvalue" placeholder="Nové uživatelské jméno">
-    <div class="button" onclick="parent.MyKLINDOS.newnameset(this.parentElement)">Odeslat</div>
+    <div class="button" onclick="window.location.replace('..')">$[settings_back];</div>
+    <div class="button nohover"><span>$[name_change_message];</span></div>
+    <input type="text" class="button nohover input" id="changenameinputvalue" placeholder="$[new_username];">
+    <div class="button" onclick="parent.MyKLINDOS.newnameset(this.parentElement)">$[submit];</div>
     <script src="./../../main.js" defer></script>
 </body>
 </html>

@@ -1,3 +1,5 @@
+const downloadStatusStorage = [];
+
 class _DownloadStatus {
   static content = {};
   static add({ name }) {
@@ -41,7 +43,7 @@ class DownloadStatus {
   }
   finish() {
     const element = _DownloadStatus.content[this.id];
-    element.querySelector("#percentage").textContent = "Hotovo!";
+    element.querySelector("#percentage").textContent = Localization.getString("finished");
     element.querySelector(".progressDownload").style.width = "100%";
     this.id = null;
 
@@ -55,7 +57,7 @@ class DownloadStatus {
   error() {
     const element = _DownloadStatus.content[this.id];
     const percentageel = element.querySelector("#percentage");
-    percentageel.textContent = "Chyba!";
+    percentageel.textContent = Localization.getString("error") + "!";
     percentageel.style.color = "red";
 
     element.querySelector(".progressDownload").style.width = "0%";
@@ -71,7 +73,7 @@ class DownloadStatus {
   converting() {
     const element = _DownloadStatus.content[this.id];
     const percentageel = element.querySelector("#percentage");
-    percentageel.textContent = "Převádění...";
+    percentageel.textContent = Localization.getString("converting") + "...";
 
     element.querySelector(".progressDownload").style.width = "0%";
   }
