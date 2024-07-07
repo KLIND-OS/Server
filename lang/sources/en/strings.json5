@@ -339,4 +339,17 @@
   file_was_saved: "Soubor byl uložen",
   reset: "Reset",
   language: "Language",
+  updates: {
+    "0%": "Updating system",
+    "20%": "Updating graphical interface",
+    "25%": "Updating graphical interface",
+    "45%": "Updating client",
+    "50%": "Updating client",
+    "60%": "Updating client",
+    "80%": "Updating client",
+    "83%": "Updating client",
+    "86%": "Updating client",
+    "90%": "Updating window manager",
+    "86%": "Updating NodeJS packages",
+  },
 }
