@@ -33,7 +33,7 @@ class Updates {
     const text = el.parentElement.querySelector(".updateStatus");
     Updates.updating = true;
     el.parentElement.setAttribute("updating", true);
-    LowLevelApi.Updates.update((percentage, t) => {
+    LowLevelApi.Updates.update((percentage) => {
       if (percentage === true) {
         el.parentElement.setAttribute("updating", false);
         Updates.updating = false;
@@ -42,7 +42,7 @@ class Updates {
           LowLevelApi.Power.reboot();
         }, 2000);
       } else {
-        text.textContent = `${percentage} ${t}`;
+        text.textContent = `${percentage} ${Localization.getString("updates")[percentage]}`;
       }
     });
   }

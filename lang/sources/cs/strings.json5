@@ -339,4 +339,17 @@
   file_was_saved: "Soubor byl uložen",
   reset: "Resetovat",
   language: "Jazyk",
+  updates: {
+    "0%": "Aktualizování systému",
+    "20%": "Aktualizace grafického rozhraní",
+    "25%": "Aktualizace grafického rozhraní",
+    "45%": "Aktualizace klienta",
+    "50%": "Aktualizace klienta",
+    "60%": "Aktualizace klienta",
+    "80%": "Aktualizace klienta",
+    "83%": "Aktualizace klienta",
+    "86%": "Aktualizace klienta",
+    "90%": "Aktualizace window manager",
+    "86%": "Aktualizace NodeJS knihoven",
+  },
 }
