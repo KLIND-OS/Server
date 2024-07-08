@@ -1,31 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NotInstalled</title>
     <style>
-        * {
-            text-align: center;
-        }
+      * {
+        text-align: center;
+      }
     </style>
-    <script src="/libs/json5.min.js"></script>
-    <script src="/lang/localization.js"></script>
-    <script>
-      Localization.loadStrings();
-    </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <h1>$[face_recognition_not_set];</h1>
-    <button onclick='
+    <button
+      onclick='
     parent.document.getElementById("facerecif").src = "about:blank";
-    parent.document.getElementById("facerec").style.display = "none";'>$[close];</button>
+    parent.document.getElementById("facerec").style.display = "none";'
+    >
+      $[close];
+    </button>
     <script>
-      Localization.loadDOM();
+      parent.Localization.loadDOM();
     </script>
-</body>
-
+  </body>
 </html>
