@@ -75,6 +75,7 @@ var CustomApp = {
       element,
     );
     await LowLevelApi.filesystem.fsExtra.rm(appDataPath, { recursive: true });
+    await LowLevelApi.NodePackages.removeContext(element);
     window.location.reload();
   },
   async loadFromPath(path) {
@@ -125,8 +126,13 @@ var CustomApp = {
       "utf8",
     );
 
-    const install = await LowLevelApi.filesystem.readFile(
-      LowLevelApi.filesystem.path.join(outputPath, "install.js"),
+    const node = await LowLevelApi.filesystem.readFile(
+      LowLevelApi.filesystem.path.join(outputPath, "node_packages.json"),
+      "utf8",
+    );
+
+    const linux = await LowLevelApi.filesystem.readFile(
+      LowLevelApi.filesystem.path.join(outputPath, "linux_programs.json"),
       "utf8",
     );
 
@@ -164,11 +170,21 @@ var CustomApp = {
 
     await LowLevelApi.filesystem.fsExtra.rm(outputPath, { recursive: true });
 
-    window.installFinished = () => {
-      all.push([name, script, icon]);
-      localStorage.setItem("customapps", JSON.stringify(all));
-      window.location.reload();
-    };
-    eval(install);
+    all.push([name, script, icon]);
+    localStorage.setItem("customapps", JSON.stringify(all));
+
+    await LowLevelApi.NodePackages.createContext(name);
+
+    await LowLevelApi.NodePackages.install(JSON.parse(node).join(" "), name);
+
+    const execAsync = LowLevelApi.filesystem.promisify(
+      LowLevelApi.child_process.exec,
+    );
+
+    await execAsync(
+      "sudo pacman -Sy --noconfirm --needed " + JSON.parse(linux).join(" "),
+    );
+
+    window.location.reload();
   },
 };
