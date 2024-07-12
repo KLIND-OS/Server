@@ -339,7 +339,7 @@
   file_was_saved: "Soubor byl uložen",
   reset: "Reset",
   language: "Language",
-  updates: {
+  msgupdates: {
     "0%": "Updating system",
     "20%": "Updating graphical interface",
     "25%": "Updating graphical interface",
