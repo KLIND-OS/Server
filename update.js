@@ -42,7 +42,7 @@ class Updates {
           LowLevelApi.Power.reboot();
         }, 2000);
       } else {
-        text.textContent = `${percentage} ${Localization.getString("updates")[percentage]}`;
+        text.textContent = `${percentage} ${Localization.getString("msgupdates")[percentage]}`;
       }
     });
   }
