@@ -124,6 +124,11 @@ var control = {
 };
 
 class App {
+  nodePackages = {
+    get: (packageName) => {
+      return LowLevelApi.NodePackages.get(packageName, this.info.name);
+    },
+  };
   windowParser = {
     parseName: (windowName) => {
       return `${this.info.name}-${windowName}`;

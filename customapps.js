@@ -181,9 +181,11 @@ var CustomApp = {
       LowLevelApi.child_process.exec,
     );
 
-    await execAsync(
-      "sudo pacman -Sy --noconfirm --needed " + JSON.parse(linux).join(" "),
-    );
+    if (JSON.parse(linux).length !== 0) {
+      await execAsync(
+        "sudo pacman -Sy --noconfirm --needed " + JSON.parse(linux).join(" "),
+      );
+    }
 
     window.location.reload();
   },
