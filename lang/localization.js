@@ -2,7 +2,7 @@ class Localization {
   static _strings = {};
 
   static loadStrings() {
-    const lang = localStorage.getItem("lang") || "cs";
+    const lang = this.getLang();
     const request = new XMLHttpRequest();
     request.open("GET", `/lang/sources/${lang}/strings.json5`, false);
     request.send(null);
@@ -15,6 +15,10 @@ class Localization {
     const strings = JSON5.parse(data);
 
     this._strings = strings;
+  }
+
+  static getLang() {
+    return localStorage.getItem("lang") || "cs";
   }
 
   static getString(x) {
