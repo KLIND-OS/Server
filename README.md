@@ -1,31 +1,29 @@
-# KLIND-OS-Demo-Server
+# KLIND OS
 
-Zde se ukládá verze KLIND OS která běží na serveru. Napsáno pouze v HTML, CSS a JavaScript. Žádný framework.
+KLIND OS is a Arch Linux distribution with GUI written in JavaScript. This repository contains the GUI. Most of the GUI code is here, some more low level stuff (apis for working with native Linux filesystem etc.) is in the [Client repository](https://github.com/KLIND-OS/Client) that contains the actuall Electron configuration and stuff.
 
-# UPOZORNĚNÍ
+Learn more here: [KLIND OS Website](https://klindos.jzitnik.dev)
 
-KLIND OS je můj projekt který jsem začal dělat když mi bylo 10 let. V té době jsem věděl hovno o programování a o tom, jak má správný kód vypadat.
-Proto dost KLIND OS kódu je pěkný bordel. Snažil jsem se ten kód z velké části přepsat, ale to je na hodně dlouho.
+# How to start a development server
 
-# Jak spustit development server
-
-1. Stáhněte Node JS na: [https://nodejs.org/en/download](https://nodejs.org/en/download)
-2. Spusťte:
+1. Download nodejs on: [https://nodejs.org/en/download](https://nodejs.org/en/download)
+2. Run:
    ```shell
    npm install
    ```
-3. Spustit development server:
+3. Run development server:
    ```shell
    npm run dev
    ```
 
-# Jak se napojit na server
+# How to connect to a server
 
-Pro připojení na server využijte [KLIND-OS-Client](https://github.com/KLIND-OS/Client).
+For connecting to a server, use [KLIND-OS-Client](https://github.com/KLIND-OS/Client).
 
-# ESLint
+**KLIND OS is not supported in the browser, but most of the GUI will work there.**
 
-1. Spusťte ESLint:
-   ```shell
-   npm run lint
-   ```
+# More info on the codebase
+
+A lot of the code in this repo was written like 4 years ago. I was learning to code and didn't know much. That's why a lot of this code is a mess.
+
+Also, this project was in Czech most of it's time, so some parts of the code is written in Czech, sorry about that.
