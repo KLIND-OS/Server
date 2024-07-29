@@ -36,7 +36,7 @@ class Loading {
           });
         }
       }, 700);
-      document.getElementById("favicon").setAttribute("href", "logo.ico");
+      document.getElementById("favicon").setAttribute("href", "/logo/logo.ico");
       document.title = titleklindows + " " + version;
     }, 790);
     document.getElementById("password").focus();

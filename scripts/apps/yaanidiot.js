@@ -1,9 +1,10 @@
-function asdkjasldjklasdjkl(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min) + min);
-}
 function idiot() {
+  function random(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min);
+  }
+
   var app = new App({
     name: "Idiot",
     hidden: true,
@@ -28,14 +29,14 @@ function idiot() {
     var width = window.innerWidth;
     var height = window.innerHeight;
     for (var i = 0; i < windows.length; i++) {
-      var top = asdkjasldjklasdjkl(0, height - 200);
-      var left = asdkjasldjklasdjkl(0, width - 200);
+      var top = random(0, height - 200);
+      var left = random(0, width - 200);
       windows[i].style.top = top + "px";
       windows[i].style.left = left + "px";
     }
   }, 200);
   var sound = new Howl({
-    src: ["/yaanidiot.mp3"],
+    src: ["/sounds/yaanidiot.mp3"],
     volume: 0.5,
     loop: true,
   });
