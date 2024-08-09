@@ -170,14 +170,6 @@ var windows = {
 
     special: {
       info: [infoApp.loadInfo, false, false],
-      my: [
-        (element) => {
-          element.querySelector("#myaccount").innerHTML =
-            localStorage.getItem("username");
-        },
-        false,
-        false,
-      ],
       filemanager: [
         (element, args) => {
           var url = "/filemanager/";
