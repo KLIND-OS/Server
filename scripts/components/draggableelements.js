@@ -159,9 +159,9 @@ class DraggableElements {
       target.style.transition = "ease 0.1s all";
       setTimeout(() => {
         target.style.top = "0px";
-        target.style.left = parseInt(window.innerWidth / 2) + "px";
+        target.style.left = Math.ceil(window.innerWidth / 2) + "px";
         target.style.height = heightOfWindow - 50 + "px";
-        target.style.width = parseInt(widthOfWindow / 2) + "px";
+        target.style.width = Math.ceil(widthOfWindow / 2) + "px";
         target.setAttribute("isFullscreen", "true");
         setTimeout(() => {
           target.style.transition = "";

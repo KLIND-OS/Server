@@ -5,7 +5,7 @@ class DiskManager {
     Sounds.devicePlugIn();
     spawnNotification(
       Localization.getString("disk_manager"),
-      Localization.getString("drive_was_connected").replace("{}", disk),
+      Localization.getString("drive_was_connected").format(disk),
     );
   }
   static remove(disk) {
@@ -13,7 +13,7 @@ class DiskManager {
     Sounds.devicePlugOut();
     spawnNotification(
       Localization.getString("disk_manager"),
-      Localization.getString("drive_was_disconnected").replace("{}", disk),
+      Localization.getString("drive_was_disconnected").format(disk),
     );
   }
   static getAllDisks() {
