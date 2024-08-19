@@ -12,6 +12,10 @@ class ContextMenu {
   menu;
   manualTrigger;
 
+  destroy() {
+    this.menu.remove();
+  }
+
   constructor(trigger, menulist, isArray = false) {
     const menu = document.createElement("ul");
     menu.id = "menu";

@@ -1,0 +1,282 @@
+.filemanager .filemanager-content {
+  width: 100%;
+  height: calc(100% - 20px);
+  display: flex;
+}
+
+/* Left aside */
+
+.filemanager .filemanager-content > aside {
+  display: flex;
+  flex-direction: column;
+  width: 16rem;
+  padding: 1rem;
+  border-right: 1px solid black;
+}
+
+.filemanager .filemanager-content > aside > div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.filemanager .filemanager-content > aside > div > img {
+  height: 1.5rem;
+  width: 1.5rem;
+  filter: invert(1);
+}
+
+.filemanager .filemanager-content > aside > div > h2 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.filemanager .filemanager-content > aside > nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filemanager .filemanager-content > aside > nav > div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+.filemanager .filemanager-content > aside > nav > div:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.filemanager .filemanager-content > aside > nav > div > img {
+  height: 1.25rem;
+  width: 1.25rem;
+  filter: invert(1);
+}
+
+/* Right main */
+
+.filemanager .filemanager-content > div {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.filemanager .filemanager-content > div > header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  height: 3.5rem;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid;
+  background-color: var(--background);
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.filemanager .filemanager-content > div > header > .breadcrumb-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filemanager
+  .filemanager-content
+  > div
+  > header
+  > .breadcrumb-container
+  > nav
+  > ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem;
+  word-break: break-word;
+  font-size: 0.875rem;
+}
+
+.filemanager
+  .filemanager-content
+  > div
+  > header
+  > .breadcrumb-container
+  > nav
+  > ol
+  > li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.filemanager
+  .filemanager-content
+  > div
+  > header
+  > .breadcrumb-container
+  > nav
+  > ol
+  * {
+  color: lightgray;
+  font-weight: 700;
+  transition: ease 0.2s color;
+}
+
+.filemanager
+  .filemanager-content
+  > div
+  > header
+  > .breadcrumb-container
+  > nav
+  > ol
+  > li:hover:not(.active):not(.sepa)
+  * {
+  color: white;
+}
+
+.filemanager
+  .filemanager-content
+  > div
+  > header
+  > .breadcrumb-container
+  > nav
+  > ol
+  li.active
+  * {
+  color: white;
+}
+
+.filemanager
+  .filemanager-content
+  > div
+  > header
+  > .breadcrumb-container
+  > nav
+  > ol
+  > li
+  > img {
+  filter: invert(1);
+}
+
+.filemanager .filemanager-content > div > header > .buttons-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filemanager
+  .filemanager-content
+  > div
+  > header
+  > .buttons-container
+  > .button {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5rem;
+  width: 2.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+  text-align: center;
+  text-decoration: none;
+}
+
+.filemanager
+  .filemanager-content
+  > div
+  > header
+  > .buttons-container
+  > .button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #1f2937;
+}
+
+.filemanager
+  .filemanager-content
+  > div
+  > header
+  > .buttons-container
+  > .button:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.filemanager
+  .filemanager-content
+  > div
+  > header
+  > .buttons-container
+  > .button:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.filemanager
+  .filemanager-content
+  > div
+  > header
+  > .buttons-container
+  > .button
+  img {
+  height: 1.25rem;
+  filter: invert(1);
+}
+
+.filemanager .filemanager-content > div > main {
+  flex: 1;
+  overflow: auto;
+  padding: 1rem;
+}
+
+.filemanager .filemanager-content > div > main > div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+  gap: 1rem;
+}
+
+.filemanager .filemanager-content > div > main > div > div {
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  height: 8rem;
+  width: 100%;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  border: 1px solid;
+  padding: 1rem;
+  transition: all 0.2s ease;
+}
+
+.filemanager .filemanager-content > div > main > div > div > img {
+  height: 2.5rem;
+  width: 2.5rem;
+  filter: invert(1);
+}
+
+.filemanager .filemanager-content > div > main > div > div > h3 {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.filemanager .filemanager-content > div > main > div > div > small {
+  color: lightgray;
+}

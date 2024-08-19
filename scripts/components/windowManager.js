@@ -172,48 +172,49 @@ var windows = {
       info: [infoApp.loadInfo, false, false],
       filemanager: [
         (element, args) => {
-          var url = "/filemanager/";
-          if (localStorage.getItem("mode") == "dark") url += "?dark";
-
-          if (args && args.mode == "select") {
-            if (url.indexOf("?") == -1) url += "?fileselect";
-            else url += "&fileselect";
-            var index = openGetFile.length;
-            openGetFile.push([element, args.callBack]);
-            element
-              .querySelector(".close")
-              .setAttribute(
-                "onclick",
-                "openGetFile[" +
-                  index +
-                  "][1]['closed']();windows.close(this,'filemanager', event)",
-              );
-            element.querySelector(".mini").remove();
-            element.querySelector(".headerclass span").textContent =
-              Localization.getString("select_file");
-            url += "&index=" + index;
-          }
-
-          if (args && args.mode == "folderselect") {
-            if (url.indexOf("?") == -1) url += "?folderselect";
-            else url += "&folderselect";
-
-            let index = openGetFile.length;
-            openGetFile.push([element, args.callBack]);
-            element
-              .querySelector(".close")
-              .setAttribute(
-                "onclick",
-                "openGetFile[" +
-                  index +
-                  "][1]['closed']();windows.close(this,'filemanager', event)",
-              );
-            element.querySelector(".mini").remove();
-            element.querySelector(".headerclass span").textContent =
-              Localization.getString("select_folder");
-            url += "&index=" + index;
-          }
-          element.querySelector("#filemanageriframe").src = url;
+          // var url = "/filemanager/";
+          // if (localStorage.getItem("mode") == "dark") url += "?dark";
+          //
+          // if (args && args.mode == "select") {
+          //   if (url.indexOf("?") == -1) url += "?fileselect";
+          //   else url += "&fileselect";
+          //   var index = openGetFile.length;
+          //   openGetFile.push([element, args.callBack]);
+          //   element
+          //     .querySelector(".close")
+          //     .setAttribute(
+          //       "onclick",
+          //       "openGetFile[" +
+          //         index +
+          //         "][1]['closed']();windows.close(this,'filemanager', event)",
+          //     );
+          //   element.querySelector(".mini").remove();
+          //   element.querySelector(".headerclass span").textContent =
+          //     Localization.getString("select_file");
+          //   url += "&index=" + index;
+          // }
+          //
+          // if (args && args.mode == "folderselect") {
+          //   if (url.indexOf("?") == -1) url += "?folderselect";
+          //   else url += "&folderselect";
+          //
+          //   let index = openGetFile.length;
+          //   openGetFile.push([element, args.callBack]);
+          //   element
+          //     .querySelector(".close")
+          //     .setAttribute(
+          //       "onclick",
+          //       "openGetFile[" +
+          //         index +
+          //         "][1]['closed']();windows.close(this,'filemanager', event)",
+          //     );
+          //   element.querySelector(".mini").remove();
+          //   element.querySelector(".headerclass span").textContent =
+          //     Localization.getString("select_folder");
+          //   url += "&index=" + index;
+          // }
+          // element.querySelector("#filemanageriframe").src = url;
+          FilemanagerApp.init(element.querySelector(".filemanager-content"));
         },
         false,
         false,
@@ -727,7 +728,7 @@ var windows = {
             var element = windows.list.appIds[id];
             var appdiv = document.querySelector(".appdiv");
             appdiv.querySelector(".canvasSection").innerHTML =
-              "<div class=\"loading\">Loading&#8230;</div>";
+              '<div class="loading">Loading&#8230;</div>';
             appdiv.querySelector("h1").textContent =
               element.querySelector(".headerclass span").textContent;
             var left = e.clientX - 150;

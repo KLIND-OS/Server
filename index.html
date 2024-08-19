@@ -93,6 +93,7 @@
     <script src="scripts/components/startmenu.js"></script>
     <script src="scripts/components/theme.js"></script>
     <script src="scripts/components/battery.js"></script>
+    <script src="scripts/apps/filemanager.js"></script>
 
     <style id="customcssstyleelement"></style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -138,6 +139,7 @@
     <link rel="stylesheet" href="styles/components/power.css" />
     <link rel="stylesheet" href="styles/apps/installer.css" />
     <link rel="stylesheet" href="styles/components/notificationCenter.css" />
+    <link rel="stylesheet" href="styles/apps/filemanager.css" />
   </head>
 
   <body
@@ -407,9 +409,7 @@
               ></div>
             </div>
           </div>
-          <textarea
-            id="notesinput"
-          ></textarea>
+          <textarea id="notesinput"></textarea>
         </div>
 
         <div onclick="ZIndexer.focus(this);" class="kalkulacka">
@@ -902,11 +902,34 @@
               ></div>
             </div>
           </div>
-          <iframe
-            class="filemanager"
-            id="filemanageriframe"
-            src="about:blank"
-          ></iframe>
+          <div class="filemanager-content">
+            <aside>
+              <div>
+                <img src="icons/filemanager.svg" />
+                <h2>$[file_manager];</h2>
+              </div>
+              <nav>
+                <div>
+                  <img class="icn-f" src="icons/filemanager.svg" />
+                  <span>$[home];</span>
+                </div>
+              </nav>
+            </aside>
+
+            <div>
+              <header>
+                <div class="breadcrumb-container">
+                  <nav>
+                    <ol></ol>
+                  </nav>
+                </div>
+                <div class="buttons-container"></div>
+              </header>
+              <main>
+                <div class="files-list"></div>
+              </main>
+            </div>
+          </div>
         </div>
 
         <div onclick="ZIndexer.focus(this)" class="fileproperties">
