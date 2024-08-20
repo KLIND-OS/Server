@@ -68,3 +68,39 @@
 .kalkulacka buttonkalkulackaeq {
   width: 104px;
 }
+
+.iconsKLINDOS {
+  width: 100%;
+  height: calc(100% - 50px);
+}
+
+.filesDragging {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  pointer-events: none;
+}
+
+.dragging-file {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  z-index: 1000;
+  background: rgb(0 0 0 / 40%);
+  backdrop-filter: blur(3px);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.dragging-file.dark img {
+  filter: invert(1);
+}
+
+.dragging-file.dark {
+  color: white;
+}

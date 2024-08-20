@@ -93,6 +93,7 @@
     <script src="scripts/components/startmenu.js"></script>
     <script src="scripts/components/theme.js"></script>
     <script src="scripts/components/battery.js"></script>
+    <script src="scripts/components/filedragging.js"></script>
     <script src="scripts/apps/filemanager.js"></script>
 
     <style id="customcssstyleelement"></style>
@@ -908,12 +909,7 @@
                 <img src="icons/filemanager.svg" />
                 <h2>$[file_manager];</h2>
               </div>
-              <nav>
-                <div>
-                  <img class="icn-f" src="icons/filemanager.svg" />
-                  <span>$[home];</span>
-                </div>
-              </nav>
+              <nav class="aside-nav"></nav>
             </aside>
 
             <div>
@@ -928,6 +924,7 @@
               <main>
                 <div class="files-list"></div>
               </main>
+              <footer class="dynamicfooter" style="display: none"></footer>
             </div>
           </div>
         </div>
@@ -1700,6 +1697,7 @@
           <p>$[please_wait];</p>
         </div>
       </div>
+      <div class="filesDragging"></div>
       <div id="klindows" class="klindows">
         <div id="openedapps">
           <span></span>
@@ -2243,6 +2241,23 @@
         window.location.replace("..");
 
       Localization.loadDOM();
+
+      FileDraggingAPI.registerDroppable(
+        document.querySelector(".iconsKLINDOS"),
+        true,
+        false,
+        Localization.getString("add_shortcut_to_desktop"),
+        (str) => {
+          const lastSlashIndex = str.lastIndexOf("/");
+
+          const partBeforeLastSlash = str.substring(0, lastSlashIndex);
+          const partAfterLastSlash = str.substring(lastSlashIndex + 1);
+          FilemanagerApp.staticTools.addShortcutToDesktop(
+            partBeforeLastSlash,
+            partAfterLastSlash,
+          );
+        },
+      );
     </script>
     <script src="scripts/apps/getstartedfunctions.js"></script>
     <script src="scripts/components/windowanimation.js"></script>

@@ -1,7 +1,45 @@
+const FilemanagerAppList = [];
+
 class FilemanagerApp {
   static clipboard;
 
+  static startOptions = Object.freeze({
+    DEFAULT: "DEFAULT",
+    FILESELECT: "FILESELECT",
+    FOLDERSELECT: "FOLDERSELECT",
+  });
+
+  static destroy(id) {
+    FilemanagerAppList[id].destroy();
+  }
+
+  destroy() {
+    this.states._rightClicks.forEach((e) => e.destroy());
+    this.states._globalRight.destroy();
+  }
+
+  static staticTools = {
+    addShortcutToDesktop: (folder, path) => {
+      var fun = `try{mainFileManager.open('${folder}', '${path}')}catch {spawnNotification(Localization.getString("file_manager"),Localization.getString("file_not_found"))}`;
+      DesktopIcons.add({
+        run: fun,
+        icon: "filemanager/images/file.png",
+      });
+    },
+  };
+
   tools = {
+    addShortcutToDesktop: (path) => {
+      FilemanagerApp.staticTools.addShortcutToDesktop(
+        this.states.currentFolder,
+        path,
+      );
+    },
+    recursiveCreateFolder: async (url) => {
+      await LowLevelApi.filesystem.fs.promises.mkdir(url, {
+        recursive: true,
+      });
+    },
     humanFileSize: function (bytes, si = false, dp = 1) {
       const thresh = si ? 1000 : 1024;
       if (Math.abs(bytes) < thresh) {
@@ -56,13 +94,112 @@ class FilemanagerApp {
     },
   };
 
+  _addAside(name, iconsrc, url, asideNav) {
+    const div = document.createElement("div");
+
+    div.onclick = () => {
+      this.redirect(url);
+    };
+
+    const icon = document.createElement("img");
+    icon.className = "icon-f";
+    icon.src = iconsrc;
+
+    const span = document.createElement("span");
+    span.textContent = name;
+
+    div.appendChild(icon);
+    div.appendChild(span);
+
+    asideNav.appendChild(div);
+  }
+
+  _loadAside() {
+    const asideNav = this.win.querySelector(".aside-nav");
+
+    this._addAside(
+      Localization.getString("home"),
+      "icons/house.svg",
+      "/",
+      asideNav,
+    );
+
+    this._addAside(
+      Localization.getString("downloads"),
+      "icons/house.svg",
+      "/Downloads/",
+      asideNav,
+    );
+  }
+
   async redirect(newFolder) {
+    const path = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir(),
+      "usrfiles",
+      newFolder,
+    );
+
+    if (!(await LowLevelApi.filesystem.exists(path))) {
+      await this.tools.recursiveCreateFolder(path);
+    }
+
     this.states.currentFolder = newFolder;
     await this.reloadWin();
   }
 
+  _loadFooter() {
+    if (this.states.type == FilemanagerApp.startOptions.DEFAULT) {
+      return;
+    }
+
+    const footer = this.win.querySelector(".dynamicfooter");
+
+    const container = document.createElement("div");
+    container.style.display = "flex";
+    container.style.alignItems = "center";
+    container.style.justifyContent = "space-between";
+    container.style.padding = "0 10px";
+    container.style.boxSizing = "border-box";
+
+    if (this.states.type == FilemanagerApp.startOptions.FILESELECT) {
+      const text = document.createElement("h2");
+      text.textContent = Localization.getString("select_folder");
+      container.appendChild(text);
+    }
+
+    if (this.states.type == FilemanagerApp.startOptions.FOLDERSELECT) {
+      const text = document.createElement("h2");
+      text.textContent = Localization.getString("select_folder");
+      container.appendChild(text);
+
+      const buttonsContainer = document.createElement("div");
+      buttonsContainer.className = "buttons-container";
+
+      const button = document.createElement("button");
+      button.className = "button";
+      button.textContent = Localization.getString("select_folder_act");
+      button.style.width = "fit-content";
+      button.style.padding = "0 5px";
+
+      button.onclick = () => {
+        this.states.callback(this.states.currentFolder);
+        this.win.parentElement.querySelector(".headerclass .close").click();
+      };
+
+      buttonsContainer.appendChild(button);
+
+      container.appendChild(buttonsContainer);
+    }
+
+    footer.appendChild(container);
+    footer.style.display = "block";
+  }
+
   __loadBredcrumbItem(breadcrumb, name, url, trail = false) {
     const liText = document.createElement("li");
+    if (trail) {
+      liText.classList.add("active");
+    }
     const p = document.createElement("p");
     p.textContent = name;
     p.setAttribute("cursor", "pointer");
@@ -120,92 +257,109 @@ class FilemanagerApp {
     buttonsDiv.appendChild(button);
   }
 
-  _loadButtons(buttonsDiv) {
-    this._loadButton(buttonsDiv, "icons/reload.png", () => this.reloadWin());
-    this._loadButton(buttonsDiv, "icons/file.png", () => {
-      BPrompt.prompt(
-        Localization.getString("enter_file_name"),
-        async (name) => {
-          if (!(name == null || name.length == 0)) {
-            if (await this.tools.fileExist(name)) {
-              spawnNotification(
-                Localization.getString("file_manager"),
-                Localization.getString("file_with_same_name"),
-              );
-            } else {
-              if (name.length > 100) {
-                spawnNotification(
-                  Localization.getString("file_manager"),
-                  Localization.getString("file_name_longer"),
-                );
-              } else {
-                if (name.indexOf("/") > -1 || name.indexOf("\\") > -1) {
-                  spawnNotification(
-                    Localization.getString("file_manager"),
-                    Localization.getString("invalid_characters_file"),
-                  );
-                } else {
-                  const path = LowLevelApi.filesystem.path.join(
-                    LowLevelApi.filesystem.os.homedir() +
-                      "/usrfiles" +
-                      this.states.currentFolder,
-                    name,
-                  );
-
-                  LowLevelApi.filesystem.fs.open(path, "w", () => {
-                    this.reloadWin();
-                  });
-                }
-              }
-            }
-          }
-        },
-      );
-    });
-    this._loadButton(buttonsDiv, "icons/folder.svg", () => {
-      BPrompt.prompt(
-        Localization.getString("enter_folder_name"),
-        async (name) => {
-          if (name == null || name.length == 0) {
-            // Nothing
+  __createFile() {
+    BPrompt.prompt(Localization.getString("enter_file_name"), async (name) => {
+      if (!(name == null || name.length == 0)) {
+        if (await this.tools.fileExist(name)) {
+          spawnNotification(
+            Localization.getString("file_manager"),
+            Localization.getString("file_with_same_name"),
+          );
+        } else {
+          if (name.length > 100) {
+            spawnNotification(
+              Localization.getString("file_manager"),
+              Localization.getString("file_name_longer"),
+            );
           } else {
-            if (name.indexOf("/") > -1 || name.indexOf(".") > -1) {
+            if (name.indexOf("/") > -1 || name.indexOf("\\") > -1) {
               spawnNotification(
                 Localization.getString("file_manager"),
-                Localization.getString("invalid_characters"),
+                Localization.getString("invalid_characters_file"),
               );
             } else {
-              if (name.length > 100) {
-                spawnNotification(
-                  Localization.getString("file_manager"),
-                  Localization.getString("folder_name_longer"),
-                );
-                return;
-              }
-              if (await this.tools.folderExists(name)) {
-                spawnNotification(
-                  Localization.getString("file_manager"),
-                  Localization.getString("folder_with_same_name"),
-                );
-              } else {
-                const path = LowLevelApi.filesystem.path.join(
-                  LowLevelApi.filesystem.os.homedir() +
-                    "/usrfiles" +
-                    this.states.currentFolder,
-                  name,
-                );
-                await LowLevelApi.filesystem.mkdir(path);
+              const path = LowLevelApi.filesystem.path.join(
+                LowLevelApi.filesystem.os.homedir() +
+                  "/usrfiles" +
+                  this.states.currentFolder,
+                name,
+              );
 
-                await this.reloadWin();
-              }
+              LowLevelApi.filesystem.fs.open(path, "w", () => {
+                this.reloadWin();
+              });
             }
           }
-        },
-      );
+        }
+      }
     });
   }
 
+  __createFolder() {
+    BPrompt.prompt(
+      Localization.getString("enter_folder_name"),
+      async (name) => {
+        if (name == null || name.length == 0) {
+          // Nothing
+        } else {
+          if (name.indexOf("/") > -1 || name.indexOf(".") > -1) {
+            spawnNotification(
+              Localization.getString("file_manager"),
+              Localization.getString("invalid_characters"),
+            );
+          } else {
+            if (name.length > 100) {
+              spawnNotification(
+                Localization.getString("file_manager"),
+                Localization.getString("folder_name_longer"),
+              );
+              return;
+            }
+            if (await this.tools.folderExists(name)) {
+              spawnNotification(
+                Localization.getString("file_manager"),
+                Localization.getString("folder_with_same_name"),
+              );
+            } else {
+              const path = LowLevelApi.filesystem.path.join(
+                LowLevelApi.filesystem.os.homedir() +
+                  "/usrfiles" +
+                  this.states.currentFolder,
+                name,
+              );
+              await LowLevelApi.filesystem.mkdir(path);
+
+              await this.reloadWin();
+            }
+          }
+        }
+      },
+    );
+  }
+
+  _loadButtons(buttonsDiv) {
+    this._loadButton(buttonsDiv, "icons/reload.png", () => this.reloadWin());
+    this._loadButton(buttonsDiv, "icons/file.png", () => this.__createFile());
+    this._loadButton(buttonsDiv, "icons/folder.svg", () =>
+      this.__createFolder(),
+    );
+  }
+
   async openFile(filename, ignorepreference = false) {
+    if (this.states.type == FilemanagerApp.startOptions.FOLDERSELECT) {
+      return;
+    }
+
+    if (this.states.type == FilemanagerApp.startOptions.FILESELECT) {
+      const path = LowLevelApi.filesystem.path.join(
+        this.states.currentFolder,
+        filename,
+      );
+      this.states.callback(path);
+      this.win.parentElement.querySelector(".headerclass .close").click();
+      return;
+    }
+
     if (filename.endsWith(".lnk")) {
       const systemPath = LowLevelApi.filesystem.path.join(
         LowLevelApi.filesystem.os.homedir() + "/usrfiles",
@@ -408,6 +562,10 @@ class FilemanagerApp {
           filesDiv.appendChild(element);
         }
       }
+
+      if (this.states.type == FilemanagerApp.startOptions.FOLDERSELECT) {
+        return;
+      }
       for (const file of items) {
         const filePath = LowLevelApi.filesystem.path.join(
           LowLevelApi.filesystem.os.homedir() +
@@ -420,6 +578,12 @@ class FilemanagerApp {
         if (fileStat.isFile()) {
           const element = document.createElement("div");
           element.setAttribute("cursor", "pointer");
+
+          FileDraggingAPI.registerFile(
+            element,
+            file,
+            LowLevelApi.filesystem.path.join(this.states.currentFolder, file),
+          );
 
           const item = new ContextMenu(element, [
             new ContextMenuItem(Localization.getString("copy"), (file) => {
@@ -440,9 +604,14 @@ class FilemanagerApp {
                 Localization.getString("copy_message"),
               );
             }),
-            new ContextMenuItem(Localization.getString("open_with"), (file) => {
-              this.openFile(file.querySelector("h3").textContent, true);
-            }),
+            this.states.type != FilemanagerApp.startOptions.DEFAULT
+              ? null
+              : new ContextMenuItem(
+                Localization.getString("open_with"),
+                (file) => {
+                  this.openFile(file.querySelector("h3").textContent, true);
+                },
+              ),
             new ContextMenuItem(Localization.getString("copy_path"), (file) => {
               var path =
                 this.states.currentFolder +
@@ -455,11 +624,9 @@ class FilemanagerApp {
             new ContextMenuItem(
               Localization.getString("add_shortcut_to_desktop"),
               (file) => {
-                var fun = `try{mainFileManager.open('${this.states.currentFolder}', '${file.querySelector("h3").textContent}')}catch {spawnNotification(Localization.getString("file_manager"),Localization.getString("file_not_found"))}`;
-                DesktopIcons.add({
-                  run: fun,
-                  icon: "filemanager/images/file.png",
-                });
+                this.tools.addShortcutToDesktop(
+                  file.querySelector("h3").textContent,
+                );
               },
             ),
             new ContextMenuItem(Localization.getString("rename"), (file) => {
@@ -586,13 +753,18 @@ class FilemanagerApp {
     // Reset right clicks
     this.states._rightClicks.forEach((e) => e.destroy());
     this.states._rightClicks = [];
+
+    // Reset aside
+    this.win.querySelector(".aside-nav").innerHTML = "";
   }
 
   async loadWin() {
+    this._loadFooter();
     this._loadBreadcrumb(
       this.win.querySelector(".breadcrumb-container nav ol"),
       this.states.currentFolder.split("/"),
     );
+    this._loadAside();
     await this._loadFiles(this.win.querySelector(".files-list"));
   }
 
@@ -611,6 +783,12 @@ class FilemanagerApp {
     const element = this.win.querySelector(".files-list").parentElement;
 
     const item = new ContextMenu(element, [
+      new ContextMenuItem(Localization.getString("create_file"), () =>
+        this.__createFile(),
+      ),
+      new ContextMenuItem(Localization.getString("create_folder"), () =>
+        this.__createFolder(),
+      ),
       new ContextMenuItem(Localization.getString("create_shortcut"), () => {
         BPrompt.prompt(
           Localization.getString("enter_shortcut_name"),
@@ -664,11 +842,19 @@ class FilemanagerApp {
     this.states._globalRight = item;
   }
 
-  static async init(win) {
+  static async init(win, startType, callback) {
     const el = new this(win);
+    el.states.type = startType || this.startOptions.DEFAULT;
+    if (callback) {
+      el.states.callback = callback;
+    }
+
+    el.win.parentElement.dataset.id = FilemanagerAppList.length;
     await el.loadWin();
     el._loadButtons(win.querySelector(".buttons-container"));
     el.registerGlobalRight();
+
+    FilemanagerAppList.push(el);
 
     return el;
   }
@@ -678,6 +864,8 @@ class FilemanagerApp {
     loading: false,
     _rightClicks: [],
     _globalRight: undefined,
+    type: undefined,
+    callback: undefined,
   };
   win;
 

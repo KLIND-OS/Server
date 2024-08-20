@@ -232,7 +232,8 @@
   update_already_running: "Aktualizace již probíhá",
   update_finished: "Aktualizace dokončena! Systém bude restartován.",
   no_opened_windows: "Nejsou otevřené žádné okna",
-  select_folder: "Select folder",
+  select_folder: "Vyberte složku",
+  select_folder_act: "Vybrat stávající složku",
   select_file: "Vyberte soubor",
   file_over_1mb: "Tento soubor je větší jak 1 MB. Tento soubor otevíráte v text editoru. Počítač se může zaseknout. Opravdu chcete tento soubor otevřít?",
   branch_manager: "Správce branche",
@@ -352,4 +353,7 @@
     "90%": "Aktualizace window manager",
   },
   home: "Domov",
+  create_folder: "Vytvořit složku",
+  create_file: "Vytvořit soubor",
+  downloads: "Stažené",
 }

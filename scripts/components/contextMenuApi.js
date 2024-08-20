@@ -24,6 +24,9 @@ class ContextMenu {
     };
 
     for (const menuItem of menulist) {
+      if (!menuItem) {
+        continue;
+      }
       const li = document.createElement("li");
       li.onclick = () => {
         menu.classList.remove("show");

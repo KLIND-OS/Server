@@ -214,9 +214,16 @@ var windows = {
           //   url += "&index=" + index;
           // }
           // element.querySelector("#filemanageriframe").src = url;
-          FilemanagerApp.init(element.querySelector(".filemanager-content"));
+          const win = element.querySelector(".filemanager-content");
+
+          if (args) {
+            return FilemanagerApp.init(win, args.mode, args.callBack);
+          }
+          FilemanagerApp.init(win);
         },
-        false,
+        (win) => {
+          FilemanagerApp.destroy(win.dataset.id);
+        },
         false,
       ],
       fileeditor: [
@@ -432,7 +439,7 @@ var windows = {
       musicplayer: [
         (element, args) => {
           element.querySelector("iframe").src =
-            "/music?filePath=" + args.filePath;
+            "/music?filePath=" + encodeURIComponent(args.filePath);
         },
         false,
         false,
