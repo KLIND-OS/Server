@@ -13,7 +13,7 @@ class FileDraggingAPI {
       }
       return ancestors;
     },
-    isHoveringFile: (elementUnderCursor) => {
+    isHoveringFile: (elementUnderCursor, start) => {
       const ancestors = FileDraggingAPI.tools.getAncestors(elementUnderCursor);
 
       let ret = [false];
@@ -23,8 +23,11 @@ class FileDraggingAPI {
           continue;
         }
         if (
-          ancestors.some((e) => e.isSameNode(el.element)) ||
-          elementUnderCursor.isSameNode(el.element)
+          ancestors.some(
+            (e) => e.isSameNode(el.element) && !e.isSameNode(start),
+          ) ||
+          (elementUnderCursor.isSameNode(el.element) &&
+            !elementUnderCursor.isSameNode(start))
         ) {
           ret = [true, el];
           el.hoverCallback(true, "file");
@@ -35,7 +38,7 @@ class FileDraggingAPI {
 
       return ret;
     },
-    isHoveringFolder: (elementUnderCursor) => {
+    isHoveringFolder: (elementUnderCursor, start) => {
       const ancestors = FileDraggingAPI.tools.getAncestors(elementUnderCursor);
 
       let ret = [false];
@@ -45,8 +48,11 @@ class FileDraggingAPI {
           continue;
         }
         if (
-          ancestors.some((e) => e.isSameNode(el.element)) ||
-          elementUnderCursor.isSameNode(el.element)
+          ancestors.some(
+            (e) => e.isSameNode(el.element) && !e.isSameNode(start),
+          ) ||
+          (elementUnderCursor.isSameNode(el.element) &&
+            !elementUnderCursor.isSameNode(start))
         ) {
           ret = [true, el];
           el.hoverCallback(true, "folder");
@@ -63,7 +69,10 @@ class FileDraggingAPI {
 
       var elementUnderCursor = document.elementFromPoint(x, y);
 
-      const [dragging, elt] = isHovering(elementUnderCursor || document);
+      const [dragging, elt] = isHovering(
+        elementUnderCursor || document,
+        event.target,
+      );
 
       const helper = ui.helper[0];
       const helperText = helper.querySelector("p");
@@ -93,6 +102,10 @@ class FileDraggingAPI {
       if (!dragging) {
         return;
       }
+
+      if (event.target.isSameNode(elt.element)) {
+        return;
+      }
       elt.hoverCallback(false, type);
       elt.callback(ui.helper[0].dataset.fileLocation, type);
     },
@@ -113,7 +126,7 @@ class FileDraggingAPI {
           event,
           ui,
           FileDraggingAPI.tools.isHoveringFile,
-          "file"
+          "file",
         );
       },
       helper: function () {
@@ -154,7 +167,7 @@ class FileDraggingAPI {
           event,
           ui,
           FileDraggingAPI.tools.isHoveringFolder,
-          "folder"
+          "folder",
         );
       },
       helper: function () {

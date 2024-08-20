@@ -24,6 +24,7 @@ class FilemanagerApp {
       DesktopIcons.add({
         run: fun,
         icon: "filemanager/images/file.png",
+        name: folder
       });
     },
     addFolderShortcutToDesktop: (path) => {
@@ -31,6 +32,7 @@ class FilemanagerApp {
       DesktopIcons.add({
         run: fun,
         icon: "icons/folder.svg",
+        name: path.replace(/\/$/, "").split("/").at(-1)
       });
     },
   };
@@ -119,7 +121,9 @@ class FilemanagerApp {
         } else {
           const bypass = FileLocker.add(clipboard[3]);
           const destinationPath = LowLevelApi.filesystem.path.join(
-            LowLevelApi.filesystem.os.homedir() + "/usrfiles" + this.states.currentFolder,
+            LowLevelApi.filesystem.os.homedir() +
+              "/usrfiles" +
+              this.states.currentFolder,
             clipboard[1],
           );
           const progressBar = new DownloadStatus(clipboard[1]);
@@ -156,7 +160,9 @@ class FilemanagerApp {
       } else {
         const bypass = FileLocker.add(clipboard[3]);
         const destinationPath = LowLevelApi.filesystem.path.join(
-          LowLevelApi.filesystem.os.homedir() + "/usrfiles" + this.states.currentFolder,
+          LowLevelApi.filesystem.os.homedir() +
+            "/usrfiles" +
+            this.states.currentFolder,
           clipboard[1],
         );
 
@@ -299,50 +305,69 @@ class FilemanagerApp {
     const liText = document.createElement("li");
     if (trail) {
       liText.classList.add("active");
+    } else {
+      let prevhov = false;
+      let interval;
+
+      FileDraggingAPI.registerDroppable(
+        liText,
+        true,
+        true,
+        Localization.getString("copy"),
+        async (location, type) => {
+          if (type == "file") {
+            const path = LowLevelApi.filesystem.path.join(
+              LowLevelApi.filesystem.os.homedir(),
+              "/usrfiles",
+              location,
+            );
+
+            FilemanagerApp.clipboard = [
+              path,
+              location.split("/").at(-1),
+              false,
+              location,
+            ];
+
+            await this.redirect(url);
+            await this.paste();
+          }
+          if (type == "folder") {
+            const path = LowLevelApi.filesystem.path.join(
+              LowLevelApi.filesystem.os.homedir(),
+              "/usrfiles",
+              location,
+            );
+
+            FilemanagerApp.clipboard = [
+              path,
+              location.split("/").at(-2),
+              true,
+              location,
+            ];
+
+            await this.redirect(url);
+            await this.paste();
+          }
+        },
+        (e) => {
+          if (e) {
+            if (prevhov == false) {
+              interval = setTimeout(() => {
+                this.redirect(url);
+                prevhov = false;
+              }, 700);
+            }
+            prevhov = true;
+          } else {
+            if (prevhov == true) {
+              clearInterval(interval);
+            }
+            prevhov = false;
+          }
+        },
+      );
     }
-
-    FileDraggingAPI.registerDroppable(
-      liText,
-      true,
-      true,
-      Localization.getString("copy"),
-      async (location, type) => {
-        if (type == "file") {
-          const path = LowLevelApi.filesystem.path.join(
-            LowLevelApi.filesystem.os.homedir(),
-            "/usrfiles",
-            location,
-          );
-
-          FilemanagerApp.clipboard = [
-            path,
-            location.split("/").at(-1),
-            false,
-            location,
-          ];
-
-          await this.redirect(url);
-          await this.paste();
-        }
-        if (type == "folder") {
-          const path = LowLevelApi.filesystem.path.join(
-            LowLevelApi.filesystem.os.homedir(),
-            "/usrfiles",
-            location,
-          );
-
-          FilemanagerApp.clipboard = [
-            path,
-            location.split("/").at(-1),
-            true,
-            location,
-          ];
-
-          await this.redirect(url);
-          await this.paste();
-        }
-      },
-    );
 
     const p = document.createElement("p");
     p.textContent = name;
@@ -562,7 +587,78 @@ class FilemanagerApp {
           FileDraggingAPI.registerFolder(
             element,
             folder,
-            LowLevelApi.filesystem.path.join(this.states.currentFolder, folder),
+            LowLevelApi.filesystem.path.join(
+              this.states.currentFolder,
+              folder,
+            ) + "/",
+          );
+
+          let interval;
+          let prevhov = false;
+
+          FileDraggingAPI.registerDroppable(
+            element,
+            true,
+            true,
+            Localization.getString("copy"),
+            async (location, type) => {
+              if (type == "file") {
+                const path = LowLevelApi.filesystem.path.join(
+                  LowLevelApi.filesystem.os.homedir(),
+                  "/usrfiles",
+                  location,
+                );
+
+                FilemanagerApp.clipboard = [
+                  path,
+                  location.split("/").at(-1),
+                  false,
+                  location,
+                ];
+
+                await this.redirect(this.states.currentFolder + folder + "/");
+                await this.paste();
+              }
+              if (type == "folder") {
+                const path = LowLevelApi.filesystem.path.join(
+                  LowLevelApi.filesystem.os.homedir(),
+                  "/usrfiles",
+                  location,
+                );
+
+                FilemanagerApp.clipboard = [
+                  path,
+                  location.split("/").at(-2),
+                  true,
+                  location,
+                ];
+
+                await this.redirect(this.states.currentFolder + folder + "/");
+                await this.paste();
+              }
+            },
+            (e) => {
+              if (e) {
+                element.style.scale = "1.1";
+                if (prevhov == false) {
+                  interval = setTimeout(() => {
+                    this.redirect(
+                      LowLevelApi.filesystem.path.join(
+                        this.states.currentFolder,
+                        folder,
+                      ) + "/",
+                    );
+                  }, 700);
+                }
+                prevhov = true;
+              } else {
+                element.style.scale = "";
+                if (prevhov == true) {
+                  clearInterval(interval);
+                }
+                prevhov = false;
+              }
+            },
           );
 
           element.onclick = () => {
@@ -939,9 +1035,7 @@ class FilemanagerApp {
       new ContextMenuItem(Localization.getString("create_folder"), () =>
         this.__createFolder(),
       ),
-      new ContextMenuItem(Localization.getString("paste"), () =>
-        this.paste(),
-      ),
+      new ContextMenuItem(Localization.getString("paste"), () => this.paste()),
       new ContextMenuItem(Localization.getString("create_shortcut"), () => {
         BPrompt.prompt(
           Localization.getString("enter_shortcut_name"),
@@ -1006,6 +1100,47 @@ class FilemanagerApp {
     await el.loadWin();
     el._loadButtons(win.querySelector(".buttons-container"));
     el.registerGlobalRight();
+
+    FileDraggingAPI.registerDroppable(
+      win.querySelector("main"),
+      true,
+      true,
+      Localization.getString("copy"),
+      async (location, type) => {
+        if (type == "file") {
+          const path = LowLevelApi.filesystem.path.join(
+            LowLevelApi.filesystem.os.homedir(),
+            "/usrfiles",
+            location,
+          );
+
+          FilemanagerApp.clipboard = [
+            path,
+            location.split("/").at(-1),
+            false,
+            location,
+          ];
+
+          await el.paste();
+        }
+        if (type == "folder") {
+          const path = LowLevelApi.filesystem.path.join(
+            LowLevelApi.filesystem.os.homedir(),
+            "/usrfiles",
+            location,
+          );
+
+          FilemanagerApp.clipboard = [
+            path,
+            location.split("/").at(-2),
+            true,
+            location,
+          ];
+
+          await el.paste();
+        }
+      },
+    );
 
     if (startFolder) {
       el.redirect(startFolder);

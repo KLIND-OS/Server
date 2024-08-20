@@ -3,6 +3,34 @@ var videofileids = [];
 var windows = {
   shadowDom: undefined,
   lastSlotId: 0,
+  _resizeObserver: new ResizeObserver((e) => {
+    const { target } = e[0];
+    const width = target.offsetWidth;
+
+    target.classList.remove(
+      "view-sm",
+      "view-md",
+      "view-lg",
+      "view-xl",
+      "view-2xl",
+      target.dataset.__prev,
+    );
+
+    target.classList.add("view-" + width);
+    target.dataset.__prev = "view-" + width;
+
+    if (width >= 1536) {
+      target.classList.add("view-2xl");
+    } else if (width >= 1280) {
+      target.classList.add("view-xl");
+    } else if (width >= 1024) {
+      target.classList.add("view-lg");
+    } else if (width >= 768) {
+      target.classList.add("view-md");
+    } else if (width >= 640) {
+      target.classList.add("view-sm");
+    }
+  }),
   list: {
     names: [
       "poznamky",
@@ -598,31 +626,8 @@ var windows = {
 
       newelement.slot = windows._createSlot();
 
-      var resizeObserver = new ResizeObserver((e) => {
-        const { target } = e[0];
-        const width = target.offsetWidth;
-
-        target.classList.remove(
-          "view-sm",
-          "view-md",
-          "view-lg",
-          "view-xl",
-          "view-2xl",
-        );
-
-        if (width >= 1536) {
-          target.classList.add("view-2xl");
-        } else if (width >= 1280) {
-          target.classList.add("view-xl");
-        } else if (width >= 1024) {
-          target.classList.add("view-lg");
-        } else if (width >= 768) {
-          target.classList.add("view-md");
-        } else if (width >= 640) {
-          target.classList.add("view-sm");
-        }
-      });
-      resizeObserver.observe(newelement);
+      newelement.dataset.__prev = "ssdmadjklj";
+      windows._resizeObserver.observe(newelement);
 
       document.querySelector(".oknapatrizde").appendChild(newelement);
       DraggableElements.reload();
@@ -678,8 +683,11 @@ var windows = {
 
       setTimeout(() => {
         el.assignedSlot.remove();
+        windows._resizeObserver.unobserve(el);
         el.remove();
-        ZIndexer.current = undefined;
+        if (el.isSameNode(ZIndexer.current)) {
+          ZIndexer.current = undefined;
+        }
       }, 200);
     }
   },
