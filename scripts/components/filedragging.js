@@ -19,14 +19,17 @@ class FileDraggingAPI {
       let ret = [false];
 
       for (const el of FileDraggingAPI.data.filesDrop) {
+        if (el == undefined) {
+          continue;
+        }
         if (
           ancestors.some((e) => e.isSameNode(el.element)) ||
           elementUnderCursor.isSameNode(el.element)
         ) {
           ret = [true, el];
-          el.hoverCallback(true);
+          el.hoverCallback(true, "file");
         } else {
-          el.hoverCallback(false);
+          el.hoverCallback(false, "file");
         }
       }
 
@@ -38,14 +41,17 @@ class FileDraggingAPI {
       let ret = [false];
 
       for (const el of FileDraggingAPI.data.foldersDrop) {
+        if (el == undefined) {
+          continue;
+        }
         if (
           ancestors.some((e) => e.isSameNode(el.element)) ||
           elementUnderCursor.isSameNode(el.element)
         ) {
           ret = [true, el];
-          el.hoverCallback(true);
+          el.hoverCallback(true, "folder");
         } else {
-          el.hoverCallback(false);
+          el.hoverCallback(false, "folder");
         }
       }
 
@@ -76,7 +82,7 @@ class FileDraggingAPI {
         helper.appendChild(helperTextNew);
       }
     },
-    drop: (event, ui, isHovering) => {
+    drop: (event, ui, isHovering, type) => {
       var x = event.pageX;
       var y = event.pageY;
 
@@ -87,7 +93,8 @@ class FileDraggingAPI {
       if (!dragging) {
         return;
       }
-      elt.callback(ui.helper[0].dataset.fileLocation);
+      elt.hoverCallback(false, type);
+      elt.callback(ui.helper[0].dataset.fileLocation, type);
     },
   };
 
@@ -106,6 +113,7 @@ class FileDraggingAPI {
           event,
           ui,
           FileDraggingAPI.tools.isHoveringFile,
+          "file"
         );
       },
       helper: function () {
@@ -131,6 +139,47 @@ class FileDraggingAPI {
     });
   }
 
+  static registerFolder(element, foldername, folderLocation) {
+    $(element).draggable({
+      scroll: false,
+      drag: function (event, ui) {
+        FileDraggingAPI.tools.drag(
+          event,
+          ui,
+          FileDraggingAPI.tools.isHoveringFolder,
+        );
+      },
+      stop: function (event, ui) {
+        FileDraggingAPI.tools.drop(
+          event,
+          ui,
+          FileDraggingAPI.tools.isHoveringFolder,
+          "folder"
+        );
+      },
+      helper: function () {
+        const draggingFile = document.createElement("div");
+        draggingFile.className = "dragging-file";
+        draggingFile.dataset.fileLocation = folderLocation;
+        if (localStorage.getItem("mode") == "dark") {
+          draggingFile.classList.add("dark");
+        }
+
+        const img = document.createElement("img");
+        img.src = "icons/folder.svg";
+        draggingFile.appendChild(img);
+
+        const text = document.createElement("h3");
+        text.textContent = foldername;
+        draggingFile.appendChild(text);
+
+        var helperContainer = $(draggingFile);
+        $(".filesDragging").append(helperContainer);
+        return helperContainer;
+      },
+    });
+  }
+
   static registerDroppable(
     element,
     allowFile,
@@ -139,21 +188,40 @@ class FileDraggingAPI {
     callback,
     hoverCallback = () => {},
   ) {
+    let x = [];
     if (allowFile) {
+      x.push(this.data.filesDrop.length);
       this.data.filesDrop.push({
         element,
         callback,
         dropText,
-        hoverCallback
+        hoverCallback,
       });
+    } else {
+      x.push(undefined);
     }
+
     if (allowFolder) {
+      x.push(this.data.foldersDrop.length);
       this.data.foldersDrop.push({
         element,
         callback,
         dropText,
-        hoverCallback
+        hoverCallback,
       });
+    } else {
+      x.push(undefined);
+    }
+
+    return x;
+  }
+
+  static unregister(id) {
+    if (id[0]) {
+      this.data.filesDrop[id[0]] = undefined;
+    }
+    if (id[1]) {
+      this.data.foldersDrop[id[1]] = undefined;
     }
   }
 }

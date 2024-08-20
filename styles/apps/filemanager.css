@@ -7,11 +7,18 @@
 /* Left aside */
 
 .filemanager .filemanager-content > aside {
-  display: flex;
+  display: none;
   flex-direction: column;
   width: 16rem;
   padding: 1rem;
   border-right: 1px solid;
+}
+
+.filemanager.view-md .filemanager-content > aside,
+.filemanager.view-lg .filemanager-content > aside,
+.filemanager.view-xl .filemanager-content > aside,
+.filemanager.view-2xl .filemanager-content > aside {
+  display: flex;
 }
 
 .filemanager .filemanager-content > aside > div {

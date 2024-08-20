@@ -67,6 +67,12 @@ class Shortcuts {
         }
       }),
     ],
+    filemanager: [
+      new Shortcut(["Control", "v"], (win) => {
+        const id = win.dataset.id;
+        FilemanagerAppList[id].paste();
+      })
+    ]
   };
   static _eqSet(xs, ys) {
     return xs.size === ys.size && [...xs].every((x) => ys.has(x));

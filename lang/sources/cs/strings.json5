@@ -317,7 +317,8 @@
   folder_exists_new_name: "Složka se stejným názvem již v této složce existuje. Zadejte nový název složky.",
   copying: "Kopírování...",
   finished: "Hotovo!",
-  file_exists_new_name: "Soubor se stejným názvem již v této složce existuje. Zadejte nový název složky.",
+  file_exists_new_name: "Soubor se stejným názvem již v této složce existuje. Zadejte nový název souboru.",
+  folder_exists_new_name: "Složka se stejným názvem již v této složce existuje. Zadejte nový název složky.",
   enter_file_name: "Vložte název souboru",
   path: "Cesta",
   file_not_found: "Soubor nebyl nalezen",
@@ -356,4 +357,5 @@
   create_folder: "Vytvořit složku",
   create_file: "Vytvořit soubor",
   downloads: "Stažené",
+  paste: "Vložit",
 }

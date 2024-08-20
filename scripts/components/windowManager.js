@@ -172,52 +172,19 @@ var windows = {
       info: [infoApp.loadInfo, false, false],
       filemanager: [
         (element, args) => {
-          // var url = "/filemanager/";
-          // if (localStorage.getItem("mode") == "dark") url += "?dark";
-          //
-          // if (args && args.mode == "select") {
-          //   if (url.indexOf("?") == -1) url += "?fileselect";
-          //   else url += "&fileselect";
-          //   var index = openGetFile.length;
-          //   openGetFile.push([element, args.callBack]);
-          //   element
-          //     .querySelector(".close")
-          //     .setAttribute(
-          //       "onclick",
-          //       "openGetFile[" +
-          //         index +
-          //         "][1]['closed']();windows.close(this,'filemanager', event)",
-          //     );
-          //   element.querySelector(".mini").remove();
-          //   element.querySelector(".headerclass span").textContent =
-          //     Localization.getString("select_file");
-          //   url += "&index=" + index;
-          // }
-          //
-          // if (args && args.mode == "folderselect") {
-          //   if (url.indexOf("?") == -1) url += "?folderselect";
-          //   else url += "&folderselect";
-          //
-          //   let index = openGetFile.length;
-          //   openGetFile.push([element, args.callBack]);
-          //   element
-          //     .querySelector(".close")
-          //     .setAttribute(
-          //       "onclick",
-          //       "openGetFile[" +
-          //         index +
-          //         "][1]['closed']();windows.close(this,'filemanager', event)",
-          //     );
-          //   element.querySelector(".mini").remove();
-          //   element.querySelector(".headerclass span").textContent =
-          //     Localization.getString("select_folder");
-          //   url += "&index=" + index;
-          // }
-          // element.querySelector("#filemanageriframe").src = url;
           const win = element.querySelector(".filemanager-content");
 
-          if (args) {
+          if (args && args.mode && args.callBack) {
             return FilemanagerApp.init(win, args.mode, args.callBack);
+          }
+
+          if (args && args.startFolder) {
+            return FilemanagerApp.init(
+              win,
+              undefined,
+              undefined,
+              args.startFolder,
+            );
           }
           FilemanagerApp.init(win);
         },
@@ -631,6 +598,32 @@ var windows = {
 
       newelement.slot = windows._createSlot();
 
+      var resizeObserver = new ResizeObserver((e) => {
+        const { target } = e[0];
+        const width = target.offsetWidth;
+
+        target.classList.remove(
+          "view-sm",
+          "view-md",
+          "view-lg",
+          "view-xl",
+          "view-2xl",
+        );
+
+        if (width >= 1536) {
+          target.classList.add("view-2xl");
+        } else if (width >= 1280) {
+          target.classList.add("view-xl");
+        } else if (width >= 1024) {
+          target.classList.add("view-lg");
+        } else if (width >= 768) {
+          target.classList.add("view-md");
+        } else if (width >= 640) {
+          target.classList.add("view-sm");
+        }
+      });
+      resizeObserver.observe(newelement);
+
       document.querySelector(".oknapatrizde").appendChild(newelement);
       DraggableElements.reload();
       if (
@@ -735,7 +728,7 @@ var windows = {
             var element = windows.list.appIds[id];
             var appdiv = document.querySelector(".appdiv");
             appdiv.querySelector(".canvasSection").innerHTML =
-              '<div class="loading">Loading&#8230;</div>';
+              "<div class=\"loading\">Loading&#8230;</div>";
             appdiv.querySelector("h1").textContent =
               element.querySelector(".headerclass span").textContent;
             var left = e.clientX - 150;

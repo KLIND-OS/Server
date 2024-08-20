@@ -26,6 +26,13 @@ class FilemanagerApp {
         icon: "filemanager/images/file.png",
       });
     },
+    addFolderShortcutToDesktop: (path) => {
+      var fun = `windows.open("filemanager", { startFolder: "${path}" })`;
+      DesktopIcons.add({
+        run: fun,
+        icon: "icons/folder.svg",
+      });
+    },
   };
 
   tools = {
@@ -94,6 +101,95 @@ class FilemanagerApp {
     },
   };
 
+  async paste() {
+    const clipboard = FilemanagerApp.clipboard;
+    if (clipboard != undefined) {
+      if (clipboard[2]) {
+        if (await this.tools.folderExists(clipboard[1])) {
+          BPrompt.prompt(
+            Localization.getString("folder_exists_new_name"),
+            async (newname) => {
+              if (newname != "" && newname != null) {
+                clipboard[1] = newname;
+                await this.paste();
+              }
+            },
+            clipboard[1],
+          );
+        } else {
+          const bypass = FileLocker.add(clipboard[3]);
+          const destinationPath = LowLevelApi.filesystem.path.join(
+            LowLevelApi.filesystem.os.homedir() + "/usrfiles" + this.states.currentFolder,
+            clipboard[1],
+          );
+          const progressBar = new DownloadStatus(clipboard[1]);
+          progressBar.customMessage(Localization.getString("copying"));
+          LowLevelApi.filesystem.fsExtra.copy(
+            clipboard[0],
+            destinationPath,
+            (err) => {
+              if (err) {
+                throw new Error("Error occured!");
+              }
+              progressBar.finish();
+              this.reloadWin();
+              FileLocker.remove(clipboard[3], bypass);
+            },
+          );
+        }
+
+        return;
+      }
+
+      var newclipboard = clipboard;
+      if (await this.tools.fileExist(newclipboard[1])) {
+        BPrompt.prompt(
+          Localization.getString("file_exists_new_name"),
+          async (newname) => {
+            if (newname != "" && newname != null) {
+              clipboard[1] = newname;
+              await this.paste();
+            }
+          },
+          newclipboard[1],
+        );
+      } else {
+        const bypass = FileLocker.add(clipboard[3]);
+        const destinationPath = LowLevelApi.filesystem.path.join(
+          LowLevelApi.filesystem.os.homedir() + "/usrfiles" + this.states.currentFolder,
+          clipboard[1],
+        );
+
+        const source = LowLevelApi.filesystem.fs.createReadStream(clipboard[0]);
+        const destination =
+          LowLevelApi.filesystem.fs.createWriteStream(destinationPath);
+
+        let bytesCopied = 0;
+        const fileSize = (await LowLevelApi.filesystem.stat(clipboard[0])).size;
+        const progressBar = new DownloadStatus(clipboard[1]);
+
+        source.on("error", (err) => console.error("Error reading file:", err));
+        destination.on("error", (err) =>
+          console.error("Error writing file:", err),
+        );
+
+        source.on("data", (chunk) => {
+          bytesCopied += chunk.length;
+          const percentage = Math.floor((bytesCopied / fileSize) * 100);
+          progressBar.updatePercentage(percentage);
+        });
+
+        source.pipe(destination);
+
+        destination.on("finish", () => {
+          progressBar.finish();
+          this.reloadWin();
+          FileLocker.remove(clipboard[3], bypass);
+        });
+      }
+    }
+  }
+
   _addAside(name, iconsrc, url, asideNav) {
     const div = document.createElement("div");
 
@@ -126,13 +222,17 @@ class FilemanagerApp {
 
     this._addAside(
       Localization.getString("downloads"),
-      "icons/house.svg",
+      "icons/download.svg",
       "/Downloads/",
       asideNav,
     );
   }
 
   async redirect(newFolder) {
+    if (newFolder == this.states.currentFolder) {
+      return;
+    }
+
     const path = LowLevelApi.filesystem.path.join(
       LowLevelApi.filesystem.os.homedir(),
       "usrfiles",
@@ -200,6 +300,50 @@ class FilemanagerApp {
     if (trail) {
       liText.classList.add("active");
     }
+
+    FileDraggingAPI.registerDroppable(
+      liText,
+      true,
+      true,
+      Localization.getString("copy"),
+      async (location, type) => {
+        if (type == "file") {
+          const path = LowLevelApi.filesystem.path.join(
+            LowLevelApi.filesystem.os.homedir(),
+            "/usrfiles",
+            location,
+          );
+
+          FilemanagerApp.clipboard = [
+            path,
+            location.split("/").at(-1),
+            false,
+            location,
+          ];
+
+          await this.redirect(url);
+          await this.paste();
+        }
+        if (type == "folder") {
+          const path = LowLevelApi.filesystem.path.join(
+            LowLevelApi.filesystem.os.homedir(),
+            "/usrfiles",
+            location,
+          );
+
+          FilemanagerApp.clipboard = [
+            path,
+            location.split("/").at(-1),
+            true,
+            location,
+          ];
+
+          await this.redirect(url);
+          await this.paste();
+        }
+      },
+    );
+
     const p = document.createElement("p");
     p.textContent = name;
     p.setAttribute("cursor", "pointer");
@@ -415,6 +559,12 @@ class FilemanagerApp {
           const element = document.createElement("div");
           element.setAttribute("cursor", "pointer");
 
+          FileDraggingAPI.registerFolder(
+            element,
+            folder,
+            LowLevelApi.filesystem.path.join(this.states.currentFolder, folder),
+          );
+
           element.onclick = () => {
             this.redirect(this.states.currentFolder + folder + "/");
           };
@@ -587,7 +737,7 @@ class FilemanagerApp {
 
           const item = new ContextMenu(element, [
             new ContextMenuItem(Localization.getString("copy"), (file) => {
-              const filename = file.textContent;
+              const filename = file.querySelector("h3").textContent;
               const path = LowLevelApi.filesystem.path.join(
                 LowLevelApi.filesystem.os.homedir() +
                   "/usrfiles" +
@@ -707,7 +857,7 @@ class FilemanagerApp {
                   file.querySelector("h3").textContent,
                 );
 
-                parent.mainFileManager.properties(path);
+                mainFileManager.properties(path);
               },
             ),
           ]);
@@ -789,6 +939,9 @@ class FilemanagerApp {
       new ContextMenuItem(Localization.getString("create_folder"), () =>
         this.__createFolder(),
       ),
+      new ContextMenuItem(Localization.getString("paste"), () =>
+        this.paste(),
+      ),
       new ContextMenuItem(Localization.getString("create_shortcut"), () => {
         BPrompt.prompt(
           Localization.getString("enter_shortcut_name"),
@@ -842,7 +995,7 @@ class FilemanagerApp {
     this.states._globalRight = item;
   }
 
-  static async init(win, startType, callback) {
+  static async init(win, startType, callback, startFolder) {
     const el = new this(win);
     el.states.type = startType || this.startOptions.DEFAULT;
     if (callback) {
@@ -853,6 +1006,10 @@ class FilemanagerApp {
     await el.loadWin();
     el._loadButtons(win.querySelector(".buttons-container"));
     el.registerGlobalRight();
+
+    if (startFolder) {
+      el.redirect(startFolder);
+    }
 
     FilemanagerAppList.push(el);
 
