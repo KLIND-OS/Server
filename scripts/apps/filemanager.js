@@ -24,7 +24,7 @@ class FilemanagerApp {
       DesktopIcons.add({
         run: fun,
         icon: "filemanager/images/file.png",
-        name: folder
+        name: path,
       });
     },
     addFolderShortcutToDesktop: (path) => {
@@ -32,7 +32,7 @@ class FilemanagerApp {
       DesktopIcons.add({
         run: fun,
         icon: "icons/folder.svg",
-        name: path.replace(/\/$/, "").split("/").at(-1)
+        name: path.replace(/\/$/, "").split("/").at(-1),
       });
     },
   };
@@ -232,6 +232,17 @@ class FilemanagerApp {
       "/Downloads/",
       asideNav,
     );
+  }
+
+  async redirectBack() {
+    if (this.states.currentFolder == "/") {
+      return;
+    }
+    const temp = this.states.currentFolder.split("/");
+    for (var i = 0; i < temp.length; i++) {
+      temp[i] += "/";
+    }
+    this.redirect(temp.slice(0, -2).join(""));
   }
 
   async redirect(newFolder) {

@@ -71,7 +71,15 @@ class Shortcuts {
       new Shortcut(["Control", "v"], (win) => {
         const id = win.dataset.id;
         FilemanagerAppList[id].paste();
-      })
+      }),
+      new Shortcut([["Control", "r"], ["F5"]], (win) => {
+        const id = win.dataset.id;
+        FilemanagerAppList[id].reloadWin();
+      }, true),
+      new Shortcut([["Control", "ArrowLeft"], ["F5"]], (win) => {
+        const id = win.dataset.id;
+        FilemanagerAppList[id].redirectBack();
+      }, true)
     ]
   };
   static _eqSet(xs, ys) {

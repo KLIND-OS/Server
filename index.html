@@ -2251,7 +2251,7 @@
           if (type == "file") {
             const lastSlashIndex = str.lastIndexOf("/");
 
-            const partBeforeLastSlash = str.substring(0, lastSlashIndex);
+            const partBeforeLastSlash = str.substring(0, lastSlashIndex) + "/";
             const partAfterLastSlash = str.substring(lastSlashIndex + 1);
             FilemanagerApp.staticTools.addShortcutToDesktop(
               partBeforeLastSlash,
