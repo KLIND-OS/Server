@@ -358,4 +358,5 @@
   create_file: "Create file",
   downloads: "Downloads",
   paste: "Paste",
+  open: "Open",
 }

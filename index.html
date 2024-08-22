@@ -95,6 +95,7 @@
     <script src="scripts/components/battery.js"></script>
     <script src="scripts/components/filedragging.js"></script>
     <script src="scripts/apps/filemanager.js"></script>
+    <script src="scripts/apps/imageEditor.js"></script>
 
     <style id="customcssstyleelement"></style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -141,6 +142,7 @@
     <link rel="stylesheet" href="styles/apps/installer.css" />
     <link rel="stylesheet" href="styles/components/notificationCenter.css" />
     <link rel="stylesheet" href="styles/apps/filemanager.css" />
+    <link rel="stylesheet" href="styles/apps/imageeditor.css" />
   </head>
 
   <body
@@ -1135,8 +1137,7 @@
               min="0"
               max="100"
               value="50"
-              class="slider"
-              id="myRange"
+              class="kl-component-slider"
               oninput="AudioEditor.input(this)"
             />
             <div
@@ -1573,11 +1574,62 @@
               ></div>
             </div>
           </div>
-          <iframe
-            style="height: calc(100% - 20px); width: 100%"
-            src="imageeditor"
-            frameborder="0"
-          ></iframe>
+          <div class="imageeditor-content">
+            <div>
+              <div class="editor">
+                <div class="filters">
+                  <label class="title">$[filters];</label>
+                  <div class="options filter-options">
+                    <button data-type="brightness" class="active">
+                      $[brightness];
+                    </button>
+                    <button data-type="saturation">$[saturate];</button>
+                    <button data-type="inversion">$[inverse];</button>
+                    <button data-type="grayscale">$[grayscale];</button>
+                  </div>
+                  <div class="slider">
+                    <div class="filter-info">
+                      <p class="name">$[brightness];</p>
+                      <p class="value">100%</p>
+                    </div>
+                    <input
+                      type="range"
+                      value="100"
+                      min="0"
+                      max="200"
+                      class="kl-component-slider"
+                    />
+                  </div>
+
+                  <label class="title" style="margin-top: 20px; display: block"
+                    >$[rotate_flip];</label
+                  >
+                  <div class="options icon-options">
+                    <button>
+                      <img src="icons/rotate-left.svg" />
+                    </button>
+                    <button>
+                      <img src="icons/rotate-right.svg" />
+                    </button>
+                    <button>
+                      <img src="icons/flip-vertical.svg" />
+                    </button>
+                    <button>
+                      <img src="icons/flip-horizontal.svg" />
+                    </button>
+                  </div>
+                </div>
+                <img src="" class="img-prev" />
+              </div>
+              <div class="controls">
+                <button class="reset-filter-f">$[reset_filters];</button>
+                <div>
+                  <button class="select-img-f">$[select_image];</button>
+                  <button class="save-img-f">$[save];</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div onclick="ZIndexer.focus(this)" class="printermanager">
           <div class="window-header">
@@ -2264,11 +2316,11 @@
         (hovering) => {
           const icons = document.querySelector(".iconsKLINDOS");
           if (hovering) {
-            icons.style.backgroundColor = "rgba(0,0,0,0.5)"
+            icons.style.backgroundColor = "rgba(0,0,0,0.5)";
           } else {
-            icons.style.backgroundColor = ""
+            icons.style.backgroundColor = "";
           }
-        }
+        },
       );
     </script>
     <script src="scripts/apps/getstartedfunctions.js"></script>

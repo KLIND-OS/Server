@@ -358,4 +358,5 @@
   create_file: "Vytvořit soubor",
   downloads: "Stažené",
   paste: "Vložit",
+  open: "Otevřít",
 }

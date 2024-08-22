@@ -109,11 +109,11 @@ var control = {
     {},
     {
       fileSelect: (callBack) => {
-        windows.open("filemanager", { mode: "select", callBack: callBack });
+        windows.open("filemanager", { mode: FilemanagerApp.startOptions.FILESELECT, callBack: callBack });
       },
       folderSelect: (callBack) => {
         windows.open("filemanager", {
-          mode: "folderselect",
+          mode: FilemanagerApp.startOptions.FOLDERSELECT,
           callBack: callBack,
         });
       },

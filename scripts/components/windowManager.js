@@ -585,6 +585,7 @@ var windows = {
       ],
       unzip: [(win, args) => UnZip.init(win, args.path), false, false],
       procesy: [(win) => Procesy.init(win), (win) => Procesy.end(win), false],
+      imageeditor: [(win) => new ImageEditorApp(win), false, false],
     },
     appIds: {},
   },
@@ -659,6 +660,7 @@ var windows = {
         ZIndexer.focus(newelement, true);
         StartMenu.close();
       });
+
       if (special != undefined && special[0] !== false) {
         special[0](newelement, args);
       }

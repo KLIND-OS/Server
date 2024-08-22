@@ -83,9 +83,9 @@ class FilemanagerApp {
     },
     folderExists: async (name) => {
       const path = LowLevelApi.filesystem.path.join(
-        LowLevelApi.filesystem.os.homedir() +
-          "/usrfiles" +
-          this.states.currentFolder,
+        LowLevelApi.filesystem.os.homedir(),
+        "usrfiles",
+        this.states.currentFolder,
         name,
       );
 
@@ -93,9 +93,9 @@ class FilemanagerApp {
     },
     fileExist: async (name) => {
       const path = LowLevelApi.filesystem.path.join(
-        LowLevelApi.filesystem.os.homedir() +
-          "/usrfiles" +
-          this.states.currentFolder,
+        LowLevelApi.filesystem.os.homedir(),
+        "usrfiles",
+        this.states.currentFolder,
         name,
       );
 
@@ -121,9 +121,9 @@ class FilemanagerApp {
         } else {
           const bypass = FileLocker.add(clipboard[3]);
           const destinationPath = LowLevelApi.filesystem.path.join(
-            LowLevelApi.filesystem.os.homedir() +
-              "/usrfiles" +
-              this.states.currentFolder,
+            LowLevelApi.filesystem.os.homedir(),
+            "usrfiles",
+            this.states.currentFolder,
             clipboard[1],
           );
           const progressBar = new DownloadStatus(clipboard[1]);
@@ -160,9 +160,9 @@ class FilemanagerApp {
       } else {
         const bypass = FileLocker.add(clipboard[3]);
         const destinationPath = LowLevelApi.filesystem.path.join(
-          LowLevelApi.filesystem.os.homedir() +
-            "/usrfiles" +
-            this.states.currentFolder,
+          LowLevelApi.filesystem.os.homedir(),
+          "usrfiles",
+          this.states.currentFolder,
           clipboard[1],
         );
 
@@ -280,7 +280,7 @@ class FilemanagerApp {
 
     if (this.states.type == FilemanagerApp.startOptions.FILESELECT) {
       const text = document.createElement("h2");
-      text.textContent = Localization.getString("select_folder");
+      text.textContent = Localization.getString("select_file");
       container.appendChild(text);
     }
 
@@ -299,7 +299,7 @@ class FilemanagerApp {
       button.style.padding = "0 5px";
 
       button.onclick = () => {
-        this.states.callback(this.states.currentFolder);
+        this.states.callback.success(this.states.currentFolder);
         this.win.parentElement.querySelector(".headerclass .close").click();
       };
 
@@ -329,7 +329,7 @@ class FilemanagerApp {
           if (type == "file") {
             const path = LowLevelApi.filesystem.path.join(
               LowLevelApi.filesystem.os.homedir(),
-              "/usrfiles",
+              "usrfiles",
               location,
             );
 
@@ -346,7 +346,7 @@ class FilemanagerApp {
           if (type == "folder") {
             const path = LowLevelApi.filesystem.path.join(
               LowLevelApi.filesystem.os.homedir(),
-              "/usrfiles",
+              "usrfiles",
               location,
             );
 
@@ -459,9 +459,9 @@ class FilemanagerApp {
               );
             } else {
               const path = LowLevelApi.filesystem.path.join(
-                LowLevelApi.filesystem.os.homedir() +
-                  "/usrfiles" +
-                  this.states.currentFolder,
+                LowLevelApi.filesystem.os.homedir(),
+                "usrfiles",
+                this.states.currentFolder,
                 name,
               );
 
@@ -502,9 +502,9 @@ class FilemanagerApp {
               );
             } else {
               const path = LowLevelApi.filesystem.path.join(
-                LowLevelApi.filesystem.os.homedir() +
-                  "/usrfiles" +
-                  this.states.currentFolder,
+                LowLevelApi.filesystem.os.homedir(),
+                "usrfiles",
+                this.states.currentFolder,
                 name,
               );
               await LowLevelApi.filesystem.mkdir(path);
@@ -535,15 +535,17 @@ class FilemanagerApp {
         this.states.currentFolder,
         filename,
       );
-      this.states.callback(path);
+      this.states.callback.success(path);
       this.win.parentElement.querySelector(".headerclass .close").click();
       return;
     }
 
     if (filename.endsWith(".lnk")) {
       const systemPath = LowLevelApi.filesystem.path.join(
-        LowLevelApi.filesystem.os.homedir() + "/usrfiles",
-        this.states.currentFolder + filename,
+        LowLevelApi.filesystem.os.homedir(),
+        "usrfiles",
+        this.states.currentFolder,
+        filename,
       );
       const content = await LowLevelApi.filesystem.readFile(systemPath, "utf8");
       if (
@@ -576,17 +578,19 @@ class FilemanagerApp {
 
   async _loadFiles(filesDiv) {
     const items = await LowLevelApi.filesystem.readdir(
-      LowLevelApi.filesystem.os.homedir() +
-        "/usrfiles" +
+      LowLevelApi.filesystem.path.join(
+        LowLevelApi.filesystem.os.homedir(),
+        "usrfiles",
         this.states.currentFolder,
+      ),
     );
 
     try {
       for (const folder of items) {
         const folderPath = LowLevelApi.filesystem.path.join(
-          LowLevelApi.filesystem.os.homedir() +
-            "/usrfiles" +
-            this.states.currentFolder,
+          LowLevelApi.filesystem.os.homedir(),
+          "usrfiles",
+          this.states.currentFolder,
           folder,
         );
         const folderStat = await LowLevelApi.filesystem.stat(folderPath);
@@ -616,7 +620,7 @@ class FilemanagerApp {
               if (type == "file") {
                 const path = LowLevelApi.filesystem.path.join(
                   LowLevelApi.filesystem.os.homedir(),
-                  "/usrfiles",
+                  "usrfiles",
                   location,
                 );
 
@@ -633,7 +637,7 @@ class FilemanagerApp {
               if (type == "folder") {
                 const path = LowLevelApi.filesystem.path.join(
                   LowLevelApi.filesystem.os.homedir(),
-                  "/usrfiles",
+                  "usrfiles",
                   location,
                 );
 
@@ -679,9 +683,9 @@ class FilemanagerApp {
           const item = new ContextMenu(element, [
             new ContextMenuItem(Localization.getString("copy"), (folder) => {
               const path = LowLevelApi.filesystem.path.join(
-                LowLevelApi.filesystem.os.homedir() +
-                  "/usrfiles" +
-                  this.states.currentFolder,
+                LowLevelApi.filesystem.os.homedir(),
+                "usrfiles",
+                this.states.currentFolder,
                 folder.querySelector("h3").textContent,
               );
               const klindospath = LowLevelApi.filesystem.path.join(
@@ -709,9 +713,9 @@ class FilemanagerApp {
                 async (res) => {
                   if (!res) return;
                   const path = LowLevelApi.filesystem.path.join(
-                    LowLevelApi.filesystem.os.homedir() +
-                      "/usrfiles" +
-                      this.states.currentFolder,
+                    LowLevelApi.filesystem.os.homedir(),
+                    "usrfiles",
+                    this.states.currentFolder,
                     foldername,
                   );
 
@@ -728,9 +732,9 @@ class FilemanagerApp {
 
               FileLocker.fullTest(this.states.currentFolder + foldername);
               const path = LowLevelApi.filesystem.path.join(
-                LowLevelApi.filesystem.os.homedir() +
-                  "/usrfiles" +
-                  this.states.currentFolder,
+                LowLevelApi.filesystem.os.homedir(),
+                "usrfiles",
+                this.states.currentFolder,
                 foldername,
               );
               BPrompt.prompt(
@@ -759,9 +763,9 @@ class FilemanagerApp {
                     );
                   } else {
                     const newpath = LowLevelApi.filesystem.path.join(
-                      LowLevelApi.filesystem.os.homedir() +
-                        "/usrfiles" +
-                        this.states.currentFolder,
+                      LowLevelApi.filesystem.os.homedir(),
+                      "usrfiles",
+                      this.states.currentFolder,
                       newname,
                     );
                     await LowLevelApi.filesystem.rename(path, newpath);
@@ -825,9 +829,9 @@ class FilemanagerApp {
       }
       for (const file of items) {
         const filePath = LowLevelApi.filesystem.path.join(
-          LowLevelApi.filesystem.os.homedir() +
-            "/usrfiles" +
-            this.states.currentFolder,
+          LowLevelApi.filesystem.os.homedir(),
+          "usrfiles",
+          this.states.currentFolder,
           file,
         );
         const fileStat = await LowLevelApi.filesystem.stat(filePath);
@@ -846,9 +850,9 @@ class FilemanagerApp {
             new ContextMenuItem(Localization.getString("copy"), (file) => {
               const filename = file.querySelector("h3").textContent;
               const path = LowLevelApi.filesystem.path.join(
-                LowLevelApi.filesystem.os.homedir() +
-                  "/usrfiles" +
-                  this.states.currentFolder,
+                LowLevelApi.filesystem.os.homedir(),
+                "usrfiles",
+                this.states.currentFolder,
                 filename,
               );
               const klindospath = LowLevelApi.filesystem.path.join(
@@ -890,9 +894,9 @@ class FilemanagerApp {
               const filename = file.querySelector("h3").textContent;
               FileLocker.fullTest(this.states.currentFolder + filename);
               const path = LowLevelApi.filesystem.path.join(
-                LowLevelApi.filesystem.os.homedir() +
-                  "/usrfiles" +
-                  this.states.currentFolder,
+                LowLevelApi.filesystem.os.homedir(),
+                "usrfiles",
+                this.states.currentFolder,
                 filename,
               );
               BPrompt.prompt(
@@ -924,9 +928,9 @@ class FilemanagerApp {
                     );
                   } else {
                     const newpath = LowLevelApi.filesystem.path.join(
-                      LowLevelApi.filesystem.os.homedir() +
-                        "/usrfiles" +
-                        this.states.currentFolder,
+                      LowLevelApi.filesystem.os.homedir(),
+                      "usrfiles",
+                      this.states.currentFolder,
                       newname,
                     );
                     await LowLevelApi.filesystem.rename(path, newpath);
@@ -944,9 +948,9 @@ class FilemanagerApp {
                 async (res) => {
                   if (!res) return;
                   const path = LowLevelApi.filesystem.path.join(
-                    LowLevelApi.filesystem.os.homedir() +
-                      "/usrfiles" +
-                      this.states.currentFolder,
+                    LowLevelApi.filesystem.os.homedir(),
+                    "usrfiles",
+                    this.states.currentFolder,
                     filename,
                   );
 
@@ -1075,8 +1079,10 @@ class FilemanagerApp {
                         Localization.getString("create_shortcut_path"),
                         async (filepath) => {
                           const path = LowLevelApi.filesystem.path.join(
-                            LowLevelApi.filesystem.os.homedir() + "/usrfiles",
-                            this.states.currentFolder + name + ".lnk",
+                            LowLevelApi.filesystem.os.homedir(),
+                            "usrfiles",
+                            this.states.currentFolder,
+                            name + ".lnk",
                           );
                           await LowLevelApi.filesystem.writeFile(
                             path,
@@ -1121,7 +1127,7 @@ class FilemanagerApp {
         if (type == "file") {
           const path = LowLevelApi.filesystem.path.join(
             LowLevelApi.filesystem.os.homedir(),
-            "/usrfiles",
+            "usrfiles",
             location,
           );
 
@@ -1137,7 +1143,7 @@ class FilemanagerApp {
         if (type == "folder") {
           const path = LowLevelApi.filesystem.path.join(
             LowLevelApi.filesystem.os.homedir(),
-            "/usrfiles",
+            "usrfiles",
             location,
           );
 
