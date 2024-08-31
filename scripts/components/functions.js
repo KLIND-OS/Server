@@ -60,7 +60,7 @@ var control = {
     reboot: (app) => {
       var appName = app.info.name;
       BPrompt.confirm(
-        Localization.getString("do_you_want_restart").replace("{}", appName),
+        Localization.getString("do_you_want_restart").format(appName),
         (x) => {
           if (x) {
             spawnNotification(
@@ -109,11 +109,11 @@ var control = {
     {},
     {
       fileSelect: (callBack) => {
-        windows.open("filemanager", { mode: "select", callBack: callBack });
+        windows.open("filemanager", { mode: FilemanagerApp.startOptions.FILESELECT, callBack: callBack });
       },
       folderSelect: (callBack) => {
         windows.open("filemanager", {
-          mode: "folderselect",
+          mode: FilemanagerApp.startOptions.FOLDERSELECT,
           callBack: callBack,
         });
       },

@@ -2,10 +2,10 @@
   "name": "klind-os",
   "version": "1.0.0",
   "description": "KLIND OS GUI napsané v JavaScriptu.",
-  "main": "server.js",
+  "main": "dev/server.js",
   "scripts": {
-    "dev": "node server dev",
-    "start": "node server",
+    "dev": "node dev/server dev",
+    "start": "node dev/server",
     "lint": "eslint .",
     "lintfix": "eslint . --fix"
   },

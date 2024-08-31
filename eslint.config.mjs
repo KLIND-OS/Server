@@ -26,7 +26,6 @@ export default [
       "**/*evo-calendar*",
       "face/js/*",
       "**/info.js",
-      "base64.js",
       "eslint.config.mjs"
     ],
   },

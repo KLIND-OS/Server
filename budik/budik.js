@@ -63,7 +63,7 @@ setInterval(() => {
   if (budikarray.indexOf(timebudik) > -1) {
     budikarray[budikarray.indexOf(timebudik)] = "";
     soundssadsadasdsa = new Howl({
-      src: ["/alarm.mp3"],
+      src: ["/sounds/alarm.mp3"],
       volume: 0.5,
     });
     soundssadsadasdsa.play();

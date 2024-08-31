@@ -117,7 +117,7 @@ table tr td input {
   background-color: rgb(158, 158, 158);
 }
 
-.slider {
+.kl-component-slider {
   appearance: none;
   height: 15px;
   border-radius: 5px;
@@ -132,7 +132,7 @@ table tr td input {
   top: 6px;
 }
 
-.slider::-webkit-slider-thumb {
+.kl-component-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 25px;
@@ -141,7 +141,7 @@ table tr td input {
   background: #04aa6d;
 }
 
-.slider::-moz-range-thumb {
+.kl-component-slider::-moz-range-thumb {
   width: 25px;
   height: 25px;
   border-radius: 50%;

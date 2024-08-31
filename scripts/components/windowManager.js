@@ -3,6 +3,34 @@ var videofileids = [];
 var windows = {
   shadowDom: undefined,
   lastSlotId: 0,
+  _resizeObserver: new ResizeObserver((e) => {
+    const { target } = e[0];
+    const width = target.offsetWidth;
+
+    target.classList.remove(
+      "view-sm",
+      "view-md",
+      "view-lg",
+      "view-xl",
+      "view-2xl",
+      target.dataset.__prev,
+    );
+
+    target.classList.add("view-" + width);
+    target.dataset.__prev = "view-" + width;
+
+    if (width >= 1536) {
+      target.classList.add("view-2xl");
+    } else if (width >= 1280) {
+      target.classList.add("view-xl");
+    } else if (width >= 1024) {
+      target.classList.add("view-lg");
+    } else if (width >= 768) {
+      target.classList.add("view-md");
+    } else if (width >= 640) {
+      target.classList.add("view-sm");
+    }
+  }),
   list: {
     names: [
       "poznamky",
@@ -170,60 +198,27 @@ var windows = {
 
     special: {
       info: [infoApp.loadInfo, false, false],
-      my: [
-        (element) => {
-          element.querySelector("#myaccount").innerHTML =
-            localStorage.getItem("username");
-        },
-        false,
-        false,
-      ],
       filemanager: [
         (element, args) => {
-          var url = "/filemanager/";
-          if (localStorage.getItem("mode") == "dark") url += "?dark";
+          const win = element.querySelector(".filemanager-content");
 
-          if (args && args.mode == "select") {
-            if (url.indexOf("?") == -1) url += "?fileselect";
-            else url += "&fileselect";
-            var index = openGetFile.length;
-            openGetFile.push([element, args.callBack]);
-            element
-              .querySelector(".close")
-              .setAttribute(
-                "onclick",
-                "openGetFile[" +
-                  index +
-                  "][1]['closed']();windows.close(this,'filemanager', event)",
-              );
-            element.querySelector(".mini").remove();
-            element.querySelector(".headerclass span").textContent =
-              Localization.getString("select_file");
-            url += "&index=" + index;
+          if (args && args.mode && args.callBack) {
+            return FilemanagerApp.init(win, args.mode, args.callBack);
           }
 
-          if (args && args.mode == "folderselect") {
-            if (url.indexOf("?") == -1) url += "?folderselect";
-            else url += "&folderselect";
-
-            let index = openGetFile.length;
-            openGetFile.push([element, args.callBack]);
-            element
-              .querySelector(".close")
-              .setAttribute(
-                "onclick",
-                "openGetFile[" +
-                  index +
-                  "][1]['closed']();windows.close(this,'filemanager', event)",
-              );
-            element.querySelector(".mini").remove();
-            element.querySelector(".headerclass span").textContent =
-              Localization.getString("select_folder");
-            url += "&index=" + index;
+          if (args && args.startFolder) {
+            return FilemanagerApp.init(
+              win,
+              undefined,
+              undefined,
+              args.startFolder,
+            );
           }
-          element.querySelector("#filemanageriframe").src = url;
+          FilemanagerApp.init(win);
         },
-        false,
+        (win) => {
+          FilemanagerApp.destroy(win.dataset.id);
+        },
         false,
       ],
       fileeditor: [
@@ -439,7 +434,7 @@ var windows = {
       musicplayer: [
         (element, args) => {
           element.querySelector("iframe").src =
-            "/music?filePath=" + args.filePath;
+            "/music?filePath=" + encodeURIComponent(args.filePath);
         },
         false,
         false,
@@ -590,6 +585,7 @@ var windows = {
       ],
       unzip: [(win, args) => UnZip.init(win, args.path), false, false],
       procesy: [(win) => Procesy.init(win), (win) => Procesy.end(win), false],
+      imageeditor: [(win) => new ImageEditorApp(win), false, false],
     },
     appIds: {},
   },
@@ -631,6 +627,9 @@ var windows = {
 
       newelement.slot = windows._createSlot();
 
+      newelement.dataset.__prev = "ssdmadjklj";
+      windows._resizeObserver.observe(newelement);
+
       document.querySelector(".oknapatrizde").appendChild(newelement);
       DraggableElements.reload();
       if (
@@ -661,6 +660,7 @@ var windows = {
         ZIndexer.focus(newelement, true);
         StartMenu.close();
       });
+
       if (special != undefined && special[0] !== false) {
         special[0](newelement, args);
       }
@@ -685,8 +685,11 @@ var windows = {
 
       setTimeout(() => {
         el.assignedSlot.remove();
+        windows._resizeObserver.unobserve(el);
         el.remove();
-        ZIndexer.current = undefined;
+        if (el.isSameNode(ZIndexer.current)) {
+          ZIndexer.current = undefined;
+        }
       }, 200);
     }
   },

@@ -12,6 +12,10 @@ class ContextMenu {
   menu;
   manualTrigger;
 
+  destroy() {
+    this.menu.remove();
+  }
+
   constructor(trigger, menulist, isArray = false) {
     const menu = document.createElement("ul");
     menu.id = "menu";
@@ -20,6 +24,9 @@ class ContextMenu {
     };
 
     for (const menuItem of menulist) {
+      if (!menuItem) {
+        continue;
+      }
       const li = document.createElement("li");
       li.onclick = () => {
         menu.classList.remove("show");

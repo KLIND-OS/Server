@@ -1,0 +1,129 @@
+.imageeditor .imageeditor-content {
+  height: calc(100% - 20px);
+  width: 100%;
+}
+
+.imageeditor .imageeditor-content > div {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.imageeditor .imageeditor-content > div > .editor {
+  display: flex;
+  box-sizing: border-box;
+  gap: 5px;
+  height: calc(100% - 70px);
+}
+
+.imageeditor .imageeditor-content > div > .editor > * {
+  height: 100%;
+  border-radius: 5px;
+}
+
+.imageeditor .imageeditor-content > div > .editor > .options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.imageeditor.black .imageeditor-content > div > .editor .icon-options button {
+  filter: invert(1);
+}
+
+.imageeditor .imageeditor-content > div > .editor > div {
+  width: 300px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.imageeditor .imageeditor-content > div > .editor > div .slider{
+  margin-top: 25px;
+}
+.imageeditor .imageeditor-content > div > .editor > div .slider .filter-info{
+  display: flex;
+  color: #464646;
+  font-size: 14px;
+  justify-content: space-between;
+}
+.imageeditor .imageeditor-content > div > .editor > div .slider input{
+  margin-top: 5px;
+  width: 100%;
+}
+
+.imageeditor.black .imageeditor-content > div > .editor > div {
+  border: 1px solid white;
+}
+
+.imageeditor .imageeditor-content > div > .editor > div > label {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.imageeditor .imageeditor-content > div > .editor > div > .options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.imageeditor .imageeditor-content > div > .editor > div > .options > button {
+  all: unset;
+  padding: 11px 20px;
+  font-size: 14px;
+  border-radius: 3px;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.imageeditor .imageeditor-content > div > .editor > div > .options > button.active {
+  background-color: black;
+}
+
+.imageeditor
+  .imageeditor-content
+  > div
+  > .editor
+  > div
+  > .options
+  > button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.imageeditor .imageeditor-content > div > .editor > img {
+  object-fit: contain;
+  max-width: calc(100% - 300px);
+}
+
+.imageeditor .imageeditor-content > div > .controls {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.imageeditor .imageeditor-content > div > .controls > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 100%;
+}
+
+.imageeditor .imageeditor-content > div > .controls button {
+  all: unset;
+  height: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.imageeditor.black .imageeditor-content > div > .controls button {
+  border: 1px solid white;
+}

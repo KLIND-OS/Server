@@ -109,6 +109,7 @@ body:not(.disablewindowanimation)
 .black h4,
 .black h5,
 .black h6,
+.black svg,
 .black,
 .black textarea {
   color: white;

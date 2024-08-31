@@ -7,96 +7,96 @@
       }
     </style>
     <p id="notdisplaynone" style="color: white; font-size: 50px">
-      Javascript je vypnutý nebo není podporovaný. Prosím zapěte jej nebo
-      aktualizujte prohlížeč.
+      JavaScript is turned off! This app requires JavaScript to run.
     </p>
   </noscript>
   <head>
+    <script src="scripts/components/custom.js"></script>
     <link rel="stylesheet" href="styles/components/defaultwindow.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Načítání...</title>
+    <title>Loading...</title>
 
     <script src="libs/json5.min.js"></script>
     <script src="lang/localization.js"></script>
     <script>
       Localization.loadStrings();
     </script>
-    <script src="contextMenuApi.js"></script>
-    <script src="JSstyles.js"></script>
-    <script src="boot.js"></script>
-    <script src="infoApp.js"></script>
-    <script src="notify.js"></script>
-    <script src="filemanager.js"></script>
-    <script src="bprompt.js"></script>
-    <script src="functions.js"></script>
+    <script src="scripts/components/contextMenuApi.js"></script>
+    <script src="scripts/components/JSstyles.js"></script>
+    <script src="scripts/components/boot.js"></script>
+    <script src="scripts/apps/infoApp.js"></script>
+    <script src="scripts/components/notify.js"></script>
+    <script src="scripts/components/filemanager.js"></script>
+    <script src="scripts/components/bprompt.js"></script>
+    <script src="scripts/components/functions.js"></script>
     <script src="config.js"></script>
-    <script src="downloadStatus.js"></script>
-    <script src="sources/babel.min.js"></script>
-    <script src="consolelog.js"></script>
-    <script src="sources/polifill.min.js"></script>
-    <script src="sources/uuid.min.js"></script>
-    <script src="script.js"></script>
-    <script src="fixwindow.js"></script>
-    <script src="windowManager.js"></script>
-    <script src="windowchanging.js"></script>
+    <script src="scripts/components/downloadStatus.js"></script>
+    <script src="scripts/components/consolelog.js"></script>
+    <script src="scripts/script.js"></script>
+    <script src="scripts/components/fixwindow.js"></script>
+    <script src="scripts/components/windowManager.js"></script>
+    <script src="scripts/components/windowchanging.js"></script>
     <script src="libs/jquery-3.6.0.js"></script>
     <script src="libs/jqueryui_1.11.4.js"></script>
-    <script src="myklindows_scripts.js"></script>
-    <script src="taskbar.js"></script>
+    <script src="scripts/apps/myklindows_scripts.js"></script>
+    <script src="scripts/components/taskbar.js"></script>
     <script src="libs/howler.js"></script>
-    <script src="loading.js"></script>
-    <script src="draggableelements.js"></script>
-    <script src="zkratky.js"></script>
-    <script src="update.js"></script>
+    <script src="scripts/components/loading.js"></script>
+    <script src="scripts/components/draggableelements.js"></script>
+    <script src="scripts/components/shortcuts.js"></script>
+    <script src="scripts/components/update.js"></script>
     <script src="info.js"></script>
-    <script src="sounds.js"></script>
-    <script src="customapps.js"></script>
-    <script src="desktopIcons.js"></script>
-    <script src="calculator.js"></script>
-    <script src="yaanidiot.js"></script>
-    <script src="/power.js"></script>
-    <script src="hash.js"></script>
+    <script src="sounds/sounds.js"></script>
+    <script src="scripts/components/customapps.js"></script>
+    <script src="scripts/components/desktopIcons.js"></script>
+    <script src="scripts/apps/calculator.js"></script>
+    <script src="scripts/apps/yaanidiot.js"></script>
+    <script src="scripts/components/power.js"></script>
+    <script src="scripts/components/hash.js"></script>
     <script src="libs/plyr.js"></script>
-    <script src="cleaner.js"></script>
-    <script src="localStorage.js"></script>
-    <script src="procesy.js"></script>
-    <script src="errors.js"></script>
-    <script src="connection.js"></script>
-    <script src="browser.js"></script>
+    <script src="scripts/apps/cleaner.js"></script>
+    <script src="scripts/components/localStorage.js"></script>
+    <script src="scripts/apps/procesy.js"></script>
+    <script src="scripts/components/errors.js"></script>
+    <script src="scripts/components/connection.js"></script>
+    <script src="scripts/apps/browser.js"></script>
     <script src="libs/jszip.min.js"></script>
     <script src="libs/xlsx.js"></script>
     <script src="tinymce/tinymce.min.js"></script>
     <script src="libs/mammoth.js"></script>
-    <script src="wordeditor.js"></script>
-    <script src="sheetseditor.js"></script>
+    <script src="scripts/apps/wordeditor.js"></script>
+    <script src="scripts/apps/sheetseditor.js"></script>
     <script src="libs/exceljs.js"></script>
-    <script src="diskmanager.js"></script>
-    <script src="colorFilters.js"></script>
-    <script src="printermanager.js"></script>
-    <script src="packageinstaller.js"></script>
-    <script src="donotdisturb.js"></script>
-    <script src="inputDevices.js"></script>
+    <script src="scripts/components/diskmanager.js"></script>
+    <script src="scripts/components/colorFilters.js"></script>
+    <script src="scripts/apps/printermanager.js"></script>
+    <script src="scripts/apps/packageinstaller.js"></script>
+    <script src="scripts/components/donotdisturb.js"></script>
+    <script src="scripts/apps/inputDevices.js"></script>
     <script src="libs/dom-to-image.min.js"></script>
-    <script src="base64.js"></script>
-    <script src="searchEngine.js"></script>
-    <script src="autoClassConstruction.js"></script>
-    <script src="unzip.js"></script>
-    <script src="filelocker.js"></script>
+    <script src="scripts/components/searchEngine.js"></script>
+    <script src="scripts/components/autoClassConstruction.js"></script>
+    <script src="scripts/components/unzip.js"></script>
+    <script src="scripts/components/filelocker.js"></script>
     <script src="libs/handlebars.js"></script>
     <script>
       if (localStorage.getItem("installed") != "true") {
         window.location.replace("install.html");
       }
     </script>
-    <script src="fileopenPreferences.js"></script>
-    <script src="userAgent.js"></script>
-    <script src="customcss.js"></script>
-    <script src="background.js"></script>
-    <script src="login.js"></script>
-    <script src="startmenu.js"></script>
-    <script src="theme.js"></script>
-    <script src="battery.js"></script>
+    <script src="scripts/components/fileopenPreferences.js"></script>
+    <script src="scripts/components/userAgent.js"></script>
+    <script src="scripts/components/customcss.js"></script>
+    <script src="scripts/components/background.js"></script>
+    <script src="scripts/components/login.js"></script>
+    <script src="scripts/components/startmenu.js"></script>
+    <script src="scripts/components/theme.js"></script>
+    <script src="scripts/components/battery.js"></script>
+    <script src="scripts/components/filedragging.js"></script>
+    <script src="scripts/apps/filemanager.js"></script>
+    <script src="scripts/apps/imageEditor.js"></script>
+    <script src="components/svg.js"></script>
 
     <style id="customcssstyleelement"></style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -105,11 +105,9 @@
       href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="sandbox.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles/style.css" />
     <link rel="stylesheet" type="text/css" href="libs/jquery_ui_1.9.2.css" />
-    <link rel="stylesheet" href="rightclickmenu.css" />
-    <link rel="stylesheet" href="libs/font-awesome.css" />
+    <link rel="stylesheet" href="styles/components/rightclickmenu.css" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Montserrat&amp;display=swap"
@@ -144,6 +142,8 @@
     <link rel="stylesheet" href="styles/components/power.css" />
     <link rel="stylesheet" href="styles/apps/installer.css" />
     <link rel="stylesheet" href="styles/components/notificationCenter.css" />
+    <link rel="stylesheet" href="styles/apps/filemanager.css" />
+    <link rel="stylesheet" href="styles/apps/imageeditor.css" />
   </head>
 
   <body
@@ -413,9 +413,7 @@
               ></div>
             </div>
           </div>
-          <textarea
-            id="notesinput"
-          ></textarea>
+          <textarea id="notesinput"></textarea>
         </div>
 
         <div onclick="ZIndexer.focus(this);" class="kalkulacka">
@@ -776,10 +774,11 @@
           </div>
           <span>$[klindos_version];</span>:
           <span id="versionwrite">unknown</span><br />
-          <span>$[screen_size];</span>: <span id="screensizewrite">unknown</span
-          ><br />
-          <span>$[time_zone];</span>: <span id="timezonewrite">unknown</span
-          ><br />
+          <span>$[screen_size];</span>:
+          <span id="screensizewrite">unknown</span>
+          <br />
+          <span>$[time_zone];</span>: <span id="timezonewrite">unknown</span>
+          <br />
         </div>
 
         <div onclick="ZIndexer.focus(this);" class="terminal">
@@ -908,11 +907,30 @@
               ></div>
             </div>
           </div>
-          <iframe
-            class="filemanager"
-            id="filemanageriframe"
-            src="about:blank"
-          ></iframe>
+          <div class="filemanager-content">
+            <aside>
+              <div>
+                <img src="icons/filemanager.svg" />
+                <h2>$[file_manager];</h2>
+              </div>
+              <nav class="aside-nav"></nav>
+            </aside>
+
+            <div>
+              <header>
+                <div class="breadcrumb-container">
+                  <nav>
+                    <ol></ol>
+                  </nav>
+                </div>
+                <div class="buttons-container"></div>
+              </header>
+              <main>
+                <div class="files-list"></div>
+              </main>
+              <footer class="dynamicfooter" style="display: none"></footer>
+            </div>
+          </div>
         </div>
 
         <div onclick="ZIndexer.focus(this)" class="fileproperties">
@@ -1121,8 +1139,7 @@
               min="0"
               max="100"
               value="50"
-              class="slider"
-              id="myRange"
+              class="kl-component-slider"
               oninput="AudioEditor.input(this)"
             />
             <div
@@ -1336,7 +1353,7 @@
           <div class="content">
             <div class="page page1">
               <img
-                src="logo.png"
+                src="/logo/logo.png"
                 alt="KLIND OS logo"
                 style="height: 100px; width: 100px"
               />
@@ -1559,11 +1576,62 @@
               ></div>
             </div>
           </div>
-          <iframe
-            style="height: calc(100% - 20px); width: 100%"
-            src="imageeditor"
-            frameborder="0"
-          ></iframe>
+          <div class="imageeditor-content">
+            <div>
+              <div class="editor">
+                <div class="filters">
+                  <label class="title">$[filters];</label>
+                  <div class="options filter-options">
+                    <button data-type="brightness" class="active">
+                      $[brightness];
+                    </button>
+                    <button data-type="saturation">$[saturate];</button>
+                    <button data-type="inversion">$[inverse];</button>
+                    <button data-type="grayscale">$[grayscale];</button>
+                  </div>
+                  <div class="slider">
+                    <div class="filter-info">
+                      <p class="name">$[brightness];</p>
+                      <p class="value">100%</p>
+                    </div>
+                    <input
+                      type="range"
+                      value="100"
+                      min="0"
+                      max="200"
+                      class="kl-component-slider"
+                    />
+                  </div>
+
+                  <label class="title" style="margin-top: 20px; display: block"
+                    >$[rotate_flip];</label
+                  >
+                  <div class="options icon-options">
+                    <button>
+                      <img src="icons/rotate-left.svg" />
+                    </button>
+                    <button>
+                      <img src="icons/rotate-right.svg" />
+                    </button>
+                    <button>
+                      <img src="icons/flip-vertical.svg" />
+                    </button>
+                    <button>
+                      <img src="icons/flip-horizontal.svg" />
+                    </button>
+                  </div>
+                </div>
+                <img src="" class="img-prev" />
+              </div>
+              <div class="controls">
+                <button class="reset-filter-f">$[reset_filters];</button>
+                <div>
+                  <button class="select-img-f">$[select_image];</button>
+                  <button class="save-img-f">$[save];</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div onclick="ZIndexer.focus(this)" class="printermanager">
           <div class="window-header">
@@ -1683,6 +1751,7 @@
           <p>$[please_wait];</p>
         </div>
       </div>
+      <div class="filesDragging"></div>
       <div id="klindows" class="klindows">
         <div id="openedapps">
           <span></span>
@@ -1701,7 +1770,7 @@
             DesktopIcons.load();
             DraggableElements.reloadDesktopIcons();
           </script>
-          <script src="getos.js" defer></script>
+          <script src="scripts/components/getos.js" defer></script>
         </div>
         <div id="backsix" style="display: none" class="startmenu">
           <div class="leftdiv">
@@ -2147,7 +2216,7 @@
           >
             <span id="timedva">$[loading];</span>
           </div>
-          <script src="clock.js"></script>
+          <script src="scripts/components/clock.js"></script>
           <div class="batteryStatus">
             <img
               id="batteryIcon"
@@ -2206,10 +2275,10 @@
       </div>
     </div>
 
-    <script src="changingz-index.js"></script>
-    <script src="audioEditor.js"></script>
+    <script src="scripts/components/z-index.js"></script>
+    <script src="scripts/apps/audioEditor.js"></script>
     <script src="mouse.js"></script>
-    <script src="connection-local.js"></script>
+    <script src="scripts/components/connection-local.js"></script>
     <script>
       if (Boot.safeBoot) {
         document.querySelector(".downbar").style.display = "none";
@@ -2226,9 +2295,38 @@
         window.location.replace("..");
 
       Localization.loadDOM();
+
+      FileDraggingAPI.registerDroppable(
+        document.querySelector(".iconsKLINDOS"),
+        true,
+        true,
+        Localization.getString("add_shortcut_to_desktop"),
+        (str, type) => {
+          if (type == "file") {
+            const lastSlashIndex = str.lastIndexOf("/");
+
+            const partBeforeLastSlash = str.substring(0, lastSlashIndex) + "/";
+            const partAfterLastSlash = str.substring(lastSlashIndex + 1);
+            FilemanagerApp.staticTools.addShortcutToDesktop(
+              partBeforeLastSlash,
+              partAfterLastSlash,
+            );
+          } else if (type == "folder") {
+            FilemanagerApp.staticTools.addFolderShortcutToDesktop(str);
+          }
+        },
+        (hovering) => {
+          const icons = document.querySelector(".iconsKLINDOS");
+          if (hovering) {
+            icons.style.backgroundColor = "rgba(0,0,0,0.5)";
+          } else {
+            icons.style.backgroundColor = "";
+          }
+        },
+      );
     </script>
-    <script src="getstartedfunctions.js"></script>
-    <script src="windowanimation.js"></script>
-    <script src="click.js"></script>
+    <script src="scripts/apps/getstartedfunctions.js"></script>
+    <script src="scripts/components/windowanimation.js"></script>
+    <script src="scripts/components/click.js"></script>
   </body>
 </html>

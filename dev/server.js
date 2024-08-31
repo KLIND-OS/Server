@@ -35,14 +35,14 @@ var app = express();
 
 app.use(connectLiveReload());
 
-function skipMiddleware(req, res) {
+function skipMiddleware(req) {
   return req.url.includes("/status");
 }
 
 app.use(logger("dev", { skip: skipMiddleware }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, ".")));
+app.use(express.static(path.join(__dirname, "..")));
 
 app.listen(port, "127.0.0.1", () => {
   console.log(`KLIND OS Server is running on port ${port}`);
