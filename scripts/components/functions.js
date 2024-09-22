@@ -109,7 +109,10 @@ var control = {
     {},
     {
       fileSelect: (callBack) => {
-        windows.open("filemanager", { mode: FilemanagerApp.startOptions.FILESELECT, callBack: callBack });
+        windows.open("filemanager", {
+          mode: FilemanagerApp.startOptions.FILESELECT,
+          callBack: callBack,
+        });
       },
       folderSelect: (callBack) => {
         windows.open("filemanager", {
@@ -176,6 +179,9 @@ class App {
       };
       LocalStorage.customApps.push(name);
     }
+  }
+  open() {
+    windows.open(Apps[this.info.name]);
   }
   createWindow({
     name,
@@ -248,7 +254,14 @@ class App {
           const root = win.querySelector("#root");
           const html = await this.appData.getText(content);
 
-          const template = Handlebars.compile(html);
+          const HandlebarsInstance = Handlebars.create();
+
+          HandlebarsInstance.registerPartial(
+            "link",
+            "<a target='blank' href='{{ href }}'>{{content}}</a>\n",
+          );
+
+          const template = HandlebarsInstance.compile(html);
           const finalHtml = template(props);
           root.innerHTML = finalHtml;
         }
