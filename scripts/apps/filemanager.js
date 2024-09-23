@@ -20,10 +20,9 @@ class FilemanagerApp {
 
   static staticTools = {
     addShortcutToDesktop: (folder, path) => {
-      var fun = `try{mainFileManager.open('${folder}', '${path}')}catch {spawnNotification(Localization.getString("file_manager"),Localization.getString("file_not_found"))}`;
-      DesktopIcons.add({
-        run: fun,
-        icon: "filemanager/images/file.png",
+      DesktopIcons.addFile({
+        folder,
+        path,
         name: path,
       });
     },
@@ -719,9 +718,22 @@ class FilemanagerApp {
                     foldername,
                   );
 
+                  const filePath = LowLevelApi.filesystem.path.join(
+                    this.states.currentFolder,
+                    foldername,
+                  );
+
                   await LowLevelApi.filesystem.rm(path, {
                     recursive: true,
                   });
+
+                  mainFileManager.links._emitUpdate(
+                    filePath,
+                    mainFileManager.links.linkUpdateType.REMOVED,
+                    {
+                      path: filePath,
+                    },
+                  );
 
                   await this.reloadWin();
                 },
@@ -955,6 +967,19 @@ class FilemanagerApp {
                   );
 
                   await LowLevelApi.filesystem.unlink(path);
+
+                  let filePath = LowLevelApi.filesystem.path.join(
+                    this.states.currentFolder,
+                    filename,
+                  );
+
+                  mainFileManager.links._emitUpdate(
+                    filePath,
+                    mainFileManager.links.linkUpdateType.REMOVED,
+                    {
+                      path: filePath,
+                    },
+                  );
 
                   await this.reloadWin();
                 },

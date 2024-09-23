@@ -33,6 +33,38 @@ var mainFileManager = {
       return bytes.toFixed(dp) + " " + units[u];
     },
   },
+  links: {
+    _data: {},
+    linkUpdateType: {
+      REMOVED: "REMOVED",
+      RENAMED: "RENAMED"
+    },
+    linkFile: (paths, callback) => {
+      if (typeof paths == "string") {
+        paths = [paths];
+      }
+
+      for (const path of paths) {
+        let x = mainFileManager.links._data[path];
+        if (x) {
+          x.push(callback);
+        } else {
+          mainFileManager.links._data[path] = [callback];
+        }
+      }
+    },
+    _emitUpdate(filePath, type, data) {
+      const content = mainFileManager.links._data[filePath];
+
+      if (!content) {
+        return;
+      }
+
+      for (const callback of content) {
+        callback(type, data);
+      }
+    },
+  },
   openWith: {
     txt: [
       [
@@ -333,6 +365,12 @@ var mainFileManager = {
     );
 
     await LowLevelApi.filesystem.unlink(path);
+
+    mainFileManager.links._emitUpdate(
+      location,
+      mainFileManager.links.linkUpdateType.REMOVED,
+      { path: location },
+    );
   },
   save: async (location, content, bypass, encoding = "binary") => {
     if (FileLocker.test(location, bypass)) {
@@ -577,39 +615,3 @@ var mainFileManager = {
     });
   },
 };
-function fileManagerOpen() {
-  if (localStorage.getItem("mode") == "dark") {
-    for (
-      var i = 0;
-      i < document.querySelectorAll("#filemanageriframe").length;
-      i++
-    ) {
-      document.querySelectorAll("#filemanageriframe")[i].src =
-        "/filemanager/?dark";
-    }
-    for (
-      let i = 0;
-      i < document.querySelectorAll("#textareafileeditorimage").length;
-      i++
-    ) {
-      document.querySelectorAll("#textareafileeditorimage")[i].style.color =
-        "white";
-    }
-  } else {
-    for (
-      let i = 0;
-      i < document.querySelectorAll("#filemanageriframe").length;
-      i++
-    ) {
-      document.querySelectorAll("#filemanageriframe")[i].src = "/filemanager/";
-    }
-    for (
-      let i = 0;
-      i < document.querySelectorAll("#textareafileeditorimage").length;
-      i++
-    ) {
-      document.querySelectorAll("#textareafileeditorimage")[i].style.color =
-        "black";
-    }
-  }
-}

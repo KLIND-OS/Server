@@ -1,3 +1,5 @@
+const supported = ["mp3", "waw", "ogg", "aac", "m4a", "wma"];
+
 function changeArray(index, arr) {
   const firstPart = arr.slice(index);
   const secondPart = arr.slice(0, index);
@@ -118,12 +120,7 @@ var sliderElement, playlistPlayer, playing;
   var allFiltered = new Array();
   allSongsFromFolder.forEach((x) => {
     const parts = x.split(".");
-    if (
-      ["mp3", "waw", "ogg", "aac", "m4a", "wma"].includes(
-        parts[parts.length - 1],
-      )
-    )
-      allFiltered.push(x);
+    if (supported.includes(parts[parts.length - 1])) allFiltered.push(x);
   });
   var startIndex;
   for (var i = 0; i < allFiltered.length; i++) {

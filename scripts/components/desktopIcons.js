@@ -15,10 +15,26 @@ var DesktopIcons = {
           text.textContent = storage[i][3];
           element.appendChild(text);
         }
-        var elmnt = document.querySelector(".iconsKLINDOS").appendChild(element);
+        var elmnt = document
+          .querySelector(".iconsKLINDOS")
+          .appendChild(element);
         elmnt.style.backgroundImage = "url(" + storage[i][1] + ")";
+
+        if (storage[i][4]) {
+          mainFileManager.links.linkFile(storage[i][4], (type) => {
+            if (
+              type == mainFileManager.links.linkUpdateType.REMOVED ||
+              type == mainFileManager.links.linkUpdateType.RENAMED
+            ) {
+              // TODO: delete icon
+              elmnt.remove();
+            }
+          });
+        }
+
         try {
-          element.style.inset = storage[i][2][1] + "px auto auto " + storage[i][2][0] + "px";
+          element.style.inset =
+            storage[i][2][1] + "px auto auto " + storage[i][2][0] + "px";
         } catch {
           // Ignore error
         }
@@ -35,17 +51,25 @@ var DesktopIcons = {
     array[id][2][1] = top;
     localStorage.setItem("desktop-icons", JSON.stringify(array));
   },
-  add: ({ run, icon, name }) => {
+  add: ({ run, icon, name, linkPath }) => {
     var storage = localStorage.getItem("desktop-icons");
     if (storage) {
       storage = JSON.parse(storage);
-    }
-    else {
+    } else {
       storage = [];
     }
-    storage.push([run, icon, ["0", "0"], name]);
+    storage.push([run, icon, ["0", "0"], name, linkPath]);
     localStorage.setItem("desktop-icons", JSON.stringify(storage));
     document.querySelector(".iconsKLINDOS").innerHTML = "";
     DesktopIcons.load();
+  },
+  addFile: ({ folder, path, name }) => {
+    var fun = `try{mainFileManager.open('${folder}', '${path}')}catch {spawnNotification(Localization.getString("file_manager"),Localization.getString("file_not_found"))}`;
+    DesktopIcons.add({
+      run: fun,
+      icon: "icons/filemanagerfile.png",
+      name,
+      linkPath: folder + path,
+    });
   },
 };

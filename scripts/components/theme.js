@@ -9,7 +9,6 @@ class Theme {
     if (localStorage.getItem("background") == null)
       document.getElementById("klindows").style.backgroundImage =
         "url(wallpapers/dark.jpg)";
-    fileManagerOpen();
   }
   static light() {
     const x = document.querySelectorAll(".window");
@@ -21,7 +20,6 @@ class Theme {
     if (localStorage.getItem("background") == null)
       document.getElementById("klindows").style.backgroundImage =
         "url(wallpapers/light.jpg)";
-    fileManagerOpen();
   }
 }
 

@@ -484,6 +484,7 @@ var windows = {
             skin = "oxide";
           }
 
+          // TODO: Replace tinymce with CKEditor
           tinymce.init({
             selector: ".window.wordeditor .wordeditor-element",
             menubar: "edit insert format",
