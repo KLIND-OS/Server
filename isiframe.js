@@ -1,7 +1,3 @@
-var topurl = parent.window.location.pathname;
-if (topurl == "/" || topurl == "/resetdotovarniho.html") {
-  // OK
-}
-else {
+if (!parent.window.location.pathname == "/") {
   window.location.replace("/");
 }
