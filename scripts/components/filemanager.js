@@ -37,7 +37,7 @@ var mainFileManager = {
     _data: {},
     linkUpdateType: {
       REMOVED: "REMOVED",
-      RENAMED: "RENAMED",
+      MOVE: "MOVE",
     },
     linkFile: (paths, callback) => {
       if (typeof paths == "string") {
@@ -442,7 +442,7 @@ var mainFileManager = {
 
     mainFileManager.links._emitUpdate(
       location,
-      mainFileManager.links.linkUpdateType.RENAMED,
+      mainFileManager.links.linkUpdateType.MOVE,
       {
         path: location,
         newPath: newLocation,
