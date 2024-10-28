@@ -28,6 +28,7 @@ class FilemanagerApp {
     },
     addFolderShortcutToDesktop: (path) => {
       var fun = `windows.open("filemanager", { startFolder: "${path}" })`;
+      // TODO: Do the same thing as in files.
       DesktopIcons.add({
         run: fun,
         icon: "icons/folder.svg",
@@ -711,28 +712,9 @@ class FilemanagerApp {
                 Localization.getString("do_you_really_folder_remove"),
                 async (res) => {
                   if (!res) return;
-                  const path = LowLevelApi.filesystem.path.join(
-                    LowLevelApi.filesystem.os.homedir(),
-                    "usrfiles",
-                    this.states.currentFolder,
-                    foldername,
-                  );
 
-                  const filePath = LowLevelApi.filesystem.path.join(
-                    this.states.currentFolder,
-                    foldername,
-                  );
-
-                  await LowLevelApi.filesystem.rm(path, {
-                    recursive: true,
-                  });
-
-                  mainFileManager.links._emitUpdate(
-                    filePath,
-                    mainFileManager.links.linkUpdateType.REMOVED,
-                    {
-                      path: filePath,
-                    },
+                  await mainFileManager.removeFolder(
+                    this.states.currentFolder + foldername,
                   );
 
                   await this.reloadWin();
@@ -905,12 +887,6 @@ class FilemanagerApp {
             new ContextMenuItem(Localization.getString("rename"), (file) => {
               const filename = file.querySelector("h3").textContent;
               FileLocker.fullTest(this.states.currentFolder + filename);
-              const path = LowLevelApi.filesystem.path.join(
-                LowLevelApi.filesystem.os.homedir(),
-                "usrfiles",
-                this.states.currentFolder,
-                filename,
-              );
               BPrompt.prompt(
                 Localization.getString("enter_new_file_name"),
                 async (newname) => {
@@ -939,13 +915,10 @@ class FilemanagerApp {
                       Localization.getString("file_with_same_name"),
                     );
                   } else {
-                    const newpath = LowLevelApi.filesystem.path.join(
-                      LowLevelApi.filesystem.os.homedir(),
-                      "usrfiles",
-                      this.states.currentFolder,
+                    await mainFileManager.renameFile(
+                      this.states.currentFolder + filename,
                       newname,
                     );
-                    await LowLevelApi.filesystem.rename(path, newpath);
                     await this.reloadWin();
                   }
                 },
@@ -959,27 +932,8 @@ class FilemanagerApp {
                 Localization.getString("do_you_really_file_remove"),
                 async (res) => {
                   if (!res) return;
-                  const path = LowLevelApi.filesystem.path.join(
-                    LowLevelApi.filesystem.os.homedir(),
-                    "usrfiles",
-                    this.states.currentFolder,
-                    filename,
-                  );
 
-                  await LowLevelApi.filesystem.unlink(path);
-
-                  let filePath = LowLevelApi.filesystem.path.join(
-                    this.states.currentFolder,
-                    filename,
-                  );
-
-                  mainFileManager.links._emitUpdate(
-                    filePath,
-                    mainFileManager.links.linkUpdateType.REMOVED,
-                    {
-                      path: filePath,
-                    },
-                  );
+                  mainFileManager.remove(this.states.currentFolder + filename);
 
                   await this.reloadWin();
                 },

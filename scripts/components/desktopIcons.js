@@ -1,4 +1,4 @@
-var DesktopIcons = {
+const DesktopIcons = {
   load: () => {
     var storage = localStorage.getItem("desktop-icons");
     if (storage) {
@@ -21,13 +21,42 @@ var DesktopIcons = {
         elmnt.style.backgroundImage = "url(" + storage[i][1] + ")";
 
         if (storage[i][4]) {
-          mainFileManager.links.linkFile(storage[i][4], (type) => {
-            if (
-              type == mainFileManager.links.linkUpdateType.REMOVED ||
-              type == mainFileManager.links.linkUpdateType.RENAMED
-            ) {
-              // TODO: delete icon
+          // There are probably A LOT OF BUGS. TODO: FIX
+          mainFileManager.links.linkFile(storage[i][4], (type, data) => {
+            if (type == mainFileManager.links.linkUpdateType.REMOVED) {
+              const storage = JSON.parse(localStorage.getItem("desktop-icons"));
               elmnt.remove();
+              let newstorage = [];
+              for (let x = 0; x < storage.length; x++) {
+                if (x != i) {
+                  newstorage.push(storage[i]);
+                }
+              }
+              localStorage.setItem("desktop-icons", JSON.stringify(newstorage));
+            } else if (type == mainFileManager.links.linkUpdateType.RENAMED) {
+              let newstorage = [];
+              for (let x = 0; x < storage.length; x++) {
+                if (x != i) {
+                  newstorage.push(storage[i]);
+                } else {
+                  const old = storage[i];
+                  const { newPath } = data;
+
+                  const lastSlashIndex = newPath.lastIndexOf("/");
+
+                  const partBeforeLastSlash =
+                    newPath.substring(0, lastSlashIndex) + "/";
+                  const partAfterLastSlash = newPath.substring(
+                    lastSlashIndex + 1,
+                  );
+
+                  old[0] = `try{mainFileManager.open('${partBeforeLastSlash}', '${partAfterLastSlash}')}catch {spawnNotification(Localization.getString("file_manager"),Localization.getString("file_not_found"))}`;
+                  old[3] = partAfterLastSlash;
+
+                  newstorage.push(old);
+                }
+              }
+              localStorage.setItem("desktop-icons", JSON.stringify(newstorage));
             }
           });
         }

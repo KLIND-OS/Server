@@ -37,7 +37,7 @@ var mainFileManager = {
     _data: {},
     linkUpdateType: {
       REMOVED: "REMOVED",
-      RENAMED: "RENAMED"
+      RENAMED: "RENAMED",
     },
     linkFile: (paths, callback) => {
       if (typeof paths == "string") {
@@ -354,6 +354,41 @@ var mainFileManager = {
     document.querySelector("#filelocation").innerHTML = file;
     windows.open("fileproperties");
   },
+  removeFolder: async (location) => {
+    let files = await mainFileManager.allFiles(location);
+    let folders = await mainFileManager.allFolders(location);
+
+    for (const file of files) {
+      const relativeFilePath = LowLevelApi.filesystem.path.join(location, file);
+
+      try {
+        await mainFileManager.remove(relativeFilePath);
+      } catch {
+        // This will error out when the file is locked via FileLocker
+      }
+    }
+
+    for (const folder of folders) {
+      const relativeFolderPath = LowLevelApi.filesystem.path.join(
+        location,
+        folder,
+      );
+      mainFileManager.removeFolder(relativeFolderPath);
+    }
+
+    const internalPath = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir(),
+      "usrfiles",
+      location,
+    );
+
+    await LowLevelApi.filesystem.rmdir(internalPath);
+    mainFileManager.links._emitUpdate(
+      location,
+      mainFileManager.links.linkUpdateType.REMOVED,
+      { path: location },
+    );
+  },
   remove: async (location, bypass = "") => {
     if (FileLocker.test(location, bypass)) {
       throw new FileUsedError("This file is already used!");
@@ -370,6 +405,48 @@ var mainFileManager = {
       location,
       mainFileManager.links.linkUpdateType.REMOVED,
       { path: location },
+    );
+  },
+  renameFile: async (location, newname, bypass = "") => {
+    const internalOldLocation = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir(),
+      "usrfiles",
+      location,
+    );
+
+    const lastSlashIndex = location.lastIndexOf("/");
+    const partBeforeLastSlash = location.substring(0, lastSlashIndex) + "/";
+
+    const newLocation = LowLevelApi.filesystem.path.join(
+      partBeforeLastSlash,
+      newname,
+    );
+    const internalNewLocation = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir(),
+      "usrfiles",
+      newLocation,
+    );
+
+    if (FileLocker.test(location, bypass)) {
+      throw new FileUsedError("This file is already used!");
+    }
+
+    if (await mainFileManager.fileExists(newLocation)) {
+      throw new Error("File already exists with the same path.");
+    }
+
+    await LowLevelApi.filesystem.rename(
+      internalOldLocation,
+      internalNewLocation,
+    );
+
+    mainFileManager.links._emitUpdate(
+      location,
+      mainFileManager.links.linkUpdateType.RENAMED,
+      {
+        path: location,
+        newPath: newLocation,
+      },
     );
   },
   save: async (location, content, bypass, encoding = "binary") => {
@@ -398,34 +475,6 @@ var mainFileManager = {
       }
     }
   },
-  saveText: async (location, file, bypass = "") => {
-    // Deprecated!
-    // Use control.fileManager.save("/file.txt", "text", undefined "utf8") instead
-    // Will be removed soon
-
-    console.warn(
-      "Using deprecated function getTextContent! Look up documentation to migrate to new API.",
-    );
-
-    if (FileLocker.test(location, bypass)) {
-      throw new FileUsedError("This file is already used!");
-    }
-
-    const path = LowLevelApi.filesystem.path.join(
-      LowLevelApi.filesystem.os.homedir() + "/usrfiles",
-      location,
-    );
-    await LowLevelApi.filesystem.writeFile(path, file, { encoding: "utf8" });
-
-    var windowasjdh = document.querySelectorAll(".window");
-    for (var i = 0; i < windowasjdh.length; i++) {
-      if (windowasjdh[i].querySelector("#filemanageriframe") != undefined) {
-        windowasjdh[i]
-          .querySelector("#filemanageriframe")
-          .contentWindow.FileManager.readFiles();
-      }
-    }
-  },
   setWallpaper: (x) => {
     Background.set(x);
   },
@@ -440,25 +489,6 @@ var mainFileManager = {
 
     const data = await LowLevelApi.filesystem.readFile(path, encoding);
     return data;
-  },
-  getTextContent: async (location) => {
-    // Deprecated!
-    // Use control.fileManager.getContent("/file.txt", "utf8") instead
-    // Will be removed soon
-
-    console.warn(
-      "Using deprecated function getTextContent! Look up documentation to migrate to new API.",
-    );
-
-    if (!(await mainFileManager.fileExists(location))) {
-      return false;
-    }
-    const path = LowLevelApi.filesystem.path.join(
-      LowLevelApi.filesystem.os.homedir() + "/usrfiles",
-      location,
-    );
-    const content = await LowLevelApi.filesystem.readFile(path, "utf8");
-    return content;
   },
   folderExist: async (location) => {
     const path = LowLevelApi.filesystem.path.join(
@@ -490,6 +520,30 @@ var mainFileManager = {
     }
 
     return files;
+  },
+  allFolders: async (folder) => {
+    const path = LowLevelApi.filesystem.path.join(
+      LowLevelApi.filesystem.os.homedir() + "/usrfiles",
+      folder,
+    );
+
+    const items = await LowLevelApi.filesystem.readdir(path);
+    const folders = [];
+
+    for (const item of items) {
+      try {
+        const filePath = LowLevelApi.filesystem.path.join(path, item);
+        const fileStat = await LowLevelApi.filesystem.stat(filePath);
+
+        if (!fileStat.isFile()) {
+          folders.push(item);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    return folders;
   },
   createAppShortCut: async (appName, fileName) => {
     if (await mainFileManager.fileExists("/" + fileName + ".kapp")) {
